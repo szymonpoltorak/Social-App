@@ -1,23 +1,32 @@
+build = docker build
+run = docker run
+stop = docker stop
+start = docker start
+app-name = $(app-name)
+process-remove = docker rm
+image-remove = docker image rm
+port-map = -p 4200:80
+
 .PHONY: all, image, build, start, stop, clean. clean-container, clean-image
 
 all: image
 
 image: build
-	docker run -d -p 4200:80 social-app-frontend:latest --name social-app-frontend
+	$(run) -d $(port-map) $(app-name):latest --name $(app-name)
 
 build:
-	docker build -t social-app-frontend .
+	$(build) -t $(app-name) .
 
 stop:
-	docker stop social-app-frontend
+	$(stop) $(app-name)
 
 start:
-	docker start social-app-frontend
+	$(start) $(app-name)
 
 clean-container:
-	docker rm social-app-frontend -f
+	$(process-remove) $(app-name) -f
 
 clean-image:
-	docker image rm social-app-frontend -f
+	$(image-remove) $(app-name) -f
 
 clean: clean-image, clean-container

@@ -1,12 +1,16 @@
+compose = docker-compose
+remove = docker -f rm
+containers = social-app-frontend social-app-backend social-app-postgres
+
 .PHONY: all, build, clean, stop
 
 all: build
 
 build:
-	docker-compose up
+	$(compose) up
 
 stop:
-	docker-compose down
+	$(compose) down
 
 clean:
-	docker rm social-app-frontend social-app-backend social-app-postgres -f
+	$(remove) $(containers)
