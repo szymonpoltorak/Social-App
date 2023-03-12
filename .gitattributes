@@ -1,0 +1,32 @@
+* text=auto
+
+*.js eol=lf diff=js
+*.ts eol=lf
+*.json eol=lf diff=json
+*.css eol=lf diff=css
+*.scss eol=lf diff=scss
+*.html eol=lf diff=html
+*.svg eol=lf diff=svg
+
+*.java  text diff=java
+
+*.tld   text
+*.xml   text
+*.fxml	text
+
+*.class binary
+*.jar   binary
+
+*.jpg binary
+*.jpeg binary
+*.png binary
+
+*.md text diff=markdown
+*.mdx text diff=markdown
+*.tex text diff=tex
+*.pdf diff=astextplain
+*.PDF diff=astextplain
+*.txt text
+
+.gitignore export-ignore
+.gitattributes export-ignore
