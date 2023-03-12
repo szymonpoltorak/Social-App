@@ -33,7 +33,7 @@ I used various technologies which I will list below.
 To simplify the development and usage of this app I used docker and makefile.
 Makefile file has few commands which can be executed from the root directory.
 
-* `make` or `make build` - uses *docker-compose* to build the whole project.
+* `make`, `make all`, `make build` - uses *docker-compose* to build the whole project.
 Frontend of the app will be available at `localhost:4200`,
 database at `localhost:5000` and backend at `localhost:8080`
 
