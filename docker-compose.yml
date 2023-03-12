@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    container_name: social-app-postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=none
+    ports:
+      - "5000:5432"
+  backend:
+    container_name: social-app-backend
+    depends_on:
+      - db
+    build:
+      context: social-app-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+  frontend:
+    container_name: social-app-frontend
+    depends_on:
+      - backend
+    build:
+      context: social-app-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
