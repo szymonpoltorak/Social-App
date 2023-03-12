@@ -16,6 +16,8 @@ I used various technologies which I will list below.
 ### BackEnd
 
 * SpringBoot 3.0.4,
+* Java JDK 17.0.6 (language level Java 11),
+* Apache Maven 3.8.5,
 * SpringData JPA,
 * SpringSecurity,
 * PostGres SQL,
@@ -32,6 +34,7 @@ I used various technologies which I will list below.
 
 To simplify the development and usage of this app I used docker and makefile.
 Makefile file has few commands which can be executed from the root directory.
+Makefile scripts may need administrator priviliges due to *docker* command usage.
 
 * `make`, `make all`, `make build` - uses *docker-compose* to build the whole project.
 Frontend of the app will be available at `localhost:4200`,
