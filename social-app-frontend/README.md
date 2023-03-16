@@ -2,6 +2,13 @@
 
 This is a frontend part of my project. It was build using `angular cli`.
 
+## How to start frontend app process
+
+To start watch mode of frontend only you can simply use this command (if you have angular installed and added to path).
+```
+ng serve
+```
+
 ## Makefile commands
 
 In this place there is also a dockerfile to build a frontend app.
