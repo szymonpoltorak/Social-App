@@ -34,9 +34,10 @@
 .buttons {
     display: flex;
     justify-content: left;
+    align-items: center;
     gap: 1em;
 }
 
-button {
+.button1 {
     width: 10em;
 }
