@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login-field',
-  templateUrl: './login-field.component.html',
-  styleUrls: ['./login-field.component.scss']
+    selector: 'app-login-field',
+    templateUrl: './login-field.component.html',
+    styleUrls: ['./login-field.component.scss']
 })
 export class LoginFieldComponent {
     email = new FormControl('', [Validators.required, Validators.email]);

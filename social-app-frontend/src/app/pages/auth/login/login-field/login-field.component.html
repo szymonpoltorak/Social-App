@@ -1,9 +1,9 @@
-<div class="example-container, size">
+<section class="example-container, size">
     <mat-form-field appearance="outline">
         <mat-label>Enter your username</mat-label>
 
-        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <input [formControl]="email" matInput placeholder="pat@example.com" required>
 
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
-</div>
+</section>
