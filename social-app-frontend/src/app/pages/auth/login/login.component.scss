@@ -26,17 +26,34 @@
     border-radius: 1em;
 }
 
-.forgot-password {
-    display: block;
+.line {
+    height: 1px;
+    width: 25%;
+    background-color: black;
+}
+
+.forgot-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 1.5em;
+}
+
+.forgot-password {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
 }
 
 .buttons {
     display: flex;
     justify-content: left;
+    align-items: center;
     gap: 1em;
 }
 
-button {
+.button1 {
     width: 10em;
 }

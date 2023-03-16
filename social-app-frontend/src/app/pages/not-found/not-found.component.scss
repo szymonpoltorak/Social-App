@@ -1,0 +1,77 @@
+$box-element-size:20em;
+
+@mixin font-bolding {
+    font-weight: 700;
+}
+
+@mixin flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    background-image: url("../../../assets/eternity.png");
+}
+
+.special {
+    color: aqua;
+    font-weight: bolder;
+}
+
+.logo-container {
+    padding-top: 2em;
+    padding-left: 2em;
+}
+
+h3 {
+    @include font-bolding;
+    font-size: 3em;
+}
+
+p {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.5em;
+}
+
+.content {
+    @include flexbox;
+    margin-top: 22em;
+    height: $box-element-size;
+    font-family: 'Poppins', sans-serif;
+}
+
+.message-container {
+    margin-bottom: 5em;
+    margin-right: 1em;
+}
+
+.error-number {
+    @include font-bolding;
+    font-size: 14em;
+}
+
+button {
+    margin-top: 3em;
+    padding: 2em;
+    background-color: transparent;
+    color: white;
+    border: 2px white solid;
+    border-radius: 1em;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+button:active {
+    background-color: aqua;
+    opacity: 0.5;
+    color: black;
+}

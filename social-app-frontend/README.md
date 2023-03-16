@@ -26,3 +26,11 @@ Makefile file has few commands that are quality of life improvements.
 * `make clean-container` - command used to remove a container,
 
 * `make clean` - command used to remove both container and image
+
+## Sources and Inspirations
+
+Error Page:
+* [Source](https://www.mantralabsglobal.com/404)
+
+Space Background:
+* [Source](https://wallpapercave.com/black-space-wallpaper-hd)
