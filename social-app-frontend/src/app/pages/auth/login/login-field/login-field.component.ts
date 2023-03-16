@@ -10,10 +10,11 @@ export class LoginFieldComponent {
     email = new FormControl('', [Validators.required, Validators.email]);
 
     getErrorMessage() {
-        if (this.email.hasError('required')) {
+        const emailError: boolean = this.email.hasError('required');
+
+        if (emailError) {
             return 'You must enter a value';
         }
-
-        return this.email.hasError('email') ? 'Not a valid email' : '';
+        return emailError ? 'Not a valid email' : '';
     }
 }

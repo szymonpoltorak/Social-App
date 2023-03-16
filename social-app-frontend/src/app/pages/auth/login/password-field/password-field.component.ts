@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-password-field',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
     styleUrls: ['./password-field.component.scss']
 })
 export class PasswordFieldComponent {
-    hide = true;
+    isPasswordHidden = true;
+    password = new FormControl('', [Validators.required]);
+
+    getErrorMessage() {
+        return 'You must enter a value';
+    }
 }

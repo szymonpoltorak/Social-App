@@ -28,5 +28,15 @@
 
 .forgot-password {
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: left;
+    gap: 1em;
+}
+
+button {
+    width: 10em;
 }
