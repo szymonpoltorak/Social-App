@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.logo {
+    letter-spacing: 0.2em;
+    font-weight: bold;
+}
+
+.numbers {
+    color: aqua;
+}
+
+.agenda {
+    max-width: 30em;
+}
+
+.login-block {
+    margin-left: 2em;
+    padding: 2em;
+    border: 1px solid;
+    border-radius: 1em;
+}
+
+.forgot-password {
+    display: block;
+    margin-bottom: 1.5em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: left;
+    gap: 1em;
+}
+
+button {
+    width: 10em;
+}
