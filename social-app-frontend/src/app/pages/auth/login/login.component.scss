@@ -4,11 +4,14 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background-image: url("../../../../assets/eternity.png");
+    color: white;
 }
 
 .logo {
     letter-spacing: 0.2em;
     font-weight: bold;
+    font-size: 2.5em;
 }
 
 .numbers {
@@ -16,20 +19,26 @@
 }
 
 .agenda {
+    font-family: 'Josefin Sans', sans-serif;
     max-width: 30em;
+    margin-right: 10em;
+}
+
+.title {
+    font-weight: 700;
 }
 
 .login-block {
     margin-left: 2em;
     padding: 2em;
-    border: 1px solid;
+    border: 1px solid aqua;
     border-radius: 1em;
 }
 
 .line {
     height: 1px;
     width: 25%;
-    background-color: black;
+    background-color: white;
 }
 
 .forgot-block {
@@ -42,7 +51,7 @@
 .forgot-password {
     display: inline-block;
     text-decoration: none;
-    color: black;
+    color: white;
     margin-left: 0.2em;
     margin-right: 0.2em;
 }
@@ -51,9 +60,28 @@
     display: flex;
     justify-content: left;
     align-items: center;
-    gap: 1em;
+    gap: 2em;
 }
 
-.button1 {
+button {
     width: 10em;
+    padding: 1em;
+    background-color: transparent;
+    color: white;
+    border: 2px white solid;
+    border-radius: 1em;
+    font-family: 'Poppins', sans-serif;
 }
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+button:active {
+    background-color: aqua;
+    opacity: 0.5;
+    color: black;
+}
+
