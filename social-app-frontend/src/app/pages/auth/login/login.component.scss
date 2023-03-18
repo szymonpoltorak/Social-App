@@ -1,59 +1,99 @@
-:host {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+$main-blue: aqua;
+$border-width: 2px;
+$main-font-color: white;
+$border-radius: 1em;
+
+@mixin bold-font {
+    font-weight: bold;
+}
+
+@mixin page-size {
     width: 100vw;
     height: 100vh;
 }
 
+@mixin flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:host {
+    @include flexbox;
+    @include page-size;
+    background-image: url("../../../../assets/eternity.png");
+    color: $main-font-color;
+}
+
 .logo {
     letter-spacing: 0.2em;
-    font-weight: bold;
+    @include bold-font;
+    font-size: 2.5em;
 }
 
 .numbers {
-    color: aqua;
+    color: $main-blue;
 }
 
 .agenda {
+    font-family: 'Josefin Sans', sans-serif;
     max-width: 30em;
+    margin-right: 10em;
+}
+
+.title {
+    @include bold-font;
 }
 
 .login-block {
     margin-left: 2em;
     padding: 2em;
-    border: 1px solid;
-    border-radius: 1em;
+    border: $border-width solid $main-blue;
+    border-radius: $border-radius;
 }
 
 .line {
-    height: 1px;
+    height: $border-width;
     width: 25%;
-    background-color: black;
+    background-color: $main-font-color;
 }
 
 .forgot-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexbox;
     margin-bottom: 1.5em;
 }
 
 .forgot-password {
     display: inline-block;
     text-decoration: none;
-    color: black;
+    color: $main-font-color;
     margin-left: 0.2em;
     margin-right: 0.2em;
 }
 
 .buttons {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    gap: 1em;
+    @include flexbox;
+    gap: 2em;
 }
 
-.button1 {
+.submit-button {
     width: 10em;
+    padding: 1em;
+    background-color: transparent;
+    color: $main-font-color;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+}
+
+.submit-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: $border-width rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+.submit-button:active {
+    background-color: $main-blue;
+    opacity: 0.5;
+    color: black;
 }
