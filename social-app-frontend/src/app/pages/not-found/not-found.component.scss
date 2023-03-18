@@ -1,4 +1,8 @@
 $box-element-size:20em;
+$main-font-color: white;
+$main-blue: aqua;
+$border-radius: 1em;
+$border-width: 2px;
 
 @mixin font-bolding {
     font-weight: 700;
@@ -10,15 +14,19 @@ $box-element-size:20em;
     align-items: center;
 }
 
-main {
-    height: 100vh;
+@mixin page-size {
     width: 100vw;
-    color: white;
+    height: 100vh;
+}
+
+main {
+    @include page-size;
+    color: $main-font-color;
     background-image: url("../../../assets/eternity.png");
 }
 
 .special {
-    color: aqua;
+    color: $main-blue;
     font-weight: bolder;
 }
 
@@ -58,20 +66,20 @@ button {
     margin-top: 3em;
     padding: 2em;
     background-color: transparent;
-    color: white;
-    border: 2px white solid;
-    border-radius: 1em;
+    color: $main-font-color;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
     font-family: 'Poppins', sans-serif;
 }
 
 button:hover {
     background-color: rgba(255, 255, 255, 0.3);
-    border: 2px rgba(255, 255, 255, 0.3) solid;
+    border: $border-width rgba(255, 255, 255, 0.3) solid;
     animation: 0.5s ease-in;
 }
 
 button:active {
-    background-color: aqua;
+    background-color: $main-blue;
     opacity: 0.5;
     color: black;
 }
