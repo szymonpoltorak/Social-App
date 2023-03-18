@@ -41,5 +41,28 @@ You have to also change makefile lines:
 
 ```properties
 db-password = -e POSTGRES_PASSWORD=none
-db-username = -e POSTGRES_USER=root
+db-username = -e POSTGRES_USER=user
+```
+
+## How to run without docker
+
+You have to install Java in version `at least` 17 and maven.
+
+On linux:
+
+```bash
+sudo apt install -y openjdk
+sudo apt install -y maven
+```
+
+Then run maven lifecycle
+
+```bash
+mvn clean package
+```
+
+And at last run jar file in `target/`.
+
+```bash
+java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
 ```

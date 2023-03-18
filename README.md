@@ -31,6 +31,22 @@ I used various technologies which I will list below.
 * makefile
 * docker
 
+## Installation of docker
+
+To install docker use:
+
+* On Linux:
+
+```bash
+sudo apt install -y docker
+```
+
+* On Windows:
+
+```psh
+winget install Docker.DockerDesktop
+```
+
 ## Makefile commands
 
 To simplify the development and usage of this app I used docker and makefile.

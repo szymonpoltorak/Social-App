@@ -2,10 +2,19 @@
 
 This is a frontend part of my project. It was build using `angular cli`.
 
+## I do not want to use docker
+
+If you do not want to run docker just use command below and then start the angular.
+
+```bash
+npm install
+```
+
 ## How to start frontend app process
 
 To start watch mode of frontend only you can simply use this command (if you have angular installed and added to path).
-```
+
+```bash
 ng serve
 ```
 
@@ -30,7 +39,9 @@ Makefile file has few commands that are quality of life improvements.
 ## Sources and Inspirations
 
 Error Page:
+
 * [Source](https://www.mantralabsglobal.com/404)
 
 Space Background:
+
 * [Source](https://wallpapercave.com/black-space-wallpaper-hd)
