@@ -1,3 +1,47 @@
+$main-blue: aqua;
+$border-width: 2px;
+$main-font-color: white;
+$border-radius: 1em;
+
+@mixin page-size {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-image: url("../../../../assets/eternity.png");
+    color: white;
+    @include page-size;
+}
+
 .link-pointer {
     cursor: pointer;
+}
+
+.submit-button {
+    width: 10em;
+    padding: 1em;
+    background-color: transparent;
+    color: $main-font-color;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+}
+
+.submit-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: $border-width rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+.submit-button:active {
+    background-color: $main-blue;
+    opacity: 0.5;
+    color: black;
 }

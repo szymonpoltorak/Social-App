@@ -1,38 +1,39 @@
-<div>
-    <app-logo class="link-pointer" routerLink="/auth/login"></app-logo>
-</div>
-
-<section>
-    <h1>Sign Up</h1>
-
-    <p>It's quick and easy</p>
-</section>
-
-<section>
+<main>
     <div>
-        <!--   Here will be last and first name     -->
+        <app-logo class="link-pointer" routerLink="/auth/login"></app-logo>
     </div>
 
-    <app-email-field></app-email-field>
-    <app-password-field [message]="'Enter your password'"></app-password-field>
-    <app-password-field [message]="'Repeat your password'"></app-password-field>
+    <section>
+        <h1>Sign Up</h1>
 
-    <div>
-        <!--    Here will be birthday date inputs    -->
-    </div>
+        <p>It's quick and easy</p>
+    </section>
 
-    <div>
-        <!--    Here will be Gender choice    -->
-    </div>
+    <form>
+        <div>
+            <!--   Here will be last and first name     -->
+        </div>
 
-    <p>
-        At Social365, we take your privacy seriously. When you register for our social media platform,
-        we collect certain information from you in order to provide you with a personalized experience.
-        This privacy policy explains what information we collect, how we use it, and how we protect your data.
-    </p>
+        <app-email-field></app-email-field>
+        <app-password-field [message]="'Enter your password'"></app-password-field>
+        <app-password-field [message]="'Repeat your password'"></app-password-field>
 
-    <div>
-        <!--   Here will be sign up button     -->
-        <button>Sign Up</button>
-    </div>
-</section>
+        <div>
+            <!--    Here will be birthday date inputs    -->
+        </div>
+
+        <div>
+            <!--    Here will be Gender choice    -->
+        </div>
+
+        <p>
+            At Social365, we take your privacy seriously. When you register for our social media platform,
+            we collect certain information from you in order to provide you with a personalized experience.
+            This privacy policy explains what information we collect, how we use it, and how we protect your data.
+        </p>
+
+        <div>
+            <button class="submit-button">Sign Up</button>
+        </div>
+    </form>
+</main>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { EmailFieldComponent } from "././email-field/email-field.component";
+import { EmailFieldComponent } from "./email-field/email-field.component";
 import { PasswordFieldComponent } from "./password-field/password-field.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -15,12 +15,12 @@ import { LogoComponent } from './logo/logo.component';
     declarations: [
         EmailFieldComponent,
         PasswordFieldComponent,
-        LogoComponent
+        LogoComponent,
     ],
     exports: [
         EmailFieldComponent,
         PasswordFieldComponent,
-        LogoComponent
+        LogoComponent,
     ],
     imports: [
         CommonModule,
