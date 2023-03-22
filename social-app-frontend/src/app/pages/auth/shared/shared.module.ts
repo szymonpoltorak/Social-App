@@ -8,16 +8,19 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { LogoComponent } from './logo/logo.component';
 
 
 @NgModule({
     declarations: [
         EmailFieldComponent,
-        PasswordFieldComponent
+        PasswordFieldComponent,
+        LogoComponent
     ],
     exports: [
         EmailFieldComponent,
-        PasswordFieldComponent
+        PasswordFieldComponent,
+        LogoComponent
     ],
     imports: [
         CommonModule,

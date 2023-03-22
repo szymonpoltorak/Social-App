@@ -25,15 +25,15 @@ $border-radius: 1em;
     color: $main-font-color;
 }
 
-.logo {
-    letter-spacing: 0.2em;
-    @include bold-font;
-    font-size: 2.5em;
-}
-
-.numbers {
-    color: $main-blue;
-}
+//.logo {
+//    letter-spacing: 0.2em;
+//    @include bold-font;
+//    font-size: 2.5em;
+//}
+//
+//.numbers {
+//    color: $main-blue;
+//}
 
 .agenda {
     font-family: 'Josefin Sans', sans-serif;
