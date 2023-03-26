@@ -11,8 +11,9 @@
         </div>
 
         <form>
-            <div>
-                <!--   Here will be last and first name     -->
+            <div class="name-inputs">
+                <app-name-input [message]="'name'"></app-name-input>
+                <app-name-input [message]="'surname'"></app-name-input>
             </div>
 
             <app-email-field class="email"></app-email-field>

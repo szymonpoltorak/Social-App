@@ -1,0 +1,26 @@
+$main-blue: aqua;
+$border-width: 2px;
+$main-font-color: white;
+$border-radius: 0.5em;
+
+.name-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    text-transform: capitalize;
+}
+
+.name-input {
+    color: white;
+    width: 18em;
+    padding: 1em;
+    background-color: transparent;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
+}
+
+.name-input:hover {
+    border-color: $main-blue;
+}
