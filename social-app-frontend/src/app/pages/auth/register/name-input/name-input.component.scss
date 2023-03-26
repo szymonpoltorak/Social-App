@@ -9,10 +9,13 @@ $border-radius: 0.5em;
 }
 
 .input-label {
+    font-family: 'Poppins', sans-serif;
     text-transform: capitalize;
+    padding-bottom: 0.5em;
 }
 
 .name-input {
+    font-family: 'Poppins', sans-serif;
     color: white;
     width: 18em;
     padding: 1em;
@@ -23,4 +26,8 @@ $border-radius: 0.5em;
 
 .name-input:hover {
     border-color: $main-blue;
+}
+
+.wrong-input {
+    border-color: red;
 }

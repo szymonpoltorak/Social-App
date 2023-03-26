@@ -31,14 +31,17 @@ $border-radius: 1em;
 }
 
 .lawyer-speech {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     font-size: 0.8em;
     padding-bottom: 1em;
     padding-top: 1em;
 }
 
 .register-container {
-    width: 50em;
+    display: flex;
+    flex-direction: column;
+    min-width: 50em;
+    max-width: 50em;
     margin-top: 10em;
     margin-left: auto;
     margin-right: auto;
@@ -46,7 +49,6 @@ $border-radius: 1em;
     border-radius: 1em;
     padding: 2em;
 }
-
 
 .logo-block {
     padding-left: 1em;

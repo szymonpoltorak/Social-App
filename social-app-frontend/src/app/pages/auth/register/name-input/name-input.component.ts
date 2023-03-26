@@ -1,10 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, Validators } from "@angular/forms";
 
 @Component({
     selector: 'app-name-input',
     templateUrl: './name-input.component.html',
     styleUrls: ['./name-input.component.scss']
 })
-export class NameInputComponent {
-    @Input() message = "";
+export class NameInputComponent implements OnInit{
+    @Input() message: string = "";
+
+    nameControl: FormControl = new FormControl('',
+        [Validators.required, Validators.maxLength(20),
+                      Validators.minLength(3), Validators.pattern('[a-zA-Z]+')]);
+
+    ngOnInit(): void {
+    }
 }
