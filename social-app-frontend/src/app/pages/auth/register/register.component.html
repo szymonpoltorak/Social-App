@@ -1,39 +1,35 @@
-<main>
-    <div>
+<main class="main-screen">
+    <div class="logo-block">
         <app-logo class="link-pointer" routerLink="/auth/login"></app-logo>
     </div>
 
-    <section>
-        <h1>Sign Up</h1>
+    <div class="register-container">
+        <div class="sign-headers">
+            <h1 class="sign-h1">Sign Up</h1>
 
-        <p>It's quick and easy</p>
-    </section>
-
-    <form>
-        <div>
-            <!--   Here will be last and first name     -->
+            <p class="fine-agenda">It's quick and easy</p>
         </div>
 
-        <app-email-field></app-email-field>
-        <app-password-field [message]="'Enter your password'"></app-password-field>
-        <app-password-field [message]="'Repeat your password'"></app-password-field>
+        <form>
+            <div>
+                <!--   Here will be last and first name     -->
+            </div>
 
-        <div>
-            <!--    Here will be birthday date inputs    -->
-        </div>
+            <app-email-field class="email"></app-email-field>
 
-        <div>
-            <!--    Here will be Gender choice    -->
-        </div>
+            <div class="passwords">
+                <app-password-field [message]="'Enter your password'"></app-password-field>
+                <app-password-field [message]="'Repeat your password'"></app-password-field>
+            </div>
 
-        <p>
-            At Social365, we take your privacy seriously. When you register for our social media platform,
-            we collect certain information from you in order to provide you with a personalized experience.
-            This privacy policy explains what information we collect, how we use it, and how we protect your data.
-        </p>
+            <p class="lawyer-speech">
+                At Social365, we take your privacy seriously. When you register for our social media platform,
+                we collect certain information from you in order to provide you with a personalized experience.
+                This privacy policy explains what information we collect, how we use it, and how we protect your data.
+                By clicking Sing Up button you accept to out privacy policy and terms of use.
+            </p>
 
-        <div>
             <button class="submit-button">Sign Up</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </main>

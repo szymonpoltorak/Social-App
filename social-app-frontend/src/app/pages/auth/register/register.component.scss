@@ -14,10 +14,43 @@ $border-radius: 1em;
     align-items: center;
 }
 
-main {
+.main-screen {
     background-image: url("../../../../assets/eternity.png");
     color: white;
     @include page-size;
+}
+
+.sign-h1 {
+    font-weight: bold;
+}
+
+.passwords {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.lawyer-speech {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+.register-container {
+    width: 50em;
+    margin-top: 10em;
+    margin-left: auto;
+    margin-right: auto;
+    border: $border-width $main-blue solid;
+    border-radius: 1em;
+    padding: 2em;
+}
+
+
+.logo-block {
+    padding-left: 1em;
+    padding-top: 1em;
 }
 
 .link-pointer {

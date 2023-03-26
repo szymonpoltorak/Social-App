@@ -8,12 +8,12 @@ import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
-        RegisterComponent
+        RegisterComponent,
     ],
     imports: [
         CommonModule,
         RegisterRoutingModule,
-        SharedModule
+        SharedModule,
     ]
 })
 export class RegisterModule {
