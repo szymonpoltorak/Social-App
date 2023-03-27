@@ -1,5 +1,8 @@
-<section class="email-container">
+<div class="email-container">
     <label for="mail-input">Email:</label>
 
-    <input id="mail-input" class="email" required type="email" placeholder="user@example.pl">
-</section>
+    <input id="mail-input" class="email" required type="email" placeholder="user@example.pl"
+           [class.wrong-mail]="emailControl.invalid && emailControl.touched"
+           [class.correct-mail]="emailControl.valid" [formControl]="emailControl"
+    >
+</div>

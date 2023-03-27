@@ -4,9 +4,22 @@
 }
 
 .email {
-    width: 44em;
-    padding: 10px;
+    width: 20.5em;
+    padding: 1em;
     background-color: transparent;
     border: white 2px solid;
     border-radius: 0.5em;
+    color: white;
+}
+
+.email:hover {
+    border-color: aqua;
+}
+
+.wrong-mail {
+    border-color: red;
+}
+
+.correct-mail {
+    border-color: green;
 }
