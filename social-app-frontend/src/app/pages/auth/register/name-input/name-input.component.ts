@@ -6,13 +6,10 @@ import { FormControl, Validators } from "@angular/forms";
     templateUrl: './name-input.component.html',
     styleUrls: ['./name-input.component.scss']
 })
-export class NameInputComponent implements OnInit{
+export class NameInputComponent {
     @Input() message: string = "";
 
     nameControl: FormControl = new FormControl('',
         [Validators.required, Validators.maxLength(20),
-                      Validators.minLength(3), Validators.pattern('[a-zA-Z]+')]);
-
-    ngOnInit(): void {
-    }
+            Validators.minLength(3), Validators.pattern('[a-zA-Z]+')]);
 }

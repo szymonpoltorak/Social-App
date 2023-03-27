@@ -1,25 +1,19 @@
-.password-container {
+.date-container {
     display: flex;
     flex-direction: column;
 }
 
-.password-input {
+.date-input {
+    font-family: "Josefin Sans", sans-serif;
     width: 20.5em;
     padding: 1em;
     background-color: transparent;
     border: white 2px solid;
     border-radius: 0.5em;
     color: white;
+    text-transform: uppercase;
 }
 
-.password-input:hover {
-    border-color: aqua;
-}
-
-.wrong-password {
-    border-color: red;
-}
-
-.correct-password {
-    border-color: green;
+.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(100%);
 }

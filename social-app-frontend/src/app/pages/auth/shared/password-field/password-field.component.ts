@@ -9,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class PasswordFieldComponent {
     @Input()
     message: string = "";
-    passwordControl = new FormControl('',
-                        [Validators.required, Validators.minLength(8),
-                                      Validators.maxLength(20)]);
+    passwordControl: FormControl = new FormControl('',
+        [Validators.required, Validators.minLength(8),
+            Validators.maxLength(20)]);
 }
