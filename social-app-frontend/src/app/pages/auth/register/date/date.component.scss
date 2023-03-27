@@ -22,3 +22,11 @@
 .date-input::-webkit-calendar-picker-indicator {
     filter: invert(100%);
 }
+
+.wrong-date {
+    border-color: red;
+}
+
+.correct-date {
+    border-color: green;
+}
