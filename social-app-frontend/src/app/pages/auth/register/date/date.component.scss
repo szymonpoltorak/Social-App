@@ -1,17 +1,22 @@
 .date-container {
     display: flex;
     flex-direction: column;
+    padding: 0.5em;
+}
+
+.data-label {
+    padding-bottom: 0.3em;
 }
 
 .date-input {
     font-family: "Josefin Sans", sans-serif;
     width: 20.5em;
-    padding: 1em;
     background-color: transparent;
     border: white 2px solid;
     border-radius: 0.5em;
     color: white;
     text-transform: uppercase;
+    padding: 1em;
 }
 
 .date-input::-webkit-calendar-picker-indicator {

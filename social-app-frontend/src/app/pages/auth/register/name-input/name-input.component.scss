@@ -6,22 +6,23 @@ $border-radius: 0.5em;
 .name-input-container {
     display: flex;
     flex-direction: column;
+    padding: 0.5em;
 }
 
 .input-label {
     font-family: 'Poppins', sans-serif;
     text-transform: capitalize;
-    padding-bottom: 0.5em;
+    padding-bottom: 0.3em;
 }
 
 .name-input {
     font-family: 'Poppins', sans-serif;
     color: white;
     width: 20.5em;
-    padding: 1em;
     background-color: transparent;
     border: $border-width $main-font-color solid;
     border-radius: $border-radius;
+    padding: 1em;
 }
 
 .name-input:hover {

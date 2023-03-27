@@ -26,15 +26,14 @@ $border-radius: 1em;
 
 .passwords {
     display: flex;
-    align-items: center;
-    gap: 1em;
+    gap: 2.5em;
 }
 
 .lawyer-speech {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 0.8em;
-    padding-bottom: 1em;
-    padding-top: 1em;
+    padding: 1em;
+    margin-bottom: 0;
 }
 
 .register-container {
@@ -42,12 +41,16 @@ $border-radius: 1em;
     flex-direction: column;
     min-width: 50em;
     max-width: 50em;
-    margin-top: 10em;
     margin-left: auto;
     margin-right: auto;
     border: $border-width $main-blue solid;
     border-radius: 1em;
     padding: 2em;
+    margin-top: 10em;
+}
+
+.fine-agenda {
+    margin-bottom: 0;
 }
 
 .logo-block {
@@ -59,14 +62,18 @@ $border-radius: 1em;
     cursor: pointer;
 }
 
+.sign-headers {
+    padding: 0.5em;
+}
+
 .submit-button {
     width: 10em;
-    padding: 1em;
     background-color: transparent;
     color: $main-font-color;
     border: $border-width $main-font-color solid;
     border-radius: $border-radius;
     font-family: 'Poppins', sans-serif;
+    padding: 1em;
 }
 
 .submit-button:hover {
@@ -83,10 +90,14 @@ $border-radius: 1em;
 
 .name-inputs {
     display: flex;
-    padding-bottom: 1.5em;
-    gap: 5em;
+    gap: 2.5em;
 }
 
 .email-date-inputs {
     display: flex;
+    gap: 2.5em;
+}
+
+.button-box {
+    padding: 0.5em;
 }
