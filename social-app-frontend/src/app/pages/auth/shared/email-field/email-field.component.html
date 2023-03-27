@@ -1,9 +1,5 @@
-<section class="example-container">
-    <mat-form-field appearance="outline">
-        <mat-label>Enter your username</mat-label>
+<section class="email-container">
+    <label for="mail-input">Email:</label>
 
-        <input autocomplete="username" [formControl]="email" matInput placeholder="user@example.com" required>
-
-        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
+    <input id="mail-input" class="email" required type="email" placeholder="user@example.pl">
 </section>

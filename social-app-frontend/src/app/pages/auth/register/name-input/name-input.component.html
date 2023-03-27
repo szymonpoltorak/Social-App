@@ -1,6 +1,10 @@
 <div class="name-input-container">
     <label class="input-label" for="my-input">{{ message }}:</label>
 
-    <input [class.wrong-input]="nameControl.invalid && nameControl.touched" [formControl]="nameControl"
-           class="name-input" id="my-input" placeholder="Enter your {{ message }}" required>
+    <input [formControl]="nameControl"
+           [class.wrong-input]="nameControl.invalid && nameControl.touched"
+           [class.correct]="nameControl.valid"
+           class="name-input" id="my-input"
+           placeholder="Enter your {{ message }}"
+           required>
 </div>
