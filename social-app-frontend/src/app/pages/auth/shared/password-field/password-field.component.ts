@@ -8,11 +8,8 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class PasswordFieldComponent {
     @Input()
-    message!: string;
-    isPasswordHidden: boolean = true;
-    password = new FormControl('', [Validators.required]);
-
-    getErrorMessage() {
-        return 'You must enter a value';
-    }
+    message: string = "";
+    passwordControl = new FormControl('',
+                        [Validators.required, Validators.minLength(8),
+                                      Validators.maxLength(20)]);
 }
