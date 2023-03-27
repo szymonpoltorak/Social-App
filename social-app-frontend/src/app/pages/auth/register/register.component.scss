@@ -1,0 +1,103 @@
+$main-blue: aqua;
+$border-width: 2px;
+$main-font-color: white;
+$border-radius: 1em;
+
+@mixin page-size {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin flexbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-screen {
+    background-image: url("../../../../assets/eternity.png");
+    color: white;
+    @include page-size;
+}
+
+.sign-h1 {
+    font-weight: bold;
+}
+
+.passwords {
+    display: flex;
+    gap: 2.5em;
+}
+
+.lawyer-speech {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8em;
+    padding: 1em;
+    margin-bottom: 0;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 50em;
+    max-width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    border: $border-width $main-blue solid;
+    border-radius: 1em;
+    padding: 2em;
+    margin-top: 10em;
+}
+
+.fine-agenda {
+    margin-bottom: 0;
+}
+
+.logo-block {
+    padding-left: 1em;
+    padding-top: 1em;
+}
+
+.link-pointer {
+    cursor: pointer;
+}
+
+.sign-headers {
+    padding: 0.5em;
+}
+
+.submit-button {
+    width: 10em;
+    background-color: transparent;
+    color: $main-font-color;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+    padding: 1em;
+}
+
+.submit-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: $border-width rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+.submit-button:active {
+    background-color: $main-blue;
+    opacity: 0.5;
+    color: black;
+}
+
+.name-inputs {
+    display: flex;
+    gap: 2.5em;
+}
+
+.email-date-inputs {
+    display: flex;
+    gap: 2.5em;
+}
+
+.button-box {
+    padding: 0.5em;
+}

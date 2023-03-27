@@ -1,0 +1,41 @@
+<main class="main-screen">
+    <div class="logo-block">
+        <app-logo class="link-pointer" routerLink="/auth/login"></app-logo>
+    </div>
+
+    <div class="register-container">
+        <div class="sign-headers">
+            <h1 class="sign-h1">Sign Up</h1>
+
+            <p class="fine-agenda">It's quick and easy</p>
+        </div>
+
+        <form>
+            <div class="name-inputs">
+                <app-name-input [message]="'name'"></app-name-input>
+                <app-name-input [message]="'surname'"></app-name-input>
+            </div>
+
+            <div class="email-date-inputs">
+                <app-email-field></app-email-field>
+                <app-date></app-date>
+            </div>
+
+            <div class="passwords">
+                <app-password-field [message]="'Enter your password'"></app-password-field>
+                <app-password-field [message]="'Repeat your password'"></app-password-field>
+            </div>
+
+            <p class="lawyer-speech">
+                At Social365, we take your privacy seriously. When you register for our social media platform,
+                we collect certain information from you in order to provide you with a personalized experience.
+                This privacy policy explains what information we collect, how we use it, and how we protect your data.
+                By clicking Sing Up button you accept to out privacy policy and terms of use.
+            </p>
+
+            <div class="button-box">
+                <button class="submit-button">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</main>

@@ -1,9 +1,0 @@
-<section class="example-container">
-    <mat-form-field appearance="outline">
-        <mat-label>Enter your username</mat-label>
-
-        <input autocomplete="username" [formControl]="email" matInput placeholder="user@example.com" required>
-
-        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
-</section>

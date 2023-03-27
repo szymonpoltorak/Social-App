@@ -1,0 +1,30 @@
+.email-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
+.mail-label {
+    padding-bottom: 0.3em;
+}
+
+.email {
+    width: 20.5em;
+    background-color: transparent;
+    border: white 2px solid;
+    border-radius: 0.5em;
+    color: white;
+    padding: 1em 1em 1.2em 1em;
+}
+
+.email:hover {
+    border-color: aqua;
+}
+
+.wrong-mail {
+    border-color: red;
+}
+
+.correct-mail {
+    border-color: green;
+}

@@ -1,0 +1,8 @@
+<div class="date-container">
+    <label class="data-label" for="date-id" >Date Of Birth:</label>
+
+    <input id="date-id" type="date" name="" value="" class="date-input"
+        [formControl]="dateControl" [class.wrong-date]="dateControl.invalid && dateControl.touched"
+        [class.correct-date]="dateControl.valid"
+    >
+</div>
