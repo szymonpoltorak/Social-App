@@ -10,7 +10,9 @@ import { PasswordValidation } from 'src/app/core/enums/PasswordValidation';
 export class PasswordFieldComponent {
     @Input()
     message: string = "";
+    
     passwordControl: FormControl = new FormControl('',
         [Validators.required, Validators.minLength(PasswordValidation.PASSWORD_MIN_LENGTH),
-            Validators.maxLength(PasswordValidation.PASSWORD_MAX_LENGTH)]);
+        Validators.maxLength(PasswordValidation.PASSWORD_MAX_LENGTH),
+        Validators.pattern(PasswordValidation.PASSWORD_PATTERN)]);
 }
