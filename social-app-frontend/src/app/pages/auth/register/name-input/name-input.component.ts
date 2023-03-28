@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
+import { NameValidation } from 'src/app/core/enums/NameValidation';
 
 @Component({
     selector: 'app-name-input',
@@ -10,6 +11,6 @@ export class NameInputComponent {
     @Input() message: string = "";
 
     nameControl: FormControl = new FormControl('',
-        [Validators.required, Validators.maxLength(20),
-            Validators.minLength(3), Validators.pattern('[a-zA-Z]+')]);
+        [Validators.required, Validators.maxLength(NameValidation.NAME_MAX_LENGTH),
+            Validators.minLength(NameValidation.NAME_MIN_LENGTH), Validators.pattern(NameValidation.NAME_PATTERN)]);
 }
