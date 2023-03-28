@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { EmailValidation } from 'src/app/core/enums/EmailValidation';
 
 @Component({
     selector: 'app-email-field',
@@ -7,6 +8,6 @@ import { FormControl, Validators } from '@angular/forms';
     styleUrls: ['./email-field.component.scss']
 })
 export class EmailFieldComponent {
-    emailControl: FormControl = new FormControl('',
-        [Validators.required, Validators.email]);
+    emailControl: FormControl = new FormControl(EmailValidation.EMAIL_VALUE,
+        [Validators.required, Validators.pattern(EmailValidation.EMAIL_PATTERN)]);
 }
