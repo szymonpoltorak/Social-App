@@ -10,20 +10,20 @@
             <p class="fine-agenda">It's quick and easy</p>
         </div>
 
-        <form>
+        <div>
             <div class="name-inputs">
-                <app-name-input [message]="'name'"></app-name-input>
-                <app-name-input [message]="'surname'"></app-name-input>
+                <app-name-input name="name" [message]="'name'"></app-name-input>
+                <app-name-input name="surname" [message]="'surname'"></app-name-input>
             </div>
 
             <div class="email-date-inputs">
-                <app-email-field></app-email-field>
-                <app-date></app-date>
+                <app-email-field name="email"></app-email-field>
+                <app-date name="date"></app-date>
             </div>
 
             <div class="passwords">
-                <app-password-field [message]="'Enter your password'"></app-password-field>
-                <app-password-field [message]="'Repeat your password'"></app-password-field>
+                <app-password-field name="password" [message]="'Enter your password'"></app-password-field>
+                <app-password-field name="repeatPassword" [message]="'Repeat your password'"></app-password-field>
             </div>
 
             <p class="lawyer-speech">
@@ -34,8 +34,9 @@
             </p>
 
             <div class="button-box">
-                <button routerLink="successful" class="submit-button">Sign Up</button>
+                <!-- <button routerLink="successful" class="submit-button">Sign Up</button> -->
+                <button (click)="validateFields()" class="submit-button">Sign Up</button>
             </div>
-        </form>
+        </div>
     </div>
 </main>
