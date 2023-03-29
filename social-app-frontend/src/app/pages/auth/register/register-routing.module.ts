@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SubmitRegisterGuard } from './guards/submit-register.guard';
 import { RegisterComponent } from "./register.component";
 
 const routes: Routes = [
@@ -13,9 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../login/login.module').then(module => module.LoginModule)
     },
     {
-        path: 'succesful',
-        loadChildren: () => import('../succesful-register/succesful-register.module').then(module => module.SuccesfulRegisterModule),
-        canActivate:[SubmitRegisterGuard]
+        path: 'successful',
+        loadChildren: () => import('../successful-register/successful-register.module').then(module => module.SuccessfulRegisterModule),
     }
 ];
 

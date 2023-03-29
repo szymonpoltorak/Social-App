@@ -1,23 +1,34 @@
 import { Component, Input } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
-import { PasswordValidation } from "src/app/core/enums/PasswordValidation";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: "app-password-field",
     templateUrl: "./password-field.component.html",
     styleUrls: ["./password-field.component.scss"],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: PasswordFieldComponent,
+            multi: true,
+        }
+    ]
 })
-export class PasswordFieldComponent {
-    @Input()
-    message: string = "";
+export class PasswordFieldComponent implements ControlValueAccessor{
+    @Input() password: string = "";
+    @Input() passwordControl!: FormControl;
 
-    passwordControl: FormControl = new FormControl(
-        PasswordValidation.PASSWORD_VALUE,
-        [
-            Validators.required,
-            Validators.minLength(PasswordValidation.PASSWORD_MIN_LENGTH),
-            Validators.maxLength(PasswordValidation.PASSWORD_MAX_LENGTH),
-            Validators.pattern(PasswordValidation.PASSWORD_PATTERN),
-        ]
-    );
+    private onChange = () => {};
+
+    private onTouched = () => {};
+
+    registerOnChange(onChange: any): void {
+        this.onChange = onChange;
+    }
+
+    registerOnTouched(onTouched: any): void {
+        this.onTouched = onTouched;
+    }
+
+    writeValue(obj: any): void {
+    }
 }

@@ -10,20 +10,39 @@
             <p class="fine-agenda">It's quick and easy</p>
         </div>
 
-        <div>
-            <div class="name-inputs">
-                <app-name-input name="name" [message]="'name'"></app-name-input>
-                <app-name-input name="surname" [message]="'surname'"></app-name-input>
+        <form [formGroup]="registerForm" (ngSubmit)="makeRedirection()">
+            <div formGroupName="nameInputs" class="name-inputs">
+                <app-name-input formControlName="firstName"
+                                [nameControl]="controlProvider.nameControl"
+                                [name]="'name'">
+                </app-name-input>
+
+                <app-name-input formControlName="lastName"
+                                [nameControl]="controlProvider.surnameControl"
+                                [name]="'surname'">
+                </app-name-input>
             </div>
 
-            <div class="email-date-inputs">
-                <app-email-field name="email"></app-email-field>
-                <app-date name="date"></app-date>
+            <div formGroupName="emailDateInputs" class="email-date-inputs">
+                <app-email-field formControlName="email"
+                                 [emailControl]="controlProvider.emailControl">
+                </app-email-field>
+
+                <app-date formControlName="date"
+                          [dateControl]="controlProvider.dateControl">
+                </app-date>
             </div>
 
-            <div class="passwords">
-                <app-password-field name="password" [message]="'Enter your password'"></app-password-field>
-                <app-password-field name="repeatPassword" [message]="'Repeat your password'"></app-password-field>
+            <div formGroupName="passwordInputs" class="passwords">
+                <app-password-field formControlName="userPassword"
+                                    [passwordControl]="controlProvider.passwordControl"
+                                    [password]="'Enter your password'">
+                </app-password-field>
+
+                <app-password-field formControlName="repeatPassword"
+                                    [passwordControl]="controlProvider.repeatPasswordControl"
+                                    [password]="'Repeat your password'">
+                </app-password-field>
             </div>
 
             <p class="lawyer-speech">
@@ -34,9 +53,11 @@
             </p>
 
             <div class="button-box">
-                <!-- <button routerLink="successful" class="submit-button">Sign Up</button> -->
-                <button (click)="validateFields()" class="submit-button">Sign Up</button>
+                <button [disabled]="registerForm.invalid" class="submit-button">Sign Up</button>
             </div>
-        </div>
+
+            <p>Real time data : {{ registerForm.value | json }}</p>
+            <p>You form status is : {{ registerForm.status }} </p>
+        </form>
     </div>
 </main>

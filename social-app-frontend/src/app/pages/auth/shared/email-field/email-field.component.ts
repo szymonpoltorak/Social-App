@@ -1,13 +1,33 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { EmailValidation } from 'src/app/core/enums/EmailValidation';
+import { Component, Input } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-email-field',
     templateUrl: './email-field.component.html',
-    styleUrls: ['./email-field.component.scss']
+    styleUrls: ['./email-field.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: EmailFieldComponent,
+            multi: true,
+        }
+    ]
 })
-export class EmailFieldComponent {
-    emailControl: FormControl = new FormControl(EmailValidation.EMAIL_VALUE,
-        [Validators.required, Validators.pattern(EmailValidation.EMAIL_PATTERN)]);
+export class EmailFieldComponent implements ControlValueAccessor{
+    @Input() emailControl!: FormControl;
+
+    private onChange = () => {};
+
+    private onTouched = () => {};
+
+    registerOnChange(onChange: any): void {
+        this.onChange = onChange;
+    }
+
+    registerOnTouched(onTouched: any): void {
+        this.onTouched = onTouched;
+    }
+
+    writeValue(obj: any): void {
+    }
 }

@@ -1,16 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
-import { NameValidation } from 'src/app/core/enums/NameValidation';
+import { Component, Input } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: 'app-name-input',
     templateUrl: './name-input.component.html',
-    styleUrls: ['./name-input.component.scss']
+    styleUrls: ['./name-input.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: NameInputComponent,
+            multi: true,
+        }
+    ]
 })
-export class NameInputComponent {
-    @Input() message: string = "";
+export class NameInputComponent implements ControlValueAccessor{
+    @Input() name: string = "";
+    @Input() nameControl!: FormControl;
 
-    nameControl: FormControl = new FormControl('',
-        [Validators.required, Validators.maxLength(NameValidation.NAME_MAX_LENGTH),
-            Validators.minLength(NameValidation.NAME_MIN_LENGTH), Validators.pattern(NameValidation.NAME_PATTERN)]);
+    private onChange = () => {};
+
+    private onTouched = () => {};
+
+    registerOnChange(onChange: any): void {
+        this.onChange = onChange;
+    }
+
+    registerOnTouched(onTouched: any): void {
+        this.onTouched = onTouched;
+    }
+
+    writeValue(name: string): void {
+    }
 }
