@@ -8,7 +8,7 @@ import { DateValidation } from "../../../core/enums/DateValidation";
 @Injectable({
     providedIn: 'root'
 })
-export class ControlProviderService {
+export class RegisterControlProviderService {
     emailControl: FormControl = new FormControl(EmailValidation.EMAIL_VALUE,
         [
             Validators.required, Validators.pattern(EmailValidation.EMAIL_PATTERN)

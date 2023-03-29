@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { ControlProviderService } from "../services/control-provider.service";
+import { RegisterControlProviderService } from "../services/register-control-provider.service";
 
 @Component({
     selector: "app-register",
@@ -10,7 +10,7 @@ import { ControlProviderService } from "../services/control-provider.service";
 export class RegisterComponent implements OnInit{
     registerForm!: FormGroup;
 
-    constructor(private formBuilder: FormBuilder, public controlProvider: ControlProviderService) {
+    constructor(private formBuilder: FormBuilder, public controlProvider: RegisterControlProviderService) {
     }
 
     makeRedirection(): void {

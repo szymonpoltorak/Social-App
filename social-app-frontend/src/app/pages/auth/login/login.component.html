@@ -6,12 +6,17 @@
     </h2>
 </section>
 
-<form class="login-block">
+<form [formGroup]="loginForm" (ngSubmit)="authenticateUser()" class="login-block">
     <h1 class="title">Login</h1>
 
-    <app-email-field></app-email-field>
+    <app-email-field formControlName="email"
+                     [emailControl]="controlProvider.emailControl">
+    </app-email-field>
 
-    <app-password-field [password]="'Enter your password'" ></app-password-field>
+    <app-password-field formControlName="password"
+                        [passwordControl]="controlProvider.passwordControl"
+                        [password]="'Enter your password'">
+    </app-password-field>
 
     <div class="forgot-block">
         <div class="line"></div>
