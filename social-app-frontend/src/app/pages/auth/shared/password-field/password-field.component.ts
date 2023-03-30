@@ -16,10 +16,11 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/f
 export class PasswordFieldComponent implements ControlValueAccessor{
     @Input() password: string = "";
     @Input() passwordControl!: FormControl;
+    @Input() wasSubmitClicked: boolean = false;
 
-    private onChange = () => {};
+    private onChange: any = () => {};
 
-    private onTouched = () => {};
+    private onTouched: any = () => {};
 
     registerOnChange(onChange: any): void {
         this.onChange = onChange;

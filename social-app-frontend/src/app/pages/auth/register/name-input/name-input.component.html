@@ -2,7 +2,7 @@
     <label class="input-label" for="my-input">{{ name }}:</label>
 
     <input [formControl]="nameControl"
-           [class.wrong-input]="nameControl.invalid && nameControl.touched"
+           [class.wrong-input]="nameControl.invalid && (nameControl.touched || wasSubmitClicked)"
            [class.correct]="nameControl.valid"
            class="name-input" id="my-input"
            placeholder="Enter your {{ name }}"

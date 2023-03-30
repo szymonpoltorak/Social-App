@@ -7,13 +7,22 @@ import { RegisterControlProviderService } from "../services/register-control-pro
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.scss"]
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
     registerForm!: FormGroup;
+    wasSubmitClicked: boolean = false;
 
-    constructor(private formBuilder: FormBuilder, public controlProvider: RegisterControlProviderService) {
+    constructor(private formBuilder: FormBuilder,
+                public controlProvider: RegisterControlProviderService) {
     }
 
     makeRedirection(): void {
+        if (this.registerForm.invalid) {
+            this.wasSubmitClicked = true;
+
+            alert("Please fill out every form field");
+
+            return;
+        }
     }
 
     ngOnInit(): void {

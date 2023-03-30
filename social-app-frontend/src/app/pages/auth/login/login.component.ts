@@ -9,6 +9,7 @@ import { LoginControlProviderService } from "../services/login-control-provider.
 })
 export class LoginComponent implements OnInit {
     loginForm !: FormGroup;
+    wasSubmitClicked: boolean = false;
 
     constructor(private formBuilder: FormBuilder, public controlProvider: LoginControlProviderService) {
     }
@@ -21,6 +22,12 @@ export class LoginComponent implements OnInit {
     }
 
     authenticateUser(): void {
+        if (this.loginForm.invalid) {
+            this.wasSubmitClicked = true;
 
+            alert("Please fill out every form field");
+
+            return;
+        }
     }
 }

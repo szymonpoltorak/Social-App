@@ -15,6 +15,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 })
 export class EmailFieldComponent implements ControlValueAccessor{
     @Input() emailControl!: FormControl;
+    @Input() wasSubmitClicked: boolean = false;
 
     private onChange = () => {};
 

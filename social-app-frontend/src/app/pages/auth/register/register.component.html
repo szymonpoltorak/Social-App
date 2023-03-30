@@ -13,11 +13,13 @@
         <form [formGroup]="registerForm" (ngSubmit)="makeRedirection()">
             <div formGroupName="nameInputs" class="name-inputs">
                 <app-name-input formControlName="firstName"
+                                [wasSubmitClicked]="wasSubmitClicked"
                                 [nameControl]="controlProvider.nameControl"
                                 [name]="'name'">
                 </app-name-input>
 
                 <app-name-input formControlName="lastName"
+                                [wasSubmitClicked]="wasSubmitClicked"
                                 [nameControl]="controlProvider.surnameControl"
                                 [name]="'surname'">
                 </app-name-input>
@@ -25,21 +27,25 @@
 
             <div formGroupName="emailDateInputs" class="email-date-inputs">
                 <app-email-field formControlName="email"
+                                 [wasSubmitClicked]="wasSubmitClicked"
                                  [emailControl]="controlProvider.emailControl">
                 </app-email-field>
 
                 <app-date formControlName="date"
+                          [wasSubmitClicked]="wasSubmitClicked"
                           [dateControl]="controlProvider.dateControl">
                 </app-date>
             </div>
 
             <div formGroupName="passwordInputs" class="passwords">
                 <app-password-field formControlName="userPassword"
+                                    [wasSubmitClicked]="wasSubmitClicked"
                                     [passwordControl]="controlProvider.passwordControl"
                                     [password]="'Enter your password'">
                 </app-password-field>
 
                 <app-password-field formControlName="repeatPassword"
+                                    [wasSubmitClicked]="wasSubmitClicked"
                                     [passwordControl]="controlProvider.repeatPasswordControl"
                                     [password]="'Repeat your password'">
                 </app-password-field>
@@ -53,7 +59,9 @@
             </p>
 
             <div class="button-box">
-                <button [disabled]="registerForm.invalid" class="submit-button">Sign Up</button>
+                <button class="submit-button" type="submit">
+                    Sign Up
+                </button>
             </div>
         </form>
     </div>

@@ -10,12 +10,16 @@
     <h1 class="title">Login</h1>
 
     <app-email-field formControlName="email"
-                     [emailControl]="controlProvider.emailControl">
+                     [emailControl]="controlProvider.emailControl"
+                     [wasSubmitClicked]="wasSubmitClicked"
+    >
     </app-email-field>
 
     <app-password-field formControlName="password"
                         [passwordControl]="controlProvider.passwordControl"
-                        [password]="'Enter your password'">
+                        [password]="'Enter your password'"
+                        [wasSubmitClicked]="wasSubmitClicked"
+    >
     </app-password-field>
 
     <div class="forgot-block">
@@ -27,7 +31,7 @@
     </div>
 
     <div class="buttons">
-        <button routerLink="/auth/register" class="submit-button">Register Now</button>
-        <button class="submit-button">Login</button>
+        <button type="button" routerLink="/auth/register" class="submit-button">Register Now</button>
+        <button type="submit" class="submit-button">Login</button>
     </div>
 </form>

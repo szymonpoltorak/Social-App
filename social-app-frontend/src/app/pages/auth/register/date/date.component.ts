@@ -15,6 +15,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from
 })
 export class DateComponent implements ControlValueAccessor{
     @Input() dateControl!: FormControl;
+    @Input() wasSubmitClicked: boolean = false;
 
     private onChange = () => {};
 
