@@ -17,6 +17,7 @@ export class PasswordFieldComponent implements ControlValueAccessor{
     @Input() password: string = "";
     @Input() passwordControl!: FormControl;
     @Input() wasSubmitClicked: boolean = false;
+    @Input() passwordMismatch: boolean = false;
 
     private onChange: any = () => {};
 

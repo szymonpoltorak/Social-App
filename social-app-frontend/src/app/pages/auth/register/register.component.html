@@ -39,12 +39,14 @@
 
             <div formGroupName="passwordInputs" class="passwords">
                 <app-password-field formControlName="userPassword"
+                                    [passwordMismatch]="passwordMismatch"
                                     [wasSubmitClicked]="wasSubmitClicked"
                                     [passwordControl]="controlProvider.passwordControl"
                                     [password]="'Enter your password'">
                 </app-password-field>
 
                 <app-password-field formControlName="repeatPassword"
+                                    [passwordMismatch]="passwordMismatch"
                                     [wasSubmitClicked]="wasSubmitClicked"
                                     [passwordControl]="controlProvider.repeatPasswordControl"
                                     [password]="'Repeat your password'">

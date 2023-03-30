@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { RegisterControlProviderService } from "../services/register-control-provider.service";
+import { RegisterValidatorService } from "../services/register-validator.service";
+import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 
 @Component({
     selector: "app-register",
@@ -10,9 +12,11 @@ import { RegisterControlProviderService } from "../services/register-control-pro
 export class RegisterComponent implements OnInit {
     registerForm!: FormGroup;
     wasSubmitClicked: boolean = false;
+    passwordMismatch!: boolean;
 
     constructor(private formBuilder: FormBuilder,
-                public controlProvider: RegisterControlProviderService) {
+                public controlProvider: RegisterControlProviderService,
+                private registerValidator: RegisterValidatorService) {
     }
 
     makeRedirection(): void {
@@ -36,9 +40,18 @@ export class RegisterComponent implements OnInit {
                 date: this.controlProvider.dateControl
             }),
             passwordInputs: this.formBuilder.group({
-                userPassword: this.controlProvider.passwordControl,
-                repeatPassword: this.controlProvider.repeatPasswordControl
-            })
+                    userPassword: this.controlProvider.passwordControl,
+                    repeatPassword: this.controlProvider.repeatPasswordControl
+                },
+                {
+                    validator: this.registerValidator.passwordMatchValidator(FormFieldNames.REGISTER_PASSWORD,
+                        FormFieldNames.REGISTER_REPEAT_PASSWORD)
+                }
+            )
+        });
+
+        this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe(() => {
+            this.passwordMismatch = <boolean>this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.invalid;
         });
     }
 }
