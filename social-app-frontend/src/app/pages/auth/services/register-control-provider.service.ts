@@ -4,6 +4,8 @@ import { EmailValidation } from "../../../core/enums/EmailValidation";
 import { NameValidation } from "../../../core/enums/NameValidation";
 import { PasswordValidation } from "../../../core/enums/PasswordValidation";
 import { DateValidation } from "../../../core/enums/DateValidation";
+import { RegisterValidatorService } from "./register-validator.service";
+import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 
 @Injectable({
     providedIn: 'root'
@@ -52,8 +54,14 @@ export class RegisterControlProviderService {
             Validators.pattern(PasswordValidation.PASSWORD_PATTERN),
         ]
     );
-    dateControl: FormControl = new FormControl(DateValidation.DATE_VALUE, Validators.required);
+    dateControl: FormControl = new FormControl(
+        DateValidation.DATE_VALUE,
+        [
+            Validators.required,
+            this.registerValidator.properAgeValidator(FormFieldNames.DATE_FIELD)
+        ]
+    );
 
-    constructor() {
+    constructor(private registerValidator: RegisterValidatorService) {
     }
 }

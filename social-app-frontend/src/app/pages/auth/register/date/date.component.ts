@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from "@angular/forms";
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
-  selector: 'app-date',
-  templateUrl: './date.component.html',
-  styleUrls: ['./date.component.scss'],
+    selector: 'app-date',
+    templateUrl: './date.component.html',
+    styleUrls: ['./date.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -13,13 +13,15 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators } from
         }
     ]
 })
-export class DateComponent implements ControlValueAccessor{
+export class DateComponent implements ControlValueAccessor {
     @Input() dateControl!: FormControl;
     @Input() wasSubmitClicked: boolean = false;
 
-    private onChange = () => {};
+    private onChange = () => {
+    };
 
-    private onTouched = () => {};
+    private onTouched = () => {
+    };
 
     registerOnChange(onChange: any): void {
         this.onChange = onChange;

@@ -13,14 +13,16 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/f
         }
     ]
 })
-export class NameInputComponent implements ControlValueAccessor{
+export class NameInputComponent implements ControlValueAccessor {
     @Input() name: string = "";
     @Input() nameControl!: FormControl;
     @Input() wasSubmitClicked: boolean = false;
 
-    private onChange = () => {};
+    private onChange = () => {
+    };
 
-    private onTouched = () => {};
+    private onTouched = () => {
+    };
 
     registerOnChange(onChange: any): void {
         this.onChange = onChange;
