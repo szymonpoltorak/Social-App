@@ -1,0 +1,15 @@
+<div class="dialog-container">
+    <h1 class="big-warning">Form is not valid!</h1>
+
+    <p class="dialog-text">
+        {{ paragraphContent }}
+    </p>
+
+    <ul *ngFor="let listItem of listItems">
+        <li class="dialog-text">{{ listItem }}</li>
+    </ul>
+
+    <button (click)="closeEvent.emit()" type="button" class="submit-button">
+        Fixing it!
+    </button>
+</div>

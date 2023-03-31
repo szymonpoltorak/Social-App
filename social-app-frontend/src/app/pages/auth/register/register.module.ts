@@ -5,7 +5,7 @@ import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from "./register.component";
 import { SharedModule } from "../shared/shared.module";
 import { NameInputComponent } from './name-input/name-input.component';
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DateComponent } from './date/date.component';
 
 
@@ -20,6 +20,7 @@ import { DateComponent } from './date/date.component';
         RegisterRoutingModule,
         SharedModule,
         ReactiveFormsModule,
+        FormsModule,
     ]
 })
 export class RegisterModule {

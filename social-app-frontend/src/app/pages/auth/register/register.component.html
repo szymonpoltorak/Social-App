@@ -10,20 +10,47 @@
             <p class="fine-agenda">It's quick and easy</p>
         </div>
 
-        <form>
-            <div class="name-inputs">
-                <app-name-input [message]="'name'"></app-name-input>
-                <app-name-input [message]="'surname'"></app-name-input>
+        <form [formGroup]="registerForm" (ngSubmit)="makeRedirection()">
+            <div formGroupName="nameInputs" class="name-inputs">
+                <app-name-input formControlName="firstName"
+                                [wasSubmitClicked]="wasSubmitClicked"
+                                [nameControl]="controlProvider.nameControl"
+                                [name]="'name'">
+                </app-name-input>
+
+                <app-name-input formControlName="lastName"
+                                [wasSubmitClicked]="wasSubmitClicked"
+                                [nameControl]="controlProvider.surnameControl"
+                                [name]="'surname'">
+                </app-name-input>
             </div>
 
-            <div class="email-date-inputs">
-                <app-email-field></app-email-field>
-                <app-date></app-date>
+            <div formGroupName="emailDateInputs" class="email-date-inputs">
+                <app-email-field formControlName="email"
+                                 [wasSubmitClicked]="wasSubmitClicked"
+                                 [emailControl]="controlProvider.emailControl">
+                </app-email-field>
+
+                <app-date formControlName="date"
+                          [wasSubmitClicked]="wasSubmitClicked"
+                          [dateControl]="controlProvider.dateControl">
+                </app-date>
             </div>
 
-            <div class="passwords">
-                <app-password-field [message]="'Enter your password'"></app-password-field>
-                <app-password-field [message]="'Repeat your password'"></app-password-field>
+            <div formGroupName="passwordInputs" class="passwords">
+                <app-password-field formControlName="userPassword"
+                                    [passwordMismatch]="passwordMismatch"
+                                    [wasSubmitClicked]="wasSubmitClicked"
+                                    [passwordControl]="controlProvider.passwordControl"
+                                    [password]="'Enter your password'">
+                </app-password-field>
+
+                <app-password-field formControlName="repeatPassword"
+                                    [passwordMismatch]="passwordMismatch"
+                                    [wasSubmitClicked]="wasSubmitClicked"
+                                    [passwordControl]="controlProvider.repeatPasswordControl"
+                                    [password]="'Repeat your password'">
+                </app-password-field>
             </div>
 
             <p class="lawyer-speech">
@@ -34,7 +61,9 @@
             </p>
 
             <div class="button-box">
-                <button class="submit-button">Sign Up</button>
+                <button class="submit-button" type="submit">
+                    Sign Up
+                </button>
             </div>
         </form>
     </div>

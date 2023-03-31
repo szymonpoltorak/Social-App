@@ -8,18 +8,3 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-.mdc-text-field--outlined:not(.mdc-text-field--disabled)
-.mdc-notched-outline__leading,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled)
-.mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
-    border-color: rgba(255, 255, 255, 1);
-}
-
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
-    color: rgba(255, 255, 255, 1);
-}
-
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
-    color: rgba(255, 255, 255, 1);
-}
