@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.notFilled.open(NotFilledDialogComponent);
+            const dialog = this.notFilled.open(NotFilledDialogComponent);
+            dialog.componentInstance.close.subscribe(() => dialog.close());
 
             return;
         }

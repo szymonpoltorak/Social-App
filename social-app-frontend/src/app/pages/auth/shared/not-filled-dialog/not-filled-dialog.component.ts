@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-not-filled-dialog',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./not-filled-dialog.component.scss']
 })
 export class NotFilledDialogComponent {
-
+    @Output() close: EventEmitter<any> = new EventEmitter();
 }

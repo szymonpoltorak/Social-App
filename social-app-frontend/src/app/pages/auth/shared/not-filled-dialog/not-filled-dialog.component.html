@@ -1,5 +1,18 @@
-<h1 mat-dialog-title>Error in form</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
+<div class="dialog-container">
+    <h1 class="big-warning">Form is not valid!</h1>
+
+    <p>
+        To make your form valid please ensure the following:
+    </p>
+
+    <ul>
+        <li>Every field is required.</li>
+        <li>You should be at least 13 years old.</li>
+        <li>Password should contain at least 8 and max 20 characters, 1 upper and lower case and 1 special character.</li>
+        <li>Passwords must be the same.</li>
+    </ul>
+
+    <button (click)="close.emit()" type="button" class="submit-button">
+        Close
+    </button>
 </div>
