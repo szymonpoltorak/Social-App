@@ -4,6 +4,8 @@ import { LoginControlProviderService } from "../services/login-control-provider.
 import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
+import { DialogService } from "../services/dialog.service";
+import { FormBuildingService } from "../services/form-building.service";
 
 @Component({
     selector: 'app-login',
@@ -16,17 +18,14 @@ export class LoginComponent implements OnInit {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
 
-    constructor(private formBuilder: FormBuilder,
-                public controlProvider: LoginControlProviderService,
-                public notFilled: MatDialog) {
+    constructor(public controlProvider: LoginControlProviderService,
+                private notFilled: MatDialog,
+                private dialogService: DialogService,
+                private formBuildingService: FormBuildingService) {
     }
 
     ngOnInit(): void {
-        this.loginForm = this.formBuilder.group({
-            email: this.controlProvider.emailControl,
-            password: this.controlProvider.passwordControl
-        });
-
+        this.loginForm = this.formBuildingService.buildLoginForm();
         this.paragraphContent = DialogContents.LOGIN_PARAGRAPH;
         this.dialogListItems = [DialogContents.LOGIN_EMAIL, DialogContents.LOGIN_PASSWORD];
     }
@@ -35,13 +34,7 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            const dialog = this.notFilled.open(NotFilledDialogComponent,{
-                data: {
-                    paragraphContent : this.paragraphContent,
-                    listItems : this.dialogListItems
-                }
-            });
-            dialog.componentInstance.closeEvent.subscribe(() => dialog.close());
+            this.dialogService.openNotFilledDialog(this.notFilled, this.paragraphContent, this.dialogListItems);
 
             return;
         }
