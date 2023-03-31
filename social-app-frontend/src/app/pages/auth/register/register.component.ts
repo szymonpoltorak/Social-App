@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { RegisterControlProviderService } from "../services/register-control-provider.service";
 import { RegisterValidatorService } from "../services/register-validator.service";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { MatDialog } from "@angular/material/dialog";
+import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
 
 @Component({
     selector: "app-register",
@@ -16,14 +18,15 @@ export class RegisterComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 public controlProvider: RegisterControlProviderService,
-                private registerValidator: RegisterValidatorService) {
+                private registerValidator: RegisterValidatorService,
+                public notFilled: MatDialog) {
     }
 
     makeRedirection(): void {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            alert("Please fill out every form field");
+            this.notFilled.open(NotFilledDialogComponent);
 
             return;
         }

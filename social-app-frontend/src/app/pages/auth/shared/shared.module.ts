@@ -5,6 +5,9 @@ import { EmailFieldComponent } from "./email-field/email-field.component";
 import { PasswordFieldComponent } from "./password-field/password-field.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LogoComponent } from './logo/logo.component';
+import { NotFilledDialogComponent } from './not-filled-dialog/not-filled-dialog.component';
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -12,6 +15,7 @@ import { LogoComponent } from './logo/logo.component';
         EmailFieldComponent,
         PasswordFieldComponent,
         LogoComponent,
+        NotFilledDialogComponent,
     ],
     exports: [
         EmailFieldComponent,
@@ -21,6 +25,8 @@ import { LogoComponent } from './logo/logo.component';
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        MatButtonModule,
+        MatDialogModule,
     ]
 })
 export class SharedModule {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { LoginControlProviderService } from "../services/login-control-provider.service";
+import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-login',
@@ -11,7 +13,9 @@ export class LoginComponent implements OnInit {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
 
-    constructor(private formBuilder: FormBuilder, public controlProvider: LoginControlProviderService) {
+    constructor(private formBuilder: FormBuilder,
+                public controlProvider: LoginControlProviderService,
+                public notFilled: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -25,7 +29,7 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            alert("Please fill out every form field");
+            this.notFilled.open(NotFilledDialogComponent);
 
             return;
         }
