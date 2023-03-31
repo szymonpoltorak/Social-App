@@ -12,7 +12,7 @@ $border-radius: 1em;
 
 .big-warning {
     font-weight: bold;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .submit-button {
@@ -23,6 +23,10 @@ $border-radius: 1em;
     border-radius: $border-radius;
     font-family: 'Poppins', sans-serif;
     padding: 0.5em;
+}
+
+.dialog-text {
+    font-family: "Josefin Sans", sans-serif;
 }
 
 .submit-button:hover {

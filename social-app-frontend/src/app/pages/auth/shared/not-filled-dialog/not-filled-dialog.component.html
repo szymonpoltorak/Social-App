@@ -1,18 +1,15 @@
 <div class="dialog-container">
     <h1 class="big-warning">Form is not valid!</h1>
 
-    <p>
-        To make your form valid please ensure the following:
+    <p class="dialog-text">
+        {{ paragraphContent }}
     </p>
 
-    <ul>
-        <li>Every field is required.</li>
-        <li>You should be at least 13 years old.</li>
-        <li>Password should contain at least 8 and max 20 characters, 1 upper and lower case and 1 special character.</li>
-        <li>Passwords must be the same.</li>
+    <ul *ngFor="let listItem of listItems">
+        <li class="dialog-text">{{ listItem }}</li>
     </ul>
 
-    <button (click)="close.emit()" type="button" class="submit-button">
-        Close
+    <button (click)="closeEvent.emit()" type="button" class="submit-button">
+        Fixing it!
     </button>
 </div>

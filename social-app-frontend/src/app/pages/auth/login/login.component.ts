@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { LoginControlProviderService } from "../services/login-control-provider.service";
 import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import { DialogContents } from "../../../core/enums/DialogContents";
 
 @Component({
     selector: 'app-login',
@@ -10,6 +11,8 @@ import { MatDialog } from "@angular/material/dialog";
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+    private dialogListItems !: Array<string>;
+    private paragraphContent !: string;
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
 
@@ -23,13 +26,22 @@ export class LoginComponent implements OnInit {
             email: this.controlProvider.emailControl,
             password: this.controlProvider.passwordControl
         });
+
+        this.paragraphContent = DialogContents.LOGIN_PARAGRAPH;
+        this.dialogListItems = [DialogContents.LOGIN_EMAIL, DialogContents.LOGIN_PASSWORD];
     }
 
     authenticateUser(): void {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.notFilled.open(NotFilledDialogComponent);
+            const dialog = this.notFilled.open(NotFilledDialogComponent,{
+                data: {
+                    paragraphContent : this.paragraphContent,
+                    listItems : this.dialogListItems
+                }
+            });
+            dialog.componentInstance.closeEvent.subscribe(() => dialog.close());
 
             return;
         }

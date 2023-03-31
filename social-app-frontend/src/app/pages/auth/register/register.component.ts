@@ -5,6 +5,7 @@ import { RegisterValidatorService } from "../services/register-validator.service
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { MatDialog } from "@angular/material/dialog";
 import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
+import { DialogContents } from "../../../core/enums/DialogContents";
 
 @Component({
     selector: "app-register",
@@ -12,6 +13,8 @@ import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled
     styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent implements OnInit {
+    private dialogListItems !: Array<string>;
+    private paragraphContent !: string;
     registerForm!: FormGroup;
     wasSubmitClicked: boolean = false;
     passwordMismatch!: boolean;
@@ -26,8 +29,13 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            const dialog = this.notFilled.open(NotFilledDialogComponent);
-            dialog.componentInstance.close.subscribe(() => dialog.close());
+            const dialog = this.notFilled.open(NotFilledDialogComponent,{
+                data: {
+                    paragraphContent : this.paragraphContent,
+                    listItems : this.dialogListItems
+                }
+            });
+            dialog.componentInstance.closeEvent.subscribe(() => dialog.close());
 
             return;
         }
@@ -57,5 +65,9 @@ export class RegisterComponent implements OnInit {
         this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe(() => {
             this.passwordMismatch = <boolean>this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.invalid;
         });
+
+        this.dialogListItems = [DialogContents.REGISTER_REQUIRED, DialogContents.REGISTER_YEAR,
+            DialogContents.REGISTER_PASSWORD, DialogContents.REGISTER_SAME_PASSWORDS];
+        this.paragraphContent = DialogContents.REGISTER_PARAGRAPH;
     }
 }
