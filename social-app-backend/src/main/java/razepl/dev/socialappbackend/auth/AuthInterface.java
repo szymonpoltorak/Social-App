@@ -1,11 +1,17 @@
 package razepl.dev.socialappbackend.auth;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestBody;
 import razepl.dev.socialappbackend.user.ServiceUser;
 
-import static razepl.dev.socialappbackend.auth.constants.AuthConstants.USER_REQUEST_PART;
-
+/**
+ * An interface that defines the methods for authentication services.
+ */
 public interface AuthInterface {
-    ResponseEntity<String> registerUser(@RequestPart(USER_REQUEST_PART) ServiceUser user);
+    /**
+     * Registers a new user with the given details.
+     * @param user the user to register
+     * @return a response entity with a status code and a message
+     */
+    ResponseEntity<String> registerUser(@RequestBody ServiceUser user);
 }
