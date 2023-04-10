@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.
  * It implements the ServiceUser interface which specifies the behavior of a user in a service.
  * The class has several annotations that specify its behavior and constraints.
  */
+@Slf4j
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,7 +50,9 @@ public class User implements ServiceUser {
     private String password;
 
     @Override
-    public int getAge() {
+    public final int getAge() {
+        log.info("Getting age of user : {}", id);
+
         return Period.between(LocalDate.now(), this.dateOfBirth).getYears();
     }
 }

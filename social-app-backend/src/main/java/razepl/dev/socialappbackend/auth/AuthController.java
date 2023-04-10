@@ -28,7 +28,7 @@ public class AuthController implements AuthInterface {
 
     @Override
     @PostMapping(value = REGISTER_MAPPING)
-    public ResponseEntity<String> registerUser(@Valid @RequestBody ServiceUser user) {
+    public final ResponseEntity<String> registerUser(@Valid @RequestBody ServiceUser user) {
         userRepository.save(user);
 
         log.info(ADDED_INFO);
@@ -37,7 +37,7 @@ public class AuthController implements AuthInterface {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handleValidationExceptions(ConstraintViolationException exception) {
+    public final ResponseEntity<String> handleValidationExceptions(ConstraintViolationException exception) {
         String errorMessage = exception.getConstraintViolations().stream()
                 .map(error -> String.format(ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
                 .collect(Collectors.joining(ERROR_DELIMITER));
