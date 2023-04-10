@@ -5,11 +5,6 @@ package razepl.dev.socialappbackend.auth.constants;
  */
 public final class AuthMappings {
     /**
-     * The part of the request path that represents the user entity.
-     */
-    public static final String USER_REQUEST_PART = "user";
-
-    /**
      * The base mapping for authentication endpoints.
      */
     public static final String AUTH_MAPPING = "/auth/";

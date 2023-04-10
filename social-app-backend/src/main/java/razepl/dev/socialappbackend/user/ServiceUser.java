@@ -42,9 +42,9 @@ public interface ServiceUser {
     String getSurname();
 
     /**
-     * Returns the hash code of the password of this user.
+     * Returns password of this user.
      *
-     * @return the hash code of the password of this user
+     * @return the password of this user
      */
-    int getPasswordHashCode();
+    int getPassword();
 }
