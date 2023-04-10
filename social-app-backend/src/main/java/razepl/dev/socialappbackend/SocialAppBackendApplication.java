@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SocialAppBackendApplication {
     public static void main(String[] args) {
-        log.info("Starting an adventure!");
+        log.info("Initializing spring boot app...");
 
         SpringApplication.run(SocialAppBackendApplication.class, args);
     }
