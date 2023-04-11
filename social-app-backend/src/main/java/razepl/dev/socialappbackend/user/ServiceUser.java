@@ -46,5 +46,5 @@ public interface ServiceUser {
      *
      * @return the password of this user
      */
-    int getPassword();
+    String getPassword();
 }
