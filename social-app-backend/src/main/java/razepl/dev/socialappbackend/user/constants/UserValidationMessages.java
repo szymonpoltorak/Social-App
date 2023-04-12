@@ -27,7 +27,7 @@ public final class UserValidationMessages {
     public static final String SURNAME_PATTERN_MESSAGE = "Surname must contain only alphabetic characters";
 
     /**
-     * The error message for date of birth validation.
+     * The error message for date of birth not null validation.
      */
     public static final String DATE_NULL_MESSAGE = "Date of birth is mandatory";
 
@@ -46,6 +46,26 @@ public final class UserValidationMessages {
      */
     public static final String PASSWORD_PATTERN_MESSAGE = "Password must contain at least one lowercase letter, one " +
             "uppercase letter, one digit and one special character from the following set: :?.@!#-_=+ ";
+
+    /**
+     * The error message for name not null validation.
+     */
+    public static final String NAME_NULL_MESSAGE = "Name is mandatory";
+
+    /**
+     * The error message for email not null validation.
+     */
+    public static final String EMAIL_NULL_MESSAGE = "Email is mandatory";
+
+    /**
+     * The error message for surname not null validation.
+     */
+    public static final String SURNAME_NULL_MESSAGE = "Surname is mandatory";
+
+    /**
+     * The error message for password not null validation.
+     */
+    public static final String PASSWORD_NULL_MESSAGE = "Password is mandatory";
 
     /**
      * A private constructor to prevent instantiation of this class.

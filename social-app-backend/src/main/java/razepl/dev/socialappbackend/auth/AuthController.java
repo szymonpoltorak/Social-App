@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
-import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
+import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.AUTH_MAPPING;
@@ -25,7 +25,7 @@ public class AuthController implements AuthInterface {
 
     @Override
     @PostMapping(value = REGISTER_MAPPING)
-    public final ResponseEntity<String> registerUser(@Valid @RequestBody ServiceUser user) {
+    public final ResponseEntity<String> registerUser(@Valid @RequestBody User user) {
         userRepository.save(user);
 
         log.info(ADDED_INFO);

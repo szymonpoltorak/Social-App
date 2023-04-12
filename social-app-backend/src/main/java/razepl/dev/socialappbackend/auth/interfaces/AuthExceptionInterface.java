@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.auth.interfaces;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 /**
  * The AuthExceptionInterface interface defines a methods for handling errors in Authentication.
@@ -14,5 +15,7 @@ public interface AuthExceptionInterface {
      * @param exception the constraint violation exception that occurred
      * @return an HTTP response entity containing an error message and status code
      */
-    ResponseEntity<String> handleValidationExceptions(ConstraintViolationException exception);
+    ResponseEntity<String> handleConstraintValidationExceptions(ConstraintViolationException exception);
+
+    ResponseEntity<String> handleMethodArgValidExceptions(MethodArgumentNotValidException exception);
 }
