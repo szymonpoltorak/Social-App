@@ -22,7 +22,7 @@ In order to configure database settings you have to go to `src/main/resources/ap
 To change username change this line:
 
 ```properties
-spring.datasource.username=root
+spring.datasource.username=postgres
 ```
 
 To change database password:
@@ -34,14 +34,13 @@ spring.datasource.password=none
 To change database url:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5000/postgres
+spring.datasource.url=jdbc:postgresql://localhost:5000/socialapp
 ```
 
 You have to also change makefile lines:
 
 ```properties
 db-password = -e POSTGRES_PASSWORD=none
-db-username = -e POSTGRES_USER=user
 ```
 
 ## How to run without docker

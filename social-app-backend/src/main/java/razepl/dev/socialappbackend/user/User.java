@@ -9,7 +9,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
@@ -17,6 +19,7 @@ import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 import java.time.LocalDate;
 import java.time.Period;
 
+import static razepl.dev.socialappbackend.constants.GlobalConstants.USERS_TABLE_NAME;
 import static razepl.dev.socialappbackend.user.constants.UserValidation.*;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.*;
 
@@ -29,7 +32,7 @@ import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "Users")
+@Entity(name = USERS_TABLE_NAME)
 public class User implements ServiceUser {
     @NotNull(message = DATE_NULL_MESSAGE)
     @DateTimeFormat(pattern = DATE_PATTERN)

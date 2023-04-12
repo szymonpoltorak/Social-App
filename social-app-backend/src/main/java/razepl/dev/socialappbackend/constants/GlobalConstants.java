@@ -10,6 +10,11 @@ public final class GlobalConstants {
     public static final String FRONTEND_ADDRESS = "http://localhost:4200";
 
     /**
+     * The name of the user database table.
+     */
+    public static final String USERS_TABLE_NAME = "Users";
+
+    /**
      * A private constructor to prevent instantiation of this class.
      */
     private GlobalConstants() {
