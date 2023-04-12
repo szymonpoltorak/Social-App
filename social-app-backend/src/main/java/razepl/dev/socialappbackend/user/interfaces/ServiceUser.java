@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user;
+package razepl.dev.socialappbackend.user.interfaces;
 
 /**
  * A service user is a person who uses a service provided by an application.

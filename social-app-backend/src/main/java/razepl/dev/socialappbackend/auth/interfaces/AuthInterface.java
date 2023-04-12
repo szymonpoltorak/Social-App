@@ -1,9 +1,8 @@
-package razepl.dev.socialappbackend.auth;
+package razepl.dev.socialappbackend.auth.interfaces;
 
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-import razepl.dev.socialappbackend.user.ServiceUser;
+import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 
 /**
  * An interface that defines the methods for authentication services.
@@ -15,6 +14,4 @@ public interface AuthInterface {
      * @return a response entity with a status code and a message
      */
     ResponseEntity<String> registerUser(@RequestBody ServiceUser user);
-
-    ResponseEntity<String> handleValidationExceptions(ConstraintViolationException exception);
 }

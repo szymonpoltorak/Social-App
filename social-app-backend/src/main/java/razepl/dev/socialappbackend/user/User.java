@@ -1,12 +1,16 @@
 package razepl.dev.socialappbackend.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 
 import java.time.LocalDate;
 import java.time.Period;

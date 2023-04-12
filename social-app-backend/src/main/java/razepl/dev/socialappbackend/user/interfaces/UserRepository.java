@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user;
+package razepl.dev.socialappbackend.user.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
