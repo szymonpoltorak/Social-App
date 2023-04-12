@@ -17,5 +17,11 @@ public interface AuthExceptionInterface {
      */
     ResponseEntity<String> handleConstraintValidationExceptions(ConstraintViolationException exception);
 
+    /**
+     * Handles method argument validation exceptions that occur during user authentication and returns an HTTP response entity.
+     *
+     * @param exception the method argument not valid exception that occurred
+     * @return an HTTP response entity containing an error message and status code
+     */
     ResponseEntity<String> handleMethodArgValidExceptions(MethodArgumentNotValidException exception);
 }
