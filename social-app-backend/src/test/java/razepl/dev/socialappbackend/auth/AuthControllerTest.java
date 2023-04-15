@@ -26,6 +26,7 @@ import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -65,7 +66,6 @@ class AuthControllerTest {
         String surname = "Kowalski";
         String email = "andrzej@gmail.com";
         LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
-        boolean expected = false;
 
         ServiceUser user = buildServiceUser(dateOfBirth, name, surname, email, password);
 
@@ -77,10 +77,10 @@ class AuthControllerTest {
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        boolean result = userRepository.findByName(name).isEmpty();
+        Optional<User> result = userRepository.findByName(name);
 
         // then
-        Assertions.assertEquals(expected, result, "Registering user has failed!");
+        Assertions.assertNotNull(result, "Registering user has failed!");
     }
 
     @ParameterizedTest
@@ -109,7 +109,7 @@ class AuthControllerTest {
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
 
-        String result = userRepository.findByName(name);
+        Optional<User> result = userRepository.findByName(name);
 
         // then
         Assertions.assertNull(result, "Registering user has failed!");

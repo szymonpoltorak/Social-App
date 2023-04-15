@@ -1,11 +1,13 @@
 package razepl.dev.socialappbackend.user.interfaces;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 /**
  * A service user is a person who uses a service provided by an application.
  * A service user has an ID, an age, an email address, a first name, a last name and a password.
  * This interface defines the methods to access and modify the properties of a service user.
  */
-public interface ServiceUser {
+public interface ServiceUser extends UserDetails {
     /**
      * Returns the ID of this user.
      *

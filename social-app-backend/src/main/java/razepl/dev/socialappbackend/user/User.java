@@ -43,7 +43,7 @@ import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.
 @Builder
 @Entity
 @Table(name = USERS_TABLE_NAME)
-public class User implements ServiceUser, UserDetails {
+public class User implements ServiceUser {
     @NotNull(message = DATE_NULL_MESSAGE)
     @DateTimeFormat(pattern = DATE_PATTERN)
     @JsonSerialize(using = LocalDateSerializer.class)

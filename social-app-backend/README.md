@@ -43,6 +43,14 @@ You have to also change makefile lines:
 db-password = -e POSTGRES_PASSWORD=none
 ```
 
+In `application.properties` you can also specify `jwt` expiration time and secret encoding key.
+Key can be generated on this [site](https://www.allkeysgenerator.com/).
+
+```properties
+security.jwt.expiration-time=
+security.jwt.encoding-key=
+```
+
 ## How to run without docker
 
 You have to install Java in version `at least` 17 and maven.

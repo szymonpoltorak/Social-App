@@ -21,6 +21,7 @@
         <maven.compiler.release>17</maven.compiler.release>
         <java.version>17</java.version>
         <logback.version>1.4.5</logback.version>
+        <jwt.ver>0.11.5</jwt.ver>
     </properties>
 
     <dependencies>
@@ -60,6 +61,24 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jwt.ver}</version>
         </dependency>
 
         <dependency>
