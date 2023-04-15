@@ -19,6 +19,7 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
@@ -44,6 +45,18 @@ class AuthControllerTest {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    private ServiceUser buildServiceUser(LocalDate dateOfBirth, String name, String surname, String email, String password) {
+        return User
+                .builder()
+                .dateOfBirth(dateOfBirth)
+                .name(name)
+                .surname(surname)
+                .email(email)
+                .password(password)
+                .role(Role.USER)
+                .build();
+    }
+
     @Test
     final void test_registerUser_successful_register() throws Exception {
         // given
@@ -54,14 +67,14 @@ class AuthControllerTest {
         LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
         boolean expected = false;
 
-        ServiceUser user = new User(dateOfBirth, name, surname, email, password);
+        ServiceUser user = buildServiceUser(dateOfBirth, name, surname, email, password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
-                .content(AuthTestUtil.asJsonString(user))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                        .content(AuthTestUtil.asJsonString(user))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         boolean result = userRepository.findByName(name).isEmpty();
@@ -81,13 +94,12 @@ class AuthControllerTest {
     })
     final void test_registerUser_parametrized(String password) throws Exception {
         // given
-        String expected = null;
         String name = "Adam";
         String surname = "Kowalski";
         String email = "andrzej@gmail.com";
         LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
 
-        ServiceUser user = new User(dateOfBirth, name, surname, email, password);
+        ServiceUser user = buildServiceUser(dateOfBirth, name, surname, email, password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
@@ -100,6 +112,6 @@ class AuthControllerTest {
         String result = userRepository.findByName(name);
 
         // then
-        Assertions.assertEquals(expected, result, "Registering user has failed!");
+        Assertions.assertNull(result, "Registering user has failed!");
     }
 }

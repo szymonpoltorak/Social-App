@@ -1,7 +1,7 @@
 package razepl.dev.socialappbackend.auth;
 
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMessages.SUCCESSFUL
 import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = FRONTEND_ADDRESS)
 @RequestMapping(value = AUTH_MAPPING)
+@CrossOrigin(origins = FRONTEND_ADDRESS)
 public class AuthController implements AuthInterface {
     private final UserRepository userRepository;
 
