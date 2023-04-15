@@ -13,7 +13,7 @@ public interface ServiceUser extends UserDetails, UserPropertyInterface {
      *
      * @return the ID of this user
      */
-    long getId();
+    long getUserId();
 
     /**
      * Returns the age of this user in years.

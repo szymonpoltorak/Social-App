@@ -73,11 +73,11 @@ public class User implements ServiceUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long userId;
 
     @Override
     public final int getAge() {
-        log.info("Getting age of user : {}", id);
+        log.info("Getting age of user : {}", userId);
 
         return Period.between(LocalDate.now(), this.dateOfBirth).getYears();
     }

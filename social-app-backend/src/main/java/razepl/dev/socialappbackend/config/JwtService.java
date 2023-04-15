@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.jwt.JwtToken;
+import razepl.dev.socialappbackend.jwt.TokenType;
+import razepl.dev.socialappbackend.jwt.interfaces.Token;
+import razepl.dev.socialappbackend.user.User;
 
 import java.security.Key;
 import java.util.Collections;
@@ -28,13 +32,13 @@ public class JwtService implements JwtServiceInterface {
     private String encodingKey;
 
     @Override
-    public final String getUsernameFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
+    public final String getUsernameFromToken(String jwtToken) {
+        return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
     @Override
-    public final <T> T getClaimFromToken(String token, Function<Claims, T> claimsHandler) {
-        Claims claims = getAllClaims(token);
+    public final <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
+        Claims claims = getAllClaims(jwtToken);
 
         return claimsHandler.apply(claims);
     }
@@ -50,10 +54,19 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public final boolean isTokenValid(String token, UserDetails userDetails) {
-        String username = getUsernameFromToken(token);
+    public final boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+        String username = getUsernameFromToken(jwtToken);
 
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+    }
+
+    @Override
+    public final Token buildToken(String jwtToken, User user) {
+        return JwtToken.builder()
+                .token(jwtToken)
+                .tokenType(TokenType.JWT_BEARER_TOKEN)
+                .user(user)
+                .build();
     }
 
     private Claims getAllClaims(String token) {

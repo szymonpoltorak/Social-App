@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
 
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ import static razepl.dev.socialappbackend.config.constants.Headers.*;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final JwtServiceInterface jwtService;
+    private final TokenRepository tokenRepository;
 
     @Override
     protected final void doFilterInternal(@NonNull HttpServletRequest request,
@@ -43,11 +45,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private void setTokenForNotAuthenticatedUser(String token, String username, @NonNull HttpServletRequest request) {
+    private void setTokenForNotAuthenticatedUser(String jwtToken, String username, @NonNull HttpServletRequest request) {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            boolean isTokenValid = tokenRepository.findByToken(jwtToken)
+                    .map(token -> !token.isExpired() && !token.isRevoked()).orElse(false);
 
-            if (jwtService.isTokenValid(token, userDetails)) {
+            if (jwtService.isTokenValid(jwtToken, userDetails) && isTokenValid) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );
