@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 
 import java.io.Serial;
@@ -117,11 +116,11 @@ public class User implements ServiceUser {
 
     @Serial
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
-        throw new java.io.NotSerializableException("razepl.dev.socialappbackend.user.User");
+        throw new java.io.NotSerializableException(USER_PACKAGE);
     }
 
     @Serial
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
-        throw new java.io.NotSerializableException("razepl.dev.socialappbackend.user.User");
+        throw new java.io.NotSerializableException(USER_PACKAGE);
     }
 }

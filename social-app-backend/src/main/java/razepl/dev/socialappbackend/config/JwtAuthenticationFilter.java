@@ -26,22 +26,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtServiceInterface jwtService;
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request,
-                                    @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
-//        if (request.getServletPath().contains(AUTH_MAPPING)) {
-//            filterChain.doFilter(request, response);
-//
-//            return;
-//        }
-//        String authHeader = request.getHeader(AUTH_HEADER);
-//
-//        if (authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
-//            filterChain.doFilter(request, response);
-//
-//            return;
-//        }
-//        String token = authHeader.substring(7);
+    protected final void doFilterInternal(@NonNull HttpServletRequest request,
+                                          @NonNull HttpServletResponse response,
+                                          @NonNull FilterChain filterChain) throws ServletException, IOException {
         String token = getJwtAuthToken(request);
 
         if (token == null) {
@@ -49,9 +36,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             return;
         }
-
         String username = jwtService.getUsernameFromToken(token);
 
+        setTokenForNotAuthenticatedUser(token, username, request);
+
+        filterChain.doFilter(request, response);
+    }
+
+    private void setTokenForNotAuthenticatedUser(String token, String username, @NonNull HttpServletRequest request) {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
@@ -59,13 +51,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );
-
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
-        filterChain.doFilter(request, response);
     }
 
     private String getJwtAuthToken(@NonNull HttpServletRequest request) {

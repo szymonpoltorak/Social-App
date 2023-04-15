@@ -42,6 +42,8 @@ public final class UserValidation {
      */
     public static final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[:\\?\\.@!#:\\-_=+ ])[a-zA-Z0-9:\\?\\.@!#:\\-_=+ ]{8,}$";
 
+    public static final String USER_PACKAGE = "razepl.dev.socialappbackend.user.User";
+
     /**
      * A private constructor to prevent instantiation of this class.
      */
