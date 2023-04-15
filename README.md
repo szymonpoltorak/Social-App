@@ -24,6 +24,8 @@ I used various technologies which I will list below.
 * PostGres SQL,
 * lombok,
 * javadoc,
+* jwt,
+* jackson,
 * logback.
 
 ### Others

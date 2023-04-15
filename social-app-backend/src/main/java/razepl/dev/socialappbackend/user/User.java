@@ -65,8 +65,6 @@ public class User implements ServiceUser {
     private String email;
 
     @NotNull(message = PASSWORD_NULL_MESSAGE)
-    @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH, message = PASSWORD_SIZE_MESSAGE)
-    @Pattern(regexp = PASSWORD_PATTERN, message = PASSWORD_PATTERN_MESSAGE)
     private String password;
 
     @NotNull

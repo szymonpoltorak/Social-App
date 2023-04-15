@@ -19,7 +19,7 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import razepl.dev.socialappbackend.user.Role;
+import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
@@ -46,18 +46,6 @@ class AuthControllerTest {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    private ServiceUser buildServiceUser(LocalDate dateOfBirth, String name, String surname, String email, String password) {
-        return User
-                .builder()
-                .dateOfBirth(dateOfBirth)
-                .name(name)
-                .surname(surname)
-                .email(email)
-                .password(password)
-                .role(Role.USER)
-                .build();
-    }
-
     @Test
     final void test_registerUser_successful_register() throws Exception {
         // given
@@ -67,7 +55,7 @@ class AuthControllerTest {
         String email = "andrzej@gmail.com";
         LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
 
-        ServiceUser user = buildServiceUser(dateOfBirth, name, surname, email, password);
+        RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
@@ -94,12 +82,13 @@ class AuthControllerTest {
     })
     final void test_registerUser_parametrized(String password) throws Exception {
         // given
+        Optional<User> expected = Optional.empty();
         String name = "Adam";
         String surname = "Kowalski";
         String email = "andrzej@gmail.com";
         LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
 
-        ServiceUser user = buildServiceUser(dateOfBirth, name, surname, email, password);
+        RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
@@ -112,6 +101,6 @@ class AuthControllerTest {
         Optional<User> result = userRepository.findByName(name);
 
         // then
-        Assertions.assertNull(result, "Registering user has failed!");
+        Assertions.assertEquals(expected, result, "Registering user has failed!");
     }
 }

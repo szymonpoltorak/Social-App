@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
+import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 
 import java.util.stream.Collectors;
 
@@ -38,6 +39,16 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
                 .stream()
                 .map(error -> String.format(ERROR_FORMAT, error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.joining(ERROR_DELIMITER));
+
+        log.error(errorMessage);
+
+        return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    @ExceptionHandler(PasswordValidationException.class)
+    public ResponseEntity<String> handlePasswordValidationException(PasswordValidationException exception) {
+        String errorMessage = exception.getMessage();
 
         log.error(errorMessage);
 

@@ -37,11 +37,6 @@ public final class UserValidationMessages {
     public static final String EMAIL_MESSAGE = "Email must be a valid email address";
 
     /**
-     * The error message for password size validation.
-     */
-    public static final String PASSWORD_SIZE_MESSAGE = "Password must be between {min} and {max} characters long";
-
-    /**
      * The error message for password pattern validation.
      */
     public static final String PASSWORD_PATTERN_MESSAGE = "Password must contain at least one lowercase letter, one " +
