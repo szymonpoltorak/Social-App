@@ -31,8 +31,13 @@ public class SecurityConfiguration implements SecurityConfigInterface {
         try {
             httpSecurity.csrf()
                     .disable()
+//                    .authorizeHttpRequests(auth -> auth.requestMatchers("/**")
+//                            .permitAll()
+//                            .anyRequest()
+//                            .authenticated())
+//                    .httpBasic();
                     .authorizeHttpRequests()
-                    .requestMatchers(AUTH_MATCHERS)
+                    .requestMatchers(AUTH_MATCHERS, "/v3/api-docs", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()

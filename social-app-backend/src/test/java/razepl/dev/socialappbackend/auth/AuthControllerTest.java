@@ -57,7 +57,7 @@ class AuthControllerTest {
         RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .content(AuthTestUtil.asJsonString(user))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class AuthControllerTest {
         RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.post("/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                         .content(AuthTestUtil.asJsonString(user))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)

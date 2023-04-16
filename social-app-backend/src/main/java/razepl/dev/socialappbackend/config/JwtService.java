@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.config.constants.Headers;
+import razepl.dev.socialappbackend.config.constants.Properties;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 
 import java.security.Key;
@@ -18,22 +20,19 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.*;
-import static razepl.dev.socialappbackend.config.constants.Properties.*;
-
 /**
  * Service to help manage Jwt manipulation like creation.
  * It implements {@link JwtServiceInterface}.
  */
 @Service
 public class JwtService implements JwtServiceInterface {
-    @Value(EXPIRATION_PROPERTY)
+    @Value(Properties.EXPIRATION_PROPERTY)
     private long expirationTime;
 
-    @Value(ENCODING_KEY_PROPERTY)
+    @Value(Properties.ENCODING_KEY_PROPERTY)
     private String encodingKey;
 
-    @Value(REFRESH_PROPERTY)
+    @Value(Properties.REFRESH_PROPERTY)
     private long refreshTime;
 
     @Override
@@ -72,22 +71,22 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getJwtToken(@NonNull HttpServletRequest request) {
-        String authHeader = request.getHeader(AUTH_HEADER);
+        String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
-        if (request.getServletPath().contains(AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
+        if (request.getServletPath().contains(Headers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
             return null;
         }
-        return authHeader.substring(TOKEN_START_INDEX);
+        return authHeader.substring(Headers.TOKEN_START_INDEX);
     }
 
     @Override
     public final String getJwtRefreshToken(@NonNull HttpServletRequest request) {
-        String authHeader = request.getHeader(AUTH_HEADER);
+        String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
-        if (authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
+        if (authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
             return null;
         }
-        return authHeader.substring(TOKEN_START_INDEX);
+        return authHeader.substring(Headers.TOKEN_START_INDEX);
     }
 
     private Claims getAllClaims(String token) {
