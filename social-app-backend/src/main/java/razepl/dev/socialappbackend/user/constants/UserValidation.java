@@ -1,7 +1,5 @@
 package razepl.dev.socialappbackend.user.constants;
 
-import org.springframework.security.core.parameters.P;
-
 import java.util.regex.Pattern;
 
 /**

@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.user.User;
-import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
 import java.time.LocalDate;

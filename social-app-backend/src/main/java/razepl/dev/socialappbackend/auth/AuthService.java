@@ -7,19 +7,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
-import razepl.dev.socialappbackend.jwt.JwtToken;
-import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
-
-import java.util.List;
 
 import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
@@ -28,10 +24,9 @@ import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.
 @RequiredArgsConstructor
 public class AuthService implements AuthServiceInterface {
     private final UserRepository userRepository;
-    private final JwtServiceInterface jwtService;
     private final PasswordEncoder passwordEncoder;
-    private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
+    private final TokenManager tokenManager;
 
     @Override
     public final AuthResponse register(RegisterUserRequest userRequest) {
@@ -50,14 +45,9 @@ public class AuthService implements AuthServiceInterface {
                 .build();
         userRepository.save(user);
 
-        String jwtToken = jwtService.generateToken(user);
+        String authToken = tokenManager.buildUsersAuthToken(user);
 
-        revokeUserTokens(user);
-        tokenRepository.save((JwtToken) jwtService.buildToken(jwtToken, user));
-
-        return AuthResponse.builder()
-                .authToken(jwtToken)
-                .build();
+        return tokenManager.buildTokensIntoResponse(authToken);
     }
 
     @Override
@@ -71,28 +61,8 @@ public class AuthService implements AuthServiceInterface {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Such user does not exist!"));
 
-        String jwtToken = jwtService.generateToken(user);
+        String authToken = tokenManager.buildUsersAuthToken(user);
 
-        revokeUserTokens(user);
-
-        tokenRepository.save((JwtToken) jwtService.buildToken(jwtToken, user));
-
-        return AuthResponse.builder()
-                .authToken(jwtToken)
-                .build();
-    }
-
-    private void revokeUserTokens(User user) {
-        List<JwtToken> userTokens = tokenRepository.findAllByUser(user);
-
-        if (userTokens.isEmpty()) {
-            return;
-        }
-
-        userTokens.forEach(token -> {
-            token.setRevoked(true);
-            token.setExpired(true);
-        });
-        tokenRepository.saveAll(userTokens);
+        return tokenManager.buildTokensIntoResponse(authToken);
     }
 }

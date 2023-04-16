@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.jwt.JwtToken;
-import razepl.dev.socialappbackend.jwt.TokenType;
-import razepl.dev.socialappbackend.jwt.interfaces.Token;
-import razepl.dev.socialappbackend.user.User;
 
 import java.security.Key;
 import java.util.Collections;
@@ -50,7 +46,7 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String generateToken(Map<String, Object> additionalClaims, UserDetails userDetails) {
-        return buildToken(additionalClaims, userDetails,expirationTime);
+        return buildToken(additionalClaims, userDetails, expirationTime);
     }
 
     @Override
@@ -58,15 +54,6 @@ public class JwtService implements JwtServiceInterface {
         String username = getUsernameFromToken(jwtToken);
 
         return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
-    }
-
-    @Override
-    public final Token buildToken(String jwtToken, User user) {
-        return JwtToken.builder()
-                .token(jwtToken)
-                .tokenType(TokenType.JWT_BEARER_TOKEN)
-                .user(user)
-                .build();
     }
 
     private Claims getAllClaims(String token) {

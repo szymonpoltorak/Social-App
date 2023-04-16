@@ -2,8 +2,8 @@ package razepl.dev.socialappbackend.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
+import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.exceptions.JsonMapperException;
 
 import java.time.LocalDate;

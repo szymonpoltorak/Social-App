@@ -30,6 +30,6 @@ public final class AuthMessages {
     /**
      * Private constructor to prevent instantiation of the AuthMessages class.
      */
-    private AuthMessages(){
+    private AuthMessages() {
     }
 }
