@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.jwt.interfaces.Token;
 import razepl.dev.socialappbackend.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.user.User;
@@ -18,42 +17,29 @@ public class TokenManagerService implements TokenManager {
     private final JwtServiceInterface jwtService;
 
     @Override
-    public void saveUsersToken(String jwtToken, User user) {
-        tokenRepository.save((JwtToken) buildToken(jwtToken, user));
+    public final void saveUsersToken(String jwtToken, User user) {
+        tokenRepository.save(buildToken(jwtToken, user));
     }
 
     @Override
-    public final String buildUsersAuthToken(User user) {
-        String jwtToken = jwtService.generateToken(user);
-
-        revokeUserTokens(user);
-
-        tokenRepository.save((JwtToken) buildToken(jwtToken, user));
-
-        return jwtToken;
+    public final AuthResponse buildTokensIntoResponse(String authToken, String refreshToken) {
+        return buildResponse(authToken, refreshToken);
     }
 
     @Override
-    public final String buildRefreshToken(User user) {
-        return jwtService.generateRefreshToken(user);
+    public final AuthResponse buildTokensIntoResponse(User user, boolean shouldIRevoke) {
+        String authToken = jwtService.generateToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+
+        if (shouldIRevoke) {
+            revokeUserTokens(user);
+        }
+        saveUsersToken(authToken, user);
+
+        return buildResponse(authToken, refreshToken);
     }
 
     @Override
-    public AuthResponse buildTokensIntoResponse(String authToken, String refreshToken) {
-        return AuthResponse.builder()
-                .authToken(authToken)
-                .refreshToken(refreshToken)
-                .build();
-    }
-
-    private Token buildToken(String jwtToken, User user) {
-        return JwtToken.builder()
-                .token(jwtToken)
-                .tokenType(TokenType.JWT_BEARER_TOKEN)
-                .user(user)
-                .build();
-    }
-
     public final void revokeUserTokens(User user) {
         List<JwtToken> userTokens = tokenRepository.findAllByUser(user.getUserId());
 
@@ -66,5 +52,20 @@ public class TokenManagerService implements TokenManager {
             token.setExpired(true);
         });
         tokenRepository.saveAll(userTokens);
+    }
+
+    private AuthResponse buildResponse(String authToken, String refreshToken) {
+        return AuthResponse.builder()
+                .authToken(authToken)
+                .refreshToken(refreshToken)
+                .build();
+    }
+
+    private JwtToken buildToken(String jwtToken, User user) {
+        return JwtToken.builder()
+                .token(jwtToken)
+                .tokenType(TokenType.JWT_BEARER_TOKEN)
+                .user(user)
+                .build();
     }
 }

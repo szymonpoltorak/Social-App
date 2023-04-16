@@ -51,6 +51,12 @@ security.jwt.expiration-time=
 security.jwt.encoding-key=
 ```
 
+If you leave settings as it is you will get 1 min expiration time to change it to a day write this line:
+
+```properties
+security.jwt.expiration-time=86400000
+```
+
 ## How to run without docker
 
 You have to install Java in version `at least` 17 and maven.
