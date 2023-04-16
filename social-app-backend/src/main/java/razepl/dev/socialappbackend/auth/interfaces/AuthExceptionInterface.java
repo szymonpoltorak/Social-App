@@ -34,4 +34,6 @@ public interface AuthExceptionInterface {
     ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception);
 
     ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception);
+
+    ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception);
 }

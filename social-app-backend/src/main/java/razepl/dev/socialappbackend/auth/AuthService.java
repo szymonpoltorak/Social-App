@@ -1,6 +1,5 @@
 package razepl.dev.socialappbackend.auth;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -15,13 +14,13 @@ import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
 import razepl.dev.socialappbackend.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
-
-import java.io.IOException;
 
 import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
@@ -70,30 +69,31 @@ public class AuthService implements AuthServiceInterface {
     }
 
     @Override
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         String refreshToken = jwtService.getJwtRefreshToken(request);
 
         if (refreshToken == null) {
-            return;
+            throw new TokenDoesNotExistException("Token does not exist!");
         }
         String username = jwtService.getUsernameFromToken(refreshToken);
 
         if (username == null) {
-            return;
+            throw new UsernameNotFoundException("Such user does not exist!");
         }
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!"));
 
-        if (jwtService.isTokenValid(refreshToken, user)) {
-            String authToken = jwtService.generateToken(user);
 
-            tokenManager.revokeUserTokens(user);
-
-            tokenManager.saveUsersToken(authToken, user);
-
-            AuthResponse authResponse = tokenManager.buildTokensIntoResponse(authToken, refreshToken);
-
-            new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+        if (!jwtService.isTokenValid(refreshToken, user)) {
+            throw new InvalidTokenException("Token is not valid!");
         }
+
+        String authToken = jwtService.generateToken(user);
+
+        tokenManager.revokeUserTokens(user);
+
+        tokenManager.saveUsersToken(authToken, user);
+
+        return tokenManager.buildTokensIntoResponse(authToken, refreshToken);
     }
 }

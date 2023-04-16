@@ -20,6 +20,11 @@ public final class AuthMappings {
     public static final String LOGIN_MAPPING = "/login";
 
     /**
+     * The mapping for user login endpoint.
+     */
+    public static final String REFRESH_MAPPING = "/refreshToken";
+
+    /**
      * A private constructor to prevent instantiation of this class.
      */
     private AuthMappings() {

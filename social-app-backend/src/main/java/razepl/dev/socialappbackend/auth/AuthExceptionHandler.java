@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
+import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
 
 import java.util.stream.Collectors;
 
@@ -62,6 +64,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     }
 
     @Override
+    @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception) {
         String errorMessage = exception.getMessage();
         String className = exception.getClass().getName();
@@ -72,6 +75,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     }
 
     @Override
+    @ExceptionHandler(AuthManagerInstanceException.class)
     public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception) {
         String errorMessage = exception.getMessage();
         String className = exception.getClass().getName();
@@ -79,6 +83,17 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
         log.error(errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.FAILED_DEPENDENCY);
+    }
+
+    @Override
+    @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class})
+    public ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
+        String errorMessage = exception.getMessage();
+        String className = exception.getClass().getName();
+
+        log.error(errorMessage);
+
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNAUTHORIZED);
     }
 
     private ExceptionResponse buildResponse(String errorMessage, String exceptionClassName) {

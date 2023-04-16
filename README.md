@@ -30,8 +30,9 @@ I used various technologies which I will list below.
 
 ### Others
 
-* makefile
-* docker
+* makefile,
+* docker,
+* postman.
 
 ## Installation of docker
 

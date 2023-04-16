@@ -12,8 +12,6 @@ import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 
-import java.io.IOException;
-
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
 
@@ -38,8 +36,9 @@ public class AuthController implements AuthInterface {
     }
 
     @Override
-    @PostMapping(value = "/refresh-token")
-    public final void refreshUsersToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        authService.refreshToken(request, response);
+    @PostMapping(value = REFRESH_MAPPING)
+    public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
+//        authService.refreshToken(request, response);
+        return ResponseEntity.ok(authService.refreshToken(request, response));
     }
 }
