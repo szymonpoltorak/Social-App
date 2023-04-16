@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.auth.responses;
+package razepl.dev.socialappbackend.auth.apicalls;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class AuthResponse {
-    private String token;
+    private String authToken;
 }

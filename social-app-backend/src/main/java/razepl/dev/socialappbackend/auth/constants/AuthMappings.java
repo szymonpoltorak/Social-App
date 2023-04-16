@@ -15,6 +15,11 @@ public final class AuthMappings {
     public static final String REGISTER_MAPPING = "/register";
 
     /**
+     * The mapping for user login endpoint.
+     */
+    public static final String LOGIN_MAPPING = "/login";
+
+    /**
      * A private constructor to prevent instantiation of this class.
      */
     private AuthMappings() {

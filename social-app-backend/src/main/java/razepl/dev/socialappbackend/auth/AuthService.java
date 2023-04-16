@@ -2,11 +2,15 @@ package razepl.dev.socialappbackend.auth;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.auth.responses.AuthResponse;
+import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 import razepl.dev.socialappbackend.jwt.JwtToken;
@@ -27,6 +31,7 @@ public class AuthService implements AuthServiceInterface {
     private final JwtServiceInterface jwtService;
     private final PasswordEncoder passwordEncoder;
     private final TokenRepository tokenRepository;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public final AuthResponse register(RegisterUserRequest userRequest) {
@@ -51,7 +56,29 @@ public class AuthService implements AuthServiceInterface {
         tokenRepository.save((JwtToken) jwtService.buildToken(jwtToken, user));
 
         return AuthResponse.builder()
-                .token(jwtToken)
+                .authToken(jwtToken)
+                .build();
+    }
+
+    @Override
+    public AuthResponse login(LoginUserRequest loginRequest) {
+        String username = loginRequest.getUsername();
+
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                username, loginRequest.getPassword())
+        );
+
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Such user does not exist!"));
+
+        String jwtToken = jwtService.generateToken(user);
+
+        revokeUserTokens(user);
+
+        tokenRepository.save((JwtToken) jwtService.buildToken(jwtToken, user));
+
+        return AuthResponse.builder()
+                .authToken(jwtToken)
                 .build();
     }
 

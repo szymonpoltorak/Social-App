@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.auth.responses;
+package razepl.dev.socialappbackend.auth.apicalls;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
