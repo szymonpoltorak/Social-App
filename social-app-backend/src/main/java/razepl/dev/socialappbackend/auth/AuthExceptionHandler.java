@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 import static razepl.dev.socialappbackend.auth.constants.AuthMessages.ERROR_DELIMITER;
 import static razepl.dev.socialappbackend.auth.constants.AuthMessages.ERROR_FORMAT;
 
+/**
+ * Class created to handle various exceptions that can be thrown in auth endpoints.
+ * It implemenets {@link AuthExceptionInterface}.
+ */
 @Slf4j
 @ControllerAdvice
 public class AuthExceptionHandler implements AuthExceptionInterface {

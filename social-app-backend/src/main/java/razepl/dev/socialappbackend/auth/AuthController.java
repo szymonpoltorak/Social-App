@@ -15,6 +15,10 @@ import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
 
+/**
+ * Class to control auth endpoints.
+ * It implements {@link AuthInterface}.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController

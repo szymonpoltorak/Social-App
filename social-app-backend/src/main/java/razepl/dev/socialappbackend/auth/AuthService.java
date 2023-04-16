@@ -17,7 +17,7 @@ import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
-import razepl.dev.socialappbackend.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
@@ -25,6 +25,10 @@ import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
+/**
+ * Class to manage logic for {@link AuthController}.
+ * It implements {@link AuthServiceInterface}.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService implements AuthServiceInterface {

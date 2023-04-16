@@ -15,6 +15,10 @@ import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
+/**
+ * Class made to provide necessary Beans for Spring app.
+ * It implements {@link AppConfigInterface}.
+ */
 @RequiredArgsConstructor
 @Configuration
 public class AppConfiguration implements AppConfigInterface {

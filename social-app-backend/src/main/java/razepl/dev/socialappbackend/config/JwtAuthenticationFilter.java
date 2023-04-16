@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenRepository;
 
 import java.io.IOException;
 

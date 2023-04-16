@@ -22,6 +22,10 @@ import static razepl.dev.socialappbackend.config.constants.Headers.*;
 import static razepl.dev.socialappbackend.config.constants.Headers.TOKEN_START_INDEX;
 import static razepl.dev.socialappbackend.config.constants.Properties.*;
 
+/**
+ * Service to help manage Jwt manipulation like creation.
+ * It implements {@link JwtServiceInterface}.
+ */
 @Service
 public class JwtService implements JwtServiceInterface {
     @Value(EXPIRATION_PROPERTY)

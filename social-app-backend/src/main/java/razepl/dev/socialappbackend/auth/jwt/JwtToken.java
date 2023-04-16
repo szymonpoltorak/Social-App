@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.jwt;
+package razepl.dev.socialappbackend.auth.jwt;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import razepl.dev.socialappbackend.jwt.interfaces.Token;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.Token;
 import razepl.dev.socialappbackend.user.User;
 
 @Data

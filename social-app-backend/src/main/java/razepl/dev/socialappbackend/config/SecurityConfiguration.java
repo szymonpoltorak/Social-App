@@ -14,6 +14,10 @@ import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_MATCHERS;
 
+/**
+ * Class made to configure security filter chain in app.
+ * It implements {@link SecurityConfigInterface}.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor

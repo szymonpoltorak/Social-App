@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.jwt.interfaces;
+package razepl.dev.socialappbackend.auth.jwt.interfaces;
 
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.user.User;
