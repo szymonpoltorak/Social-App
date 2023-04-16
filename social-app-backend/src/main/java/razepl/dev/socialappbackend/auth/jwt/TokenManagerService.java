@@ -10,6 +10,10 @@ import razepl.dev.socialappbackend.user.User;
 
 import java.util.List;
 
+/**
+ * Service class to manage building, saving and revoking user tokens.
+ * It implements {@link TokenManager}.
+ */
 @Service
 @RequiredArgsConstructor
 public class TokenManagerService implements TokenManager {

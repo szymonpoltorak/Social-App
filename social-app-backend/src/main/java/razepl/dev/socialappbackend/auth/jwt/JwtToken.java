@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import razepl.dev.socialappbackend.auth.jwt.interfaces.Token;
 import razepl.dev.socialappbackend.user.User;
 
+/**
+ * Entity class that is mapped for a table in database representing JWT tokens.
+ */
 @Data
 @Builder
 @AllArgsConstructor
