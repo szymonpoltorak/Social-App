@@ -78,7 +78,7 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public String getJwtRefreshToken(HttpServletRequest request) {
+    public final String getJwtRefreshToken(@NonNull HttpServletRequest request) {
         String authHeader = request.getHeader(AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {

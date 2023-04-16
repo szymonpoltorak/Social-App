@@ -26,7 +26,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @Override
     @ExceptionHandler(ConstraintViolationException.class)
     public final ResponseEntity<ExceptionResponse> handleConstraintValidationExceptions(ConstraintViolationException exception) {
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
         String errorMessage = exception.getConstraintViolations()
                 .stream()
                 .map(error -> String.format(ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
@@ -40,7 +40,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @Override
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public final ResponseEntity<ExceptionResponse> handleMethodArgValidExceptions(MethodArgumentNotValidException exception) {
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
         String errorMessage = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -56,7 +56,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @ExceptionHandler(PasswordValidationException.class)
     public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception) {
         String errorMessage = exception.getMessage();
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
 
         log.error(errorMessage);
 
@@ -67,7 +67,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception) {
         String errorMessage = exception.getMessage();
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
 
         log.error(errorMessage);
 
@@ -78,7 +78,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @ExceptionHandler(AuthManagerInstanceException.class)
     public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception) {
         String errorMessage = exception.getMessage();
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
 
         log.error(errorMessage);
 
@@ -89,7 +89,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class})
     public ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
         String errorMessage = exception.getMessage();
-        String className = exception.getClass().getName();
+        String className = exception.getClass().getSimpleName();
 
         log.error(errorMessage);
 

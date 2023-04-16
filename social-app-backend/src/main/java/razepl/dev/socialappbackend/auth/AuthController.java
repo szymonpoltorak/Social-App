@@ -38,7 +38,6 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REFRESH_MAPPING)
     public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
-//        authService.refreshToken(request, response);
         return ResponseEntity.ok(authService.refreshToken(request, response));
     }
 }
