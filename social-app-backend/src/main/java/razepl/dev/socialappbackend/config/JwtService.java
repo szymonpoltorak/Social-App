@@ -5,7 +5,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
@@ -16,8 +18,9 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
-import static razepl.dev.socialappbackend.config.constants.Properties.ENCODING_KEY_PROPERTY;
-import static razepl.dev.socialappbackend.config.constants.Properties.EXPIRATION_PROPERTY;
+import static razepl.dev.socialappbackend.config.constants.Headers.*;
+import static razepl.dev.socialappbackend.config.constants.Headers.TOKEN_START_INDEX;
+import static razepl.dev.socialappbackend.config.constants.Properties.*;
 
 @Service
 public class JwtService implements JwtServiceInterface {
@@ -26,6 +29,9 @@ public class JwtService implements JwtServiceInterface {
 
     @Value(ENCODING_KEY_PROPERTY)
     private String encodingKey;
+
+    @Value(REFRESH_PROPERTY)
+    private long refreshTime;
 
     @Override
     public final String getUsernameFromToken(String jwtToken) {
@@ -40,13 +46,18 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public final String generateToken(UserDetails userDetails) {
-        return generateToken(Collections.emptyMap(), userDetails);
+    public final String generateRefreshToken(UserDetails userDetails) {
+        return buildToken(Collections.emptyMap(), userDetails, refreshTime);
     }
 
     @Override
-    public final String generateToken(Map<String, Object> additionalClaims, UserDetails userDetails) {
-        return buildToken(additionalClaims, userDetails, expirationTime);
+    public final String generateToken(UserDetails userDetails) {
+        return generateToken(Collections.emptyMap(), userDetails, expirationTime);
+    }
+
+    @Override
+    public final String generateToken(Map<String, Object> additionalClaims, UserDetails userDetails, long expiration) {
+        return buildToken(additionalClaims, userDetails, expiration);
     }
 
     @Override
@@ -54,6 +65,26 @@ public class JwtService implements JwtServiceInterface {
         String username = getUsernameFromToken(jwtToken);
 
         return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+    }
+
+    @Override
+    public final String getJwtToken(@NonNull HttpServletRequest request) {
+        String authHeader = request.getHeader(AUTH_HEADER);
+
+        if (request.getServletPath().contains(AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
+            return null;
+        }
+        return authHeader.substring(TOKEN_START_INDEX);
+    }
+
+    @Override
+    public String getJwtRefreshToken(HttpServletRequest request) {
+        String authHeader = request.getHeader(AUTH_HEADER);
+
+        if (authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
+            return null;
+        }
+        return authHeader.substring(TOKEN_START_INDEX);
     }
 
     private Claims getAllClaims(String token) {

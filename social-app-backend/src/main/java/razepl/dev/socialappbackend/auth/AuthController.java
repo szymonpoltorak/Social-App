@@ -1,5 +1,7 @@
 package razepl.dev.socialappbackend.auth;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +11,8 @@ import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+
+import java.io.IOException;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
@@ -29,7 +33,13 @@ public class AuthController implements AuthInterface {
 
     @Override
     @PostMapping(value = LOGIN_MAPPING)
-    public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+    public final ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(authService.login(loginRequest));
+    }
+
+    @Override
+    @PostMapping(value = "/refresh-token")
+    public final void refreshUsersToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        authService.refreshToken(request, response);
     }
 }

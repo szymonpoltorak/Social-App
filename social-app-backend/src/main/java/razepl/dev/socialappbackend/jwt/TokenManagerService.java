@@ -18,6 +18,11 @@ public class TokenManagerService implements TokenManager {
     private final JwtServiceInterface jwtService;
 
     @Override
+    public void saveUsersToken(String jwtToken, User user) {
+        tokenRepository.save((JwtToken) buildToken(jwtToken, user));
+    }
+
+    @Override
     public final String buildUsersAuthToken(User user) {
         String jwtToken = jwtService.generateToken(user);
 
@@ -29,9 +34,15 @@ public class TokenManagerService implements TokenManager {
     }
 
     @Override
-    public AuthResponse buildTokensIntoResponse(String authToken) {
+    public final String buildRefreshToken(User user) {
+        return jwtService.generateRefreshToken(user);
+    }
+
+    @Override
+    public AuthResponse buildTokensIntoResponse(String authToken, String refreshToken) {
         return AuthResponse.builder()
                 .authToken(authToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 
@@ -43,8 +54,8 @@ public class TokenManagerService implements TokenManager {
                 .build();
     }
 
-    private void revokeUserTokens(User user) {
-        List<JwtToken> userTokens = tokenRepository.findAllByUser(user);
+    public final void revokeUserTokens(User user) {
+        List<JwtToken> userTokens = tokenRepository.findAllByUser(user.getUserId());
 
         if (userTokens.isEmpty()) {
             return;

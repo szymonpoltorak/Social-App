@@ -18,8 +18,6 @@ import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
 
 import java.io.IOException;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.*;
-
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -31,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected final void doFilterInternal(@NonNull HttpServletRequest request,
                                           @NonNull HttpServletResponse response,
                                           @NonNull FilterChain filterChain) throws ServletException, IOException {
-        String token = getJwtAuthToken(request);
+        String token = jwtService.getJwtToken(request);
 
         if (token == null) {
             filterChain.doFilter(request, response);
@@ -46,29 +44,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private void setTokenForNotAuthenticatedUser(String jwtToken, String username, @NonNull HttpServletRequest request) {
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-            boolean isTokenValid = tokenRepository.findByToken(jwtToken)
-                    .map(token -> !token.isExpired() && !token.isRevoked()).orElse(false);
-
-            if (jwtService.isTokenValid(jwtToken, userDetails) && isTokenValid) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
+        if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
+            return;
         }
-    }
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-    private String getJwtAuthToken(@NonNull HttpServletRequest request) {
-        String authHeader = request.getHeader(AUTH_HEADER);
+        boolean isTokenValid = tokenRepository.findByToken(jwtToken)
+                .map(token -> !token.isExpired() && !token.isRevoked()).orElse(false);
 
-        if (request.getServletPath().contains(AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(TOKEN_HEADER)) {
-            return null;
+        if (jwtService.isTokenValid(jwtToken, userDetails) && isTokenValid) {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    userDetails, null, userDetails.getAuthorities()
+            );
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
-        return authHeader.substring(TOKEN_START_INDEX);
     }
 }

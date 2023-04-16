@@ -12,5 +12,6 @@ public interface TokenRepository extends JpaRepository<JwtToken, Long> {
     Optional<JwtToken> findByToken(String jwtToken);
 
     @Query("select t from JwtToken as t inner join User as u on (t.user.userId = u.userId) where t.isExpired = false and t.isRevoked = false")
-    List<JwtToken> findAllByUser(User user);
+//    List<JwtToken> findAllByUser(User user);
+    List<JwtToken> findAllByUser(Long id);
 }

@@ -7,7 +7,7 @@ public final class AuthMappings {
     /**
      * The base mapping for authentication endpoints.
      */
-    public static final String AUTH_MAPPING = "/auth/";
+    public static final String AUTH_MAPPING = "/api/auth/";
 
     /**
      * The mapping for user registration endpoint.
