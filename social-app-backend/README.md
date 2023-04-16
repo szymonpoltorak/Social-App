@@ -22,7 +22,7 @@ In order to configure database settings you have to go to `src/main/resources/ap
 To change username change this line:
 
 ```properties
-spring.datasource.username=root
+spring.datasource.username=postgres
 ```
 
 To change database password:
@@ -34,14 +34,27 @@ spring.datasource.password=none
 To change database url:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5000/postgres
+spring.datasource.url=jdbc:postgresql://localhost:5000/socialapp
 ```
 
 You have to also change makefile lines:
 
 ```properties
 db-password = -e POSTGRES_PASSWORD=none
-db-username = -e POSTGRES_USER=user
+```
+
+In `application.properties` you can also specify `jwt` expiration time and secret encoding key.
+Key can be generated on this [site](https://www.allkeysgenerator.com/).
+
+```properties
+security.jwt.expiration-time=
+security.jwt.encoding-key=
+```
+
+If you leave settings as it is you will get 1 min expiration time to change it to a day write this line:
+
+```properties
+security.jwt.expiration-time=86400000
 ```
 
 ## How to run without docker

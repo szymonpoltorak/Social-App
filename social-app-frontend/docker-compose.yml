@@ -1,0 +1,13 @@
+version: "3"
+
+name: social-app-frontend
+
+services:
+    frontend:
+        container_name: frontend
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "4200:80"
+

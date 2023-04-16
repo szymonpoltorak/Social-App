@@ -1,6 +1,5 @@
 build = docker build
-run = docker run
-stop = docker stop
+compose = docker-compose
 start = docker start
 app-name = social-app-frontend
 process-remove = docker rm
@@ -11,14 +10,11 @@ port-map = -p 4200:80
 
 all: image
 
-image: build
-	$(run) -d $(port-map) $(app-name):latest --name $(app-name)
-
-build:
-	$(build) -t $(app-name) .
+image:
+	$(compose) up
 
 stop:
-	$(stop) $(app-name)
+	$(compose) down
 
 start:
 	$(start) $(app-name)

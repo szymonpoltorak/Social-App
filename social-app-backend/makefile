@@ -25,7 +25,7 @@ pull:
 	$(pull) $(postgres-image)
 
 db:
-	$(run) --name $(container) -e POSTGRES_USER=root -e POSTGRES_PASSWORD=none -d $(port-map-db) $(postgres-image)
+	$(run) --name $(container) -e POSTGRES_PASSWORD=none -d $(port-map-db) $(postgres-image)
 
 stop:
 	$(stop) $(container)

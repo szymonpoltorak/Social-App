@@ -24,12 +24,15 @@ I used various technologies which I will list below.
 * PostGres SQL,
 * lombok,
 * javadoc,
+* jwt,
+* jackson,
 * logback.
 
 ### Others
 
-* makefile
-* docker
+* makefile,
+* docker,
+* postman.
 
 ## Installation of docker
 
