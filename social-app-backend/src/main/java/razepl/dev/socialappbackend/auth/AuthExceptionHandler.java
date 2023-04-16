@@ -4,10 +4,13 @@ import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
+import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 
 import java.util.stream.Collectors;
@@ -20,7 +23,8 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMessages.ERROR_FORM
 public class AuthExceptionHandler implements AuthExceptionInterface {
     @Override
     @ExceptionHandler(ConstraintViolationException.class)
-    public final ResponseEntity<String> handleConstraintValidationExceptions(ConstraintViolationException exception) {
+    public final ResponseEntity<ExceptionResponse> handleConstraintValidationExceptions(ConstraintViolationException exception) {
+        String className = exception.getClass().getName();
         String errorMessage = exception.getConstraintViolations()
                 .stream()
                 .map(error -> String.format(ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
@@ -28,12 +32,13 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
         log.error(errorMessage);
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Override
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public final ResponseEntity<String> handleMethodArgValidExceptions(MethodArgumentNotValidException exception) {
+    public final ResponseEntity<ExceptionResponse> handleMethodArgValidExceptions(MethodArgumentNotValidException exception) {
+        String className = exception.getClass().getName();
         String errorMessage = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -42,16 +47,44 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
         log.error(errorMessage);
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Override
     @ExceptionHandler(PasswordValidationException.class)
-    public ResponseEntity<String> handlePasswordValidationException(PasswordValidationException exception) {
+    public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception) {
         String errorMessage = exception.getMessage();
+        String className = exception.getClass().getName();
 
         log.error(errorMessage);
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception) {
+        String errorMessage = exception.getMessage();
+        String className = exception.getClass().getName();
+
+        log.error(errorMessage);
+
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception) {
+        String errorMessage = exception.getMessage();
+        String className = exception.getClass().getName();
+
+        log.error(errorMessage);
+
+        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.FAILED_DEPENDENCY);
+    }
+
+    private ExceptionResponse buildResponse(String errorMessage, String exceptionClassName) {
+        return ExceptionResponse.builder()
+                .errorMessage(errorMessage)
+                .exceptionClassName(exceptionClassName)
+                .build();
     }
 }

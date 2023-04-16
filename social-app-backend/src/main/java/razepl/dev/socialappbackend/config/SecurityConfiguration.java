@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
+import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_MATCHERS;
 
@@ -22,21 +23,25 @@ public class SecurityConfiguration implements SecurityConfigInterface {
 
     @Bean
     @Override
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers(AUTH_MATCHERS)
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+        try {
+            httpSecurity.csrf()
+                    .disable()
+                    .authorizeHttpRequests()
+                    .requestMatchers(AUTH_MATCHERS)
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated()
+                    .and()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authenticationProvider(authenticationProvider)
+                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-        return httpSecurity.build();
+            return httpSecurity.build();
+        } catch (Exception exception) {
+            throw new SecurityChainException("Security chain has come with an error!");
+        }
     }
 }

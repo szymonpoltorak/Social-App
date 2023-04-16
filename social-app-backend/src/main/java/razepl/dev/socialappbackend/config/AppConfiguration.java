@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
+import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
 @RequiredArgsConstructor
@@ -45,7 +46,12 @@ public class AppConfiguration implements AppConfigInterface {
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
+            throws AuthManagerInstanceException {
+        try {
+            return configuration.getAuthenticationManager();
+        } catch (Exception exception) {
+            throw new AuthManagerInstanceException("Could not create authManager bean!");
+        }
     }
 }

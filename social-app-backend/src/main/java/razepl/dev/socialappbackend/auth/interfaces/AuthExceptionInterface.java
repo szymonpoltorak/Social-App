@@ -2,7 +2,10 @@ package razepl.dev.socialappbackend.auth.interfaces;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
+import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 
 /**
@@ -16,7 +19,7 @@ public interface AuthExceptionInterface {
      * @param exception the constraint violation exception that occurred
      * @return an HTTP response entity containing an error message and status code
      */
-    ResponseEntity<String> handleConstraintValidationExceptions(ConstraintViolationException exception);
+    ResponseEntity<ExceptionResponse> handleConstraintValidationExceptions(ConstraintViolationException exception);
 
     /**
      * Handles method argument validation exceptions that occur during user authentication and returns an HTTP response entity.
@@ -24,7 +27,11 @@ public interface AuthExceptionInterface {
      * @param exception the method argument not valid exception that occurred
      * @return an HTTP response entity containing an error message and status code
      */
-    ResponseEntity<String> handleMethodArgValidExceptions(MethodArgumentNotValidException exception);
+    ResponseEntity<ExceptionResponse> handleMethodArgValidExceptions(MethodArgumentNotValidException exception);
 
-    ResponseEntity<String> handlePasswordValidationException(PasswordValidationException exception);
+    ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception);
+
+    ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception);
+
+    ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception);
 }
