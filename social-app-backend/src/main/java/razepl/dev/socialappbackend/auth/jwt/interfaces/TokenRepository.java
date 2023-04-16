@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface TokenRepository extends JpaRepository<JwtToken, Long> {
     /**
      * Method to find token object inside database by the given token string
+     *
      * @param jwtToken token string
      * @return {@link Optional} of {@link JwtToken} instance
      */
@@ -21,6 +22,7 @@ public interface TokenRepository extends JpaRepository<JwtToken, Long> {
 
     /**
      * Method used to return the list of all tokens that user have based on his id.
+     *
      * @param id the id of the user
      * @return List of {@link JwtToken} of the user
      */

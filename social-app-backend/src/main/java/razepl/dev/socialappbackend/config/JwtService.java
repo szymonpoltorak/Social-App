@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.*;
-import static razepl.dev.socialappbackend.config.constants.Headers.TOKEN_START_INDEX;
 import static razepl.dev.socialappbackend.config.constants.Properties.*;
 
 /**

@@ -12,7 +12,6 @@ import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
  * The AuthExceptionInterface interface defines a methods for handling errors in Authentication.
  */
 public interface AuthExceptionInterface {
-
     /**
      * Handles validation exceptions that occur during user authentication and returns an HTTP response entity.
      *

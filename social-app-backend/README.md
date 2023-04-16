@@ -40,7 +40,7 @@ spring.datasource.url=jdbc:postgresql://localhost:5000/socialapp
 You have to also change makefile lines:
 
 ```properties
-db-password = -e POSTGRES_PASSWORD=none
+db-password=-e POSTGRES_PASSWORD=none
 ```
 
 In `application.properties` you can also specify `jwt` expiration time and secret encoding key.
