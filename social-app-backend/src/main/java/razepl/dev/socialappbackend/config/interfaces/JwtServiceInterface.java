@@ -63,7 +63,7 @@ public interface JwtServiceInterface {
      * @param request the HTTP request from which to retrieve the JWT token
      * @return the JWT token retrieved from the request
      */
-    String getJwtToken(@NonNull HttpServletRequest request);
+    String getJwtToken(HttpServletRequest request);
 
     /**
      * Generates a refresh token for a given user.
@@ -79,5 +79,5 @@ public interface JwtServiceInterface {
      * @param request the HTTP request from which to retrieve the JWT refresh token
      * @return the JWT refresh token retrieved from the request
      */
-    String getJwtRefreshToken(@NonNull HttpServletRequest request);
+    String getJwtRefreshToken(HttpServletRequest request);
 }

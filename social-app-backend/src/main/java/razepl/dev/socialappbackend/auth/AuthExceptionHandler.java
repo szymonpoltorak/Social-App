@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
-import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
-import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
-import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
-import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+import razepl.dev.socialappbackend.exceptions.*;
 
 import java.util.stream.Collectors;
 
@@ -59,45 +56,34 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @Override
     @ExceptionHandler(PasswordValidationException.class)
     public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception) {
-        String errorMessage = exception.getMessage();
-        String className = exception.getClass().getSimpleName();
-
-        log.error(errorMessage);
-
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
+        return buildResponseEntity(exception, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Override
     @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception) {
-        String errorMessage = exception.getMessage();
-        String className = exception.getClass().getSimpleName();
-
-        log.error(errorMessage);
-
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.NOT_FOUND);
+        return buildResponseEntity(exception, HttpStatus.NOT_FOUND);
     }
 
     @Override
     @ExceptionHandler(AuthManagerInstanceException.class)
     public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception) {
-        String errorMessage = exception.getMessage();
-        String className = exception.getClass().getSimpleName();
-
-        log.error(errorMessage);
-
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.FAILED_DEPENDENCY);
+        return buildResponseEntity(exception, HttpStatus.FAILED_DEPENDENCY);
     }
 
     @Override
-    @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class})
+    @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class, NullArgumentException.class})
     public ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
+        return buildResponseEntity(exception, HttpStatus.UNAUTHORIZED);
+    }
+
+    private ResponseEntity<ExceptionResponse> buildResponseEntity(Exception exception, HttpStatus status) {
         String errorMessage = exception.getMessage();
         String className = exception.getClass().getSimpleName();
 
         log.error(errorMessage);
 
-        return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(buildResponse(errorMessage, className), status);
     }
 
     private ExceptionResponse buildResponse(String errorMessage, String exceptionClassName) {

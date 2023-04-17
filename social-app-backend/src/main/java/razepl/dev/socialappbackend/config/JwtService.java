@@ -7,7 +7,6 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.constants.Headers;
@@ -70,7 +69,7 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public final String getJwtToken(@NonNull HttpServletRequest request) {
+    public final String getJwtToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (request.getServletPath().contains(Headers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
@@ -80,7 +79,7 @@ public class JwtService implements JwtServiceInterface {
     }
 
     @Override
-    public final String getJwtRefreshToken(@NonNull HttpServletRequest request) {
+    public final String getJwtRefreshToken(HttpServletRequest request) {
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {

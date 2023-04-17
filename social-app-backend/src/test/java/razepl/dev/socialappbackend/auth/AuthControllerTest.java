@@ -27,6 +27,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static razepl.dev.socialappbackend.constants.ApiRequests.REGISTER_REQUEST;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
@@ -57,7 +59,7 @@ class AuthControllerTest {
         RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
                         .content(AuthTestUtil.asJsonString(user))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -90,7 +92,7 @@ class AuthControllerTest {
         RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
                         .content(AuthTestUtil.asJsonString(user))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
