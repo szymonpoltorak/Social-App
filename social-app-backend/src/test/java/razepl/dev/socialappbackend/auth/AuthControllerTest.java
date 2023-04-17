@@ -19,7 +19,9 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
+import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
@@ -35,6 +37,9 @@ import static razepl.dev.socialappbackend.constants.ApiRequests.REGISTER_REQUEST
 class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private AuthInterface authInterface;
 
     @Autowired
     private UserRepository userRepository;
@@ -103,5 +108,35 @@ class AuthControllerTest {
 
         // then
         Assertions.assertEquals(expected, result, "Registering user has failed!");
+    }
+
+    @Test
+    final void test_loginUser_args_nulls() {
+        // given
+
+        // when
+
+        // then
+        Assertions.assertThrows(NullArgumentException.class, () -> authInterface.loginUser(null));
+    }
+
+    @Test
+    final void test_registerUser_args_nulls() {
+        // given
+
+        // when
+
+        // then
+        Assertions.assertThrows(NullArgumentException.class, () -> authInterface.registerUser(null));
+    }
+
+    @Test
+    final void test_refreshUserToken_args_nulls() {
+        // given
+
+        // when
+
+        // then
+        Assertions.assertThrows(NullArgumentException.class, () -> authInterface.refreshUserToken(null, null));
     }
 }

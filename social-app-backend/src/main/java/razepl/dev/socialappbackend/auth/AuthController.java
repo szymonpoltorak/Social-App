@@ -11,6 +11,7 @@ import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
@@ -30,18 +31,24 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REGISTER_MAPPING)
     public final ResponseEntity<AuthResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
+        NullChecker.throwAppropriateException(registerRequest);
+
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
     @Override
     @PostMapping(value = LOGIN_MAPPING)
     public final ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+        NullChecker.throwAppropriateException(loginRequest);
+
         return ResponseEntity.ok(authService.login(loginRequest));
     }
 
     @Override
     @PostMapping(value = REFRESH_MAPPING)
     public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
+        NullChecker.throwAppropriateException(request, response);
+
         return ResponseEntity.ok(authService.refreshToken(request, response));
     }
 }
