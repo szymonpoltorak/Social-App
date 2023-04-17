@@ -24,6 +24,7 @@ import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.util.AuthTestUtil;
 
 import java.time.LocalDate;
 import java.util.List;
