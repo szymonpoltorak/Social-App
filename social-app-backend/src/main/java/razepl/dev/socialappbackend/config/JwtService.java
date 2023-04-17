@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.constants.Headers;
 import razepl.dev.socialappbackend.config.constants.Properties;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 
 import java.security.Key;
 import java.util.Collections;
@@ -36,11 +37,15 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getUsernameFromToken(String jwtToken) {
+        NullChecker.throwAppropriateException(jwtToken);
+
         return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
     @Override
     public final <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
+        NullChecker.throwAppropriateException(jwtToken, claimsHandler);
+
         Claims claims = getAllClaims(jwtToken);
 
         return claimsHandler.apply(claims);
@@ -48,21 +53,29 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String generateRefreshToken(UserDetails userDetails) {
+        NullChecker.throwAppropriateException(userDetails);
+
         return buildToken(Collections.emptyMap(), userDetails, refreshTime);
     }
 
     @Override
     public final String generateToken(UserDetails userDetails) {
+        NullChecker.throwAppropriateException(userDetails);
+
         return generateToken(Collections.emptyMap(), userDetails, expirationTime);
     }
 
     @Override
     public final String generateToken(Map<String, Object> additionalClaims, UserDetails userDetails, long expiration) {
+        NullChecker.throwAppropriateException(additionalClaims, userDetails);
+
         return buildToken(additionalClaims, userDetails, expiration);
     }
 
     @Override
     public final boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+        NullChecker.throwAppropriateException(jwtToken, userDetails);
+
         String username = getUsernameFromToken(jwtToken);
 
         return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
@@ -70,6 +83,8 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getJwtToken(HttpServletRequest request) {
+        NullChecker.throwAppropriateException(request);
+
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (request.getServletPath().contains(Headers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
@@ -80,6 +95,8 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getJwtRefreshToken(HttpServletRequest request) {
+        NullChecker.throwAppropriateException(request);
+
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {

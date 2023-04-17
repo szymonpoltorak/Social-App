@@ -8,8 +8,8 @@ import razepl.dev.socialappbackend.exceptions.JsonMapperException;
 
 import java.time.LocalDate;
 
-class AuthTestUtil {
-    static String asJsonString(Object obj) {
+public class AuthTestUtil {
+    private static String asJsonString(Object obj) {
         try {
             return new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(obj);
         } catch (Exception exception) {
@@ -17,7 +17,7 @@ class AuthTestUtil {
         }
     }
 
-    static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
+    private static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
         return RegisterRequest
                 .builder()
                 .dateOfBirth(dateOfBirth)
