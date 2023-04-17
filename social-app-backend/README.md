@@ -70,7 +70,7 @@ sudo apt install -y maven
 
 Then run maven lifecycle
 
-```bash
+```maven
 mvn clean package
 ```
 
@@ -79,3 +79,19 @@ And at last run jar file in `target/`.
 ```bash
 java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
 ```
+
+## Documentation
+
+There are two different documentation tools included in this project.
+
+* First is JavaDoc which will generate documentation for whole code based on docstrings,
+  To generate docs use command:
+
+```maven
+mvn clean javadoc:javadoc
+```
+
+And then run `target/site/apidocs/index.html`.
+
+* Api documentation created via swagger. When you run your spring application go to
+  `http://localhost/swagger-ui/index.html` and you will se your api documentation.

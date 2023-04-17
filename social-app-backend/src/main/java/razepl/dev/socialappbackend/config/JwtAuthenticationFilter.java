@@ -18,6 +18,10 @@ import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 
 import java.io.IOException;
 
+/**
+ * Class made to add Jwt to security filter chain to let Jwt tokens to authenticate user and his requests.
+ * This class extends {@link OncePerRequestFilter}.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

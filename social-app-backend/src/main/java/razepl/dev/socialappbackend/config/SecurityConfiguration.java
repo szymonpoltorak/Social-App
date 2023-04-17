@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_MATCHERS;
+import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
 
 /**
  * Class made to configure security filter chain in app.
@@ -32,7 +32,7 @@ public class SecurityConfiguration implements SecurityConfigInterface {
             httpSecurity.csrf()
                     .disable()
                     .authorizeHttpRequests()
-                    .requestMatchers(AUTH_MATCHERS, "/v3/api-docs", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
+                    .requestMatchers(WHITE_LIST)
                     .permitAll()
                     .anyRequest()
                     .authenticated()
