@@ -7,10 +7,10 @@ import { MatDialog } from "@angular/material/dialog";
 })
 export class DialogService {
     openNotFilledDialog(notFilled: MatDialog, paragraphContent: string, dialogListItems: Array<string>): void {
-        const dialog = notFilled.open(NotFilledDialogComponent,{
+        const dialog = notFilled.open(NotFilledDialogComponent, {
             data: {
-                paragraphContent : paragraphContent,
-                listItems : dialogListItems
+                paragraphContent: paragraphContent,
+                listItems: dialogListItems
             }
         });
         dialog.componentInstance.closeEvent.subscribe(() => dialog.close());

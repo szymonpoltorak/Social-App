@@ -6,19 +6,19 @@
     </h2>
 </section>
 
-<form [formGroup]="loginForm" (ngSubmit)="authenticateUser()" class="login-block">
+<form (ngSubmit)="authenticateUser()" [formGroup]="loginForm" class="login-block">
     <h1 class="title">Login</h1>
 
-    <app-email-field formControlName="email"
-                     [emailControl]="controlProvider.emailControl"
+    <app-email-field [emailControl]="controlProvider.emailControl"
                      [wasSubmitClicked]="wasSubmitClicked"
+                     formControlName="email"
     >
     </app-email-field>
 
-    <app-password-field formControlName="password"
-                        [passwordControl]="controlProvider.passwordControl"
+    <app-password-field [passwordControl]="controlProvider.passwordControl"
                         [password]="'Enter your password'"
                         [wasSubmitClicked]="wasSubmitClicked"
+                        formControlName="password"
     >
     </app-password-field>
 
@@ -31,7 +31,7 @@
     </div>
 
     <div class="buttons">
-        <button type="button" routerLink="/auth/register" class="submit-button">Register Now</button>
-        <button type="submit" class="submit-button">Login</button>
+        <button class="submit-button" routerLink="/auth/register" type="button">Register Now</button>
+        <button class="submit-button" type="submit">Login</button>
     </div>
 </form>

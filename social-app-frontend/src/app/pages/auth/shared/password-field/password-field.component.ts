@@ -19,12 +19,6 @@ export class PasswordFieldComponent implements ControlValueAccessor {
     @Input() wasSubmitClicked: boolean = false;
     @Input() passwordMismatch: boolean = false;
 
-    private onChange: any = () => {
-    };
-
-    private onTouched: any = () => {
-    };
-
     registerOnChange(onChange: any): void {
         this.onChange = onChange;
     }
@@ -35,4 +29,10 @@ export class PasswordFieldComponent implements ControlValueAccessor {
 
     writeValue(obj: any): void {
     }
+
+    private onChange: any = () => {
+    };
+
+    private onTouched: any = () => {
+    };
 }

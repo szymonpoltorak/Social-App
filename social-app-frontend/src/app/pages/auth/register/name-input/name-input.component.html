@@ -1,11 +1,11 @@
 <div class="name-input-container">
     <label class="input-label" for="my-input">{{ name }}:</label>
 
-    <input [formControl]="nameControl"
+    <input [class.correct]="nameControl.valid"
            [class.wrong-input]="nameControl.invalid && (nameControl.touched || wasSubmitClicked)"
-           [class.correct]="nameControl.valid"
-           class="name-input" id="my-input"
-           placeholder="Enter your {{ name }}"
-           required autocomplete="on" autocapitalize="on"
+           [formControl]="nameControl"
+           autocapitalize="on" autocomplete="on"
+           class="name-input"
+           id="my-input" placeholder="Enter your {{ name }}" required
     >
 </div>
