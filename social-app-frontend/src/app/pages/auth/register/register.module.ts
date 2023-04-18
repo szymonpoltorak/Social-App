@@ -21,7 +21,7 @@ import { DateComponent } from './date/date.component';
         SharedModule,
         ReactiveFormsModule,
         FormsModule,
-    ]
+    ],
 })
 export class RegisterModule {
 }
