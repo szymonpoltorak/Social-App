@@ -73,7 +73,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
     @Override
     @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class, NullArgumentException.class})
-    public ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
+    public final ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
         return buildResponseEntity(exception, HttpStatus.UNAUTHORIZED);
     }
 

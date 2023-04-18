@@ -17,7 +17,7 @@ public class AuthTestUtil {
         }
     }
 
-    public static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
+    private static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
         return RegisterRequest
                 .builder()
                 .dateOfBirth(dateOfBirth)
@@ -26,5 +26,14 @@ public class AuthTestUtil {
                 .email(email)
                 .password(password)
                 .build();
+    }
+
+    public static RegisterUserRequest createUserForRegister(String password) {
+        String name = "Adam";
+        String surname = "Kowalski";
+        String email = "andrzej@gmail.com";
+        LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
+
+        return buildUserRequest(dateOfBirth, name, surname, email, password);
     }
 }

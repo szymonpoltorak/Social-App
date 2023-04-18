@@ -19,17 +19,20 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
+import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.util.AuthTestUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static razepl.dev.socialappbackend.constants.ApiRequests.LOGIN_REQUEST;
 import static razepl.dev.socialappbackend.constants.ApiRequests.REGISTER_REQUEST;
 
 @SpringBootTest
@@ -45,6 +48,9 @@ class AuthControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenRepository tokenRepository;
+
     @BeforeEach
     final void init() {
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -57,22 +63,17 @@ class AuthControllerTest {
     final void test_registerUser_successful_register() throws Exception {
         // given
         String password = "Abc1!l1.DKk";
-        String name = "Adam";
-        String surname = "Kowalski";
-        String email = "andrzej@gmail.com";
-        LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
-
-        RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
+        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
-                        .content(AuthTestUtil.asJsonString(user))
+                        .content(AuthTestUtil.asJsonString(request))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Optional<User> result = userRepository.findByName(name);
+        Optional<User> result = userRepository.findByName(request.getName());
 
         // then
         Assertions.assertNotNull(result, "Registering user has failed!");
@@ -90,25 +91,69 @@ class AuthControllerTest {
     final void test_registerUser_parametrized(String password) throws Exception {
         // given
         Optional<User> expected = Optional.empty();
-        String name = "Adam";
-        String surname = "Kowalski";
-        String email = "andrzej@gmail.com";
-        LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
-
-        RegisterUserRequest user = AuthTestUtil.buildUserRequest(dateOfBirth, name, surname, email, password);
+        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
-                        .content(AuthTestUtil.asJsonString(user))
+                        .content(AuthTestUtil.asJsonString(request))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
 
-        Optional<User> result = userRepository.findByName(name);
+        Optional<User> result = userRepository.findByName(request.getName());
 
         // then
         Assertions.assertEquals(expected, result, "Registering user has failed!");
+    }
+
+    @Test
+    final void test_registerUser() throws Exception {
+        // given
+        String password = "Abc1!l1.DKk";
+        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
+
+        // when
+        mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
+                .content(AuthTestUtil.asJsonString(request))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .with(SecurityMockMvcRequestPostProcessors.csrf()));
+
+        User user = userRepository.findByName(request.getName()).orElseThrow();
+
+        boolean result = tokenRepository.findAllByUser(user.getUserId()).isEmpty();
+
+        // then
+        Assertions.assertFalse(result, "Token was not found!");
+    }
+
+    @Test
+    final void test_loginUser() throws Exception {
+        // given
+        String password = "Abc1!l1.DKk";
+        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
+        LoginUserRequest loginRequest = LoginRequest.builder()
+                .username(request.getEmail())
+                .password(request.getPassword())
+                .build();
+
+        // when
+        mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
+                .content(AuthTestUtil.asJsonString(request))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.post(LOGIN_REQUEST)
+                        .content(AuthTestUtil.asJsonString(loginRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        // then
     }
 
     @Test
