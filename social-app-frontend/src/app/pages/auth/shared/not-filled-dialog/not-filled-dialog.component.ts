@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-not-filled-dialog',
-  templateUrl: './not-filled-dialog.component.html',
-  styleUrls: ['./not-filled-dialog.component.scss']
+    selector: 'app-not-filled-dialog',
+    templateUrl: './not-filled-dialog.component.html',
+    styleUrls: ['./not-filled-dialog.component.scss']
 })
 export class NotFilledDialogComponent {
     @Output() closeEvent: EventEmitter<any> = new EventEmitter();

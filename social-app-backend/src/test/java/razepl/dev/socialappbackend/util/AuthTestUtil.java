@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.auth;
+package razepl.dev.socialappbackend.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -8,8 +8,8 @@ import razepl.dev.socialappbackend.exceptions.JsonMapperException;
 
 import java.time.LocalDate;
 
-class AuthTestUtil {
-    static String asJsonString(Object obj) {
+public class AuthTestUtil {
+    public static String asJsonString(Object obj) {
         try {
             return new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(obj);
         } catch (Exception exception) {
@@ -17,7 +17,7 @@ class AuthTestUtil {
         }
     }
 
-    static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
+    private static RegisterUserRequest buildUserRequest(LocalDate dateOfBirth, String name, String surname, String email, String password) {
         return RegisterRequest
                 .builder()
                 .dateOfBirth(dateOfBirth)
@@ -26,5 +26,14 @@ class AuthTestUtil {
                 .email(email)
                 .password(password)
                 .build();
+    }
+
+    public static RegisterUserRequest createUserForRegister(String password) {
+        String name = "Adam";
+        String surname = "Kowalski";
+        String email = "andrzej@gmail.com";
+        LocalDate dateOfBirth = LocalDate.of(2000, 1, 1);
+
+        return buildUserRequest(dateOfBirth, name, surname, email, password);
     }
 }

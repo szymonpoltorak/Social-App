@@ -12,7 +12,6 @@ import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
  * The AuthExceptionInterface interface defines a methods for handling errors in Authentication.
  */
 public interface AuthExceptionInterface {
-
     /**
      * Handles validation exceptions that occur during user authentication and returns an HTTP response entity.
      *
@@ -29,11 +28,35 @@ public interface AuthExceptionInterface {
      */
     ResponseEntity<ExceptionResponse> handleMethodArgValidExceptions(MethodArgumentNotValidException exception);
 
+    /**
+     * Handles an exception related to password validation.
+     *
+     * @param exception The exception to handle.
+     * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
+     */
     ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception);
 
+    /**
+     * Handles an exception related to a user not being found.
+     *
+     * @param exception The exception to handle.
+     * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
+     */
     ResponseEntity<ExceptionResponse> handleUserNotFoundException(UsernameNotFoundException exception);
 
+    /**
+     * Handles an exception related to an authentication manager instance.
+     *
+     * @param exception The exception to handle.
+     * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
+     */
     ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception);
 
+    /**
+     * Handles exceptions related to JWT tokens.
+     *
+     * @param exception The exception to handle.
+     * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
+     */
     ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception);
 }

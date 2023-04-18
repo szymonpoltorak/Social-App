@@ -17,8 +17,6 @@ export class LoginControlProviderService {
         PasswordValidation.PASSWORD_VALUE,
         [
             Validators.required,
-            Validators.minLength(PasswordValidation.PASSWORD_MIN_LENGTH),
-            Validators.maxLength(PasswordValidation.PASSWORD_MAX_LENGTH),
             Validators.pattern(PasswordValidation.PASSWORD_PATTERN),
         ]
     );

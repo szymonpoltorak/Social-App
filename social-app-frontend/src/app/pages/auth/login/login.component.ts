@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { LoginControlProviderService } from "../services/login-control-provider.service";
-import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { DialogService } from "../services/dialog.service";
@@ -13,10 +12,10 @@ import { FormBuildingService } from "../services/form-building.service";
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    private dialogListItems !: Array<string>;
-    private paragraphContent !: string;
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
+    private dialogListItems !: Array<string>;
+    private paragraphContent !: string;
 
     constructor(public controlProvider: LoginControlProviderService,
                 private notFilled: MatDialog,

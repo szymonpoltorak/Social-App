@@ -17,12 +17,6 @@ export class EmailFieldComponent implements ControlValueAccessor {
     @Input() emailControl!: FormControl;
     @Input() wasSubmitClicked: boolean = false;
 
-    private onChange = () => {
-    };
-
-    private onTouched = () => {
-    };
-
     registerOnChange(onChange: any): void {
         this.onChange = onChange;
     }
@@ -33,4 +27,10 @@ export class EmailFieldComponent implements ControlValueAccessor {
 
     writeValue(obj: any): void {
     }
+
+    private onChange = () => {
+    };
+
+    private onTouched = () => {
+    };
 }

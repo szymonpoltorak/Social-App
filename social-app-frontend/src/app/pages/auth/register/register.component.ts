@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { RegisterControlProviderService } from "../services/register-control-provider.service";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { MatDialog } from "@angular/material/dialog";
@@ -13,11 +13,11 @@ import { FormBuildingService } from "../services/form-building.service";
     styleUrls: ["./register.component.scss"]
 })
 export class RegisterComponent implements OnInit {
-    private dialogListItems !: Array<string>;
-    private paragraphContent !: string;
     registerForm!: FormGroup;
     wasSubmitClicked: boolean = false;
     passwordMismatch!: boolean;
+    private dialogListItems !: Array<string>;
+    private paragraphContent !: string;
 
     constructor(public controlProvider: RegisterControlProviderService,
                 private formBuildingService: FormBuildingService,

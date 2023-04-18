@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * The AuthResponse class is a model class representing the response to an authentication request.
+ * This class includes an authentication token and a refresh token.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

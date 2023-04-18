@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 
+/**
+ * The LoginRequest class is a model class representing a login request.
+ * This class includes login credentials and implements the {@link LoginUserRequest} interface.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

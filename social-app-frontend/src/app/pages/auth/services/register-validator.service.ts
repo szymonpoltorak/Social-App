@@ -23,7 +23,7 @@ export class RegisterValidatorService {
             const dateFieldValueYear: number = new Date(control.value).getFullYear();
             const userAge: number = currentDateYear - dateFieldValueYear;
 
-            return userAge > 200 || userAge < 13 || dateFieldValueYear > currentDateYear ? { 'wrongAge' : true } : null;
+            return userAge > 200 || userAge < 13 || dateFieldValueYear > currentDateYear ? {'wrongAge': true} : null;
         };
     }
 }

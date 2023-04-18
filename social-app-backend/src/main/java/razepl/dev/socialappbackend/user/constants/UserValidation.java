@@ -1,5 +1,7 @@
 package razepl.dev.socialappbackend.user.constants;
 
+import razepl.dev.socialappbackend.user.User;
+
 import java.util.regex.Pattern;
 
 /**
@@ -36,6 +38,9 @@ public final class UserValidation {
     public static final Pattern PASSWORD_PATTERN = Pattern
             .compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[:\\?\\.@!#:\\-_=+ ])[a-zA-Z0-9:\\?\\.@!#:\\-_=+ ]{8,20}$");
 
+    /**
+     * {@link User} package location.
+     */
     public static final String USER_PACKAGE = "razepl.dev.socialappbackend.user.User";
 
     /**

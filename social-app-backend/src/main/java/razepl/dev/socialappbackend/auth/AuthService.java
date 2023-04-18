@@ -13,11 +13,12 @@ import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
-import razepl.dev.socialappbackend.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
@@ -25,6 +26,10 @@ import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
+/**
+ * Class to manage logic for {@link AuthController}.
+ * It implements {@link AuthServiceInterface}.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService implements AuthServiceInterface {
@@ -36,6 +41,8 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse register(RegisterUserRequest userRequest) {
+        NullChecker.throwAppropriateException(userRequest);
+
         String password = userRequest.getPassword();
 
         if (!PASSWORD_PATTERN.matcher(password).matches()) {
@@ -56,6 +63,8 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public AuthResponse login(LoginUserRequest loginRequest) {
+        NullChecker.throwAppropriateException(loginRequest);
+
         String username = loginRequest.getUsername();
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -70,6 +79,8 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
+        NullChecker.throwAppropriateException(request, response);
+
         String refreshToken = jwtService.getJwtRefreshToken(request);
 
         if (refreshToken == null) {
@@ -87,7 +98,6 @@ public class AuthService implements AuthServiceInterface {
         if (!jwtService.isTokenValid(refreshToken, user)) {
             throw new InvalidTokenException("Token is not valid!");
         }
-
         String authToken = jwtService.generateToken(user);
 
         tokenManager.revokeUserTokens(user);

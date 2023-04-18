@@ -18,12 +18,6 @@ export class NameInputComponent implements ControlValueAccessor {
     @Input() nameControl!: FormControl;
     @Input() wasSubmitClicked: boolean = false;
 
-    private onChange = () => {
-    };
-
-    private onTouched = () => {
-    };
-
     registerOnChange(onChange: any): void {
         this.onChange = onChange;
     }
@@ -34,4 +28,10 @@ export class NameInputComponent implements ControlValueAccessor {
 
     writeValue(name: string): void {
     }
+
+    private onChange = () => {
+    };
+
+    private onTouched = () => {
+    };
 }

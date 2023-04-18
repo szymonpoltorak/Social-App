@@ -26,6 +26,7 @@ I used various technologies which I will list below.
 * javadoc,
 * jwt,
 * jackson,
+* swagger,
 * logback.
 
 ### Others

@@ -8,6 +8,10 @@ import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 
 import java.time.LocalDate;
 
+/**
+ * The RegisterRequest class is a model class representing a user registration request.
+ * This class includes user information and implements the {@link RegisterUserRequest} interface.
+ */
 @Data
 @Builder
 @AllArgsConstructor

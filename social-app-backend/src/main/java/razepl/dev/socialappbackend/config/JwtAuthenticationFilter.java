@@ -13,11 +13,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.jwt.interfaces.TokenRepository;
 
 import java.io.IOException;
 
+/**
+ * Class made to add Jwt to security filter chain to let Jwt tokens to authenticate user and his requests.
+ * This class extends {@link OncePerRequestFilter}.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
