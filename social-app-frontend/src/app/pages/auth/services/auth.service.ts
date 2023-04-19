@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { RegisterRequest } from "../../../core/data/register-request";
-import { Observable } from "rxjs";
+import { catchError, Observable, of } from "rxjs";
 import { LoginRequest } from "../../../core/data/login-request";
 import { AuthApiCalls } from "../../../core/enums/AuthApiCalls";
 import { LocalStorageService } from "./local-storage.service";
@@ -17,7 +17,8 @@ export class AuthService {
     }
 
     registerUser(registerRequest: RegisterRequest): void {
-        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.REGISTER_URL, registerRequest);
+        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.REGISTER_URL, registerRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
 
         response.subscribe((data: AuthResponse) => {
             this.addData(data);
@@ -27,18 +28,19 @@ export class AuthService {
     }
 
     loginUser(loginRequest: LoginRequest): void {
-        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.LOGIN_URL, loginRequest);
+        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.LOGIN_URL, loginRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
 
         response.subscribe((data: AuthResponse) => {
-            this.addData(data);
-
+                this.addData(data);
         });
         console.log((this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN)));
         console.log(this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN));
     }
 
     refreshUsersToken(refreshToken: string): void {
-        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.REFRESH_URL, refreshToken);
+        const response: Observable<AuthResponse> = this.http.post<AuthResponse>(AuthApiCalls.REFRESH_URL, refreshToken)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
 
         response.subscribe((data: AuthResponse) => {
            this.localStorageService.removeValueFromStorage(StorageKeys.AUTH_TOKEN);
@@ -53,6 +55,9 @@ export class AuthService {
     private addData(data: AuthResponse) {
         console.log(data);
 
+        if (data.isEmpty()) {
+            return;
+        }
         this.localStorageService.addValueIntoStorage(StorageKeys.AUTH_TOKEN, data.authToken);
         this.localStorageService.addValueIntoStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
     }
