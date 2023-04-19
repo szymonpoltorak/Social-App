@@ -4,11 +4,12 @@ import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { RegisterControlProviderService } from "./register-control-provider.service";
 import { RegisterValidatorService } from "./register-validator.service";
 import { LoginControlProviderService } from "./login-control-provider.service";
+import { FormBuilderInterface } from "../../../core/interfaces/FormBuilderInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class FormBuildingService {
+export class FormBuildingService implements FormBuilderInterface{
     constructor(private formBuilder: FormBuilder,
                 private registerControlProvider: RegisterControlProviderService,
                 private loginControlProvider: LoginControlProviderService,

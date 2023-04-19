@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { StorageKeys } from "../../../core/enums/StorageKeys";
+import { LocalStorageInterface } from "../../../core/interfaces/LocalStorageInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class LocalStorageService {
+export class LocalStorageService implements LocalStorageInterface{
     constructor() {
     }
 
