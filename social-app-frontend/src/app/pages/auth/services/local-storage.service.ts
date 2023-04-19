@@ -16,10 +16,10 @@ export class LocalStorageService {
         window.localStorage.removeItem(key);
     }
 
-    getValueFromStorage<V>(key: StorageKeys): string {
+    getValueFromStorage<V>(key: StorageKeys): V {
         const value: string | null = window.localStorage.getItem(key);
 
-        return value == null ? {} as string : value;
+        return value == null ? {} as V : JSON.parse(value);
     }
 
     clearStorage(): void {
