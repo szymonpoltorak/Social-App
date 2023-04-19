@@ -1,4 +1,4 @@
-export class RegisterResponse {
+export class AuthResponse {
     authToken!: string;
     refreshToken!: string;
 }

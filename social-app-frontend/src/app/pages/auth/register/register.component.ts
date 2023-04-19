@@ -4,10 +4,10 @@ import { RegisterControlProviderService } from "../services/register-control-pro
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
-import { DialogService } from "../services/dialog.service";
 import { FormBuildingService } from "../services/form-building.service";
-import { AuthService } from "../services/auth.service";
 import { RegisterRequest } from "../../../core/data/register-request";
+import { AuthService } from "../services/auth.service";
+import { DialogService } from "../services/dialog.service";
 
 @Component({
     selector: "app-register",

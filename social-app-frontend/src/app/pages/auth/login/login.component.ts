@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { LoginControlProviderService } from "../services/login-control-provider.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
-import { DialogService } from "../services/dialog.service";
-import { FormBuildingService } from "../services/form-building.service";
 import { LoginRequest } from "../../../core/data/login-request";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { LoginControlProviderService } from "../services/login-control-provider.service";
+import { DialogService } from "../services/dialog.service";
+import { FormBuildingService } from "../services/form-building.service";
 import { AuthService } from "../services/auth.service";
 
 @Component({

@@ -1,7 +1,9 @@
 <div class="email-container">
     <label class="mail-label" for="mail-input">Email:</label>
 
-    <input [class.correct-mail]="emailControl.valid" [class.wrong-mail]="emailControl.invalid && (emailControl.touched || wasSubmitClicked)" [formControl]="emailControl" autocomplete="on" class="email" id="mail-input"
+    <input [class.correct-mail]="emailControl.valid"
+           [class.wrong-mail]="emailControl.invalid && (emailControl.touched || wasSubmitClicked)"
+           [formControl]="emailControl" autocomplete="on" class="email" id="mail-input"
            placeholder="user@example.pl"
            required
            type="email"
