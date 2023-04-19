@@ -27,8 +27,6 @@ export class LocalStorageService {
         console.log(stringValue);
 
         return JSON.parse(stringValue) as V;
-
-        // return value == null ? {} as V : JSON.parse(JSON.stringify({ [key]: value }));
     }
 
     clearStorage(): void {
