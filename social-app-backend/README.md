@@ -67,6 +67,7 @@ On linux:
 sudo apt install -y openjdk
 sudo apt install -y maven
 ```
+* Using jar:
 
 Then run maven lifecycle
 
@@ -78,6 +79,12 @@ And at last run jar file in `target/`.
 
 ```bash
 java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
+```
+
+* Using maven simply just run using this command:
+
+```maven
+mvn clean spring-boot:run
 ```
 
 ## Documentation
@@ -95,3 +102,8 @@ And then run `target/site/apidocs/index.html`.
 
 * Api documentation created via swagger. When you run your spring application go to
   `http://localhost/swagger-ui/index.html` and you will se your api documentation.
+
+## Troubleshooting
+
+* I am getting an error on start of app about filters and connections.
+This means you have not `socialapp` database in your docker container.

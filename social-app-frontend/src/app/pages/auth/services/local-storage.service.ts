@@ -19,7 +19,7 @@ export class LocalStorageService {
     getValueFromStorage<V>(key: StorageKeys): V {
         const value: string | null = window.localStorage.getItem(key);
 
-        return value == null ? {} as V : JSON.parse(value);
+        return value == null ? {} as V : JSON.parse(JSON.stringify({ [key]: value }));
     }
 
     clearStorage(): void {
