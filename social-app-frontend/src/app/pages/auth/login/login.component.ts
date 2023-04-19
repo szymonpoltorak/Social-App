@@ -8,13 +8,14 @@ import { LoginControlProviderService } from "../services/login-control-provider.
 import { DialogService } from "../services/dialog.service";
 import { FormBuildingService } from "../services/form-building.service";
 import { AuthService } from "../services/auth.service";
+import { LoginInterface } from "../../../core/interfaces/LoginInterface";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, LoginInterface {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
     private dialogListItems !: Array<string>;

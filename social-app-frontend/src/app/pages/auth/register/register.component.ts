@@ -8,13 +8,14 @@ import { FormBuildingService } from "../services/form-building.service";
 import { RegisterRequest } from "../../../core/data/register-request";
 import { AuthService } from "../services/auth.service";
 import { DialogService } from "../services/dialog.service";
+import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
 
 @Component({
     selector: "app-register",
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.scss"]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, RegisterInterface {
     registerForm!: FormGroup;
     wasSubmitClicked: boolean = false;
     passwordMismatch!: boolean;
