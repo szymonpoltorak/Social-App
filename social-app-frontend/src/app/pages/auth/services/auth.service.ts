@@ -15,11 +15,19 @@ export class AuthService {
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-        return this.http.post<RegisterResponse>(AuthApiCalls.REGISTER_URL, registerRequest);
+        const response: Observable<RegisterResponse> = this.http.post<RegisterResponse>(AuthApiCalls.REGISTER_URL, registerRequest);
+
+        response.subscribe(data => console.log(data));
+
+        return response;
     }
 
     loginUser(loginRequest: LoginRequest): Observable<LoginResponse> {
-        return this.http.post<LoginResponse>(AuthApiCalls.LOGIN_URL, loginRequest);
+        const response: Observable<LoginResponse> = this.http.post<LoginResponse>(AuthApiCalls.LOGIN_URL, loginRequest);
+
+        response.subscribe(data => console.log(data));
+
+        return response;
     }
 
     refreshUsersToken(refreshToken: string): void {

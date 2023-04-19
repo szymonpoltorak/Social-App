@@ -36,7 +36,11 @@ export class RegisterComponent implements OnInit {
 
             return;
         }
-        console.log(this.buildRegisterRequest());
+        const request = this.buildRegisterRequest();
+
+        console.log(request);
+
+        this.authService.registerUser(request);
     }
 
     ngOnInit(): void {

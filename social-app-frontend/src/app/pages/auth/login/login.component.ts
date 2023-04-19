@@ -7,6 +7,7 @@ import { DialogService } from "../services/dialog.service";
 import { FormBuildingService } from "../services/form-building.service";
 import { LoginRequest } from "../../../core/data/login-request";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { AuthService } from "../services/auth.service";
 
 @Component({
     selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     constructor(public controlProvider: LoginControlProviderService,
                 private notFilled: MatDialog,
                 private dialogService: DialogService,
-                private formBuildingService: FormBuildingService) {
+                private formBuildingService: FormBuildingService,
+                private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -39,10 +41,14 @@ export class LoginComponent implements OnInit {
 
             return;
         }
-        console.log(this.buildLoginRequest());
+        const request = this.buildLoginRequest();
+
+        console.log(request);
+
+        this.authService.loginUser(request);
     }
 
-    buildLoginRequest(): LoginRequest {
+    private buildLoginRequest(): LoginRequest {
         const loginRequest: LoginRequest = new LoginRequest();
 
         loginRequest.username = this.loginForm.get(FormFieldNames.EMAIL_FIELD)!.value;
