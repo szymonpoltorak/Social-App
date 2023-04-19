@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { RegisterValidationInterface } from "../../../core/interfaces/RegisterValidationInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class RegisterValidatorService {
+export class RegisterValidatorService implements RegisterValidationInterface{
     constructor() {
     }
 
@@ -17,7 +18,7 @@ export class RegisterValidatorService {
         };
     }
 
-    properAgeValidator(dateFieldName: string): ValidatorFn {
+    properAgeValidator(): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
             const currentDateYear: number = new Date().getFullYear();
             const dateFieldValueYear: number = new Date(control.value).getFullYear();

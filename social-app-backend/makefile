@@ -16,7 +16,7 @@ port-map-spring= -p 8080:8080
 all: db
 
 spring: db, spring
-	$(run) --name $(app-name) -d $(port-map-spring) $(social-app-backed):latest
+	$(run) --name $(app-name) -e POSTGRES_DB=socialapp -d $(port-map-spring) $(social-app-backed):latest
 
 spring-image:
 	$(build) -t $(app-name) $(dockerfile-dir)

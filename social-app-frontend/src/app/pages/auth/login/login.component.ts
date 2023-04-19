@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { LoginControlProviderService } from "../services/login-control-provider.service";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
+import { LoginRequest } from "../../../core/data/login-request";
+import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { LoginControlProviderService } from "../services/login-control-provider.service";
 import { DialogService } from "../services/dialog.service";
 import { FormBuildingService } from "../services/form-building.service";
+import { AuthService } from "../services/auth.service";
+import { LoginInterface } from "../../../core/interfaces/LoginInterface";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, LoginInterface {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
     private dialogListItems !: Array<string>;
@@ -20,7 +24,8 @@ export class LoginComponent implements OnInit {
     constructor(public controlProvider: LoginControlProviderService,
                 private notFilled: MatDialog,
                 private dialogService: DialogService,
-                private formBuildingService: FormBuildingService) {
+                private formBuildingService: FormBuildingService,
+                private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -37,5 +42,19 @@ export class LoginComponent implements OnInit {
 
             return;
         }
+        const request = this.buildLoginRequest();
+
+        console.log(request);
+
+        this.authService.loginUser(request);
+    }
+
+    private buildLoginRequest(): LoginRequest {
+        const loginRequest: LoginRequest = new LoginRequest();
+
+        loginRequest.username = this.loginForm.get(FormFieldNames.EMAIL_FIELD)!.value;
+        loginRequest.password = this.loginForm.get(FormFieldNames.LOGIN_PASSWORD)!.value;
+
+        return loginRequest;
     }
 }

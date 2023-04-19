@@ -54,7 +54,7 @@ export class RegisterControlProviderService {
         DateValidation.DATE_VALUE,
         [
             Validators.required,
-            this.registerValidator.properAgeValidator(FormFieldNames.DATE_FIELD)
+            this.registerValidator.properAgeValidator()
         ]
     );
 

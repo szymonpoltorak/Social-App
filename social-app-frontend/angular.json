@@ -69,7 +69,8 @@
                             "browserTarget": "social-app-frontend:build:production"
                         },
                         "development": {
-                            "browserTarget": "social-app-frontend:build:development"
+                            "browserTarget": "social-app-frontend:build:development",
+                            "proxyConfig": "proxy.conf.json"
                         }
                     },
                     "defaultConfiguration": "development"
