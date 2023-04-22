@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
-import { RegisterControlProviderService } from "../services/register-control-provider.service";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
-import { FormBuildingService } from "../services/form-building.service";
 import { RegisterRequest } from "../../../core/data/register-request";
-import { AuthService } from "../services/auth.service";
-import { DialogService } from "../services/dialog.service";
 import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
+import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
+import { FormBuildingService } from "../../../core/services/form-building.service";
+import { DialogService } from "../../../core/services/dialog.service";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
     selector: "app-register",

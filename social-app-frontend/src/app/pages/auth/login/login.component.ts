@@ -4,11 +4,11 @@ import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { LoginRequest } from "../../../core/data/login-request";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { LoginControlProviderService } from "../services/login-control-provider.service";
-import { DialogService } from "../services/dialog.service";
-import { FormBuildingService } from "../services/form-building.service";
-import { AuthService } from "../services/auth.service";
 import { LoginInterface } from "../../../core/interfaces/LoginInterface";
+import { LoginControlProviderService } from "../../../core/services/login-control-provider.service";
+import { DialogService } from "../../../core/services/dialog.service";
+import { FormBuildingService } from "../../../core/services/form-building.service";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
     selector: 'app-login',

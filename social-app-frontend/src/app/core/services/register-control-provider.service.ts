@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { EmailValidation } from "../../../core/enums/EmailValidation";
-import { NameValidation } from "../../../core/enums/NameValidation";
-import { PasswordValidation } from "../../../core/enums/PasswordValidation";
-import { DateValidation } from "../../../core/enums/DateValidation";
 import { RegisterValidatorService } from "./register-validator.service";
-import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { EmailValidation } from "../enums/EmailValidation";
+import { NameValidation } from "../enums/NameValidation";
+import { PasswordValidation } from "../enums/PasswordValidation";
+import { DateValidation } from "../enums/DateValidation";
 
 @Injectable({
     providedIn: 'root'

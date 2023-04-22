@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { RegisterControlProviderService } from "./register-control-provider.service";
 import { RegisterValidatorService } from "./register-validator.service";
 import { LoginControlProviderService } from "./login-control-provider.service";
-import { FormBuilderInterface } from "../../../core/interfaces/FormBuilderInterface";
+import { FormBuilderInterface } from "../interfaces/FormBuilderInterface";
+import { FormFieldNames } from "../enums/FormFieldNames";
 
 @Injectable({
     providedIn: 'root'

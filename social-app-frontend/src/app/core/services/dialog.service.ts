@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NotFilledDialogComponent } from "../shared/not-filled-dialog/not-filled-dialog.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { NotFilledDialogComponent } from "../../pages/auth/shared/not-filled-dialog/not-filled-dialog.component";
 
 @Injectable({
     providedIn: 'root'

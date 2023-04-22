@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from "@angular/forms";
-import { EmailValidation } from "../../../core/enums/EmailValidation";
-import { PasswordValidation } from "../../../core/enums/PasswordValidation";
+import { EmailValidation } from "../enums/EmailValidation";
+import { PasswordValidation } from "../enums/PasswordValidation";
 
 @Injectable({
     providedIn: 'root'
