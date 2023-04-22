@@ -9,6 +9,7 @@ import { RegisterControlProviderService } from "../../../core/services/register-
 import { FormBuildingService } from "../../../core/services/form-building.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-register",
@@ -24,30 +25,32 @@ export class RegisterComponent implements OnInit, RegisterInterface {
 
     constructor(public controlProvider: RegisterControlProviderService,
                 private formBuildingService: FormBuildingService,
-                private notFilled: MatDialog,
                 private dialogService: DialogService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private router: Router) {
     }
 
     makeRedirection(): void {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openNotFilledDialog(this.notFilled, this.paragraphContent, this.dialogListItems);
+            this.dialogService.openInvalidFormDialog(this.paragraphContent, this.dialogListItems);
 
             return;
         }
-        const request = this.buildRegisterRequest();
+        const request: RegisterRequest = this.buildRegisterRequest();
 
         console.log(request);
 
         this.authService.registerUser(request);
+
+        this.router.navigateByUrl("home");
     }
 
     ngOnInit(): void {
         this.registerForm = this.formBuildingService.buildRegisterForm();
 
-        this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe(() => {
+        this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe((): void => {
             this.passwordMismatch = <boolean>this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.invalid;
         });
 

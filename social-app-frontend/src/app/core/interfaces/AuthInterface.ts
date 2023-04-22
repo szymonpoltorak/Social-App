@@ -31,4 +31,6 @@ export interface AuthInterface {
      * @param refreshToken The refresh token to send in the request body.
      */
     refreshUsersToken(refreshToken: string): void;
+
+    isUserAuthenticated(): boolean;
 }

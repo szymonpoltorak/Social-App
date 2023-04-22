@@ -17,17 +17,17 @@ export class LocalStorageService implements LocalStorageInterface{
         window.localStorage.removeItem(key);
     }
 
-    getValueFromStorage<V>(key: StorageKeys): V {
+    getValueFromStorage(key: StorageKeys): string {
         const value: string | null = window.localStorage.getItem(key);
 
         if (value == null) {
-            return {} as V;
+            return "";
         }
-        const stringValue: string = '{"' + key + '": ' + value + '}';
+        const stringValue: string = '"' + key + '": ' + value + '';
 
         console.log(stringValue);
 
-        return JSON.parse(stringValue) as V;
+        return stringValue;
     }
 
     clearStorage(): void {

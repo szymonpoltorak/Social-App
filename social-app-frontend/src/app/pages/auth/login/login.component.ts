@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit, LoginInterface {
     private paragraphContent !: string;
 
     constructor(public controlProvider: LoginControlProviderService,
-                private notFilled: MatDialog,
                 private dialogService: DialogService,
                 private formBuildingService: FormBuildingService,
                 private authService: AuthService) {
@@ -38,11 +37,11 @@ export class LoginComponent implements OnInit, LoginInterface {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openNotFilledDialog(this.notFilled, this.paragraphContent, this.dialogListItems);
+            this.dialogService.openInvalidFormDialog(this.paragraphContent, this.dialogListItems);
 
             return;
         }
-        const request = this.buildLoginRequest();
+        const request: LoginRequest = this.buildLoginRequest();
 
         console.log(request);
 
