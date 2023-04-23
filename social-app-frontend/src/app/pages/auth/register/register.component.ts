@@ -10,6 +10,7 @@ import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
+import { UserService } from "../../../core/services/user.service";
 
 @Component({
     selector: "app-register",
@@ -26,7 +27,8 @@ export class RegisterComponent implements OnInit, RegisterInterface {
     constructor(public controlProvider: RegisterControlProviderService,
                 private dialogService: DialogService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private userService: UserService) {
     }
 
     makeRedirection(): void {
@@ -46,6 +48,8 @@ export class RegisterComponent implements OnInit, RegisterInterface {
 
                 return;
             }
+            this.userService.authenticateUser();
+
             this.authService.saveData(data);
 
             this.router.navigateByUrl(RoutePaths.HOME_PATH);

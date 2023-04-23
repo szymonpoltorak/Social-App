@@ -2,6 +2,7 @@ import { RegisterRequest } from "../data/register-request";
 import { LoginRequest } from "../data/login-request";
 import { Observable } from "rxjs";
 import { AuthResponse } from "../data/auth-response";
+import { TokenResponse } from "../data/token-response";
 
 /**
  * The interface for Auth Service.
@@ -34,5 +35,5 @@ export interface AuthInterface {
      */
     refreshUsersToken(refreshToken: string): Observable<AuthResponse>;
 
-    isUserAuthenticated(): Observable<boolean>;
+    isUserAuthenticated(): Observable<TokenResponse>;
 }

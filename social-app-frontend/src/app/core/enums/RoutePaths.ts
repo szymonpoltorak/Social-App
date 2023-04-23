@@ -3,6 +3,7 @@ export const enum RoutePaths {
 
     LOGIN_AUTH_PATH = "login",
     LOGIN_PATH = 'auth/login',
+    LOGIN_DIRECT = "/auth/login",
 
     REGISTER_PATH = 'auth/register',
     REGISTER_AUTH_PATH = "register",

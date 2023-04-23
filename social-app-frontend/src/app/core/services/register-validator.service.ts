@@ -5,7 +5,7 @@ import { RegisterValidationInterface } from "../interfaces/RegisterValidationInt
 @Injectable({
     providedIn: 'root'
 })
-export class RegisterValidatorService implements RegisterValidationInterface{
+export class RegisterValidatorService implements RegisterValidationInterface {
     constructor() {
     }
 

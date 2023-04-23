@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, Observable, of } from "rxjs";
+import { catchError, Observable, of } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 import { RegisterRequest } from "../data/register-request";
 import { AuthResponse } from "../data/auth-response";
@@ -13,40 +13,19 @@ import { AuthInterface } from "../interfaces/AuthInterface";
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService implements AuthInterface{
+export class AuthService implements AuthInterface {
     constructor(private http: HttpClient,
                 private localStorageService: LocalStorageService) {
     }
 
-    isUserAuthenticated(): Observable<boolean> {
+    isUserAuthenticated(): Observable<TokenResponse> {
         const authToken: string = this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
-        const refreshToken: string = this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN)
+        const refreshToken: string = this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN);
 
-        if (authToken === "") {
-            return of(false);
-        }
         console.log(JSON.parse(`{${ authToken }, ${ refreshToken }}`));
 
-        // const response: Observable<TokenResponse> = this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
         return this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
-            this.buildAuthRequest(authToken))
-            .pipe(
-                map((data: TokenResponse): boolean => {
-                    // console.log("I enter this place");
-
-                    // if (!data.isAuthTokenValid) {
-                    //     // console.log("I am getting here");
-                    //     this.refreshUsersToken(refreshToken).then(() => {
-                    //         return this.areTokensPresent();
-                    //     });
-                    //
-                    //     // return this.areTokensPresent();
-                    // }
-                    // console.log("Returning true");
-                    return true;
-                }),
-                catchError(() => of(false))
-            );
+            this.buildAuthRequest(authToken));
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {

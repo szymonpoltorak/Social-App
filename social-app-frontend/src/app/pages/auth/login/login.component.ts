@@ -10,6 +10,7 @@ import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
+import { UserService } from "../../../core/services/user.service";
 
 @Component({
     selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit, LoginInterface {
     constructor(public controlProvider: LoginControlProviderService,
                 private dialogService: DialogService,
                 private authService: AuthService,
-                private router: Router) {
+                private router: Router,
+                private userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -46,12 +48,14 @@ export class LoginComponent implements OnInit, LoginInterface {
 
         console.log(request);
 
-        this.authService.loginUser(request).subscribe((data: AuthResponse): void  => {
+        this.authService.loginUser(request).subscribe((data: AuthResponse): void => {
             if (data.authToken === "") {
                 this.dialogService.openInvalidFormDialog(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems);
 
                 return;
             }
+            this.userService.authenticateUser();
+
             this.router.navigateByUrl(RoutePaths.HOME_PATH);
         });
     }

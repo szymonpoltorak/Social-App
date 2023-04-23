@@ -5,7 +5,7 @@ import { StorageKeys } from "../enums/StorageKeys";
 @Injectable({
     providedIn: 'root'
 })
-export class LocalStorageService implements LocalStorageInterface{
+export class LocalStorageService implements LocalStorageInterface {
     constructor() {
     }
 
@@ -20,7 +20,7 @@ export class LocalStorageService implements LocalStorageInterface{
     getValueFromStorage(key: StorageKeys): string {
         const value: string | null = window.localStorage.getItem(key);
 
-        return value === null ? "" : `"${key}": ${value}`;
+        return value === null ? "" : `"${ key }": ${ value }`;
     }
 
     clearStorage(): void {
