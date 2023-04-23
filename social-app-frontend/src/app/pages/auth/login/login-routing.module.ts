@@ -10,7 +10,7 @@ const routes: Routes = [
     },
     {
         path: RoutePaths.REGISTER_PATH,
-        loadChildren: () => import(RoutePaths.REGISTER_MODULE).then(module => module.RegisterModule)
+        loadChildren: () => import('../register/register.module').then(module => module.RegisterModule)
     }
 ];
 

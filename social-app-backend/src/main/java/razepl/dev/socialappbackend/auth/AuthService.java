@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
+import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
+import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
@@ -18,6 +20,7 @@ import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
@@ -62,7 +65,7 @@ public class AuthService implements AuthServiceInterface {
     }
 
     @Override
-    public AuthResponse login(LoginUserRequest loginRequest) {
+    public final AuthResponse login(LoginUserRequest loginRequest) {
         NullChecker.throwAppropriateException(loginRequest);
 
         String username = loginRequest.getUsername();
@@ -71,14 +74,15 @@ public class AuthService implements AuthServiceInterface {
                 username, loginRequest.getPassword())
         );
 
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Such user does not exist!"));
+        User user = userRepository.findByEmail(username).orElseThrow(
+                () -> new UsernameNotFoundException("Such user does not exist!")
+        );
 
         return tokenManager.buildTokensIntoResponse(user, true);
     }
 
     @Override
-    public AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
+    public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         NullChecker.throwAppropriateException(request, response);
 
         String refreshToken = jwtService.getJwtRefreshToken(request);
@@ -92,8 +96,8 @@ public class AuthService implements AuthServiceInterface {
             throw new UsernameNotFoundException("Such user does not exist!");
         }
         User user = userRepository.findByEmail(username).orElseThrow(
-                () -> new UsernameNotFoundException("Such user does not exist!"));
-
+                () -> new UsernameNotFoundException("Such user does not exist!")
+        );
 
         if (!jwtService.isTokenValid(refreshToken, user)) {
             throw new InvalidTokenException("Token is not valid!");
@@ -105,5 +109,18 @@ public class AuthService implements AuthServiceInterface {
         tokenManager.saveUsersToken(authToken, user);
 
         return tokenManager.buildTokensIntoResponse(authToken, refreshToken);
+    }
+
+    @Override
+    public final TokenResponse validateUsersTokens(TokenRequest request) {
+        NullChecker.throwAppropriateException(request);
+
+        User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
+
+        boolean isAuthTokenValid = jwtService.isTokenValid(request.authToken(), user);
+
+        return TokenResponse.builder()
+                .isAuthTokenValid(isAuthTokenValid)
+                .build();
     }
 }

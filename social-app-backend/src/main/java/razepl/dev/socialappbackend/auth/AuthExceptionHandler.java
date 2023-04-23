@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
+import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
 import razepl.dev.socialappbackend.exceptions.*;
 
@@ -75,6 +76,14 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     @ExceptionHandler({InvalidTokenException.class, TokenDoesNotExistException.class, NullArgumentException.class})
     public final ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception) {
         return buildResponseEntity(exception, HttpStatus.UNAUTHORIZED);
+    }
+
+    @Override
+    @ExceptionHandler(TokensUserNotFoundException.class)
+    public final ResponseEntity<TokenResponse> handleTokenExceptions() {
+        TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
+
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     private ResponseEntity<ExceptionResponse> buildResponseEntity(Exception exception, HttpStatus status) {

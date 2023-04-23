@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
+import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
 
@@ -59,4 +60,6 @@ public interface AuthExceptionInterface {
      * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
      */
     ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception);
+
+    ResponseEntity<TokenResponse> handleTokenExceptions();
 }

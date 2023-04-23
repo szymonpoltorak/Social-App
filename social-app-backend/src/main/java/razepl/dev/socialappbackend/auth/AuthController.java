@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
-import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
+import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
@@ -50,5 +48,13 @@ public class AuthController implements AuthInterface {
         NullChecker.throwAppropriateException(request, response);
 
         return ResponseEntity.ok(authService.refreshToken(request, response));
+    }
+
+    @Override
+    @PostMapping(value = AUTHENTICATE_MAPPING)
+    public final ResponseEntity<TokenResponse> authenticateUser(@RequestBody TokenRequest request) {
+        NullChecker.throwAppropriateException(request);
+
+        return ResponseEntity.ok(authService.validateUsersTokens(request));
     }
 }

@@ -10,11 +10,11 @@ const routes: Routes = [
     },
     {
         path: RoutePaths.LOGIN_AUTH_PATH,
-        loadChildren: () => import(RoutePaths.LOGIN_AUTH_MODULE).then(module => module.LoginModule),
+        loadChildren: () => import('./login/login.module').then(module => module.LoginModule),
     },
     {
         path: RoutePaths.REGISTER_AUTH_PATH,
-        loadChildren: () => import(RoutePaths.REGISTER_AUTH_MODULE).then(module => module.RegisterModule)
+        loadChildren: () => import('./register/register.module').then(module => module.RegisterModule)
     }
 ];
 

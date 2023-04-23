@@ -1,6 +1,8 @@
 package razepl.dev.socialappbackend.user.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import razepl.dev.socialappbackend.user.User;
 
 import java.util.Optional;
@@ -25,4 +27,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return an {@link Optional} containing the user with the given name, or empty if not found
      */
     Optional<User> findByName(String name);
+
+    @Query("select u from User as u inner join JwtToken as t on u.userId = t.user.userId where t.token = :authToken")
+    Optional<User> findUserByToken(String authToken);
 }

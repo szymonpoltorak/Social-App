@@ -6,7 +6,7 @@ import { AuthGuard } from "./core/guards/auth.guard";
 const routes: Routes = [
     {
         path: RoutePaths.AUTH_PATH,
-        loadChildren: () => import(RoutePaths.AUTH_MODULE)
+        loadChildren: () => import("./pages/auth/auth.module")
             .then(module => module.AuthModule)
     },
     {
@@ -16,13 +16,13 @@ const routes: Routes = [
     },
     {
         path: RoutePaths.HOME_PATH,
-        loadChildren: () => import(RoutePaths.HOME_MODULE)
+        loadChildren: () => import("./pages/home/home.module")
             .then(module => module.HomeModule),
         canActivate: [AuthGuard]
     },
     {
         path: RoutePaths.NOT_FOUND_PATH,
-        loadChildren: () => import(RoutePaths.NOT_FOUND_MODULE)
+        loadChildren: () => import("./pages/not-found/not-found.module")
             .then(module => module.NotFoundModule)
     },
     {

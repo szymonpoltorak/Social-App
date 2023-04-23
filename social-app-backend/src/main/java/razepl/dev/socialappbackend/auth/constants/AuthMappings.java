@@ -24,6 +24,8 @@ public final class AuthMappings {
      */
     public static final String REFRESH_MAPPING = "/refreshToken";
 
+    public static final String AUTHENTICATE_MAPPING = "/authenticate";
+
     /**
      * A private constructor to prevent instantiation of this class.
      */
