@@ -17,10 +17,7 @@ import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
-import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
-import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
-import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
+import razepl.dev.socialappbackend.exceptions.*;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
@@ -50,6 +47,9 @@ public class AuthService implements AuthServiceInterface {
 
         if (!PASSWORD_PATTERN.matcher(password).matches()) {
             throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
+        }
+        if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException("User already exists!");
         }
         @Valid User user = User.builder()
                 .name(userRequest.getName())

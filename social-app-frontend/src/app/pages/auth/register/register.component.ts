@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { RegisterRequest } from "../../../core/data/register-request";
 import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
@@ -11,6 +10,7 @@ import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
+import { AuthResponse } from "../../../core/data/auth-response";
 
 @Component({
     selector: "app-register",
@@ -41,11 +41,17 @@ export class RegisterComponent implements OnInit, RegisterInterface {
         }
         const request: RegisterRequest = this.buildRegisterRequest();
 
-        console.log(request);
+        this.authService.registerUser(request).subscribe((data: AuthResponse): void => {
+            if (data.authToken === "") {
+                this.dialogService.openInvalidFormDialog(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
+                    [DialogContents.REGISTER_ITEMS]);
 
-        this.authService.registerUser(request);
+                return;
+            }
+            this.authService.saveData(data);
 
-        this.router.navigateByUrl(RoutePaths.HOME_PATH);
+            this.router.navigateByUrl(RoutePaths.HOME_PATH);
+        });
     }
 
     ngOnInit(): void {

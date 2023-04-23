@@ -1,5 +1,7 @@
 import { RegisterRequest } from "../data/register-request";
 import { LoginRequest } from "../data/login-request";
+import { Observable } from "rxjs";
+import { AuthResponse } from "../data/auth-response";
 
 /**
  * The interface for Auth Service.
@@ -12,7 +14,7 @@ export interface AuthInterface {
      *
      * @param registerRequest The registration request data to send in the request body.
      */
-    registerUser(registerRequest: RegisterRequest): void;
+    registerUser(registerRequest: RegisterRequest): Observable<AuthResponse>;
 
     /**
      * Logs in a user by making a POST request to the authentication API's login endpoint with the provided login request data.
@@ -21,7 +23,7 @@ export interface AuthInterface {
      *
      * @param loginRequest The login request data to send in the request body.
      */
-    loginUser(loginRequest: LoginRequest): void;
+    loginUser(loginRequest: LoginRequest): Observable<AuthResponse>;
 
     /**
      * Sends a POST request to the authentication API's refresh endpoint with the provided refresh token to obtain a new authentication
@@ -30,7 +32,7 @@ export interface AuthInterface {
      *
      * @param refreshToken The refresh token to send in the request body.
      */
-    refreshUsersToken(refreshToken: string): void;
+    refreshUsersToken(refreshToken: string): Observable<AuthResponse>;
 
-    isUserAuthenticated(): boolean;
+    isUserAuthenticated(): Observable<boolean>;
 }

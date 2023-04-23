@@ -1,126 +1,90 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, Observable, of, Subject, takeUntil } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
 import { LocalStorageService } from "./local-storage.service";
 import { RegisterRequest } from "../data/register-request";
 import { AuthResponse } from "../data/auth-response";
 import { AuthApiCalls } from "../enums/AuthApiCalls";
 import { StorageKeys } from "../enums/StorageKeys";
 import { LoginRequest } from "../data/login-request";
-import { AuthInterface } from "../interfaces/AuthInterface";
 import { TokenResponse } from "../data/token-response";
+import { AuthInterface } from "../interfaces/AuthInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService implements AuthInterface, OnDestroy {
-    private refreshDestroy$: Subject<void> = new Subject<void>();
-    private authDestroy$: Subject<void> = new Subject<void>();
-    private isAuthDestroy$: Subject<void> = new Subject<void>();
-
+export class AuthService implements AuthInterface{
     constructor(private http: HttpClient,
                 private localStorageService: LocalStorageService) {
     }
 
-    isUserAuthenticated(): boolean {
+    isUserAuthenticated(): Observable<boolean> {
         const authToken: string = this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
-        const refreshToken: string = this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN);
+        const refreshToken: string = this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN)
 
         if (authToken === "") {
-            return false;
+            return of(false);
         }
-        const response: Observable<TokenResponse> = this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
-            this.buildAuthRequest(authToken, refreshToken))
+        console.log(JSON.parse(`{${ authToken }, ${ refreshToken }}`));
+
+        // const response: Observable<TokenResponse> = this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
+        return this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
+            this.buildAuthRequest(authToken))
             .pipe(
-                catchError(() => of(JSON.parse(AuthApiCalls.TOKEN_ERROR_FOUND))),
-                takeUntil(this.isAuthDestroy$)
-            );
-        let isAuthTokenValid: boolean = false;
-        let isRefreshTokenValid: boolean = false;
+                map((data: TokenResponse): boolean => {
+                    // console.log("I enter this place");
 
-        response.subscribe((data: TokenResponse): void => {
-            isAuthTokenValid = data.isAuthTokenValid;
-            isRefreshTokenValid = data.isRefreshTokenValid;
-        });
-
-        console.log(isAuthTokenValid);
-        console.log(isRefreshTokenValid);
-
-        if (isAuthTokenValid) {
-            return true;
-        }
-        if (!isRefreshTokenValid) {
-            return false;
-        }
-        this.refreshUsersToken(refreshToken);
-
-        return true;
-    }
-
-    registerUser(registerRequest: RegisterRequest): void {
-        this.handleAuthRequest(registerRequest, AuthApiCalls.REGISTER_URL);
-    }
-
-    loginUser(loginRequest: LoginRequest): void {
-        this.handleAuthRequest(loginRequest, AuthApiCalls.LOGIN_URL);
-    }
-
-    refreshUsersToken(refreshToken: string): void {
-        const response: Observable<AuthResponse> = this.getProperObservable(this.buildRefreshToken(refreshToken),
-            AuthApiCalls.REFRESH_URL, this.refreshDestroy$);
-
-        response.subscribe((data: AuthResponse): void => {
-            this.localStorageService.removeValueFromStorage(StorageKeys.AUTH_TOKEN);
-            this.localStorageService.removeValueFromStorage(StorageKeys.REFRESH_TOKEN);
-
-            this.addData(data);
-        });
-        console.log((this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN)));
-        console.log(this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN));
-    }
-
-    ngOnDestroy(): void {
-        this.refreshDestroy$.next();
-        this.refreshDestroy$.complete();
-
-        this.authDestroy$.next();
-        this.authDestroy$.complete();
-    }
-
-    private handleAuthRequest<T>(request: T, url: AuthApiCalls): void {
-        const response: Observable<AuthResponse> = this.getProperObservable(request, url, this.authDestroy$);
-
-        response.subscribe((data: AuthResponse): void => {
-            this.addData(data);
-        });
-        console.log((this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN)));
-        console.log(this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN));
-    }
-
-    private getProperObservable<T>(request: T, url: AuthApiCalls, onDestroy: Subject<void>): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(url, request)
-            .pipe(
-                map((data: AuthResponse) => Object.assign(new AuthResponse(), data)),
-                catchError(() => of(JSON.parse(AuthApiCalls.AUTH_ERROR_FOUND))),
-                takeUntil(onDestroy)
+                    // if (!data.isAuthTokenValid) {
+                    //     // console.log("I am getting here");
+                    //     this.refreshUsersToken(refreshToken).then(() => {
+                    //         return this.areTokensPresent();
+                    //     });
+                    //
+                    //     // return this.areTokensPresent();
+                    // }
+                    // console.log("Returning true");
+                    return true;
+                }),
+                catchError(() => of(false))
             );
     }
 
-    private buildAuthRequest(authToken: string, refreshToken: string) {
-        return JSON.parse(`{${ authToken }, ${ refreshToken }}`);
+    registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(AuthApiCalls.REGISTER_URL, registerRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+    }
+
+    loginUser(loginRequest: LoginRequest): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(AuthApiCalls.LOGIN_URL, loginRequest)
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+    }
+
+    refreshUsersToken(refreshToken: string): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(AuthApiCalls.REFRESH_URL,
+            this.buildRefreshToken(refreshToken))
+            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+    }
+
+    saveData(data: AuthResponse): void {
+        console.log(data);
+
+        if (data.authToken === "" || data.refreshToken === "") {
+            return;
+        }
+        console.log(data.authToken);
+        console.log(data.refreshToken);
+
+        this.localStorageService.addValueIntoStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+        this.localStorageService.addValueIntoStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+    }
+
+    private buildAuthRequest(authToken: string) {
+        console.log(JSON.parse(`{${ authToken }}`));
+
+        return JSON.parse(`{${ authToken }}`);
     }
 
     private buildRefreshToken(refreshToken: string) {
-        return JSON.parse(`{${ refreshToken }`);
-    }
-
-    private addData(data: AuthResponse): void {
-        console.log(data);
-
-        if (data.isEmpty()) {
-            return;
-        }
-        this.localStorageService.addValueIntoStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-        this.localStorageService.addValueIntoStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+        return JSON.parse(`{${ refreshToken }}`);
     }
 }

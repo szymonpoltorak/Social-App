@@ -7,5 +7,10 @@ export const enum DialogContents {
 
     LOGIN_PARAGRAPH = "You have filled form with wrong login and password, Please ensure the following:",
     LOGIN_EMAIL = "Check if your email is written correctly,",
-    LOGIN_PASSWORD = "Check if you spelled your password correctly"
+    LOGIN_PASSWORD = "Check if you spelled your password correctly",
+
+    REGISTER_USER_EXISTS_PARAGRAPH = "User already exists!",
+    REGISTER_ITEMS = "If you forgot your password just use forgot password option!",
+
+    LOGIN_WRONG_PARAGRAPH = "I was not able to log you in!"
 }

@@ -11,6 +11,7 @@ import { FormBuildingService } from "../../../core/services/form-building.servic
 import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
+import { AuthResponse } from "../../../core/data/auth-response";
 
 @Component({
     selector: 'app-login',
@@ -48,9 +49,14 @@ export class LoginComponent implements OnInit, LoginInterface {
 
         console.log(request);
 
-        this.authService.loginUser(request);
+        this.authService.loginUser(request).subscribe((data: AuthResponse): void  => {
+            if (data.authToken === "") {
+                this.dialogService.openInvalidFormDialog(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems);
 
-        this.router.navigateByUrl(RoutePaths.HOME_PATH);
+                return;
+            }
+            this.router.navigateByUrl(RoutePaths.HOME_PATH);
+        });
     }
 
     private buildLoginRequest(): LoginRequest {

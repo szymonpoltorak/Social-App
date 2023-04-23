@@ -79,11 +79,17 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     }
 
     @Override
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public final ResponseEntity<ExceptionResponse> handleUserExistException(UserAlreadyExistsException exception) {
+        return buildResponseEntity(exception, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
     @ExceptionHandler(TokensUserNotFoundException.class)
     public final ResponseEntity<TokenResponse> handleTokenExceptions() {
         TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
 
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<ExceptionResponse> buildResponseEntity(Exception exception, HttpStatus status) {

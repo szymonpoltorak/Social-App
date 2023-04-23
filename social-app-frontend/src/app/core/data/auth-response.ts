@@ -11,11 +11,4 @@ export class AuthResponse {
      * The refresh token.
      */
     refreshToken!: string;
-
-    /**
-     * Returns `true` if both `authToken` and `refreshToken` are empty strings, `false` otherwise.
-     */
-    isEmpty(): boolean {
-        return this.authToken === "" || this.refreshToken === "";
-    }
 }

@@ -20,14 +20,7 @@ export class LocalStorageService implements LocalStorageInterface{
     getValueFromStorage(key: StorageKeys): string {
         const value: string | null = window.localStorage.getItem(key);
 
-        if (value == null) {
-            return "";
-        }
-        const stringValue: string = '"' + key + '": ' + value + '';
-
-        console.log(stringValue);
-
-        return stringValue;
+        return value === null ? "" : `"${key}": ${value}`;
     }
 
     clearStorage(): void {
