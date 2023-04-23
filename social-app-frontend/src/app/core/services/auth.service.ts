@@ -43,6 +43,9 @@ export class AuthService implements AuthInterface, OnDestroy {
             isRefreshTokenValid = data.isRefreshTokenValid;
         });
 
+        console.log(isAuthTokenValid);
+        console.log(isRefreshTokenValid);
+
         if (isAuthTokenValid) {
             return true;
         }
