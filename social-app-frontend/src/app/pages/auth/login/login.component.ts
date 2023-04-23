@@ -9,6 +9,8 @@ import { LoginControlProviderService } from "../../../core/services/login-contro
 import { DialogService } from "../../../core/services/dialog.service";
 import { FormBuildingService } from "../../../core/services/form-building.service";
 import { AuthService } from "../../../core/services/auth.service";
+import { Router } from "@angular/router";
+import { RoutePaths } from "../../../core/enums/RoutePaths";
 
 @Component({
     selector: 'app-login',
@@ -24,7 +26,8 @@ export class LoginComponent implements OnInit, LoginInterface {
     constructor(public controlProvider: LoginControlProviderService,
                 private dialogService: DialogService,
                 private formBuildingService: FormBuildingService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -46,6 +49,8 @@ export class LoginComponent implements OnInit, LoginInterface {
         console.log(request);
 
         this.authService.loginUser(request);
+
+        this.router.navigateByUrl(RoutePaths.HOME_PATH);
     }
 
     private buildLoginRequest(): LoginRequest {

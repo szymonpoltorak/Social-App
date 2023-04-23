@@ -10,6 +10,7 @@ import { FormBuildingService } from "../../../core/services/form-building.servic
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
+import { RoutePaths } from "../../../core/enums/RoutePaths";
 
 @Component({
     selector: "app-register",
@@ -44,7 +45,7 @@ export class RegisterComponent implements OnInit, RegisterInterface {
 
         this.authService.registerUser(request);
 
-        this.router.navigateByUrl("home");
+        this.router.navigateByUrl(RoutePaths.HOME_PATH);
     }
 
     ngOnInit(): void {
