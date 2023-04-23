@@ -5,7 +5,6 @@ import { DialogContents } from "../../../core/enums/DialogContents";
 import { RegisterRequest } from "../../../core/data/register-request";
 import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
 import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
-import { FormBuildingService } from "../../../core/services/form-building.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
 import { Router } from "@angular/router";
@@ -25,7 +24,6 @@ export class RegisterComponent implements OnInit, RegisterInterface {
     private paragraphContent !: string;
 
     constructor(public controlProvider: RegisterControlProviderService,
-                private formBuildingService: FormBuildingService,
                 private dialogService: DialogService,
                 private authService: AuthService,
                 private router: Router) {
@@ -55,7 +53,7 @@ export class RegisterComponent implements OnInit, RegisterInterface {
     }
 
     ngOnInit(): void {
-        this.registerForm = this.formBuildingService.buildRegisterForm();
+        this.registerForm = this.controlProvider.buildRegisterForm();
 
         this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe((): void => {
             this.passwordMismatch = <boolean>this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.invalid;
