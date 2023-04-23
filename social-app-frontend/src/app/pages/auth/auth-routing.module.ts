@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoutePaths } from "../../core/enums/RoutePaths";
 
 const routes: Routes = [
     {
-        path: '',
-        redirectTo: 'login',
+        path: RoutePaths.CURRENT_PATH,
+        redirectTo: RoutePaths.LOGIN_AUTH_PATH,
         pathMatch: 'full'
     },
     {
-        path: 'login',
-        loadChildren: () => import('./login/login.module').then(module => module.LoginModule),
+        path: RoutePaths.LOGIN_AUTH_PATH,
+        loadChildren: () => import(RoutePaths.LOGIN_AUTH_MODULE).then(module => module.LoginModule),
     },
     {
-        path: 'register',
-        loadChildren: () => import('./register/register.module').then(module => module.RegisterModule)
+        path: RoutePaths.REGISTER_AUTH_PATH,
+        loadChildren: () => import(RoutePaths.REGISTER_AUTH_MODULE).then(module => module.RegisterModule)
     }
 ];
 

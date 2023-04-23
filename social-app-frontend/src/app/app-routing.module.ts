@@ -1,30 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RoutePaths } from "./core/enums/RoutePaths";
 
 const routes: Routes = [
     {
-        path: "auth",
-        loadChildren: () => import("./pages/auth/auth.module")
+        path: RoutePaths.AUTH_PATH,
+        loadChildren: () => import(RoutePaths.AUTH_MODULE)
             .then(module => module.AuthModule)
     },
     {
-        path: '',
-        redirectTo: 'auth/login',
+        path: RoutePaths.CURRENT_PATH,
+        redirectTo: RoutePaths.LOGIN_PATH,
         pathMatch: 'full'
     },
     {
-        path: "home",
-        loadChildren: () => import("./pages/home/home.module")
+        path: RoutePaths.HOME_PATH,
+        loadChildren: () => import(RoutePaths.HOME_MODULE)
             .then(module => module.HomeModule)
     },
     {
-        path: 'error',
-        loadChildren: () => import("./pages/not-found/not-found.module")
+        path: RoutePaths.NOT_FOUND_PATH,
+        loadChildren: () => import(RoutePaths.NOT_FOUND_MODULE)
             .then(module => module.NotFoundModule)
     },
     {
-        path: '**',
-        redirectTo: 'error'
+        path: RoutePaths.ERROR_MATCHER,
+        redirectTo: RoutePaths.NOT_FOUND_PATH
     },
 ];
 
