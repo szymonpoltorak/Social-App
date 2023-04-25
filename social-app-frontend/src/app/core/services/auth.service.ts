@@ -9,6 +9,7 @@ import { StorageKeys } from "../enums/StorageKeys";
 import { LoginRequest } from "../data/login-request";
 import { TokenResponse } from "../data/token-response";
 import { AuthInterface } from "../interfaces/AuthInterface";
+import { AuthConstants } from "../enums/AuthConstants";
 
 @Injectable({
     providedIn: 'root'
@@ -47,7 +48,7 @@ export class AuthService implements AuthInterface {
     saveData(data: AuthResponse): void {
         console.log(data);
 
-        if (data.authToken === "" || data.refreshToken === "") {
+        if (data.authToken === AuthConstants.NO_TOKEN || data.refreshToken === AuthConstants.NO_TOKEN) {
             return;
         }
         console.log(data.authToken);

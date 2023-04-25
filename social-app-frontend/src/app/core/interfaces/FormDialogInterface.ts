@@ -1,3 +1,3 @@
 export interface FormDialogInterface {
-    openInvalidFormDialog(paragraphContent: string, dialogListItems: Array<string>): void;
+    openDialogWindow(paragraphContent: string, dialogListItems: Array<string>, header: string): void;
 }

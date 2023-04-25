@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
     private isAuthenticated !: boolean;
+    private wasLoggedOut !: boolean;
 
     constructor() {
     }
@@ -13,7 +14,15 @@ export class UserService {
         return this.isAuthenticated;
     }
 
-    authenticateUser(): void {
-        this.isAuthenticated = true;
+    get wasUserLoggedOut(): boolean {
+        return this.wasLoggedOut;
+    }
+
+    set setWasUserLoggedOut(wasLoggedOut: boolean) {
+        this.wasLoggedOut = wasLoggedOut;
+    }
+
+    set setUserAuthentication(isAuthenticated: boolean) {
+        this.isAuthenticated = isAuthenticated;
     }
 }

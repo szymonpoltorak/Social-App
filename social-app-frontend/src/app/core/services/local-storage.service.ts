@@ -24,6 +24,7 @@ export class LocalStorageService implements LocalStorageInterface {
     }
 
     clearStorage(): void {
-        window.localStorage.clear();
+        window.localStorage.removeItem(StorageKeys.REFRESH_TOKEN);
+        window.localStorage.removeItem(StorageKeys.AUTH_TOKEN);
     }
 }

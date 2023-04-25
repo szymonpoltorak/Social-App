@@ -10,11 +10,11 @@ export class DialogService implements FormDialogInterface {
     constructor(private notFilled: MatDialog) {
     }
 
-    openInvalidFormDialog(paragraphContent: string, dialogListItems: Array<string>): void {
-        this.openNotFilledDialog(this.notFilled, paragraphContent, dialogListItems);
+    openDialogWindow(paragraphContent: string, dialogListItems: Array<string>, header: string): void {
+        this.openNotFilledDialog(this.notFilled, paragraphContent, dialogListItems, header);
     }
 
-    openNotFilledDialog(notFilled: MatDialog, paragraphContent: string, dialogListItems: Array<string>): void {
+    openNotFilledDialog(notFilled: MatDialog, paragraphContent: string, dialogListItems: Array<string>, header: string): void {
         const dialog: MatDialogRef<NotFilledDialogComponent> = notFilled.open(NotFilledDialogComponent, {
             data: {
                 paragraphContent: paragraphContent,

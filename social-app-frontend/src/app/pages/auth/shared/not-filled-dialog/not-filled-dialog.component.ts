@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
@@ -8,6 +8,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class NotFilledDialogComponent {
     @Output() closeEvent: EventEmitter<any> = new EventEmitter();
+    @Input() dialogHeader !: string;
     paragraphContent: string;
     listItems: Array<String>;
 

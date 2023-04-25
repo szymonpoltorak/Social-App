@@ -89,7 +89,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
     public final ResponseEntity<TokenResponse> handleTokenExceptions() {
         TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     private ResponseEntity<ExceptionResponse> buildResponseEntity(Exception exception, HttpStatus status) {

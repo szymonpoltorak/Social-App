@@ -34,13 +34,21 @@ export class LoginComponent implements OnInit, LoginInterface {
         this.loginForm = this.controlProvider.buildLoginForm();
         this.paragraphContent = DialogContents.LOGIN_PARAGRAPH;
         this.dialogListItems = [DialogContents.LOGIN_EMAIL, DialogContents.LOGIN_PASSWORD];
+
+        if (this.userService.wasUserLoggedOut) {
+            this.dialogService.openDialogWindow(DialogContents.LOGGED_OUT_PARAGRAPH,
+                [DialogContents.LOGGED_OUT_ERROR, DialogContents.LOGGED_OUT_BUTTON],
+                DialogContents.LOGGED_OUT_HEADER);
+
+            this.userService.setWasUserLoggedOut = false;
+        }
     }
 
     authenticateUser(): void {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openInvalidFormDialog(this.paragraphContent, this.dialogListItems);
+            this.dialogService.openDialogWindow(this.paragraphContent, this.dialogListItems, DialogContents.FORM_HEADER);
 
             return;
         }
@@ -50,11 +58,12 @@ export class LoginComponent implements OnInit, LoginInterface {
 
         this.authService.loginUser(request).subscribe((data: AuthResponse): void => {
             if (data.authToken === "") {
-                this.dialogService.openInvalidFormDialog(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems);
+                this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
+                    DialogContents.FORM_HEADER);
 
                 return;
             }
-            this.userService.authenticateUser();
+            this.userService.setUserAuthentication = true;
 
             this.router.navigateByUrl(RoutePaths.HOME_PATH);
         });

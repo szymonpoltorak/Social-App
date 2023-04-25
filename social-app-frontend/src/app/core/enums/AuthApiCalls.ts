@@ -5,7 +5,5 @@ export const enum AuthApiCalls {
 
     IS_USER_AUTHENTICATED = "/api/auth/authenticate",
 
-    AUTH_ERROR_FOUND = '{"authToken": "", "refreshToken": ""}',
-    TOKEN_ERROR_FOUND = `{"isAuthTokenValid": "false"}`,
     ERROR_FOUND = '{"authToken": "", "refreshToken": ""}'
 }

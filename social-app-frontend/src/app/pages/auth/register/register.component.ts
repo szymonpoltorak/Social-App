@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { UserService } from "../../../core/services/user.service";
+import { AuthConstants } from "../../../core/enums/AuthConstants";
 
 @Component({
     selector: "app-register",
@@ -35,20 +36,20 @@ export class RegisterComponent implements OnInit, RegisterInterface {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openInvalidFormDialog(this.paragraphContent, this.dialogListItems);
+            this.dialogService.openDialogWindow(this.paragraphContent, this.dialogListItems, DialogContents.FORM_HEADER);
 
             return;
         }
         const request: RegisterRequest = this.buildRegisterRequest();
 
         this.authService.registerUser(request).subscribe((data: AuthResponse): void => {
-            if (data.authToken === "") {
-                this.dialogService.openInvalidFormDialog(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
-                    [DialogContents.REGISTER_ITEMS]);
+            if (data.authToken === AuthConstants.NO_TOKEN) {
+                this.dialogService.openDialogWindow(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
+                    [DialogContents.REGISTER_ITEMS], DialogContents.FORM_HEADER);
 
                 return;
             }
-            this.userService.authenticateUser();
+            this.userService.setUserAuthentication = true;
 
             this.authService.saveData(data);
 
