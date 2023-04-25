@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn } from "@angular/forms";
-import { RegisterValidationInterface } from "../../../core/interfaces/RegisterValidationInterface";
+import { RegisterValidationInterface } from "../interfaces/RegisterValidationInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class RegisterValidatorService implements RegisterValidationInterface{
+export class RegisterValidatorService implements RegisterValidationInterface {
     constructor() {
     }
 

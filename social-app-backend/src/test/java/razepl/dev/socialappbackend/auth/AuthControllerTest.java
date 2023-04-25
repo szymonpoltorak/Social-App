@@ -122,7 +122,7 @@ class AuthControllerTest {
 
         User user = userRepository.findByName(request.getName()).orElseThrow();
 
-        boolean result = tokenRepository.findAllByUser(user.getUserId()).isEmpty();
+        boolean result = tokenRepository.findAllValidTokensByUserId(user.getUserId()).isEmpty();
 
         // then
         Assertions.assertFalse(result, "Token was not found!");
@@ -140,10 +140,10 @@ class AuthControllerTest {
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
-                .content(AuthTestUtil.asJsonString(request))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .with(SecurityMockMvcRequestPostProcessors.csrf()))
+                        .content(AuthTestUtil.asJsonString(request))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         mockMvc.perform(MockMvcRequestBuilders.post(LOGIN_REQUEST)

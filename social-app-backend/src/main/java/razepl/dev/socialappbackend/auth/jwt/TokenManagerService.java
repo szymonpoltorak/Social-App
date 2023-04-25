@@ -50,7 +50,7 @@ public class TokenManagerService implements TokenManager {
     public final void revokeUserTokens(User user) {
         NullChecker.throwAppropriateException(user);
 
-        List<JwtToken> userTokens = tokenRepository.findAllByUser(user.getUserId());
+        List<JwtToken> userTokens = tokenRepository.findAllValidTokensByUserId(user.getUserId());
 
         if (userTokens.isEmpty()) {
             return;

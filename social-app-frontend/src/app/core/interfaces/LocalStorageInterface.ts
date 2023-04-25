@@ -25,7 +25,7 @@ export interface LocalStorageInterface {
      * @param key The key associated with the value to retrieve from local storage.
      * @returns The value associated with the specified key, or an empty object if no value is found.
      */
-    getValueFromStorage<V>(key: StorageKeys): V;
+    getValueFromStorage(key: StorageKeys): string;
 
     /**
      * Removes all key-value pairs from local storage.

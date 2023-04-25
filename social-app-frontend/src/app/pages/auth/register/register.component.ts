@@ -1,14 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
-import { RegisterControlProviderService } from "../services/register-control-provider.service";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { MatDialog } from "@angular/material/dialog";
 import { DialogContents } from "../../../core/enums/DialogContents";
-import { FormBuildingService } from "../services/form-building.service";
 import { RegisterRequest } from "../../../core/data/register-request";
-import { AuthService } from "../services/auth.service";
-import { DialogService } from "../services/dialog.service";
 import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
+import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
+import { DialogService } from "../../../core/services/dialog.service";
+import { AuthService } from "../../../core/services/auth.service";
+import { Router } from "@angular/router";
+import { RoutePaths } from "../../../core/enums/RoutePaths";
+import { AuthResponse } from "../../../core/data/auth-response";
+import { UserService } from "../../../core/services/user.service";
+import { AuthConstants } from "../../../core/enums/AuthConstants";
 
 @Component({
     selector: "app-register",
@@ -23,31 +26,41 @@ export class RegisterComponent implements OnInit, RegisterInterface {
     private paragraphContent !: string;
 
     constructor(public controlProvider: RegisterControlProviderService,
-                private formBuildingService: FormBuildingService,
-                private notFilled: MatDialog,
                 private dialogService: DialogService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private router: Router,
+                private userService: UserService) {
     }
 
     makeRedirection(): void {
         if (this.registerForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openNotFilledDialog(this.notFilled, this.paragraphContent, this.dialogListItems);
+            this.dialogService.openDialogWindow(this.paragraphContent, this.dialogListItems, DialogContents.FORM_HEADER);
 
             return;
         }
-        const request = this.buildRegisterRequest();
+        const request: RegisterRequest = this.buildRegisterRequest();
 
-        console.log(request);
+        this.authService.registerUser(request).subscribe((data: AuthResponse): void => {
+            if (data.authToken === AuthConstants.NO_TOKEN) {
+                this.dialogService.openDialogWindow(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
+                    [DialogContents.REGISTER_ITEMS], DialogContents.FORM_HEADER);
 
-        this.authService.registerUser(request);
+                return;
+            }
+            this.userService.setUserAuthentication = true;
+
+            this.authService.saveData(data);
+
+            this.router.navigateByUrl(RoutePaths.HOME_PATH);
+        });
     }
 
     ngOnInit(): void {
-        this.registerForm = this.formBuildingService.buildRegisterForm();
+        this.registerForm = this.controlProvider.buildRegisterForm();
 
-        this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe(() => {
+        this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.valueChanges.subscribe((): void => {
             this.passwordMismatch = <boolean>this.registerForm.get(FormFieldNames.PASSWORD_GROUP)?.invalid;
         });
 

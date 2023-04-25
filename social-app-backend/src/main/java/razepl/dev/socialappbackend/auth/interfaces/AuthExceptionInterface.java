@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
+import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.UserAlreadyExistsException;
 
 /**
  * The AuthExceptionInterface interface defines a methods for handling errors in Authentication.
@@ -59,4 +61,8 @@ public interface AuthExceptionInterface {
      * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
      */
     ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception);
+
+    ResponseEntity<ExceptionResponse> handleUserExistException(UserAlreadyExistsException exception);
+
+    ResponseEntity<TokenResponse> handleTokenExceptions();
 }

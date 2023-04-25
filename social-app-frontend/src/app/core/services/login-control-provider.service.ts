@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
-import { EmailValidation } from "../../../core/enums/EmailValidation";
-import { PasswordValidation } from "../../../core/enums/PasswordValidation";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { EmailValidation } from "../enums/EmailValidation";
+import { PasswordValidation } from "../enums/PasswordValidation";
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +21,13 @@ export class LoginControlProviderService {
         ]
     );
 
-    constructor() {
+    constructor(private formBuilder: FormBuilder) {
+    }
+
+    buildLoginForm(): FormGroup {
+        return this.formBuilder.group({
+            email: this.emailControl,
+            password: this.passwordControl
+        });
     }
 }

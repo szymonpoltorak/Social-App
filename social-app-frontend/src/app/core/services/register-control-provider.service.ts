@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormControl, Validators } from "@angular/forms";
-import { EmailValidation } from "../../../core/enums/EmailValidation";
-import { NameValidation } from "../../../core/enums/NameValidation";
-import { PasswordValidation } from "../../../core/enums/PasswordValidation";
-import { DateValidation } from "../../../core/enums/DateValidation";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { RegisterValidatorService } from "./register-validator.service";
-import { FormFieldNames } from "../../../core/enums/FormFieldNames";
+import { EmailValidation } from "../enums/EmailValidation";
+import { NameValidation } from "../enums/NameValidation";
+import { PasswordValidation } from "../enums/PasswordValidation";
+import { DateValidation } from "../enums/DateValidation";
+import { FormFieldNames } from "../enums/FormFieldNames";
 
 @Injectable({
     providedIn: 'root'
@@ -58,6 +58,29 @@ export class RegisterControlProviderService {
         ]
     );
 
-    constructor(private registerValidator: RegisterValidatorService) {
+    constructor(private registerValidator: RegisterValidatorService,
+                private formBuilder: FormBuilder) {
+    }
+
+    buildRegisterForm(): FormGroup {
+        return this.formBuilder.group({
+            nameInputs: this.formBuilder.group({
+                firstName: this.nameControl,
+                lastName: this.surnameControl
+            }),
+            emailDateInputs: this.formBuilder.group({
+                email: this.emailControl,
+                date: this.dateControl
+            }),
+            passwordInputs: this.formBuilder.group({
+                    userPassword: this.passwordControl,
+                    repeatPassword: this.repeatPasswordControl
+                },
+                {
+                    validator: this.registerValidator.passwordMatchValidator(FormFieldNames.REGISTER_PASSWORD,
+                        FormFieldNames.REGISTER_REPEAT_PASSWORD)
+                }
+            )
+        });
     }
 }
