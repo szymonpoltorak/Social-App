@@ -8,12 +8,14 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 })
 export class NotFilledDialogComponent {
     @Output() closeEvent: EventEmitter<any> = new EventEmitter();
-    @Input() dialogHeader !: string;
+    // @Input() dialogHeader !: string;
+    dialogHeader: string;
     paragraphContent: string;
     listItems: Array<String>;
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any) {
         this.paragraphContent = data.paragraphContent;
         this.listItems = data.listItems;
+        this.dialogHeader = data.dialogHeader;
     }
 }

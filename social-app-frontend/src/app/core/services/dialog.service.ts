@@ -18,7 +18,8 @@ export class DialogService implements FormDialogInterface {
         const dialog: MatDialogRef<NotFilledDialogComponent> = notFilled.open(NotFilledDialogComponent, {
             data: {
                 paragraphContent: paragraphContent,
-                listItems: dialogListItems
+                listItems: dialogListItems,
+                dialogHeader: header
             }
         });
         dialog.componentInstance.closeEvent.subscribe(() => dialog.close());

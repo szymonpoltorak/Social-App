@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { UserService } from "../../../core/services/user.service";
+import { AuthConstants } from "../../../core/enums/AuthConstants";
 
 @Component({
     selector: 'app-login',
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit, LoginInterface {
         console.log(request);
 
         this.authService.loginUser(request).subscribe((data: AuthResponse): void => {
-            if (data.authToken === "") {
+            if (data.authToken === AuthConstants.NO_TOKEN) {
                 this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
                     DialogContents.FORM_HEADER);
 
