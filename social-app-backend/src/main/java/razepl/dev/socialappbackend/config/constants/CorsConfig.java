@@ -3,7 +3,7 @@ package razepl.dev.socialappbackend.config.constants;
 import java.util.List;
 
 public final class CorsConfig {
-    public static final List<String> ALLOWED_REQUESTS = List.of("GET","POST", "PUT", "DELETE", "OPTIONS");
+    public static final List<String> ALLOWED_REQUESTS = List.of("GET", "POST", "PUT", "DELETE", "OPTIONS");
 
     /**
      * The address of the frontend server.
