@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
+import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
 import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
 
 /**
@@ -49,7 +50,7 @@ public class SecurityConfiguration implements SecurityConfigInterface {
                     .authenticationProvider(authenticationProvider)
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .logout()
-                    .logoutUrl("/api/auth/logout")
+                    .logoutUrl(LOGOUT_URL)
                     .addLogoutHandler(logoutHandler)
                     .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()));
 

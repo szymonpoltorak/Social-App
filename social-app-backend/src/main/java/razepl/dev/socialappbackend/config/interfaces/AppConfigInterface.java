@@ -42,5 +42,10 @@ public interface AppConfigInterface {
      */
     AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws AuthManagerInstanceException;
 
+    /**
+     * Returns the cors config bean.
+     *
+     * @return CorsConfigurationSource
+     */
     CorsConfigurationSource corsConfigurationSource();
 }
