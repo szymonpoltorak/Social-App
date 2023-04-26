@@ -29,13 +29,16 @@ public class SecurityConfiguration implements SecurityConfigInterface {
     @Override
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
         try {
-            httpSecurity.csrf()
+            httpSecurity
+                    .csrf()
                     .disable()
                     .authorizeHttpRequests()
                     .requestMatchers(WHITE_LIST)
                     .permitAll()
                     .anyRequest()
                     .authenticated()
+                    .and()
+                    .cors()
                     .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

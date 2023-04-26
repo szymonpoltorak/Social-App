@@ -22,7 +22,6 @@ import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADD
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = AUTH_MAPPING)
-@CrossOrigin(origins = FRONTEND_ADDRESS)
 public class AuthController implements AuthInterface {
     private final AuthServiceInterface authService;
 
