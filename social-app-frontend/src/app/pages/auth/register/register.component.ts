@@ -3,7 +3,7 @@ import { AbstractControl, FormGroup } from "@angular/forms";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { RegisterRequest } from "../../../core/data/register-request";
-import { RegisterInterface } from "../../../core/interfaces/RegisterInterface";
+import { RegisterInterface } from "../../../core/interfaces/auth/RegisterInterface";
 import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";

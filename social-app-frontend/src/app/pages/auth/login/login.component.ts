@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { LoginRequest } from "../../../core/data/login-request";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { LoginInterface } from "../../../core/interfaces/LoginInterface";
+import { LoginInterface } from "../../../core/interfaces/auth/LoginInterface";
 import { LoginControlProviderService } from "../../../core/services/login-control-provider.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
@@ -12,6 +12,8 @@ import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { UserService } from "../../../core/services/user.service";
 import { AuthConstants } from "../../../core/enums/AuthConstants";
+import { LocalStorageService } from "../../../core/services/local-storage.service";
+import { StorageKeys } from "../../../core/enums/StorageKeys";
 
 @Component({
     selector: 'app-login',
@@ -28,7 +30,8 @@ export class LoginComponent implements OnInit, LoginInterface {
                 private dialogService: DialogService,
                 private authService: AuthService,
                 private router: Router,
-                private userService: UserService) {
+                private userService: UserService,
+                private localStorage: LocalStorageService) {
     }
 
     ngOnInit(): void {
@@ -65,6 +68,9 @@ export class LoginComponent implements OnInit, LoginInterface {
                 return;
             }
             this.userService.setUserAuthentication = true;
+
+            this.localStorage.addValueIntoStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+            this.localStorage.addValueIntoStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
 
             this.router.navigateByUrl(RoutePaths.HOME_PATH);
         });

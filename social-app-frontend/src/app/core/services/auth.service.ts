@@ -8,7 +8,7 @@ import { AuthApiCalls } from "../enums/AuthApiCalls";
 import { StorageKeys } from "../enums/StorageKeys";
 import { LoginRequest } from "../data/login-request";
 import { TokenResponse } from "../data/token-response";
-import { AuthInterface } from "../interfaces/AuthInterface";
+import { AuthInterface } from "../interfaces/auth/AuthInterface";
 import { AuthConstants } from "../enums/AuthConstants";
 
 @Injectable({
@@ -20,13 +20,17 @@ export class AuthService implements AuthInterface {
     }
 
     isUserAuthenticated(): Observable<TokenResponse> {
-        const authToken: string = this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
-        const refreshToken: string = this.localStorageService.getValueFromStorage(StorageKeys.REFRESH_TOKEN);
+        const authToken: string = this.localStorageService.getKeyValueFromStorage(StorageKeys.AUTH_TOKEN);
+        const refreshToken: string = this.localStorageService.getKeyValueFromStorage(StorageKeys.REFRESH_TOKEN);
 
         console.log(JSON.parse(`{${ authToken }, ${ refreshToken }}`));
 
         return this.http.post<TokenResponse>(AuthApiCalls.IS_USER_AUTHENTICATED,
             this.buildAuthRequest(authToken));
+    }
+
+    logoutUser(): Observable<any> {
+        return this.http.post("/api/auth/logout", "");
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
