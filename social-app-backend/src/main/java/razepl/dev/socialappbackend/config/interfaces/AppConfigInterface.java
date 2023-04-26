@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfigurationSource;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 
 /**
@@ -40,4 +41,6 @@ public interface AppConfigInterface {
      * @throws AuthManagerInstanceException if there is an error instantiating the AuthenticationManager.
      */
     AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws AuthManagerInstanceException;
+
+    CorsConfigurationSource corsConfigurationSource();
 }

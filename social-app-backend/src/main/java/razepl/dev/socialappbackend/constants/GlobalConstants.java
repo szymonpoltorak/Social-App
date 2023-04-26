@@ -5,11 +5,6 @@ package razepl.dev.socialappbackend.constants;
  */
 public final class GlobalConstants {
     /**
-     * The address of the frontend server.
-     */
-    public static final String FRONTEND_ADDRESS = "http://localhost:4200";
-
-    /**
      * The name of the user database table.
      */
     public static final String USERS_TABLE_NAME = "Users";

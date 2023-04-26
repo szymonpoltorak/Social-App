@@ -20,6 +20,9 @@ import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
 import java.util.List;
 
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.*;
+import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_HEADER;
+
 /**
  * Class made to provide necessary Beans for Spring app.
  * It implements {@link AppConfigInterface}.
@@ -37,15 +40,16 @@ public class AppConfiguration implements AppConfigInterface {
     }
 
     @Bean
+    @Override
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowedOrigins(FRONTEND_ADDRESS);
+        configuration.setAllowedMethods(ALLOWED_REQUESTS);
+        configuration.setAllowedHeaders(List.of(AUTH_HEADER, CONTENT_TYPE_HEADER));
 
-        source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration(API_PATTERN, configuration);
 
         return source;
     }
