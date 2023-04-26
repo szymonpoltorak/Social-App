@@ -27,9 +27,9 @@ public interface TokenRepository extends JpaRepository<JwtToken, Long> {
      * @return List of {@link JwtToken} of the user
      */
     @Query("""
-        select t from JwtToken as t
-        inner join User as u on (t.user.userId = u.userId)
-        where u.userId = :id and (t.isExpired = false or t.isRevoked = false)
-    """)
+                select t from JwtToken as t
+                inner join User as u on (t.user.userId = u.userId)
+                where u.userId = :id and (t.isExpired = false or t.isRevoked = false)
+            """)
     List<JwtToken> findAllValidTokensByUserId(Long id);
 }

@@ -11,9 +11,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+
+import java.util.List;
+
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.*;
+import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_HEADER;
 
 /**
  * Class made to provide necessary Beans for Spring app.
@@ -29,6 +37,21 @@ public class AppConfiguration implements AppConfigInterface {
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    }
+
+    @Bean
+    @Override
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        configuration.setAllowedOrigins(FRONTEND_ADDRESS);
+        configuration.setAllowedMethods(ALLOWED_REQUESTS);
+        configuration.setAllowedHeaders(List.of(AUTH_HEADER, CONTENT_TYPE_HEADER));
+
+        source.registerCorsConfiguration(API_PATTERN, configuration);
+
+        return source;
     }
 
     @Bean

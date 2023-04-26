@@ -34,5 +34,12 @@ public interface AuthInterface {
      */
     ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response);
 
+    /**
+     * Authenticates a user with the given token request.
+     *
+     * @param request the token request
+     * @return a ResponseEntity with a TokenResponse as the response body
+     */
     ResponseEntity<TokenResponse> authenticateUser(TokenRequest request);
+
 }

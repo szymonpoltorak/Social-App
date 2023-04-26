@@ -1,4 +1,4 @@
-import { StorageKeys } from "../enums/StorageKeys";
+import { StorageKeys } from "../../enums/StorageKeys";
 
 /**
  * The interface for local storage interactions.
@@ -17,7 +17,7 @@ export interface LocalStorageInterface {
      *
      * @param key The key associated with the value to remove from local storage.
      */
-    removeValueFromStorage<V>(key: StorageKeys): void;
+    removeValueFromStorage(key: StorageKeys): void;
 
     /**
      * Retrieves the value associated with the specified key from local storage.
@@ -25,6 +25,8 @@ export interface LocalStorageInterface {
      * @param key The key associated with the value to retrieve from local storage.
      * @returns The value associated with the specified key, or an empty object if no value is found.
      */
+    getKeyValueFromStorage(key: StorageKeys): string;
+
     getValueFromStorage(key: StorageKeys): string;
 
     /**

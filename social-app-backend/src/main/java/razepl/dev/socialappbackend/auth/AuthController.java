@@ -5,14 +5,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
-import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADDRESS;
 
 /**
  * Class to control auth endpoints.
@@ -22,7 +24,6 @@ import static razepl.dev.socialappbackend.constants.GlobalConstants.FRONTEND_ADD
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = AUTH_MAPPING)
-@CrossOrigin(origins = FRONTEND_ADDRESS)
 public class AuthController implements AuthInterface {
     private final AuthServiceInterface authService;
 

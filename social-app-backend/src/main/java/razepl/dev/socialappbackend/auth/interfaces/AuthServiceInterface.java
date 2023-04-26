@@ -35,6 +35,13 @@ public interface AuthServiceInterface {
      */
     AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response);
 
+    /**
+     * Validates the user's tokens using the given token request.
+     *
+     * @param request the token request containing the user's tokens
+     * @return a token response containing information about the validity of the tokens
+     */
     TokenResponse validateUsersTokens(TokenRequest request);
+
 }
 

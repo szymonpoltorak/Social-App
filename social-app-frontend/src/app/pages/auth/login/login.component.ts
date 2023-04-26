@@ -3,15 +3,16 @@ import { FormGroup } from "@angular/forms";
 import { DialogContents } from "../../../core/enums/DialogContents";
 import { LoginRequest } from "../../../core/data/login-request";
 import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { LoginInterface } from "../../../core/interfaces/LoginInterface";
+import { LoginInterface } from "../../../core/interfaces/auth/LoginInterface";
 import { LoginControlProviderService } from "../../../core/services/login-control-provider.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
-import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { UserService } from "../../../core/services/user.service";
 import { AuthConstants } from "../../../core/enums/AuthConstants";
+import { StorageKeys } from "../../../core/enums/StorageKeys";
+import { UtilService } from "../../../core/services/util.service";
 
 @Component({
     selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit, LoginInterface {
     constructor(public controlProvider: LoginControlProviderService,
                 private dialogService: DialogService,
                 private authService: AuthService,
-                private router: Router,
+                private utilService: UtilService,
                 private userService: UserService) {
     }
 
@@ -66,7 +67,10 @@ export class LoginComponent implements OnInit, LoginInterface {
             }
             this.userService.setUserAuthentication = true;
 
-            this.router.navigateByUrl(RoutePaths.HOME_PATH);
+            this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+            this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+
+            this.utilService.navigate(RoutePaths.HOME_PATH);
         });
     }
 

@@ -56,6 +56,11 @@ public final class Headers {
             SWAGGER_JSON_MATCHERS, SWAGGER_UI, SWAGGER_UI_MATCHERS};
 
     /**
+     * The URL for logging out.
+     */
+    public static final String LOGOUT_URL = "/api/auth/logout";
+
+    /**
      * Private constructor to prevent instantiation of this class.
      */
     private Headers() {
