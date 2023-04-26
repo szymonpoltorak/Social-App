@@ -13,7 +13,7 @@ export class LocalStorageService implements LocalStorageInterface {
         window.localStorage.setItem(key, JSON.stringify(value));
     }
 
-    removeValueFromStorage<V>(key: StorageKeys): void {
+    removeValueFromStorage(key: StorageKeys): void {
         window.localStorage.removeItem(key);
     }
 

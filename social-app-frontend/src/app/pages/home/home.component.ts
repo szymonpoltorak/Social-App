@@ -1,10 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
 import { AuthService } from "../../core/services/auth.service";
 import { Subject, takeUntil } from "rxjs";
-import { LocalStorageService } from "../../core/services/local-storage.service";
 import { RoutePaths } from "../../core/enums/RoutePaths";
 import { UserService } from "../../core/services/user.service";
+import { UtilService } from "../../core/services/util.service";
 
 @Component({
     selector: 'app-home',
@@ -14,19 +13,18 @@ import { UserService } from "../../core/services/user.service";
 export class HomeComponent implements OnDestroy {
     private onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(private router: Router,
-                private authService: AuthService,
-                private localStorage: LocalStorageService,
+    constructor(private authService: AuthService,
+                private utilService: UtilService,
                 private userService: UserService) {
     }
 
     logoutUserFromSite(): void {
         this.authService.logoutUser().pipe(takeUntil(this.onDestroy$)).subscribe(data => {
-            this.localStorage.clearStorage();
+            this.utilService.clearStorage();
 
             this.userService.setWasUserLoggedOut = true;
 
-            this.router.navigateByUrl(RoutePaths.LOGIN_DIRECT);
+            this.utilService.navigate(RoutePaths.LOGIN_DIRECT);
         });
     }
 

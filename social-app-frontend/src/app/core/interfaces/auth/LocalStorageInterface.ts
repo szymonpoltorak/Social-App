@@ -17,7 +17,7 @@ export interface LocalStorageInterface {
      *
      * @param key The key associated with the value to remove from local storage.
      */
-    removeValueFromStorage<V>(key: StorageKeys): void;
+    removeValueFromStorage(key: StorageKeys): void;
 
     /**
      * Retrieves the value associated with the specified key from local storage.
