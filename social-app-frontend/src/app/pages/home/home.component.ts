@@ -19,7 +19,7 @@ export class HomeComponent implements OnDestroy {
     }
 
     logoutUserFromSite(): void {
-        this.authService.logoutUser().pipe(takeUntil(this.onDestroy$)).subscribe(data => {
+        this.authService.logoutUser().pipe(takeUntil(this.onDestroy$)).subscribe( () => {
             this.utilService.clearStorage();
 
             this.userService.setWasUserLoggedOut = true;
