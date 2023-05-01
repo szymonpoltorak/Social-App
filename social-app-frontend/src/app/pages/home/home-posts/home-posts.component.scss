@@ -1,0 +1,20 @@
+$upper-navbar-color: #191819;
+
+@mixin content-field {
+    border: 2px white solid;
+    background-color: $upper-navbar-color;
+    border-radius: 1em;
+    padding: 1em;
+    width: 30em;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.posts-container {
+    @include flex-center;
+    @include content-field;
+}

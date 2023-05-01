@@ -5,12 +5,18 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SharedModule } from "../auth/shared/shared.module";
 import { SocialNavbarComponent } from './social-navbar/social-navbar.component';
+import { HomeProfileComponent } from './home-profile/home-profile.component';
+import { HomePostsComponent } from './home-posts/home-posts.component';
+import { HomeFriendsComponent } from './home-friends/home-friends.component';
 
 
 @NgModule({
     declarations: [
         HomeComponent,
-        SocialNavbarComponent
+        SocialNavbarComponent,
+        HomeProfileComponent,
+        HomePostsComponent,
+        HomeFriendsComponent
     ],
     imports: [
         CommonModule,
