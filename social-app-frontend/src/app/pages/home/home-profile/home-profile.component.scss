@@ -14,7 +14,38 @@ $upper-navbar-color: #191819;
     align-content: center;
 }
 
+@mixin container {
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+.separator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1em;
+}
+
 .user-container {
-    @include flex-center;
     @include content-field;
 }
+
+.username-container {
+    @include container;
+}
+
+.name-friends-container {
+    display: grid;
+    padding: 0.1em;
+    gap: 0.1em;
+}
+
+.icon-text-container {
+    @include container;
+}
+
+.friends-counter {
+    font-size: 11px;
+}
+

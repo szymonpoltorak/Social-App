@@ -6,11 +6,11 @@ import { UserService } from "../../../core/services/user.service";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 
 @Component({
-  selector: 'app-social-navbar',
-  templateUrl: './social-navbar.component.html',
-  styleUrls: ['./social-navbar.component.scss']
+    selector: 'app-social-navbar',
+    templateUrl: './social-navbar.component.html',
+    styleUrls: ['./social-navbar.component.scss']
 })
-export class SocialNavbarComponent implements OnDestroy{
+export class SocialNavbarComponent implements OnDestroy {
     private onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private authService: AuthService,
@@ -19,7 +19,7 @@ export class SocialNavbarComponent implements OnDestroy{
     }
 
     logoutUserFromSite(): void {
-        this.authService.logoutUser().pipe(takeUntil(this.onDestroy$)).subscribe( (): void => {
+        this.authService.logoutUser().pipe(takeUntil(this.onDestroy$)).subscribe((): void => {
             this.utilService.clearStorage();
 
             this.userService.setWasUserLoggedOut = true;

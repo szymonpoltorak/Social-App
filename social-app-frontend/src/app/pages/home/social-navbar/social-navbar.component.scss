@@ -20,32 +20,6 @@ $upper-navbar-color: #191819;
     align-content: center;
 }
 
-.icon-box {
-    @include flex-center;
-    background-color: $input-background-color;
-    width: 3em;
-    border-radius: 45%;
-    height: 3em;
-    cursor: pointer;
-    transition: border-radius 0.2s ease-in-out;
-}
-
-.icon-box:hover {
-    background-color: #565756;
-    border-radius: 35%;
-}
-
-.icon-box:active {
-    background-color: #414241;
-}
-
-svg {
-    fill: white;
-    width: 1.5em;
-    cursor: pointer;
-    height: 3em;
-}
-
 .search-bar {
     @include flex-center;
     gap: 1em;
