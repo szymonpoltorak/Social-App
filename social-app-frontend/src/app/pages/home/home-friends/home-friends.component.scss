@@ -15,6 +15,6 @@ $upper-navbar-color: #191819;
 }
 
 .friends-container {
-    @include flex-center;
     @include content-field;
+    padding: 2em;
 }

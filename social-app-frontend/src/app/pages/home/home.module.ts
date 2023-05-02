@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { SharedModule } from "../auth/shared/shared.module";
+import { SharedAuthModule } from "../auth/shared/shared-auth.module";
 import { SocialNavbarComponent } from './social-navbar/social-navbar.component';
 import { HomeProfileComponent } from './home-profile/home-profile.component';
 import { HomePostsComponent } from './home-posts/home-posts.component';
 import { HomeFriendsComponent } from './home-friends/home-friends.component';
 import { MatListModule } from "@angular/material/list";
 import { IconsModule } from "../icons/icons.module";
+import { SharedHomeModule } from "./shared-home/shared-home.module";
 
 
 @NgModule({
@@ -23,9 +24,10 @@ import { IconsModule } from "../icons/icons.module";
     imports: [
         CommonModule,
         HomeRoutingModule,
-        SharedModule,
+        SharedHomeModule,
         MatListModule,
-        IconsModule
+        IconsModule,
+        SharedAuthModule
     ]
 })
 export class HomeModule {

@@ -1,3 +1,8 @@
 <div class="friends-container">
-    <p>Welcome to my site!</p>
+    <p>Friend list</p>
+
+    <app-friend *ngFor="let friend of friendList"
+                [friendName]="friend.friendName"
+                [friendJob]="friend.friendJob">
+    </app-friend>
 </div>

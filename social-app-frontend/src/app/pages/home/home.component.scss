@@ -1,15 +1,10 @@
 $upper-navbar-color: #191819;
-$input-background-color: #2c2d2c;
 $main-background-color: #0a0b0a;
 
 @mixin flex-center {
     display: flex;
     justify-content: center;
     align-content: center;
-}
-
-@mixin input-background-color {
-    background-color: $input-background-color;
 }
 
 @mixin navbar-background {
