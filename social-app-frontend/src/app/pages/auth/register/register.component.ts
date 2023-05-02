@@ -7,7 +7,6 @@ import { RegisterInterface } from "../../../core/interfaces/auth/RegisterInterfa
 import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
 import { DialogService } from "../../../core/services/dialog.service";
 import { AuthService } from "../../../core/services/auth.service";
-import { Router } from "@angular/router";
 import { RoutePaths } from "../../../core/enums/RoutePaths";
 import { AuthResponse } from "../../../core/data/auth-response";
 import { UserService } from "../../../core/services/user.service";
