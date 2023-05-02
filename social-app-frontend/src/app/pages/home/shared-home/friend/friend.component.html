@@ -1,9 +1,14 @@
-<div class="friend-container">
-    <app-user-icon></app-user-icon>
+<div class="friend-separator">
+    <div class="friend-container">
+        <app-user-icon></app-user-icon>
 
-    <div class="friend-data-container">
-        <div>{{ friendName }}</div>
 
-        <div class="job-name">{{ friendJob }}</div>
+        <div class="friend-data-container">
+            <div>{{ friendName }}</div>
+
+            <div class="job-name">{{ friendJob }}</div>
+        </div>
     </div>
+
+    <app-remove-friend-icon></app-remove-friend-icon>
 </div>
