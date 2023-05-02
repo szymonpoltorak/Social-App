@@ -11,6 +11,7 @@ import { NotifyIconComponent } from './notify-icon/notify-icon.component';
 import { SettingsIconComponent } from './settings-icon/settings-icon.component';
 import { ChatIconComponent } from './chat-icon/chat-icon.component';
 import { SearchIconComponent } from './search-icon/search-icon.component';
+import { UserIconComponent } from './user-icon/user-icon.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SearchIconComponent } from './search-icon/search-icon.component';
         NotifyIconComponent,
         SettingsIconComponent,
         ChatIconComponent,
-        SearchIconComponent
+        SearchIconComponent,
+        UserIconComponent
     ],
     exports: [
         GithubIconComponent,
@@ -38,7 +40,8 @@ import { SearchIconComponent } from './search-icon/search-icon.component';
         ChatIconComponent,
         NotifyIconComponent,
         SettingsIconComponent,
-        LogoutIconComponent
+        LogoutIconComponent,
+        UserIconComponent
     ],
     imports: [
         CommonModule
