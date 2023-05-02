@@ -1,0 +1,34 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.post-create-bar {
+    @include flex-center;
+    gap: 1.5em;
+    margin-top: 1em;
+    height: 3em;
+}
+
+.post-button {
+    background-color: #2596be;
+    color: white;
+    padding: 1em;
+    border: none;
+    border-radius: 1em;
+}
+
+.post-button:hover {
+    background-color: #16d1f6;
+}
+
+.post-button:active {
+    background-color: aqua;
+}
+
+.attach-option {
+    @include flex-center;
+    padding: 0.7em;
+    gap: 0.3em;
+}

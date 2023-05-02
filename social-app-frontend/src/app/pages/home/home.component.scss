@@ -13,7 +13,7 @@ $main-background-color: #0a0b0a;
 
 @mixin grid-three-columns {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 0.5fr);
     margin-top: 3em;
 }
 
@@ -30,7 +30,7 @@ $main-background-color: #0a0b0a;
 
 .grid-container {
     @include grid-three-columns;
-    gap: 5em;
+    gap: 2em;
 }
 
 .flex-container {

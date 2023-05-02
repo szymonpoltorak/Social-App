@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./remove-friend-icon.component.scss']
 })
 export class RemoveFriendIconComponent {
-
 }

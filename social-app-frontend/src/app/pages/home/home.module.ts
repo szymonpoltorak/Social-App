@@ -11,6 +11,7 @@ import { HomeFriendsComponent } from './home-friends/home-friends.component';
 import { MatListModule } from "@angular/material/list";
 import { IconsModule } from "../icons/icons.module";
 import { SharedHomeModule } from "./shared-home/shared-home.module";
+import { PostButtonBarComponent } from './post-button-bar/post-button-bar.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SharedHomeModule } from "./shared-home/shared-home.module";
         HomeProfileComponent,
         HomePostsComponent,
         HomeFriendsComponent,
+        PostButtonBarComponent,
     ],
     imports: [
         CommonModule,
