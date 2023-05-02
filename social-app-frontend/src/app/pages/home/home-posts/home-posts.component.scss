@@ -2,7 +2,7 @@ $upper-navbar-color: #191819;
 $input-background-color: #2c2d2c;
 
 @mixin content-field {
-    border: 2px white solid;
+    border: 1px #eeeee4 solid;
     background-color: $upper-navbar-color;
     border-radius: 1em;
     padding: 1em;
