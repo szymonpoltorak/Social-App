@@ -10,7 +10,8 @@
             </div>
         </div>
 
-        <app-add-friend-icon></app-add-friend-icon>
+        <app-add-friend-icon (click)="updateFriendStatus()" *ngIf="!isFriendAdded"></app-add-friend-icon>
+        <app-remove-friend-icon (click)="updateFriendStatus()" *ngIf="isFriendAdded"></app-remove-friend-icon>
     </div>
 
     <div class="post-content">
@@ -19,9 +20,17 @@
 
     <div class="separator-container">
         <div class="statistics-icons">
-            <app-like-icon></app-like-icon>
+            <div class="vote-container">
+                <app-like-icon (click)="updatePostLike()" [isPostLiked]="isPostLiked"></app-like-icon>
 
-            <app-comment-icon></app-comment-icon>
+                <div>{{ numOfLikes }}</div>
+            </div>
+
+            <div class="vote-container">
+                <app-comment-icon></app-comment-icon>
+
+                <div>{{ numOfComments }}</div>
+            </div>
         </div>
 
         <app-share-icon></app-share-icon>

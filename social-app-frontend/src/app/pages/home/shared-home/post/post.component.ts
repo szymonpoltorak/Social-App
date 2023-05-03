@@ -11,4 +11,15 @@ export class PostComponent {
     @Input() postContent!: string;
     @Input() numOfLikes!: number;
     @Input() numOfComments!: number;
+    isPostLiked!: boolean;
+    isFriendAdded!: boolean;
+
+    updatePostLike(): void {
+        this.isPostLiked = !this.isPostLiked;
+        this.numOfLikes = this.isPostLiked ? this.numOfLikes + 1 : this.numOfLikes - 1;
+    }
+
+    updateFriendStatus(): void {
+        this.isFriendAdded = !this.isFriendAdded;
+    }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-like-icon',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./like-icon.component.scss']
 })
 export class LikeIconComponent {
-
+    @Input() isPostLiked!: boolean;
 }

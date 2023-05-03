@@ -43,3 +43,10 @@ $upper-navbar-color: #191819;
 .post-content {
     margin: 1em;
 }
+
+.vote-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
