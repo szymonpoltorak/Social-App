@@ -1,0 +1,8 @@
+<div class="friends-container">
+    <p>Friend list</p>
+
+    <app-friend *ngFor="let friend of friendList"
+                [friendName]="friend.friendName"
+                [friendJob]="friend.friendJob">
+    </app-friend>
+</div>

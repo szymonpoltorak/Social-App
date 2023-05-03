@@ -1,0 +1,23 @@
+@import "../icons.common";
+
+.liked {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f3845;
+    width: 3em;
+    border-radius: 45%;
+    height: 3em;
+    cursor: pointer;
+    transition: border-radius 0.2s ease-in-out;
+    //fill: #7fb2ba;
+}
+
+.liked:hover {
+    background-color: #306a72;
+    border-radius: 35%;
+}
+
+.liked:active {
+    background-color: #2596be;
+}

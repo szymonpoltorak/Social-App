@@ -1,0 +1,16 @@
+$input-background-color: #2c2d2c;
+
+.counter-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-input {
+    background-color: $input-background-color;
+    padding: 1em;
+    width: 24em;
+    height: 4em;
+    border-radius: 1em;
+    color: white;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

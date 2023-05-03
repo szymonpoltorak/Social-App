@@ -45,3 +45,10 @@ Error Page:
 Space Background:
 
 * [Source](https://wallpapercave.com/black-space-wallpaper-hd)
+
+Navbar icons:
+
+* [Source](https://fonts.google.com/icons)
+
+Social icons:
+* [Source](https://icons8.com/icons/set/social-media)

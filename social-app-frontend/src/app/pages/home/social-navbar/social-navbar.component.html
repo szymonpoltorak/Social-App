@@ -1,0 +1,19 @@
+<nav class="navbar-container">
+    <app-logo class="logo-background"></app-logo>
+
+    <div class="search-bar">
+        <input class="search-input" id="search-input" placeholder="Search Social365" type="search">
+
+        <app-search-icon></app-search-icon>
+    </div>
+
+    <div class="icon-bar">
+        <app-chat-icon></app-chat-icon>
+
+        <app-notify-icon></app-notify-icon>
+
+        <app-settings-icon></app-settings-icon>
+
+        <app-logout-icon (click)="logoutUserFromSite()"></app-logout-icon>
+    </div>
+</nav>

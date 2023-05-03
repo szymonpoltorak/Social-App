@@ -1,0 +1,51 @@
+$upper-navbar-color: #191819;
+
+@mixin content-field {
+    border: 1px #eeeee4 solid;
+    background-color: $upper-navbar-color;
+    border-radius: 1em;
+    padding: 1em;
+    width: 30em;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@mixin container {
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+.separator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1em;
+}
+
+.user-container {
+    @include content-field;
+}
+
+.username-container {
+    @include container;
+}
+
+.name-friends-container {
+    display: grid;
+    padding: 0.1em;
+    gap: 0.1em;
+}
+
+.icon-text-container {
+    @include container;
+}
+
+.friends-counter {
+    font-size: 11px;
+}
+

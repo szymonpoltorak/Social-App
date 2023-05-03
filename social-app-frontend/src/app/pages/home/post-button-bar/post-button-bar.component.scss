@@ -1,0 +1,55 @@
+$input-background-color: #2c2d2c;
+
+@mixin border-radius-transition {
+    border-radius: 1.3em;
+    transition: border-radius 0.3s ease-in-out;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.post-create-bar {
+    @include flex-center;
+    gap: 1.5em;
+    margin-top: 1em;
+    height: 3em;
+}
+
+.post-button {
+    background-color: #2596be;
+    color: white;
+    padding: 1em;
+    border: none;
+    @include border-radius-transition;
+}
+
+.post-button:hover {
+    background-color: #16c1f6;
+    border-radius: 1em;
+}
+
+.post-button:active {
+    background-color: #16a1f6;
+}
+
+.attach-option {
+    @include flex-center;
+    @include border-radius-transition;
+    background-color: $input-background-color;
+    border-radius: 1.3em;
+    padding: 0.7em;
+    gap: 0.5em;
+    cursor: pointer;
+}
+
+.attach-option:hover {
+    border-radius: 1em;
+    background-color: #565756;
+}
+
+.attach-option:active {
+    background-color: #414241;
+}

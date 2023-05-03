@@ -1,0 +1,51 @@
+$upper-navbar-color: #191819;
+$main-background-color: #0a0b0a;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@mixin position-sticky {
+    position: sticky;
+    align-self: start;
+}
+
+@mixin navbar-background {
+    background-color: $upper-navbar-color;
+}
+
+@mixin grid-three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 0.5fr);
+    margin-top: 3em;
+}
+
+.just-background {
+    background-color: $main-background-color;
+    color: white;
+}
+
+.logo-background {
+    @include navbar-background;
+}
+
+.grid-container {
+    @include grid-three-columns;
+    gap: 2em;
+}
+
+.flex-container {
+    @include flex-center;
+}
+
+.sticky-navbar {
+    @include position-sticky;
+    top: 0;
+}
+
+.sticky-element {
+    @include position-sticky;
+    top: 8em;
+}

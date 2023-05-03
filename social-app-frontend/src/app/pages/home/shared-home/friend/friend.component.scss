@@ -1,0 +1,20 @@
+.friend-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.friend-data-container {
+    display: grid;
+    gap: 0.2em;
+}
+
+.friend-separator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-name {
+    font-size: 0.7em;
+}

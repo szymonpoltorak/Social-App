@@ -1,5 +1,13 @@
-<h1>Home works!</h1>
+<div class="just-background">
+    <app-social-navbar class="sticky-navbar"></app-social-navbar>
 
-<button (click)="logoutUserFromSite()" style="padding: 3em; margin-left: 2em;">
-    Logout
-</button>
+    <main class="flex-container">
+        <div class="grid-container">
+            <app-home-profile class="sticky-element"></app-home-profile>
+
+            <app-home-posts></app-home-posts>
+
+            <app-home-friends class="sticky-element"></app-home-friends>
+        </div>
+    </main>
+</div>

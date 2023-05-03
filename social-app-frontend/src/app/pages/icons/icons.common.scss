@@ -1,0 +1,32 @@
+$input-background-color: #2c2d2c;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.icon-container {
+    @include flex-center;
+    background-color: $input-background-color;
+    width: 3em;
+    border-radius: 45%;
+    height: 3em;
+    cursor: pointer;
+    transition: border-radius 0.2s ease-in-out;
+}
+
+.icon-container:hover {
+    background-color: #565756;
+    border-radius: 35%;
+}
+
+.icon-container:active {
+    background-color: #414241;
+}
+
+svg {
+    width: 1.5em;
+    cursor: pointer;
+    height: 3em;
+}

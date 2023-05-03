@@ -1,0 +1,20 @@
+$upper-navbar-color: #191819;
+
+@mixin content-field {
+    border: 1px #eeeee4 solid;
+    background-color: $upper-navbar-color;
+    border-radius: 1em;
+    padding: 1em;
+    width: 30em;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.friends-container {
+    @include content-field;
+    padding: 2em;
+}

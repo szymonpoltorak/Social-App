@@ -1,0 +1,11 @@
+<textarea
+    [(ngModel)]="postText"
+    maxlength="120"
+    class="post-input"
+    placeholder="Say hello to world..."
+    (input)="updateCharacterCounter()">
+</textarea>
+
+<div class="counter-container">
+    <label>{{ numOfCharacters }} / 120</label>
+</div>
