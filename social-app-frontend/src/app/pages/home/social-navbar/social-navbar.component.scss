@@ -1,24 +1,4 @@
-$input-background-color: #2c2d2c;
-$upper-navbar-color: #191819;
-
-@mixin navbar-background {
-    background-color: $upper-navbar-color;
-}
-
-@mixin grid-three-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-@mixin input-background-color {
-    background-color: $input-background-color;
-}
-
-@mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
+@import "mixins";
 
 .search-bar {
     @include flex-center;

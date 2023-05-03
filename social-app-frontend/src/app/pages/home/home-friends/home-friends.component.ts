@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FriendInterface } from "../../../core/interfaces/home/FriendInterface";
+import { FriendInterface } from "@core/interfaces/home/FriendInterface";
 
 @Component({
     selector: 'app-home-friends',

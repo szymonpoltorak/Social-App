@@ -1,23 +1,4 @@
-$main-blue: aqua;
-$border-width: 2px;
-$main-font-color: white;
-$border-radius: 1em;
-
-@mixin page-size {
-    width: 100%;
-    height: 100%;
-}
-
-@mixin flex-gap {
-    display: flex;
-    gap: 2.5em;
-}
-
-@mixin flexbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@import "mixins";
 
 .main-screen {
     background-image: url("../../../../assets/eternity.png");
@@ -29,10 +10,6 @@ $border-radius: 1em;
     font-weight: bold;
 }
 
-.passwords {
-    @include flex-gap;
-}
-
 .lawyer-speech {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 0.8em;
@@ -41,8 +18,7 @@ $border-radius: 1em;
 }
 
 .register-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     min-width: 50em;
     max-width: 50em;
     margin: 10em auto 0;
@@ -91,11 +67,7 @@ $border-radius: 1em;
     color: black;
 }
 
-.name-inputs {
-    @include flex-gap;
-}
-
-.email-date-inputs {
+.inputs {
     @include flex-gap;
 }
 
