@@ -10,6 +10,11 @@
     <app-post-button-bar></app-post-button-bar>
 </div>
 
-<div class="posts-container">
-    <p>Lorem ipsum!</p>
-</div>
+<app-post *ngFor="let post of posts"
+          [postAuthor]="post.postAuthor"
+          [postAuthorLocation]="post.postAuthorLocation"
+          [postContent]="post.postContent"
+          [numOfLikes]="post.numOfLikes"
+          [numOfComments]="post.numOfComments"
+>
+</app-post>

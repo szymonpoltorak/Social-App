@@ -7,6 +7,11 @@ $main-background-color: #0a0b0a;
     align-content: center;
 }
 
+@mixin position-sticky {
+    position: sticky;
+    align-self: start;
+}
+
 @mixin navbar-background {
     background-color: $upper-navbar-color;
 }
@@ -19,8 +24,6 @@ $main-background-color: #0a0b0a;
 
 .just-background {
     background-color: $main-background-color;
-    width: 100%;
-    height: 100%;
     color: white;
 }
 
@@ -35,4 +38,14 @@ $main-background-color: #0a0b0a;
 
 .flex-container {
     @include flex-center;
+}
+
+.sticky-navbar {
+    @include position-sticky;
+    top: 0;
+}
+
+.sticky-element {
+    @include position-sticky;
+    top: 6em;
 }

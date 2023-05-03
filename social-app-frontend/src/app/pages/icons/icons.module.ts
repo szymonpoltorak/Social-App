@@ -14,6 +14,9 @@ import { SearchIconComponent } from './search-icon/search-icon.component';
 import { UserIconComponent } from './user-icon/user-icon.component';
 import { AddFriendIconComponent } from './add-friend-icon/add-friend-icon.component';
 import { RemoveFriendIconComponent } from './remove-friend-icon/remove-friend-icon.component';
+import { LikeIconComponent } from './like-icon/like-icon.component';
+import { CommentIconComponent } from './comment-icon/comment-icon.component';
+import { ShareIconComponent } from './share-icon/share-icon.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { RemoveFriendIconComponent } from './remove-friend-icon/remove-friend-ic
         SearchIconComponent,
         UserIconComponent,
         AddFriendIconComponent,
-        RemoveFriendIconComponent
+        RemoveFriendIconComponent,
+        LikeIconComponent,
+        CommentIconComponent,
+        ShareIconComponent
     ],
     exports: [
         GithubIconComponent,
@@ -46,7 +52,11 @@ import { RemoveFriendIconComponent } from './remove-friend-icon/remove-friend-ic
         SettingsIconComponent,
         LogoutIconComponent,
         UserIconComponent,
-        RemoveFriendIconComponent
+        RemoveFriendIconComponent,
+        AddFriendIconComponent,
+        LikeIconComponent,
+        CommentIconComponent,
+        ShareIconComponent
     ],
     imports: [
         CommonModule

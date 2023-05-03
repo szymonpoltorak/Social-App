@@ -1,0 +1,29 @@
+<div class="posts-container">
+    <div class="separator-container">
+        <div class="username-container">
+            <app-user-icon></app-user-icon>
+
+            <div class="name-location-container">
+                <div>{{ postAuthor }}</div>
+
+                <div class="location-text">{{ postAuthorLocation }}</div>
+            </div>
+        </div>
+
+        <app-add-friend-icon></app-add-friend-icon>
+    </div>
+
+    <div class="post-content">
+        {{ postContent }}
+    </div>
+
+    <div class="separator-container">
+        <div class="statistics-icons">
+            <app-like-icon></app-like-icon>
+
+            <app-comment-icon></app-comment-icon>
+        </div>
+
+        <app-share-icon></app-share-icon>
+    </div>
+</div>

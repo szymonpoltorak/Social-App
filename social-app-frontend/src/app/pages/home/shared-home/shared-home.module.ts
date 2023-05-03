@@ -4,12 +4,14 @@ import { FriendComponent } from "./friend/friend.component";
 import { IconsModule } from "../../icons/icons.module";
 import { TextInputComponent } from './text-input/text-input.component';
 import { FormsModule } from "@angular/forms";
+import { PostComponent } from './post/post.component';
 
 
 @NgModule({
     declarations: [
         FriendComponent,
         TextInputComponent,
+        PostComponent,
     ],
     imports: [
         CommonModule,
@@ -18,7 +20,8 @@ import { FormsModule } from "@angular/forms";
     ],
     exports: [
         FriendComponent,
-        TextInputComponent
+        TextInputComponent,
+        PostComponent
     ]
 })
 export class SharedHomeModule {

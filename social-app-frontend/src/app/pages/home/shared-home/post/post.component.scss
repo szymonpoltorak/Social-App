@@ -1,0 +1,45 @@
+$upper-navbar-color: #191819;
+
+@mixin content-field {
+    border: 1px #eeeee4 solid;
+    background-color: $upper-navbar-color;
+    border-radius: 1em;
+    padding: 1em;
+    width: 30em;
+}
+
+.posts-container {
+    @include content-field;
+    margin-bottom: 2em;
+    width: 35em;
+}
+
+.username-container {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.name-location-container {
+    display: grid;
+    gap: 0.3em;
+}
+
+.location-text {
+    font-size: 10px;
+}
+
+.statistics-icons {
+    display: flex;
+    gap: 1em;
+}
+
+.separator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-content {
+    margin: 1em;
+}

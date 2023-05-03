@@ -1,5 +1,7 @@
 export interface PostInterface {
-    authorName: string;
-    authorLocation: string;
-    postDescription: string;
+    postAuthor: string;
+    postAuthorLocation: string;
+    postContent: string;
+    numOfLikes: number;
+    numOfComments: number;
 }
