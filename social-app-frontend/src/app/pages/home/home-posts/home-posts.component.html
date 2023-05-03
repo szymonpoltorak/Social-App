@@ -11,10 +11,10 @@
 </div>
 
 <app-post *ngFor="let post of posts"
-          [postAuthor]="post.postAuthor"
-          [postAuthorLocation]="post.postAuthorLocation"
-          [postContent]="post.postContent"
-          [numOfLikes]="post.numOfLikes"
           [numOfComments]="post.numOfComments"
+          [numOfLikes]="post.numOfLikes"
+          [postAuthorLocation]="post.postAuthorLocation"
+          [postAuthor]="post.postAuthor"
+          [postContent]="post.postContent"
 >
 </app-post>

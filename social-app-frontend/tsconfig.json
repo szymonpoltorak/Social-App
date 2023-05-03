@@ -22,7 +22,33 @@
         "lib": [
             "ES2022",
             "dom"
-        ]
+        ],
+        "paths": {
+            "@assets/*": [
+                "./src/assets/*"
+            ],
+            "@auth/*": [
+                "./src/app/pages/auth/*"
+            ],
+            "@pages/*": [
+                "./src/app/pages/*"
+            ],
+            "@core/*": [
+                "./src/app/core/*"
+            ],
+            "@icons/*": [
+                "./src/app/pages/icons/*"
+            ],
+            "@not-found/*": [
+                "./src/app/pages/not-found/*"
+            ],
+            "@home/*": [
+                "./src/app/pages/home/*"
+            ],
+            "@styles/*": [
+                "./src/app/styles/*"
+            ]
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

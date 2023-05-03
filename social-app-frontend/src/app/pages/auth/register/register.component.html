@@ -11,7 +11,7 @@
         </div>
 
         <form (ngSubmit)="makeRedirection()" [formGroup]="registerForm">
-            <div class="name-inputs" formGroupName="nameInputs">
+            <div class="inputs" formGroupName="nameInputs">
                 <app-name-input [nameControl]="controlProvider.nameControl"
                                 [name]="'name'"
                                 [wasSubmitClicked]="wasSubmitClicked"
@@ -25,7 +25,7 @@
                 </app-name-input>
             </div>
 
-            <div class="email-date-inputs" formGroupName="emailDateInputs">
+            <div class="inputs" formGroupName="emailDateInputs">
                 <app-email-field [emailControl]="controlProvider.emailControl"
                                  [wasSubmitClicked]="wasSubmitClicked"
                                  formControlName="email">
@@ -37,7 +37,7 @@
                 </app-date>
             </div>
 
-            <div class="passwords" formGroupName="passwordInputs">
+            <div class="inputs" formGroupName="passwordInputs">
                 <app-password-field [passwordControl]="controlProvider.passwordControl"
                                     [passwordMismatch]="passwordMismatch"
                                     [password]="'Enter your password'"

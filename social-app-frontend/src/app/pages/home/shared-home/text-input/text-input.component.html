@@ -1,9 +1,9 @@
 <textarea
+    (input)="updateCharacterCounter()"
     [(ngModel)]="postText"
-    maxlength="120"
     class="post-input"
-    placeholder="Say hello to world..."
-    (input)="updateCharacterCounter()">
+    maxlength="120"
+    placeholder="Say hello to world...">
 </textarea>
 
 <div class="counter-container">

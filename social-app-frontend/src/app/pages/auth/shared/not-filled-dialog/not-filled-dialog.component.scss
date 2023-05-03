@@ -1,7 +1,4 @@
-$main-blue: aqua;
-$border-width: 2px;
-$main-font-color: white;
-$border-radius: 1em;
+@import "variables";
 
 .dialog-container {
     border: $border-width aqua solid;

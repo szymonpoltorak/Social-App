@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
-import { AuthService } from "../../../core/services/auth.service";
-import { UtilService } from "../../../core/services/util.service";
-import { UserService } from "../../../core/services/user.service";
-import { RoutePaths } from "../../../core/enums/RoutePaths";
+import { AuthService } from "@core/services/auth.service";
+import { UtilService } from "@core/services/util.service";
+import { UserService } from "@core/services/user.service";
+import { RoutePaths } from "@core/enums/RoutePaths";
 
 @Component({
     selector: 'app-social-navbar',

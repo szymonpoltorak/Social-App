@@ -1,11 +1,7 @@
-$main-blue: aqua;
-$border-width: 2px;
-$main-font-color: white;
-$border-radius: 0.5em;
+@import "variables";
 
 .name-input-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     padding: 0.5em;
 }
 
