@@ -1,26 +1,7 @@
-$box-element-size: 20em;
-$main-font-color: white;
-$main-blue: aqua;
-$border-radius: 1em;
-$border-width: 2px;
-
-@mixin font-bolding {
-    font-weight: 700;
-}
-
-@mixin flexbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@mixin page-size {
-    width: 100vw;
-    height: 100vh;
-}
+@import "mixins";
 
 main {
-    @include page-size;
+    @include page-view-size;
     color: $main-font-color;
     background-image: url("../../../assets/eternity.png");
 }
@@ -46,7 +27,7 @@ p {
 }
 
 .content {
-    @include flexbox;
+    @include flex-center;
     margin-top: 22em;
     height: $box-element-size;
     font-family: 'Poppins', sans-serif;

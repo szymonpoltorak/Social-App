@@ -41,3 +41,12 @@
     border-radius: 1.3em;
     transition: border-radius 0.3s ease-in-out;
 }
+
+@mixin font-bolding {
+    font-weight: 700;
+}
+
+@mixin page-view-size {
+    width: 100vw;
+    height: 100vh;
+}
