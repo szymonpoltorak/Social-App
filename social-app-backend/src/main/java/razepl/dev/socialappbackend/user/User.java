@@ -72,6 +72,16 @@ public class User implements ServiceUser {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String location;
+
+    private String job;
+
+    private String github;
+
+    private String twitter;
+
+    private String linkedin;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
