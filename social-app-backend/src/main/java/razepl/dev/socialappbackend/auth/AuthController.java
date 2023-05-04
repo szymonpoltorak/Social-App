@@ -1,9 +1,9 @@
 package razepl.dev.socialappbackend.auth;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +20,10 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
  * Class to control auth endpoints.
  * It implements {@link AuthInterface}.
  */
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = AUTH_MAPPING)
+@Tag(name = "User authentication")
 public class AuthController implements AuthInterface {
     private final AuthServiceInterface authService;
 
