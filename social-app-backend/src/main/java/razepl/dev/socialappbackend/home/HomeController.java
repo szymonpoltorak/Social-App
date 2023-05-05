@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.FriendData;
 import razepl.dev.socialappbackend.home.data.UserData;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
@@ -26,6 +27,8 @@ public class HomeController implements HomeInterface {
     @Override
     @GetMapping(value = USERDATA_MAPPING)
     public final ResponseEntity<UserData> getUserData(@RequestParam String username) {
+        NullChecker.throwAppropriateException(username);
+
         log.info("Getting userdata for user {}", username);
 
         return ResponseEntity.ok(homeService.buildUserDataFromDb(username));
@@ -34,6 +37,8 @@ public class HomeController implements HomeInterface {
     @Override
     @GetMapping(value = FRIENDS_LIST_MAPPING)
     public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username) {
+        NullChecker.throwAppropriateException(username);
+
         log.info("Finding list of users for {}", username);
 
         return ResponseEntity.ok(homeService.buildUsersFriendList(username));
