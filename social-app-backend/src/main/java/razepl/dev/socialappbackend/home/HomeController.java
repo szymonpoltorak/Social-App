@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import razepl.dev.socialappbackend.home.data.FriendData;
 import razepl.dev.socialappbackend.home.data.UserData;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 
-import static razepl.dev.socialappbackend.home.constants.HomeMappings.HOME_MAPPING;
-import static razepl.dev.socialappbackend.home.constants.HomeMappings.USERDATA_MAPPING;
+import java.util.List;
+
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.*;
 
 @Slf4j
 @RestController
@@ -24,6 +26,16 @@ public class HomeController implements HomeInterface {
     @Override
     @GetMapping(value = USERDATA_MAPPING)
     public final ResponseEntity<UserData> getUserData(@RequestParam String username) {
+        log.info("Getting userdata for user {}", username);
+
         return ResponseEntity.ok(homeService.buildUserDataFromDb(username));
+    }
+
+    @Override
+    @GetMapping(value = FRIENDS_LIST_MAPPING)
+    public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username) {
+        log.info("Finding list of users for {}", username);
+
+        return ResponseEntity.ok(homeService.buildUsersFriendList(username));
     }
 }

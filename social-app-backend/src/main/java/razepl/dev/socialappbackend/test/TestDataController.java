@@ -70,7 +70,7 @@ public class TestDataController {
             if (!user.getEmail().equals(username)) {
                 Friend friend = Friend
                         .builder()
-                        .friendName(user.getName())
+                        .friendName(user.getFullName())
                         .user(userToGenFriends)
                         .friendJob(user.getJob())
                         .build();

@@ -94,6 +94,11 @@ public class User implements ServiceUser {
     }
 
     @Override
+    public final String getFullName() {
+        return String.format("%s %s", name, surname);
+    }
+
+    @Override
     public final Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
