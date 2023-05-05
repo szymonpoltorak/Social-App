@@ -21,6 +21,9 @@ public class Friend {
 
     private String friendJob;
 
+    @Column(unique = true)
+    private String friendUsername;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

@@ -1,5 +1,6 @@
 package razepl.dev.socialappbackend.home.interfaces;
 
+import razepl.dev.socialappbackend.home.data.FriendUserRequest;
 import razepl.dev.socialappbackend.home.data.UserDataRequest;
 
 public interface UserServiceInterface {
@@ -12,4 +13,8 @@ public interface UserServiceInterface {
     void updateUsersLocation(UserDataRequest request);
 
     void updateUsersJob(UserDataRequest request);
+
+    void removeFriendFromUser(FriendUserRequest request);
+
+    void addFriendToUser(FriendUserRequest request);
 }

@@ -10,4 +10,6 @@ public interface FriendsRepository extends JpaRepository<Friend, Long> {
     long countFriendByUser(User user);
 
     Optional<List<Friend>> findAllByUser(User user);
+
+    Optional<Friend> findByFriendUsernameAndUser(String friendUsername, User user);
 }

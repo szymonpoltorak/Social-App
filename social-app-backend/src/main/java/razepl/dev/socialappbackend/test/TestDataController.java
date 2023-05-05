@@ -71,6 +71,7 @@ public class TestDataController {
                 Friend friend = Friend
                         .builder()
                         .friendName(user.getFullName())
+                        .friendUsername(user.getUsername())
                         .user(userToGenFriends)
                         .friendJob(user.getJob())
                         .build();

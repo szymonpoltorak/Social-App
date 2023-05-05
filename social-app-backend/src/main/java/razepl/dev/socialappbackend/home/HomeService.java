@@ -47,6 +47,7 @@ public class HomeService implements HomeServiceInterface {
             FriendData friendData = FriendData
                     .builder()
                     .fullName(friend.getFriendName())
+                    .friendUsername(friend.getFriendUsername())
                     .job(friend.getFriendJob())
                     .build();
             response.add(friendData);

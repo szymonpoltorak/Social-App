@@ -19,6 +19,10 @@ public final class HomeMappings {
 
     public static final String HOME_USER_MAPPING = "/api/home/user";
 
+    public static final String ADD_FRIEND_MAPPING = "/addFriend";
+
+    public static final String REMOVE_FRIEND_MAPPING = "/removeFriend";
+
     private HomeMappings() {
     }
 }

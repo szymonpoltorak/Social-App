@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.home.data.FriendUserRequest;
 import razepl.dev.socialappbackend.home.data.UserDataRequest;
 import razepl.dev.socialappbackend.home.interfaces.HomeUserInterface;
 import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;
@@ -22,6 +23,30 @@ import static razepl.dev.socialappbackend.home.constants.ResponseMessages.SUCCES
 @RequestMapping(value = HOME_USER_MAPPING)
 public class HomeUserController implements HomeUserInterface {
     private final UserServiceInterface userService;
+
+    @Override
+    @PatchMapping(value = ADD_FRIEND_MAPPING)
+    public ResponseEntity<String> addToUsersFriends(@RequestBody FriendUserRequest request) {
+        NullChecker.throwAppropriateException(request);
+
+        log.info("Adding friend: {}, for user : {}", request.friendsUsername(), request.username());
+
+        userService.addFriendToUser(request);
+
+        return ResponseEntity.ok("Successfully add friend to user!");
+    }
+
+    @Override
+    @PatchMapping(value = REMOVE_FRIEND_MAPPING)
+    public ResponseEntity<String> removeFromUsersFriends(@RequestBody FriendUserRequest request) {
+        NullChecker.throwAppropriateException(request);
+
+        log.info("Removing friend: {}, from user : {}", request.friendsUsername(), request.username());
+
+        userService.removeFriendFromUser(request);
+
+        return ResponseEntity.ok("Successfully removed friend from user!");
+    }
 
     @Override
     @PatchMapping(value = TWITTER_MAPPING)
