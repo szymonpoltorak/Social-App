@@ -11,8 +11,8 @@ import razepl.dev.socialappbackend.user.User;
 @NoArgsConstructor
 @Data
 @Builder
-@Entity
-public class Friends {
+@Entity(name = "Friends")
+public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long friendshipId;
