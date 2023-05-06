@@ -28,11 +28,10 @@ export class LocalStorageService implements LocalStorageInterface {
     getValueFromStorage(key: StorageKeys): string {
         const value: string | null = window.localStorage.getItem(key);
 
-        return value === null ? "" : `${ value }`;
+        return value === null ? "" : value;
     }
 
     clearStorage(): void {
-        window.localStorage.removeItem(StorageKeys.REFRESH_TOKEN);
-        window.localStorage.removeItem(StorageKeys.AUTH_TOKEN);
+        window.localStorage.clear();
     }
 }

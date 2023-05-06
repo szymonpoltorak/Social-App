@@ -12,6 +12,7 @@ import { AuthResponse } from "@core/data/auth-response";
 import { UserService } from "@core/services/user.service";
 import { AuthConstants } from "@core/enums/AuthConstants";
 import { UtilService } from "@core/services/util.service";
+import { StorageKeys } from "@core/enums/StorageKeys";
 
 @Component({
     selector: "app-register",
@@ -50,6 +51,11 @@ export class RegisterComponent implements OnInit, RegisterInterface {
                 return;
             }
             this.userService.setUserAuthentication = true;
+
+            const username: string = this.registerForm.get(FormFieldNames.EMAIL_DATE_GROUP)
+                ?.get(FormFieldNames.EMAIL_FIELD)?.value;
+
+            this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
 
             this.authService.saveData(data);
 

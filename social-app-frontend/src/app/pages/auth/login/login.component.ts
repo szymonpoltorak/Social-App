@@ -78,11 +78,13 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
 
                     return;
                 }
+                const username: string = this.loginForm.get(FormFieldNames.EMAIL_FIELD)?.value;
+
                 this.userService.setUserAuthentication = true;
 
-                this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-                this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+                this.authService.saveData(data);
 
+                this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
                 this.utilService.navigate(RoutePaths.HOME_PATH);
             });
     }

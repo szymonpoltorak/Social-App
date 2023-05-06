@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const header: string = `${ this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN) }`;
+        const header: string = this.localStorageService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
 
         request = request.clone({
             setHeaders: {
