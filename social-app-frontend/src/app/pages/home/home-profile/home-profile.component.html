@@ -3,9 +3,9 @@
         <app-user-icon></app-user-icon>
 
         <div class="name-friends-container">
-            <div>Users Name</div>
+            <div>{{ fullName }}</div>
 
-            <div class="friends-counter">10 friends</div>
+            <div class="friends-counter">{{ numOfFriends }} Friends</div>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
             <div class="icon-text-container">
                 <app-location-icon></app-location-icon>
 
-                <div>Warsaw, Poland</div>
+                <div>{{ userLocation }}</div>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -26,7 +26,7 @@
             <div class="icon-text-container">
                 <app-work-icon></app-work-icon>
 
-                <div>Work position at company</div>
+                <div>{{ job }}</div>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -38,9 +38,11 @@
     <div class="social-container">
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="twitter !== ''" [attr.href]="twitter" >
                     <app-twitter-icon></app-twitter-icon>
                 </a>
+
+                <app-twitter-icon *ngIf="twitter === ''"></app-twitter-icon>
 
                 <div>Twitter profile</div>
             </div>
@@ -50,9 +52,11 @@
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="linkedin !== ''" [attr.href]="linkedin">
                     <app-linked-in-icon></app-linked-in-icon>
                 </a>
+
+                <app-linked-in-icon *ngIf="linkedin === ''"></app-linked-in-icon>
 
                 <div>LinkedIn profile</div>
             </div>
@@ -62,9 +66,11 @@
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="github !== ''" [attr.href]="github">
                     <app-github-icon></app-github-icon>
                 </a>
+
+                <app-github-icon *ngIf="github === ''"></app-github-icon>
 
                 <div>Github profile</div>
             </div>
