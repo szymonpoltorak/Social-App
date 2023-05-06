@@ -4,6 +4,7 @@ import { LocalStorageService } from "./local-storage.service";
 import { StorageKeys } from "../enums/StorageKeys";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { AuthResponse } from "@core/data/auth-response";
 
 @Injectable({
     providedIn: 'root'
@@ -26,8 +27,8 @@ export class UtilService {
         this.localStorageService.addValueIntoStorage(key, value);
     }
 
-    buildTestData(): Observable<void> {
-        return this.http.post<void>("/test", {});
+    buildTestData(): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>("/api/test", {});
     }
 
     getValueFromStorage(key: StorageKeys): string {

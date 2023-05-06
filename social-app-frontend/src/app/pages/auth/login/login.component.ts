@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { DialogContents } from "@core/enums/DialogContents";
 import { LoginRequest } from "@core/data/login-request";
@@ -13,17 +13,20 @@ import { UserService } from "@core/services/user.service";
 import { AuthConstants } from "@core/enums/AuthConstants";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { UtilService } from "@core/services/util.service";
+import { catchError, Subject, takeUntil, throwError } from "rxjs";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, LoginInterface {
+export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
     private dialogListItems !: Array<string>;
     private paragraphContent !: string;
+    private testDestroy$: Subject<any> = new Subject<any>();
+    private loginDestroy$: Subject<any> = new Subject<any>();
 
     constructor(public controlProvider: LoginControlProviderService,
                 private dialogService: DialogService,
@@ -44,7 +47,14 @@ export class LoginComponent implements OnInit, LoginInterface {
 
             this.userService.setWasUserLoggedOut = false;
         }
-        this.utilService.buildTestData();
+
+        this.utilService.buildTestData()
+            .pipe(takeUntil(this.testDestroy$), catchError(error => {
+                this.utilService.clearStorage();
+
+                return throwError(error);
+            }))
+            .subscribe();
     }
 
     authenticateUser(): void {
@@ -59,20 +69,22 @@ export class LoginComponent implements OnInit, LoginInterface {
 
         console.log(request);
 
-        this.authService.loginUser(request).subscribe((data: AuthResponse): void => {
-            if (data.authToken === AuthConstants.NO_TOKEN) {
-                this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
-                    DialogContents.FORM_HEADER);
+        this.authService.loginUser(request)
+            .pipe(takeUntil(this.loginDestroy$))
+            .subscribe((data: AuthResponse): void => {
+                if (data.authToken === AuthConstants.NO_TOKEN) {
+                    this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
+                        DialogContents.FORM_HEADER);
 
-                return;
-            }
-            this.userService.setUserAuthentication = true;
+                    return;
+                }
+                this.userService.setUserAuthentication = true;
 
-            this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-            this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+                this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+                this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
 
-            this.utilService.navigate(RoutePaths.HOME_PATH);
-        });
+                this.utilService.navigate(RoutePaths.HOME_PATH);
+            });
     }
 
     private buildLoginRequest(): LoginRequest {
@@ -82,5 +94,10 @@ export class LoginComponent implements OnInit, LoginInterface {
         loginRequest.password = this.loginForm.get(FormFieldNames.LOGIN_PASSWORD)!.value;
 
         return loginRequest;
+    }
+
+    ngOnDestroy(): void {
+        this.testDestroy$.complete();
+        this.loginDestroy$.complete();
     }
 }

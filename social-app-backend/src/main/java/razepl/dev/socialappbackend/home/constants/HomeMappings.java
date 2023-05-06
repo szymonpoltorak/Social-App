@@ -13,7 +13,7 @@ public final class HomeMappings {
 
     public static final String LINKEDIN_MAPPING = "/linkedin";
 
-    public static final String JOB_MAPPING = "/job";
+    public static final String JOB_MAPPING = "/friendJob";
 
     public static final String LOCATION_MAPPING = "/location";
 

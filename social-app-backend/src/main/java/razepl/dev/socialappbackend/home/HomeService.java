@@ -30,11 +30,11 @@ public class HomeService implements HomeServiceInterface {
         return UserData
                 .builder()
                 .fullName(user.getFullName())
-                .location(user.getLocation())
-                .job(user.getJob())
-                .github(user.getGithub())
-                .linkedin(user.getLinkedin())
-                .twitter(user.getTwitter())
+                .location(convertNullIntoEmptyString(user.getLocation()))
+                .job(convertNullIntoEmptyString(user.getJob()))
+                .github(convertNullIntoEmptyString(user.getGithub()))
+                .linkedin(convertNullIntoEmptyString(user.getLinkedin()))
+                .twitter(convertNullIntoEmptyString(user.getTwitter()))
                 .numOfFriends(friendsRepository.countFriendByUser(user))
                 .build();
     }
@@ -50,12 +50,16 @@ public class HomeService implements HomeServiceInterface {
         for (Friend friend : friendList) {
             FriendData friendData = FriendData
                     .builder()
-                    .fullName(friend.getFriendName())
+                    .friendFullName(friend.getFriendName())
                     .friendUsername(friend.getFriendUsername())
-                    .job(friend.getFriendJob())
+                    .friendJob(convertNullIntoEmptyString(friend.getFriendJob()))
                     .build();
             response.add(friendData);
         }
         return response;
+    }
+
+    private String convertNullIntoEmptyString(String value) {
+        return value == null ? "" : value;
     }
 }

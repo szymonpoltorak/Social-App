@@ -34,13 +34,13 @@ public class LogoutService implements LogoutHandler {
         String jwt = authHeader.substring(TOKEN_START_INDEX);
         JwtToken token = tokenRepository.findByToken(jwt).orElse(null);
 
-        log.info("Jwt in header : {}\nToken in repository : {}", jwt, token);
-
         if (token == null) {
-            log.warn("Token is null");
+            log.warn("Jwt in header: {}\nToken is null", jwt);
 
             return;
         }
+        log.info("Jwt in header : {}\nToken in repository : {}", jwt, token);
+
         token.setExpired(true);
         token.setRevoked(true);
         tokenRepository.save(token);

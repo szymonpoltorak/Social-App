@@ -30,7 +30,7 @@ export class AuthService implements AuthInterface {
     }
 
     logoutUser(): Observable<any> {
-        return this.http.post("/api/auth/logout", "");
+        return this.http.post(AuthApiCalls.LOGOUT_URL, {});
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {

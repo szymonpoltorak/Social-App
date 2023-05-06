@@ -103,7 +103,7 @@ public class HomeUserController implements HomeUserInterface {
     public ResponseEntity<String> updateUsersJob(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
-        log.info("Updating users job data with: \n{}", request);
+        log.info("Updating users friendJob data with: \n{}", request);
 
         userService.updateUsersJob(request);
 

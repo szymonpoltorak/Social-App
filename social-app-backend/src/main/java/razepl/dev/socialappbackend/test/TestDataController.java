@@ -20,13 +20,13 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/api/test")
 public class TestDataController {
     private final AuthServiceInterface authInterface;
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
 
-    @PostMapping()
+    @PostMapping
     public final ResponseEntity<AuthResponse> buildExampleDatabase() {
         log.info("Entering building example data!");
 

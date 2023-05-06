@@ -108,6 +108,8 @@ public class AuthService implements AuthServiceInterface {
         if (username == null) {
             throw new UsernameNotFoundException("Such user does not exist!");
         }
+        log.info("User of username : {}", username);
+
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!")
         );

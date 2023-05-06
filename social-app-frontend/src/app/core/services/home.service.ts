@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Friend } from "@core/interfaces/home/Friend";
+import { FriendData } from "@core/interfaces/home/FriendData";
 import { UserData } from "@core/interfaces/home/UserData";
+import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +12,8 @@ export class HomeService {
     constructor(private http: HttpClient) {
     }
 
-    getFriendList(username: string): Observable<Friend[]> {
-        return this.http.get<Friend[]>("/api/home/friendList", {
+    getFriendList(username: string): Observable<FriendData[]> {
+        return this.http.get<FriendData[]>(HomeApiCalls.GET_FRIEND_LIST, {
             params: {
                 "username": username
             }
@@ -20,10 +21,10 @@ export class HomeService {
     }
 
     getUserData(username: string): Observable<UserData> {
-        return this.http.get<UserData>("/api/home/userData", {
+        return this.http.get<UserData>(HomeApiCalls.GET_USERDATA, {
             params: {
                 "username": username
             }
-        })
+        });
     }
 }

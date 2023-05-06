@@ -5,5 +5,6 @@ export const enum AuthApiCalls {
 
     IS_USER_AUTHENTICATED = "/api/auth/authenticate",
 
-    ERROR_FOUND = '{"authToken": "", "refreshToken": ""}'
+    ERROR_FOUND = '{"authToken": "", "refreshToken": ""}',
+    LOGOUT_URL = "/api/auth/logout"
 }
