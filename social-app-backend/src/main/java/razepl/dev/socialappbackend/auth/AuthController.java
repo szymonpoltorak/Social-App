@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
  * Class to control auth endpoints.
  * It implements {@link AuthInterface}.
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = AUTH_MAPPING)
@@ -32,6 +34,8 @@ public class AuthController implements AuthInterface {
     public final ResponseEntity<AuthResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
         NullChecker.throwAppropriateException(registerRequest);
 
+        log.info("Registering user with data: \n{}", registerRequest);
+
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
@@ -39,6 +43,8 @@ public class AuthController implements AuthInterface {
     @PostMapping(value = LOGIN_MAPPING)
     public final ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
         NullChecker.throwAppropriateException(loginRequest);
+
+        log.info("Logging user with data: \n{}", loginRequest);
 
         return ResponseEntity.ok(authService.login(loginRequest));
     }
@@ -48,6 +54,8 @@ public class AuthController implements AuthInterface {
     public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
         NullChecker.throwAppropriateException(request, response);
 
+        log.info("Refreshing users token.");
+
         return ResponseEntity.ok(authService.refreshToken(request, response));
     }
 
@@ -55,6 +63,8 @@ public class AuthController implements AuthInterface {
     @PostMapping(value = AUTHENTICATE_MAPPING)
     public final ResponseEntity<TokenResponse> authenticateUser(@RequestBody TokenRequest request) {
         NullChecker.throwAppropriateException(request);
+
+        log.info("Authenticating user with data:\n{}", request);
 
         return ResponseEntity.ok(authService.validateUsersTokens(request));
     }

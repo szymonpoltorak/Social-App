@@ -25,6 +25,8 @@ public class HomeService implements HomeServiceInterface {
     public final UserData buildUserDataFromDb(String username) {
         User user = userRepository.findByEmail(username).orElseThrow();
 
+        log.info("Building data for user : {}", user);
+
         return UserData
                 .builder()
                 .fullName(user.getFullName())
@@ -42,6 +44,8 @@ public class HomeService implements HomeServiceInterface {
         User user = userRepository.findByEmail(username).orElseThrow();
         List<Friend> friendList = friendsRepository.findAllByUser(user).orElseThrow();
         List<FriendData> response = new ArrayList<>(friendList.size());
+
+        log.info("Friend list for user : {}", user);
 
         for (Friend friend : friendList) {
             FriendData friendData = FriendData

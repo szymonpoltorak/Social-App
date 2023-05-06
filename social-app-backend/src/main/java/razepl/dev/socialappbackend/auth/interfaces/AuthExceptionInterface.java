@@ -8,6 +8,7 @@ import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
 import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
 import razepl.dev.socialappbackend.exceptions.UserAlreadyExistsException;
 
 /**
@@ -64,5 +65,5 @@ public interface AuthExceptionInterface {
 
     ResponseEntity<ExceptionResponse> handleUserExistException(UserAlreadyExistsException exception);
 
-    ResponseEntity<TokenResponse> handleTokenExceptions();
+    ResponseEntity<TokenResponse> handleTokenExceptions(TokensUserNotFoundException exception);
 }

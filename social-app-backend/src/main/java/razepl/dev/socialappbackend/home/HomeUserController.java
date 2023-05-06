@@ -1,5 +1,6 @@
 package razepl.dev.socialappbackend.home;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import static razepl.dev.socialappbackend.home.constants.ResponseMessages.SUCCES
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = HOME_USER_MAPPING)
+@Tag(name = "User details editing at home site")
 public class HomeUserController implements HomeUserInterface {
     private final UserServiceInterface userService;
 

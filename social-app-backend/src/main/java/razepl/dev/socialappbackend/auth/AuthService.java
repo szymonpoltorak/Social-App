@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +24,8 @@ import razepl.dev.socialappbackend.user.Role;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
+import java.util.Optional;
+
 import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
@@ -30,6 +33,7 @@ import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.
  * Class to manage logic for {@link AuthController}.
  * It implements {@link AuthServiceInterface}.
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthService implements AuthServiceInterface {
@@ -46,9 +50,15 @@ public class AuthService implements AuthServiceInterface {
         String password = userRequest.getPassword();
 
         if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            log.error("Password was not valid! Password: {}", password);
+
             throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
         }
-        if (userRepository.findByEmail(userRequest.getEmail()).isPresent()) {
+        Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
+
+        if (existingUser.isPresent()) {
+            log.error("User already exists! Found user: {}", existingUser.get());
+
             throw new UserAlreadyExistsException("User already exists!");
         }
         @Valid User user = User.builder()
@@ -60,6 +70,8 @@ public class AuthService implements AuthServiceInterface {
                 .password(passwordEncoder.encode(password))
                 .build();
         userRepository.save(user);
+
+        log.info("Building token response for user : {}", user);
 
         return tokenManager.buildTokensIntoResponse(user, false);
     }
@@ -77,6 +89,7 @@ public class AuthService implements AuthServiceInterface {
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!")
         );
+        log.info("Building token response for user : {}", user);
 
         return tokenManager.buildTokensIntoResponse(user, true);
     }
@@ -104,6 +117,8 @@ public class AuthService implements AuthServiceInterface {
         }
         String authToken = jwtService.generateToken(user);
 
+        log.info("New auth token : {}\nFor user : {}", authToken, user);
+
         tokenManager.revokeUserTokens(user);
 
         tokenManager.saveUsersToken(authToken, user);
@@ -118,6 +133,8 @@ public class AuthService implements AuthServiceInterface {
         User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
 
         boolean isAuthTokenValid = jwtService.isTokenValid(request.authToken(), user);
+
+        log.info("Is token valid : {}\nFor user : {}", isAuthTokenValid, user);
 
         return TokenResponse.builder()
                 .isAuthTokenValid(isAuthTokenValid)

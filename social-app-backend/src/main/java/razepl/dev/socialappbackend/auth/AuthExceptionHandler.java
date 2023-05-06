@@ -34,7 +34,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
                 .map(error -> String.format(ERROR_FORMAT, error.getPropertyPath(), error.getMessage()))
                 .collect(Collectors.joining(ERROR_DELIMITER));
 
-        log.error(errorMessage);
+        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -49,7 +49,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
                 .map(error -> String.format(ERROR_FORMAT, error.getField(), error.getDefaultMessage()))
                 .collect(Collectors.joining(ERROR_DELIMITER));
 
-        log.error(errorMessage);
+        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -86,8 +86,11 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
     @Override
     @ExceptionHandler(TokensUserNotFoundException.class)
-    public final ResponseEntity<TokenResponse> handleTokenExceptions() {
+    public final ResponseEntity<TokenResponse> handleTokenExceptions(TokensUserNotFoundException exception) {
+        String className = exception.getClass().getSimpleName();
         TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
+
+        log.error("Exception class name : {}\nError message : {}", className, exception.getMessage());
 
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
@@ -96,7 +99,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
         String errorMessage = exception.getMessage();
         String className = exception.getClass().getSimpleName();
 
-        log.error(errorMessage);
+        log.error("Exception class name : {}\nError message : {}", className, errorMessage);
 
         return new ResponseEntity<>(buildResponse(errorMessage, className), status);
     }
