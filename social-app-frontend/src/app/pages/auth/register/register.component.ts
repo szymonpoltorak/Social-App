@@ -1,17 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
-import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { DialogContents } from "../../../core/enums/DialogContents";
-import { RegisterRequest } from "../../../core/data/register-request";
-import { RegisterInterface } from "../../../core/interfaces/auth/RegisterInterface";
-import { RegisterControlProviderService } from "../../../core/services/register-control-provider.service";
-import { DialogService } from "../../../core/services/dialog.service";
-import { AuthService } from "../../../core/services/auth.service";
-import { RoutePaths } from "../../../core/enums/RoutePaths";
-import { AuthResponse } from "../../../core/data/auth-response";
-import { UserService } from "../../../core/services/user.service";
-import { AuthConstants } from "../../../core/enums/AuthConstants";
-import { UtilService } from "../../../core/services/util.service";
+import { FormFieldNames } from "@core/enums/FormFieldNames";
+import { DialogContents } from "@core/enums/DialogContents";
+import { RegisterRequest } from "@core/data/register-request";
+import { RegisterInterface } from "@core/interfaces/auth/RegisterInterface";
+import { RegisterControlProviderService } from "@core/services/register-control-provider.service";
+import { DialogService } from "@core/services/dialog.service";
+import { AuthService } from "@core/services/auth.service";
+import { RoutePaths } from "@core/enums/RoutePaths";
+import { AuthResponse } from "@core/data/auth-response";
+import { UserService } from "@core/services/user.service";
+import { AuthConstants } from "@core/enums/AuthConstants";
+import { UtilService } from "@core/services/util.service";
 
 @Component({
     selector: "app-register",

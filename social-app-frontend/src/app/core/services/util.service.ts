@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { LocalStorageService } from "./local-storage.service";
 import { StorageKeys } from "../enums/StorageKeys";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UtilService {
     constructor(private router: Router,
-                private localStorageService: LocalStorageService) {
+                private localStorageService: LocalStorageService,
+                private http: HttpClient) {
     }
 
     navigate(url: string): void {
@@ -21,6 +24,10 @@ export class UtilService {
 
     addValueToStorage<V>(key: StorageKeys, value: V): void {
         this.localStorageService.addValueIntoStorage(key, value);
+    }
+
+    buildTestData(): Observable<void> {
+        return this.http.post<void>("/test", {});
     }
 
     getValueFromStorage(key: StorageKeys): string {

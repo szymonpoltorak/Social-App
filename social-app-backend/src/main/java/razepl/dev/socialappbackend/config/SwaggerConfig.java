@@ -29,10 +29,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Server(
                         description = "Backend environment",
                         url = "http://localhost:8080"
-                ),
-                @Server(
-                        description = "Frontend environment",
-                        url = "http://localhost:4200"
                 )
         },
         security = {
