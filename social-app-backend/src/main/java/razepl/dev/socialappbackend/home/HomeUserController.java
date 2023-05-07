@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.home.data.DataResponse;
 import razepl.dev.socialappbackend.home.data.FriendUserRequest;
 import razepl.dev.socialappbackend.home.data.UserDataRequest;
 import razepl.dev.socialappbackend.home.interfaces.HomeUserInterface;
@@ -28,85 +29,85 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = ADD_FRIEND_MAPPING)
-    public ResponseEntity<String> addToUsersFriends(@RequestBody FriendUserRequest request) {
+    public ResponseEntity<DataResponse> addToUsersFriends(@RequestBody FriendUserRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Adding friend: {}, for user : {}", request.friendsUsername(), request.username());
 
         userService.addFriendToUser(request);
 
-        return ResponseEntity.ok("Successfully add friend to user!");
+        return ResponseEntity.ok(new DataResponse("Successfully add friend to user!"));
     }
 
     @Override
     @PatchMapping(value = REMOVE_FRIEND_MAPPING)
-    public ResponseEntity<String> removeFromUsersFriends(@RequestBody FriendUserRequest request) {
+    public ResponseEntity<DataResponse> removeFromUsersFriends(@RequestBody FriendUserRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Removing friend: {}, from user : {}", request.friendsUsername(), request.username());
 
         userService.removeFriendFromUser(request);
 
-        return ResponseEntity.ok("Successfully removed friend from user!");
+        return ResponseEntity.ok(new DataResponse("Successfully removed friend from user!"));
     }
 
     @Override
     @PatchMapping(value = TWITTER_MAPPING)
-    public ResponseEntity<String> updateTwitterData(@RequestBody UserDataRequest request) {
+    public ResponseEntity<DataResponse> updateTwitterData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users twitter data with: \n{}", request);
 
         userService.updateTwitterData(request);
 
-        return ResponseEntity.ok(SUCCESSFUL_DATA_UPDATE);
+        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
     }
 
     @Override
     @PatchMapping(value = LINKEDIN_MAPPING)
-    public ResponseEntity<String> updateLinkedinData(@RequestBody UserDataRequest request) {
+    public ResponseEntity<DataResponse> updateLinkedinData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users linkedin data with: \n{}", request);
 
         userService.updateLinkedinData(request);
 
-        return ResponseEntity.ok(SUCCESSFUL_DATA_UPDATE);
+        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
     }
 
     @Override
     @PatchMapping(value = GITHUB_MAPPING)
-    public ResponseEntity<String> updateGithubData(@RequestBody UserDataRequest request) {
+    public ResponseEntity<DataResponse> updateGithubData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users github data with: \n{}", request);
 
         userService.updateGithubData(request);
 
-        return ResponseEntity.ok(SUCCESSFUL_DATA_UPDATE);
+        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
     }
 
     @Override
     @PatchMapping(value = LOCATION_MAPPING)
-    public ResponseEntity<String> updateUsersLocation(@RequestBody UserDataRequest request) {
+    public ResponseEntity<DataResponse> updateUsersLocation(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users location data with: \n{}", request);
 
         userService.updateUsersLocation(request);
 
-        return ResponseEntity.ok(SUCCESSFUL_DATA_UPDATE);
+        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
     }
 
     @Override
     @PatchMapping(value = JOB_MAPPING)
-    public ResponseEntity<String> updateUsersJob(@RequestBody UserDataRequest request) {
+    public ResponseEntity<DataResponse> updateUsersJob(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users friendJob data with: \n{}", request);
 
         userService.updateUsersJob(request);
 
-        return ResponseEntity.ok(SUCCESSFUL_DATA_UPDATE);
+        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
     }
 }

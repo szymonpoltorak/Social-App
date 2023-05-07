@@ -32,6 +32,10 @@ export class HomeFriendsComponent implements OnInit, OnDestroy {
             });
     }
 
+    removeFriendFromList(friendUsername: string): void {
+        this.friendList = this.friendList.filter((friend: FriendData): boolean => friend.friendUsername !== friendUsername);
+    }
+
     ngOnDestroy(): void {
         this.destroyFriendList$.complete();
     }
