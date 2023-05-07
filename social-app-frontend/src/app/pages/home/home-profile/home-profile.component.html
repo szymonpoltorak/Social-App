@@ -16,7 +16,7 @@
             <div class="icon-text-container">
                 <app-location-icon></app-location-icon>
 
-                <div>{{ userLocation }}</div>
+                <app-social-link [socialSiteName]="SocialNames.JOB_PROFILE" [socialLink]="userLocation"></app-social-link>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -26,7 +26,7 @@
             <div class="icon-text-container">
                 <app-work-icon></app-work-icon>
 
-                <div>{{ job }}</div>
+                <app-social-link [socialSiteName]="SocialNames.LOCATION_PROFILE" [socialLink]="job"></app-social-link>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -38,13 +38,13 @@
     <div class="social-container">
         <div class="separator-container">
             <div class="icon-text-container">
-                <a *ngIf="twitter !== ''" [attr.href]="twitter" >
+                <a *ngIf="twitter !== ''" [attr.href]="twitter" target="_blank">
                     <app-twitter-icon></app-twitter-icon>
                 </a>
 
                 <app-twitter-icon *ngIf="twitter === ''"></app-twitter-icon>
 
-                <div>Twitter profile</div>
+                <app-social-link [socialSiteName]="SocialNames.TWITTER_PROFILE" [socialLink]="twitter"></app-social-link>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -52,13 +52,13 @@
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a *ngIf="linkedin !== ''" [attr.href]="linkedin">
+                <a *ngIf="linkedin !== ''" [attr.href]="linkedin" target="_blank">
                     <app-linked-in-icon></app-linked-in-icon>
                 </a>
 
                 <app-linked-in-icon *ngIf="linkedin === ''"></app-linked-in-icon>
 
-                <div>LinkedIn profile</div>
+                <app-social-link [socialSiteName]="SocialNames.LINKEDIN_PROFILE" [socialLink]="linkedin"></app-social-link>
             </div>
 
             <app-edit-icon></app-edit-icon>
@@ -66,13 +66,13 @@
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a *ngIf="github !== ''" [attr.href]="github">
+                <a *ngIf="github !== ''" [attr.href]="github" target="_blank">
                     <app-github-icon></app-github-icon>
                 </a>
 
                 <app-github-icon *ngIf="github === ''"></app-github-icon>
 
-                <div>Github profile</div>
+                <app-social-link [socialSiteName]="SocialNames.GITHUB_PROFILE" [socialLink]="github"></app-social-link>
             </div>
 
             <app-edit-icon></app-edit-icon>

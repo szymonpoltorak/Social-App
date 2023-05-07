@@ -5,6 +5,7 @@ import { UtilService } from "@core/services/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { Subject, takeUntil } from "rxjs";
 import { UserData } from "@core/interfaces/home/UserData";
+import { SocialNames } from "../../../core/enums/SocialNames";
 
 @Component({
     selector: 'app-home-profile',
@@ -12,6 +13,7 @@ import { UserData } from "@core/interfaces/home/UserData";
     styleUrls: ['./home-profile.component.scss']
 })
 export class HomeProfileComponent implements OnInit, OnDestroy {
+    private userDataDestroy$: Subject<any> = new Subject<any>();
     job!: string;
     userLocation!: string;
     numOfFriends!: number;
@@ -19,7 +21,6 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
     twitter: string = "";
     github: string = "";
     linkedin: string = "";
-    private userDataDestroy$: Subject<any> = new Subject<any>();
 
     constructor(private homeService: HomeService,
                 private userDataService: UserHomeDataService,
@@ -47,4 +48,6 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.userDataDestroy$.complete();
     }
+
+    protected readonly SocialNames = SocialNames;
 }

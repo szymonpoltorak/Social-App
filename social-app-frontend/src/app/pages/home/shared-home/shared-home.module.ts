@@ -5,6 +5,7 @@ import { IconsModule } from "@icons/icons.module";
 import { TextInputComponent } from './text-input/text-input.component';
 import { FormsModule } from "@angular/forms";
 import { PostComponent } from './post/post.component';
+import { SocialLinkComponent } from './social-link/social-link.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { PostComponent } from './post/post.component';
         FriendComponent,
         TextInputComponent,
         PostComponent,
+        SocialLinkComponent,
     ],
     imports: [
         CommonModule,
@@ -21,7 +23,8 @@ import { PostComponent } from './post/post.component';
     exports: [
         FriendComponent,
         TextInputComponent,
-        PostComponent
+        PostComponent,
+        SocialLinkComponent
     ]
 })
 export class SharedHomeModule {
