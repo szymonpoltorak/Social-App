@@ -26,9 +26,6 @@ export class FriendComponent implements OnDestroy {
 
         username = username.substring(1, username.length - 1);
 
-        console.log(`Username: ${username}`);
-        console.log(`Friend name: ${this.friendName}`);
-
         this.userDataService.manageUsersFriendEndpoints(username, this.friendUsername, HomeApiCalls.REMOVE_FRIEND)
             .pipe(takeUntil(this.destroyFriend$))
             .subscribe((): void => {

@@ -5,7 +5,7 @@ import { LoginRequest } from "@core/data/login-request";
 import { FormFieldNames } from "@core/enums/FormFieldNames";
 import { LoginInterface } from "@core/interfaces/auth/LoginInterface";
 import { LoginControlProviderService } from "@core/services/login-control-provider.service";
-import { DialogService } from "@core/services/dialog.service";
+import { AuthDialogService } from "@core/services/auth-dialog.service";
 import { AuthService } from "@core/services/auth.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { AuthResponse } from "@core/data/auth-response";
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
     private loginDestroy$: Subject<any> = new Subject<any>();
 
     constructor(public controlProvider: LoginControlProviderService,
-                private dialogService: DialogService,
+                private dialogService: AuthDialogService,
                 private authService: AuthService,
                 private utilService: UtilService,
                 private userService: UserService) {

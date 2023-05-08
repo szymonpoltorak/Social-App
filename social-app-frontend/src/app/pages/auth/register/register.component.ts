@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AbstractControl, FormGroup } from "@angular/forms";
 import { FormFieldNames } from "@core/enums/FormFieldNames";
 import { DialogContents } from "@core/enums/DialogContents";
 import { RegisterRequest } from "@core/data/register-request";
 import { RegisterInterface } from "@core/interfaces/auth/RegisterInterface";
 import { RegisterControlProviderService } from "@core/services/register-control-provider.service";
-import { DialogService } from "@core/services/dialog.service";
+import { AuthDialogService } from "@core/services/auth-dialog.service";
 import { AuthService } from "@core/services/auth.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { AuthResponse } from "@core/data/auth-response";
@@ -13,21 +13,23 @@ import { UserService } from "@core/services/user.service";
 import { AuthConstants } from "@core/enums/AuthConstants";
 import { UtilService } from "@core/services/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
     selector: "app-register",
     templateUrl: "./register.component.html",
     styleUrls: ["./register.component.scss"]
 })
-export class RegisterComponent implements OnInit, RegisterInterface {
+export class RegisterComponent implements OnInit, RegisterInterface, OnDestroy {
     registerForm!: FormGroup;
     wasSubmitClicked: boolean = false;
     passwordMismatch!: boolean;
     private dialogListItems !: Array<string>;
     private paragraphContent !: string;
+    private destroyRegister$: Subject<void> = new Subject<void>();
 
     constructor(public controlProvider: RegisterControlProviderService,
-                private dialogService: DialogService,
+                private dialogService: AuthDialogService,
                 private authService: AuthService,
                 private userService: UserService,
                 private utilService: UtilService) {
@@ -43,7 +45,9 @@ export class RegisterComponent implements OnInit, RegisterInterface {
         }
         const request: RegisterRequest = this.buildRegisterRequest();
 
-        this.authService.registerUser(request).subscribe((data: AuthResponse): void => {
+        this.authService.registerUser(request)
+            .pipe(takeUntil(this.destroyRegister$))
+            .subscribe((data: AuthResponse): void => {
             if (data.authToken === AuthConstants.NO_TOKEN) {
                 this.dialogService.openDialogWindow(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
                     [DialogContents.REGISTER_ITEMS], DialogContents.FORM_HEADER);
@@ -92,5 +96,10 @@ export class RegisterComponent implements OnInit, RegisterInterface {
         registerRequest.password = passwordGroup.get(FormFieldNames.PASSWORD_FIELD)!.value;
 
         return registerRequest;
+    }
+
+    ngOnDestroy(): void {
+        this.destroyRegister$.next();
+        this.destroyRegister$.complete();
     }
 }

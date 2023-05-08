@@ -6,6 +6,7 @@ import { TextInputComponent } from './text-input/text-input.component';
 import { FormsModule } from "@angular/forms";
 import { PostComponent } from './post/post.component';
 import { SocialLinkComponent } from './social-link/social-link.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { SocialLinkComponent } from './social-link/social-link.component';
         TextInputComponent,
         PostComponent,
         SocialLinkComponent,
+        EditDialogComponent,
     ],
     imports: [
         CommonModule,

@@ -12,6 +12,7 @@ import { MatListModule } from "@angular/material/list";
 import { IconsModule } from "@icons/icons.module";
 import { SharedHomeModule } from "./shared-home/shared-home.module";
 import { PostButtonBarComponent } from './post-button-bar/post-button-bar.component';
+import { HomeDialogService } from "@core/services/home-dialog.service";
 
 
 @NgModule({
@@ -30,6 +31,9 @@ import { PostButtonBarComponent } from './post-button-bar/post-button-bar.compon
         MatListModule,
         IconsModule,
         SharedAuthModule
+    ],
+    providers: [
+        HomeDialogService
     ]
 })
 export class HomeModule {

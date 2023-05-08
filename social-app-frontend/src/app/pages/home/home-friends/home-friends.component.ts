@@ -12,7 +12,7 @@ import { StorageKeys } from "@core/enums/StorageKeys";
     styleUrls: ['./home-friends.component.scss']
 })
 export class HomeFriendsComponent implements OnInit, OnDestroy {
-    private destroyFriendList$: Subject<FriendData[]> = new Subject<FriendData[]>();
+    private destroyFriendList$: Subject<void> = new Subject<void>();
     friendList!: FriendData[];
 
     constructor(private homeService: HomeService,
@@ -37,6 +37,7 @@ export class HomeFriendsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.destroyFriendList$.next();
         this.destroyFriendList$.complete();
     }
 }

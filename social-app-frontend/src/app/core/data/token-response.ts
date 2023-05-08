@@ -1,3 +1,3 @@
-export class TokenResponse {
-    isAuthTokenValid !: boolean;
+export interface TokenResponse {
+    isAuthTokenValid : boolean;
 }

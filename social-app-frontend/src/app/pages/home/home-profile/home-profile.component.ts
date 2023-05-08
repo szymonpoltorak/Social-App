@@ -5,7 +5,9 @@ import { UtilService } from "@core/services/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { Subject, takeUntil } from "rxjs";
 import { UserData } from "@core/interfaces/home/UserData";
-import { SocialNames } from "../../../core/enums/SocialNames";
+import { SocialNames } from "@core/enums/SocialNames";
+import { HomeDialogService } from "@core/services/home-dialog.service";
+import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 
 @Component({
     selector: 'app-home-profile',
@@ -13,7 +15,9 @@ import { SocialNames } from "../../../core/enums/SocialNames";
     styleUrls: ['./home-profile.component.scss']
 })
 export class HomeProfileComponent implements OnInit, OnDestroy {
-    private userDataDestroy$: Subject<any> = new Subject<any>();
+    private userDataDestroy$: Subject<void> = new Subject<void>();
+    protected readonly SocialNames = SocialNames;
+    protected readonly HomeApiCalls = HomeApiCalls;
     job!: string;
     userLocation!: string;
     numOfFriends!: number;
@@ -24,7 +28,8 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
 
     constructor(private homeService: HomeService,
                 private userDataService: UserHomeDataService,
-                private utilService: UtilService) {
+                private utilService: UtilService,
+                private homeDialogService: HomeDialogService) {
     }
 
     ngOnInit(): void {
@@ -45,9 +50,12 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
             });
     }
 
-    ngOnDestroy(): void {
-        this.userDataDestroy$.complete();
+    openDialog(title: string, url: string): void {
+        this.homeDialogService.openMatDialogWindow(title, url);
     }
 
-    protected readonly SocialNames = SocialNames;
+    ngOnDestroy(): void {
+        this.userDataDestroy$.next();
+        this.userDataDestroy$.complete();
+    }
 }

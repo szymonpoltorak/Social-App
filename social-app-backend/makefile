@@ -15,6 +15,9 @@ port-map-spring= -p 8080:8080
 
 all: db
 
+run:
+	mvn clean spring-boot:run
+
 spring: db, spring
 	$(run) --name $(app-name) -e POSTGRES_DB=socialapp -d $(port-map-spring) $(social-app-backed):latest
 

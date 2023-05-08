@@ -29,7 +29,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = ADD_FRIEND_MAPPING)
-    public ResponseEntity<DataResponse> addToUsersFriends(@RequestBody FriendUserRequest request) {
+    public final ResponseEntity<DataResponse> addToUsersFriends(@RequestBody FriendUserRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Adding friend: {}, for user : {}", request.friendsUsername(), request.username());
@@ -41,7 +41,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = REMOVE_FRIEND_MAPPING)
-    public ResponseEntity<DataResponse> removeFromUsersFriends(@RequestBody FriendUserRequest request) {
+    public final ResponseEntity<DataResponse> removeFromUsersFriends(@RequestBody FriendUserRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Removing friend: {}, from user : {}", request.friendsUsername(), request.username());
@@ -53,7 +53,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = TWITTER_MAPPING)
-    public ResponseEntity<DataResponse> updateTwitterData(@RequestBody UserDataRequest request) {
+    public final ResponseEntity<DataResponse> updateTwitterData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users twitter data with: \n{}", request);
@@ -65,7 +65,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = LINKEDIN_MAPPING)
-    public ResponseEntity<DataResponse> updateLinkedinData(@RequestBody UserDataRequest request) {
+    public final ResponseEntity<DataResponse> updateLinkedinData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users linkedin data with: \n{}", request);
@@ -77,7 +77,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = GITHUB_MAPPING)
-    public ResponseEntity<DataResponse> updateGithubData(@RequestBody UserDataRequest request) {
+    public final ResponseEntity<DataResponse> updateGithubData(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users github data with: \n{}", request);
@@ -89,7 +89,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = LOCATION_MAPPING)
-    public ResponseEntity<DataResponse> updateUsersLocation(@RequestBody UserDataRequest request) {
+    public final ResponseEntity<DataResponse> updateUsersLocation(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users location data with: \n{}", request);
@@ -101,7 +101,7 @@ public class HomeUserController implements HomeUserInterface {
 
     @Override
     @PatchMapping(value = JOB_MAPPING)
-    public ResponseEntity<DataResponse> updateUsersJob(@RequestBody UserDataRequest request) {
+    public final ResponseEntity<DataResponse> updateUsersJob(@RequestBody UserDataRequest request) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Updating users friendJob data with: \n{}", request);

@@ -1,0 +1,46 @@
+@import "mixins";
+
+.edit-dialog-container {
+    border: $border-width aqua solid;
+    background-color: black;
+    color: white;
+    padding: 2em;
+}
+
+.dialog-header {
+    color: white;
+}
+
+.link-input {
+
+}
+
+.button-container {
+    @include flex-center;
+}
+
+.submit-button {
+    width: 8em;
+    background-color: transparent;
+    color: $main-font-color;
+    border: $border-width $main-font-color solid;
+    border-radius: $border-radius;
+    font-family: 'Poppins', sans-serif;
+    padding: 0.5em;
+}
+
+.dialog-text {
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.submit-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: $border-width rgba(255, 255, 255, 0.3) solid;
+    animation: 0.5s ease-in;
+}
+
+.submit-button:active {
+    background-color: $main-blue;
+    opacity: 0.5;
+    color: black;
+}
