@@ -12,11 +12,31 @@
 }
 
 .link-input {
+    width: 25em;
+    background-color: transparent;
+    border: white 2px solid;
+    border-radius: 0.5em;
+    color: white;
+    padding: 1em;
+    margin-bottom: 1em;
+}
 
+.link-input:hover {
+    border-color: aqua;
 }
 
 .button-container {
-    @include flex-center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrong-link {
+    border-color: red;
+}
+
+.correct-link {
+    border-color: green;
 }
 
 .submit-button {
