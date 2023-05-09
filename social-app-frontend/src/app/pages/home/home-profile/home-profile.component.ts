@@ -16,6 +16,7 @@ import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 })
 export class HomeProfileComponent implements OnInit, OnDestroy {
     private userDataDestroy$: Subject<void> = new Subject<void>();
+    private userDataDestroyDialog$: Subject<void> = new Subject<void>();
     protected readonly SocialNames = SocialNames;
     protected readonly HomeApiCalls = HomeApiCalls;
     job!: string;
@@ -51,7 +52,27 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
     }
 
     openDialog(title: string, url: string): void {
-        this.homeDialogService.openMatDialogWindow(title, url);
+        this.homeDialogService.openMatDialogWindow(title, url).subscribe((data: string): void => {
+            if (data === null) {
+                return;
+            }
+            if (title === SocialNames.JOB_DIALOG) {
+                this.job = data;
+            }
+            if (title === SocialNames.LOCATION_DIALOG) {
+                this.userLocation = data;
+            }
+            if (title === SocialNames.TWITTER_DIALOG) {
+                this.twitter = data;
+            }
+            if (title === SocialNames.GITHUB_DIALOG) {
+                this.github = data;
+            }
+            if (title === SocialNames.LINKEDIN_DIALOG) {
+                this.linkedin = data;
+            }
+            this.homeDialogService.closeDialog();
+        });
     }
 
     ngOnDestroy(): void {

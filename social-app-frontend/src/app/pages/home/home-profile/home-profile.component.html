@@ -14,10 +14,10 @@
     <div class="location-work-container">
         <div class="separator-container">
             <div class="icon-text-container">
-                <app-location-icon></app-location-icon>
+                <app-work-icon></app-work-icon>
 
                 <app-social-link [socialSiteName]="SocialNames.JOB_PROFILE"
-                                 [socialLink]="userLocation"></app-social-link>
+                                 [socialLink]="job"></app-social-link>
             </div>
 
             <app-edit-icon (click)="openDialog(SocialNames.JOB_DIALOG, HomeApiCalls.UPDATE_JOB)"></app-edit-icon>
@@ -25,9 +25,9 @@
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <app-work-icon></app-work-icon>
+                <app-location-icon></app-location-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.LOCATION_PROFILE" [socialLink]="job"></app-social-link>
+                <app-social-link [socialSiteName]="SocialNames.LOCATION_PROFILE" [socialLink]="userLocation"></app-social-link>
             </div>
 
             <app-edit-icon
