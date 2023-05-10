@@ -2,17 +2,22 @@ package razepl.dev.socialappbackend.home;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.friend.Friend;
 import razepl.dev.socialappbackend.friend.FriendsRepository;
 import razepl.dev.socialappbackend.home.data.FriendData;
+import razepl.dev.socialappbackend.home.data.PostData;
 import razepl.dev.socialappbackend.home.data.UserData;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
+import razepl.dev.socialappbackend.post.Post;
+import razepl.dev.socialappbackend.post.PostRepository;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -20,6 +25,7 @@ import java.util.List;
 public class HomeService implements HomeServiceInterface {
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
+    private final PostRepository postRepository;
 
     @Override
     public final UserData buildUserDataFromDb(String username) {
@@ -40,23 +46,31 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public List<FriendData> buildUsersFriendList(String username) {
+    public final List<FriendData> buildUsersFriendList(String username) {
         User user = userRepository.findByEmail(username).orElseThrow();
         List<Friend> friendList = friendsRepository.findAllByUser(user).orElseThrow();
-        List<FriendData> response = new ArrayList<>(friendList.size());
 
         log.info("Friend list for user : {}", user);
 
-        for (Friend friend : friendList) {
-            FriendData friendData = FriendData
-                    .builder()
-                    .friendFullName(friend.getFriendName())
-                    .friendUsername(friend.getFriendUsername())
-                    .friendJob(convertNullIntoEmptyString(friend.getFriendJob()))
-                    .build();
-            response.add(friendData);
+        return friendList
+                .stream()
+                .map(Friend::buildData)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public final List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite) {
+        if (numOfSite < 0) {
+            throw new IllegalArgumentException("Num of site cannot be less than 0");
         }
-        return response;
+        Page<Post> postList = postRepository.getPosts(Pageable.ofSize(100).withPage(numOfSite));
+
+        log.info("Number of posts that has been taken: {}", postList.getNumberOfElements());
+
+        return postList
+                .stream()
+                .map(Post::buildData)
+                .collect(Collectors.toList());
     }
 
     private String convertNullIntoEmptyString(String value) {

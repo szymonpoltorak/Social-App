@@ -11,6 +11,8 @@ import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.friend.Friend;
 import razepl.dev.socialappbackend.friend.FriendsRepository;
+import razepl.dev.socialappbackend.post.Post;
+import razepl.dev.socialappbackend.post.PostRepository;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
@@ -25,6 +27,7 @@ public class TestDataController {
     private final AuthServiceInterface authInterface;
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
     @PostMapping
     public final ResponseEntity<AuthResponse> buildExampleDatabase() {
@@ -33,6 +36,8 @@ public class TestDataController {
         AuthResponse response = registerUsers();
 
         addFriendsFor("jacek0@gmail.com");
+
+        addPosts();
 
         return ResponseEntity.ok(response);
     }
@@ -76,6 +81,39 @@ public class TestDataController {
                         .friendJob(user.getJob())
                         .build();
                 friendsRepository.save(friend);
+            }
+        }
+    }
+
+    private void addPosts() {
+        LocalDate date = LocalDate.of(2023, 11, 11);
+        String[] contents = {"Hello world!", "What is going on guys?", "How to pass my exams?",
+                "Lets play football!", "Its time for sleep."};
+        User jacek = userRepository.findByEmail("jacek0@gmail.com").orElseThrow();
+        User ania = userRepository.findByEmail("ania1@gmail.com").orElseThrow();
+        String location = "Warsaw, Poland";
+
+        for (int i = 0; i < contents.length; i++) {
+            if (i % 2 == 0) {
+                Post post = Post
+                        .builder()
+                        .postLocation(location)
+                        .postContent(contents[i])
+                        .postDate(date)
+                        .user(jacek)
+                        .numOfLikes(0L)
+                        .build();
+                postRepository.save(post);
+            } else {
+                Post post = Post
+                        .builder()
+                        .postLocation(location)
+                        .postContent(contents[i])
+                        .postDate(date)
+                        .user(ania)
+                        .numOfLikes(0L)
+                        .build();
+                postRepository.save(post);
             }
         }
     }

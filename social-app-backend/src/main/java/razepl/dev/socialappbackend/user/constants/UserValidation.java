@@ -18,7 +18,7 @@ public final class UserValidation {
     /**
      * The pattern for a valid date.
      */
-    public static final String DATE_PATTERN = "dd-MM-yyyy";
+    public static final String DATE_PATTERN = "MM-dd-yyyy";
 
     /**
      * The maximum length for a valid name.

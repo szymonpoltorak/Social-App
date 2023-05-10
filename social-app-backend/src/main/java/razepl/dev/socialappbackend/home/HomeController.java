@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.FriendData;
+import razepl.dev.socialappbackend.home.data.PostData;
 import razepl.dev.socialappbackend.home.data.UserData;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
@@ -31,7 +32,7 @@ public class HomeController implements HomeInterface {
     public final ResponseEntity<UserData> getUserData(@RequestParam String username) {
         NullChecker.throwAppropriateException(username);
 
-        log.info("Getting userdata for user {}", username);
+        log.info("Getting userdata for user : {}", username);
 
         return ResponseEntity.ok(homeService.buildUserDataFromDb(username));
     }
@@ -41,8 +42,16 @@ public class HomeController implements HomeInterface {
     public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username) {
         NullChecker.throwAppropriateException(username);
 
-        log.info("Finding list of users for {}", username);
+        log.info("Finding list of users for : {}", username);
 
         return ResponseEntity.ok(homeService.buildUsersFriendList(username));
+    }
+
+    @Override
+    @GetMapping(value = "/postList")
+    public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite) {
+        log.info("Number of site for posts : {}", numOfSite);
+
+        return ResponseEntity.ok(homeService.getTheListOfPostsByNumberOfSite(numOfSite));
     }
 }

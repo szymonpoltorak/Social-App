@@ -26,7 +26,7 @@ import java.time.Period;
 import java.util.Collection;
 import java.util.List;
 
-import static razepl.dev.socialappbackend.constants.GlobalConstants.USERS_TABLE_NAME;
+import static razepl.dev.socialappbackend.globals.GlobalConstants.USERS_TABLE_NAME;
 import static razepl.dev.socialappbackend.user.constants.UserValidation.*;
 import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.*;
 

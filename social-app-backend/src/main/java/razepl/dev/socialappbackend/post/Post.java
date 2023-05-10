@@ -1,0 +1,57 @@
+package razepl.dev.socialappbackend.post;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import razepl.dev.socialappbackend.globals.DataBuilder;
+import razepl.dev.socialappbackend.home.data.PostData;
+import razepl.dev.socialappbackend.user.User;
+
+import java.time.LocalDate;
+
+import static razepl.dev.socialappbackend.user.constants.UserValidation.DATE_PATTERN;
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "Posts")
+public class Post implements DataBuilder<PostData> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long postId;
+
+    private String postContent;
+
+    private String postLocation;
+
+    private long numOfLikes;
+
+    @DateTimeFormat(pattern = DATE_PATTERN)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate postDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @Override
+    public final PostData buildData() {
+        return PostData
+                .builder()
+                .postAuthor(user.getFullName())
+                .postContent(postContent)
+                .postLocation(postLocation)
+                .postDate(postDate)
+                .build();
+    }
+}

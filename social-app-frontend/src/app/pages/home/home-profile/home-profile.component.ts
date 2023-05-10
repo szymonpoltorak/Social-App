@@ -56,6 +56,8 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroyDialog$))
             .subscribe((data: string): void => {
             if (data === null) {
+                this.homeDialogService.closeDialog();
+                
                 return;
             }
             if (title === SocialNames.JOB_DIALOG) {

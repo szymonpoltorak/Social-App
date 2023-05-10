@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.constants;
+package razepl.dev.socialappbackend.globals;
 
 /**
  * A utility class that contains global constants for the application.
