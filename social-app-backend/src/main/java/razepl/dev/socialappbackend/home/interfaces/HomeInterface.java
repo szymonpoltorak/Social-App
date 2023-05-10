@@ -13,4 +13,6 @@ public interface HomeInterface {
     ResponseEntity<List<PostData>> getPostsList(int offsetValue);
 
     ResponseEntity<PostData> createPost(PostRequest request);
+
+    ResponseEntity<DataResponse> incrementPostLikeCounter(long postId);
 }

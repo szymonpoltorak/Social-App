@@ -92,6 +92,19 @@ public class HomeService implements HomeServiceInterface {
         return post.buildData();
     }
 
+    @Override
+    public final DataResponse updatePostLikeCounter(long postId) {
+        Post post = postRepository.findById(postId).orElseThrow();
+
+        log.info("Post from repository : {}", post);
+
+        post.incrementLikeCounter();
+
+        postRepository.save(post);
+
+        return new DataResponse("Successfully incremented like counter!");
+    }
+
     private String convertNullIntoEmptyString(String value) {
         return value == null ? "" : value;
     }

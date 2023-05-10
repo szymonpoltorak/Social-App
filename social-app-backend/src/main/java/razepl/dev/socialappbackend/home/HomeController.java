@@ -59,4 +59,12 @@ public class HomeController implements HomeInterface {
 
         return ResponseEntity.ok(homeService.createNewPost(request));
     }
+
+    @Override
+    @PatchMapping(value = LIKE_POST_MAPPING)
+    public final ResponseEntity<DataResponse> incrementPostLikeCounter(@RequestParam long postId) {
+        log.info("User liked post of id : {}", postId);
+
+        return ResponseEntity.ok(homeService.updatePostLikeCounter(postId));
+    }
 }

@@ -12,4 +12,6 @@ public interface HomeServiceInterface {
     List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite);
 
     PostData createNewPost(PostRequest request);
+
+    DataResponse updatePostLikeCounter(long postId);
 }

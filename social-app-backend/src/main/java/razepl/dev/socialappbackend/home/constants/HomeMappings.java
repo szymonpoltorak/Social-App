@@ -27,6 +27,8 @@ public final class HomeMappings {
 
     public static final String POST_LIST_MAPPING = "/postList";
 
+    public static final String LIKE_POST_MAPPING = "/likePost";
+
     private HomeMappings() {
     }
 }
