@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +30,7 @@ public class Post implements DataBuilder<PostData> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long postId;
 
+    @Size(min = 1, max = 120)
     private String postContent;
 
     private String postLocation;
@@ -50,8 +52,10 @@ public class Post implements DataBuilder<PostData> {
                 .builder()
                 .postAuthor(user.getFullName())
                 .postContent(postContent)
-                .postLocation(postLocation)
+                .postLocation(postLocation == null ? "" : postLocation)
                 .postDate(postDate)
+                .numOfLikes(numOfLikes)
+                .postId(postId)
                 .build();
     }
 }

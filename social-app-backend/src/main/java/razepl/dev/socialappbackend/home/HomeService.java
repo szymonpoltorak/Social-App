@@ -1,15 +1,15 @@
 package razepl.dev.socialappbackend.home;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.friend.Friend;
 import razepl.dev.socialappbackend.friend.FriendsRepository;
-import razepl.dev.socialappbackend.home.data.FriendData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 import razepl.dev.socialappbackend.post.Post;
 import razepl.dev.socialappbackend.post.PostRepository;
@@ -71,6 +71,25 @@ public class HomeService implements HomeServiceInterface {
                 .stream()
                 .map(Post::buildData)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public final PostData createNewPost(PostRequest request) {
+        User user = userRepository.findByEmail(request.authorUsername()).orElseThrow();
+
+        @Valid Post post = Post
+                .builder()
+                .postDate(request.dateOfCreation())
+                .postContent(request.postContent())
+                .postLocation(user.getLocation())
+                .numOfLikes(0L)
+                .user(user)
+                .build();
+        log.info("Newly created post : {}", post);
+
+        postRepository.save(post);
+
+        return post.buildData();
     }
 
     private String convertNullIntoEmptyString(String value) {

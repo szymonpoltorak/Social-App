@@ -23,6 +23,10 @@ public final class HomeMappings {
 
     public static final String REMOVE_FRIEND_MAPPING = "/removeFriend";
 
+    public static final String CREATE_POST_MAPPING = "/createPost";
+
+    public static final String POST_LIST_MAPPING = "/postList";
+
     private HomeMappings() {
     }
 }

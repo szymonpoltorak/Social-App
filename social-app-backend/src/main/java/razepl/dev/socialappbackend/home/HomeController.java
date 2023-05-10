@@ -4,14 +4,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
-import razepl.dev.socialappbackend.home.data.FriendData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 
@@ -48,10 +43,20 @@ public class HomeController implements HomeInterface {
     }
 
     @Override
-    @GetMapping(value = "/postList")
+    @GetMapping(value = POST_LIST_MAPPING)
     public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite) {
         log.info("Number of site for posts : {}", numOfSite);
 
         return ResponseEntity.ok(homeService.getTheListOfPostsByNumberOfSite(numOfSite));
+    }
+
+    @Override
+    @PostMapping(value = CREATE_POST_MAPPING)
+    public final ResponseEntity<PostData> createPost(@RequestBody PostRequest request) {
+        NullChecker.throwAppropriateException(request);
+
+        log.info("Creating post with data : {}", request);
+
+        return ResponseEntity.ok(homeService.createNewPost(request));
     }
 }

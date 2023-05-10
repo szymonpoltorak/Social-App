@@ -1,8 +1,6 @@
 package razepl.dev.socialappbackend.home.interfaces;
 
-import razepl.dev.socialappbackend.home.data.FriendData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.*;
 
 import java.util.List;
 
@@ -12,4 +10,6 @@ public interface HomeServiceInterface {
     List<FriendData> buildUsersFriendList(String username);
 
     List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite);
+
+    PostData createNewPost(PostRequest request);
 }
