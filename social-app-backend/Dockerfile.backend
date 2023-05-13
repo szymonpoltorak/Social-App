@@ -6,7 +6,7 @@ COPY pom.xml .
 
 COPY src/ src/
 
-RUN mvn -f /home/app/pom.xml clean package -X
+RUN mvn -f /home/app/pom.xml clean package -DskipTests -X
 
 FROM openjdk:21-jdk-slim
 

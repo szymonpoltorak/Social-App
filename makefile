@@ -4,10 +4,13 @@ containers = social-app-frontend social-app-backend social-app-postgres
 
 .PHONY: all, build, clean, stop
 
-all: build
+all: run
+
+run:
+	$(compose) up
 
 build:
-	$(compose) up
+	$(compose) build
 
 stop:
 	$(compose) down

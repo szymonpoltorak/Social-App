@@ -1,4 +1,4 @@
-port-map-db = -p 5000:5432
+port-map-db = -p 5432:5432
 postgres-image = postgres:15.2-alpine3.17
 run = docker run
 pull = docker pull
@@ -15,10 +15,7 @@ port-map-spring= -p 8080:8080
 
 all: db
 
-run:
-	mvn clean spring-boot:run
-
-spring: db, spring
+spring: db, spring-image
 	$(run) --name $(app-name) -e POSTGRES_DB=socialapp -d $(port-map-spring) $(social-app-backed):latest
 
 spring-image:
@@ -28,7 +25,7 @@ pull:
 	$(pull) $(postgres-image)
 
 db:
-	$(run) --name $(container) -e POSTGRES_PASSWORD=none -d $(port-map-db) $(postgres-image)
+	# $(run) --name $(container) -e POSTGRES_PASSWORD=none -e POSTGRES_DB=socialapp -d $(port-map-db) $(postgres-image)
 
 stop:
 	$(stop) $(container)
