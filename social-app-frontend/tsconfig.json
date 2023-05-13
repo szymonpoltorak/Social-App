@@ -47,6 +47,9 @@
             ],
             "@styles/*": [
                 "./src/app/styles/*"
+            ],
+            "@environments/*": [
+                "./src/environments/*"
             ]
         }
     },

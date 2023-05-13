@@ -1,7 +1,5 @@
 version: "3"
 
-name: social-app-frontend
-
 services:
     frontend:
         container_name: frontend

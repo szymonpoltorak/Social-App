@@ -5,6 +5,7 @@ import { StorageKeys } from "../enums/StorageKeys";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthResponse } from "@core/data/auth-response";
+import { environment } from "@environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -28,7 +29,7 @@ export class UtilService {
     }
 
     buildTestData(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>("/api/test", {});
+        return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
     }
 
     getValueFromStorage(key: StorageKeys): string {

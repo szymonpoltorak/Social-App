@@ -45,7 +45,7 @@ public class AppConfiguration implements AppConfigInterface {
         CorsConfiguration configuration = new CorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        configuration.setAllowedOrigins(FRONTEND_ADDRESS);
+        configuration.setAllowedOrigins(CORS_ADDRESSES);
         configuration.setAllowedMethods(ALLOWED_REQUESTS);
         configuration.setAllowedHeaders(List.of(AUTH_HEADER, CONTENT_TYPE_HEADER));
 

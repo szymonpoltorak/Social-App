@@ -25,6 +25,8 @@ services:
     container_name: frontend
     depends_on:
       - backend
+    environment:
+      - API_URL=http://backend:8080
     build:
       context: social-app-frontend
       dockerfile: Dockerfile.frontend
