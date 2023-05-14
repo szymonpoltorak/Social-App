@@ -6,7 +6,7 @@ services:
   postgres:
     container_name: postgres
     build:
-      context: social-app-backend
+      context: .
       dockerfile: Dockerfile.postgres
     ports:
       - "5432:5432"
@@ -17,16 +17,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialapp
     build:
-      context: social-app-backend
+      context: .
       dockerfile: Dockerfile.backend
     ports:
       - "8080:8080"
-  frontend:
-    container_name: frontend
-    depends_on:
-      - backend
-    build:
-      context: social-app-frontend
-      dockerfile: Dockerfile.frontend
-    ports:
-      - "4200:80"

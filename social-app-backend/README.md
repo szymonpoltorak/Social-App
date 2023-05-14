@@ -6,15 +6,11 @@ This is a backend part of the social media app written in Spring.
 
 Here I list a commands provided in makefile file.
 
-* `make`, `make all`, `make db` - runs an image of postgres docker image,
+* `make db` - runs an image of postgres docker image,
 
-* `make spring-image` - build an image of backend spring app,
-
-* `make spring` - runs and builds a backend spring image,
+* `make`, `make all`, `make spring` - runs and builds a backend spring image,
 
 * `make clean` - removes docker process and images created by the makefile,
-
-* `make stop` - stops the postgres db and spring image processes.
 
 ## Database configuring
 
