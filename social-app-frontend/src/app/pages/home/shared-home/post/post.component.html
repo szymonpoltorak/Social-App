@@ -10,8 +10,13 @@
             </div>
         </div>
 
-        <app-add-friend-icon (click)="updateFriendStatus()" *ngIf="!isFriendAdded"></app-add-friend-icon>
-        <app-remove-friend-icon (click)="updateFriendStatus()" *ngIf="isFriendAdded"></app-remove-friend-icon>
+        <app-add-friend-icon (click)="updateFriendStatus()"
+                             *ngIf="!isFriendAdded && username !== currentUser">
+        </app-add-friend-icon>
+
+        <app-remove-friend-icon (click)="updateFriendStatus()"
+                                *ngIf="isFriendAdded && username !== currentUser">
+        </app-remove-friend-icon>
     </div>
 
     <div class="post-content">

@@ -16,17 +16,14 @@ export class HomePostsComponent implements OnInit, OnDestroy {
     private destroyCreatePost$: Subject<void> = new Subject<void>();
     @ViewChild(TextInputComponent) postTextInput !: TextInputComponent;
     posts: PostData[] = [];
+    currentUser!: string;
 
     constructor(private postService: PostService,
                 private utilService: UtilService) {
     }
 
     createNewPost(): void {
-        let username: string = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
-
-        username = username.substring(1, username.length - 1);
-
-        this.postService.createNewPost(this.postTextInput.postText, username)
+        this.postService.createNewPost(this.postTextInput.postText, this.currentUser)
             .pipe(takeUntil(this.destroyCreatePost$))
             .subscribe((data: PostData): void => {
                 console.log(data);
@@ -38,6 +35,12 @@ export class HomePostsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.currentUser = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
+
+        this.currentUser = this.currentUser.substring(1, this.currentUser.length - 1);
+
+        console.log(`Current user ${ this.currentUser }`);
+
         this.postService.getListOfPosts()
             .pipe(takeUntil(this.destroyPostList$))
             .subscribe((data: PostData[]): void => {

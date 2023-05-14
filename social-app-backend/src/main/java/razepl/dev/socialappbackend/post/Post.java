@@ -53,6 +53,7 @@ public class Post implements DataBuilder<PostData> {
         return PostData
                 .builder()
                 .postAuthor(user.getFullName())
+                .username(user.getUsername())
                 .postContent(postContent)
                 .postDate(postDate)
                 .numOfLikes(numOfLikes)
