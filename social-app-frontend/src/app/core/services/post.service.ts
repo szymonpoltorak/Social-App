@@ -14,11 +14,12 @@ export class PostService {
     constructor(private http: HttpClient) {
     }
 
-    createNewPost(postContent: string, authorUsername: string, postDate: Date): Observable<PostData> {
+    createNewPost(postContent: string, authorUsername: string): Observable<PostData> {
+        console.log(`PostContent: ${postContent}\nAuthorUsername: ${authorUsername}`);
+
         return this.http.post<PostData>(`${environment.httpBackend}${HomeApiCalls.CREATE_POST}`, {
             "postContent": postContent,
-            "authorUsername": authorUsername,
-            "postDate": postDate
+            "authorUsername": authorUsername
         });
     }
 

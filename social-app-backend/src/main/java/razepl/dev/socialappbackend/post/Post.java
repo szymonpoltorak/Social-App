@@ -33,8 +33,6 @@ public class Post implements DataBuilder<PostData> {
     @Size(min = 1, max = 120)
     private String postContent;
 
-    private String postLocation;
-
     private long numOfLikes;
 
     @DateTimeFormat(pattern = DATE_PATTERN)
@@ -56,7 +54,6 @@ public class Post implements DataBuilder<PostData> {
                 .builder()
                 .postAuthor(user.getFullName())
                 .postContent(postContent)
-                .postLocation(postLocation == null ? "" : postLocation)
                 .postDate(postDate)
                 .numOfLikes(numOfLikes)
                 .postId(postId)

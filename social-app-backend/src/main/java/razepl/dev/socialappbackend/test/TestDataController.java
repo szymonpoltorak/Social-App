@@ -94,13 +94,11 @@ public class TestDataController {
         User jacek = userRepository.findByEmail("jacek0@gmail.com").orElseThrow();
         User ania = userRepository.findByEmail("ania1@gmail.com").orElseThrow();
         User andrzej = userRepository.findByEmail("andrzej2@gmail.com").orElseThrow();
-        String location = "Warsaw, Poland";
 
         for (int i = 0; i < contents.length; i++) {
             if (i % 3 == 0) {
                 Post post = Post
                         .builder()
-                        .postLocation(location)
                         .postContent(contents[i])
                         .postDate(date)
                         .user(jacek)
@@ -110,7 +108,6 @@ public class TestDataController {
             } else if (i % 3 == 1) {
                 Post post = Post
                         .builder()
-                        .postLocation(location)
                         .postContent(contents[i])
                         .postDate(date)
                         .user(ania)
@@ -120,7 +117,6 @@ public class TestDataController {
             } else {
                 Post post = Post
                         .builder()
-                        .postLocation(location)
                         .postContent(contents[i])
                         .postDate(date)
                         .user(andrzej)

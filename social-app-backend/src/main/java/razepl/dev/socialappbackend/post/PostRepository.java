@@ -9,6 +9,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("""
             select p from Post as p
             inner join User as u on p.user.userId = u.userId
+            order by p.postDate
             """)
     Page<Post> getPosts(Pageable pageable);
 }

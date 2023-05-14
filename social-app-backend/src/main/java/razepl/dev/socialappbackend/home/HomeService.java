@@ -2,7 +2,6 @@ package razepl.dev.socialappbackend.home;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +15,7 @@ import razepl.dev.socialappbackend.post.PostRepository;
 import razepl.dev.socialappbackend.user.User;
 import razepl.dev.socialappbackend.user.interfaces.UserRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,9 +79,8 @@ public class HomeService implements HomeServiceInterface {
 
         @Valid Post post = Post
                 .builder()
-                .postDate(request.dateOfCreation())
+                .postDate(LocalDate.now())
                 .postContent(request.postContent())
-                .postLocation(user.getLocation())
                 .numOfLikes(0L)
                 .user(user)
                 .build();

@@ -2,18 +2,17 @@
     <div class="writing-container">
         <app-user-icon></app-user-icon>
 
-        <app-text-input></app-text-input>
+        <app-text-input #postTextInput></app-text-input>
     </div>
 
     <mat-divider></mat-divider>
 
-    <app-post-button-bar></app-post-button-bar>
+    <app-post-button-bar (createEvent)="createNewPost()"></app-post-button-bar>
 </div>
 
 <app-post *ngFor="let post of posts"
           [numOfComments]="post.numOfComments"
           [numOfLikes]="post.numOfLikes"
-          [postLocation]="post.postLocation"
           [postAuthor]="post.postAuthor"
           [postContent]="post.postContent"
           [postDate]="post.postDate"

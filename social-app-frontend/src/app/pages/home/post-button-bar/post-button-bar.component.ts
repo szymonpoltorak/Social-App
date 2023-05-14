@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
     selector: 'app-post-button-bar',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./post-button-bar.component.scss']
 })
 export class PostButtonBarComponent {
+    @Output() createEvent: EventEmitter<void> = new EventEmitter<void>();
 
+    emitCreatePostEvent(): void {
+        this.createEvent.emit();
+    }
 }
