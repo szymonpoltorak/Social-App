@@ -13,8 +13,10 @@
 <app-post *ngFor="let post of posts"
           [numOfComments]="post.numOfComments"
           [numOfLikes]="post.numOfLikes"
-          [postAuthorLocation]="post.postAuthorLocation"
+          [postLocation]="post.postLocation"
           [postAuthor]="post.postAuthor"
           [postContent]="post.postContent"
+          [postDate]="post.postDate"
+          [postId]="post.postId"
 >
 </app-post>

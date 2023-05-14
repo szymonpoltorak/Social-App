@@ -7,5 +7,7 @@ export enum HomeApiCalls {
     UPDATE_JOB = "/api/home/user/job",
     UPDATE_LOCATION = "/api/home/user/location",
     ADD_FRIEND = "/api/home/user/addFriend",
-    REMOVE_FRIEND = "/api/home/user/removeFriend"
+    REMOVE_FRIEND = "/api/home/user/removeFriend",
+    POST_LIST = "/api/home/postList",
+    CREATE_POST = "/api/home/createPost"
 }

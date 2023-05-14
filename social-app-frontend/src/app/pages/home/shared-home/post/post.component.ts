@@ -7,10 +7,12 @@ import { Component, Input } from '@angular/core';
 })
 export class PostComponent {
     @Input() postAuthor!: string;
-    @Input() postAuthorLocation!: string;
+    @Input() postLocation!: string;
     @Input() postContent!: string;
+    @Input() postDate !: Date;
     @Input() numOfLikes!: number;
     @Input() numOfComments!: number;
+    @Input() postId !: number;
     isPostLiked!: boolean;
     isFriendAdded!: boolean;
 

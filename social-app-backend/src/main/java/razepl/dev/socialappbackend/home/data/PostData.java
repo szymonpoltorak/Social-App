@@ -7,5 +7,5 @@ import java.time.LocalDate;
 
 @Builder
 public record PostData(String postContent, String postAuthor, String postLocation,
-                       LocalDate postDate, long numOfLikes, long postId) implements EntityData {
+                       LocalDate postDate, long numOfLikes, long numOfComments, long postId) implements EntityData {
 }

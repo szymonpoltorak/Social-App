@@ -88,20 +88,33 @@ public class TestDataController {
     private void addPosts() {
         LocalDate date = LocalDate.of(2023, 11, 11);
         String[] contents = {"Hello world!", "What is going on guys?", "How to pass my exams?",
-                "Lets play football!", "Its time for sleep."};
+                "Lets play football!", "Its time for sleep.", "Yesterday I started a new work!",
+                "Live is funny!", "Who wants to play basketball??", "Life is funny!"
+        };
         User jacek = userRepository.findByEmail("jacek0@gmail.com").orElseThrow();
         User ania = userRepository.findByEmail("ania1@gmail.com").orElseThrow();
+        User andrzej = userRepository.findByEmail("andrzej2@gmail.com").orElseThrow();
         String location = "Warsaw, Poland";
 
         for (int i = 0; i < contents.length; i++) {
-            if (i % 2 == 0) {
+            if (i % 3 == 0) {
                 Post post = Post
                         .builder()
                         .postLocation(location)
                         .postContent(contents[i])
                         .postDate(date)
                         .user(jacek)
-                        .numOfLikes(0L)
+                        .numOfLikes(25L)
+                        .build();
+                postRepository.save(post);
+            } else if (i % 3 == 1) {
+                Post post = Post
+                        .builder()
+                        .postLocation(location)
+                        .postContent(contents[i])
+                        .postDate(date)
+                        .user(ania)
+                        .numOfLikes(10L)
                         .build();
                 postRepository.save(post);
             } else {
@@ -110,8 +123,8 @@ public class TestDataController {
                         .postLocation(location)
                         .postContent(contents[i])
                         .postDate(date)
-                        .user(ania)
-                        .numOfLikes(0L)
+                        .user(andrzej)
+                        .numOfLikes(34L)
                         .build();
                 postRepository.save(post);
             }
