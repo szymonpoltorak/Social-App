@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.home;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.exceptions.UsersAlreadyFriendsException;
 import razepl.dev.socialappbackend.friend.Friend;
 import razepl.dev.socialappbackend.friend.FriendsRepository;
 import razepl.dev.socialappbackend.home.data.FriendUserRequest;
@@ -72,6 +73,10 @@ public class UserService implements UserServiceInterface {
     @Override
     public final void addFriendToUser(FriendUserRequest request) {
         User user = userRepository.findByEmail(request.username()).orElseThrow();
+
+        if (friendsRepository.findByFriendUsernameAndUser(request.friendsUsername(), user).isPresent()) {
+            throw new UsersAlreadyFriendsException("User already exists!");
+        }
         User friend = userRepository.findByEmail(request.friendsUsername()).orElseThrow();
 
         Friend newFriend = Friend

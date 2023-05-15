@@ -15,24 +15,24 @@ export class PostService {
     }
 
     createNewPost(postContent: string, authorUsername: string): Observable<PostData> {
-        console.log(`PostContent: ${postContent}\nAuthorUsername: ${authorUsername}`);
+        console.log(`PostContent: ${ postContent }\nAuthorUsername: ${ authorUsername }`);
 
-        return this.http.post<PostData>(`${environment.httpBackend}${HomeApiCalls.CREATE_POST}`, {
+        return this.http.post<PostData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_POST }`, {
             "postContent": postContent,
             "authorUsername": authorUsername
         });
     }
 
     getListOfPosts(): Observable<PostData[]> {
-        return this.http.get<PostData[]>(`${environment.httpBackend}${HomeApiCalls.POST_LIST}`, {
+        return this.http.get<PostData[]>(`${ environment.httpBackend }${ HomeApiCalls.POST_LIST }`, {
             params: {
                 "numOfSite": this.numOfSite
             }
         });
     }
 
-    addUserToFriends(username: string, friendsUsername: string): Observable<string> {
-        return this.http.patch<string>(`${environment.httpBackend}${HomeApiCalls.ADD_FRIEND}`, {
+    manageFriendStatus(username: string, friendsUsername: string, url: string): Observable<string> {
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
             "username": username,
             "friendsUsername": friendsUsername
         });

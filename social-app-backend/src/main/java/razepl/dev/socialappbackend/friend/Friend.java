@@ -23,7 +23,6 @@ public class Friend implements DataBuilder<FriendData> {
 
     private String friendJob;
 
-    @Column(unique = true)
     private String friendUsername;
 
     @ManyToOne(fetch = FetchType.LAZY)
