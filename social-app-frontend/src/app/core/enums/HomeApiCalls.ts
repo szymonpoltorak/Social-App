@@ -9,5 +9,6 @@ export enum HomeApiCalls {
     ADD_FRIEND = "/api/home/user/addFriend",
     REMOVE_FRIEND = "/api/home/user/removeFriend",
     POST_LIST = "/api/home/postList",
-    CREATE_POST = "/api/home/createPost"
+    CREATE_POST = "/api/home/createPost",
+    UPDATE_LIKES = "/api/home/likePost"
 }

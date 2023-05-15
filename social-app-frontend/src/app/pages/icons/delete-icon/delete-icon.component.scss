@@ -1,0 +1,26 @@
+.delete-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8f2434;
+    width: 3em;
+    border-radius: 45%;
+    height: 3em;
+    cursor: pointer;
+    transition: border-radius 0.2s ease-in-out;
+}
+
+.delete-icon-container:hover {
+    background-color: #cc334a;
+    border-radius: 35%;
+}
+
+.delete-icon-container:active {
+    background-color: #dc6474;
+}
+
+svg {
+    width: 1.5em;
+    cursor: pointer;
+    height: 3em;
+}

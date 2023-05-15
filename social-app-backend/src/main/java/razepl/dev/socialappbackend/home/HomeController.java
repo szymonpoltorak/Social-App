@@ -62,9 +62,9 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final ResponseEntity<DataResponse> incrementPostLikeCounter(@RequestParam long postId) {
-        log.info("User liked post of id : {}", postId);
+    public final ResponseEntity<DataResponse> changePostNumberOfLikes(@RequestBody LikeRequest request) {
+        log.info("User wants to change number of like with data : {}", request);
 
-        return ResponseEntity.ok(homeService.updatePostLikeCounter(postId));
+        return ResponseEntity.ok(homeService.updatePostLikeCounter(request));
     }
 }

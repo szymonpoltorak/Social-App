@@ -26,8 +26,6 @@ export class HomePostsComponent implements OnInit, OnDestroy {
         this.postService.createNewPost(this.postTextInput.postText, this.currentUser)
             .pipe(takeUntil(this.destroyCreatePost$))
             .subscribe((data: PostData): void => {
-                console.log(data);
-
                 this.posts.unshift(data);
             });
         this.postTextInput.postText = "";
@@ -36,17 +34,16 @@ export class HomePostsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.currentUser = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
-
         this.currentUser = this.currentUser.substring(1, this.currentUser.length - 1);
-
-        console.log(`Current user ${ this.currentUser }`);
 
         this.postService.getListOfPosts()
             .pipe(takeUntil(this.destroyPostList$))
             .subscribe((data: PostData[]): void => {
-                console.log(data);
-
                 this.posts = data;
+
+                if (data.length === 100) {
+                    this.postService.incrementSiteNumber();
+                }
             });
     }
 

@@ -44,10 +44,6 @@ public class Post implements DataBuilder<PostData> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public final void incrementLikeCounter() {
-        numOfLikes++;
-    }
-
     @Override
     public final PostData buildData() {
         return PostData

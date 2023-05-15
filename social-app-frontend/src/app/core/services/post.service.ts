@@ -15,8 +15,6 @@ export class PostService {
     }
 
     createNewPost(postContent: string, authorUsername: string): Observable<PostData> {
-        console.log(`PostContent: ${ postContent }\nAuthorUsername: ${ authorUsername }`);
-
         return this.http.post<PostData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_POST }`, {
             "postContent": postContent,
             "authorUsername": authorUsername
@@ -35,6 +33,13 @@ export class PostService {
         return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
             "username": username,
             "friendsUsername": friendsUsername
+        });
+    }
+
+    updateNumOfLikes(postId: number, numOfLikes: number): Observable<string> {
+        return this.http.patch<string>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {
+            "postId": postId,
+            "numOfLikes": numOfLikes
         });
     }
 

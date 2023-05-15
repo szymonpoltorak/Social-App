@@ -14,5 +14,5 @@ public interface HomeInterface {
 
     ResponseEntity<PostData> createPost(PostRequest request);
 
-    ResponseEntity<DataResponse> incrementPostLikeCounter(long postId);
+    ResponseEntity<DataResponse> changePostNumberOfLikes(LikeRequest request);
 }

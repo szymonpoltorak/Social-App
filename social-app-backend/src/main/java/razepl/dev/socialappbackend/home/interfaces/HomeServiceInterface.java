@@ -13,5 +13,5 @@ public interface HomeServiceInterface {
 
     PostData createNewPost(PostRequest request);
 
-    DataResponse updatePostLikeCounter(long postId);
+    DataResponse updatePostLikeCounter(LikeRequest request);
 }

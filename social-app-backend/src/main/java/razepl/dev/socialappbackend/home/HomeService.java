@@ -92,12 +92,12 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final DataResponse updatePostLikeCounter(long postId) {
-        Post post = postRepository.findById(postId).orElseThrow();
+    public final DataResponse updatePostLikeCounter(LikeRequest request) {
+        Post post = postRepository.findById(request.postId()).orElseThrow();
 
         log.info("Post from repository : {}", post);
 
-        post.incrementLikeCounter();
+        post.setNumOfLikes(request.numOfLikes());
 
         postRepository.save(post);
 

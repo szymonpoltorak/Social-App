@@ -11,13 +11,7 @@
 </div>
 
 <app-post *ngFor="let post of posts"
-          [numOfComments]="post.numOfComments"
-          [numOfLikes]="post.numOfLikes"
-          [postAuthor]="post.postAuthor"
-          [postContent]="post.postContent"
-          [postDate]="post.postDate"
-          [postId]="post.postId"
+          [postData]="post"
           [currentUser]="currentUser"
-          [username]="post.username"
 >
 </app-post>

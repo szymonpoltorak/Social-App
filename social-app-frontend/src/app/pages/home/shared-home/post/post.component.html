@@ -4,23 +4,27 @@
             <app-user-icon></app-user-icon>
 
             <div class="name-location-container">
-                <div>{{ postAuthor }}</div>
+                <div>{{ postData.postAuthor }}</div>
 
-                <div class="location-text">{{ postDate }}</div>
+                <div class="location-text">{{ postData.postDate }}</div>
             </div>
         </div>
 
-        <app-add-friend-icon (click)="updateFriendStatus()"
-                             *ngIf="!isFriendAdded && username !== currentUser">
+        <app-delete-icon *ngIf="currentUser === postData.username">
+
+        </app-delete-icon>
+
+        <app-add-friend-icon *ngIf="!isFriendAdded && postData.username !== currentUser"
+                             (click)="updateFriendStatus()">
         </app-add-friend-icon>
 
-        <app-remove-friend-icon (click)="updateFriendStatus()"
-                                *ngIf="isFriendAdded && username !== currentUser">
+        <app-remove-friend-icon *ngIf="isFriendAdded && postData.username !== currentUser"
+                                (click)="updateFriendStatus()">
         </app-remove-friend-icon>
     </div>
 
     <div class="post-content">
-        {{ postContent }}
+        {{ postData.postContent }}
     </div>
 
     <div class="separator-container">
@@ -28,13 +32,13 @@
             <div class="vote-container">
                 <app-like-icon (click)="updatePostLike()" [isPostLiked]="isPostLiked"></app-like-icon>
 
-                <div>{{ numOfLikes }}</div>
+                <div>{{ postData.numOfLikes }}</div>
             </div>
 
             <div class="vote-container">
                 <app-comment-icon></app-comment-icon>
 
-                <div>{{ numOfComments }}</div>
+                <div>{{ postData.numOfComments }}</div>
             </div>
         </div>
 
