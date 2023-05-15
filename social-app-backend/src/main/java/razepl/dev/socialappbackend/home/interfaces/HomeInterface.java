@@ -15,4 +15,6 @@ public interface HomeInterface {
     ResponseEntity<PostData> createPost(PostRequest request);
 
     ResponseEntity<DataResponse> changePostNumberOfLikes(LikeRequest request);
+
+    ResponseEntity<Void> deletePost(long postId);
 }

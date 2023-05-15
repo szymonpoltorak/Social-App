@@ -67,4 +67,14 @@ public class HomeController implements HomeInterface {
 
         return ResponseEntity.ok(homeService.updatePostLikeCounter(request));
     }
+
+    @Override
+    @DeleteMapping(value = DELETE_POST_MAPPING)
+    public final ResponseEntity<Void> deletePost(@RequestParam long postId) {
+        log.info("Removing post of id : {}", postId);
+
+        homeService.deletePostByPostId(postId);
+
+        return ResponseEntity.ok().build();
+    }
 }

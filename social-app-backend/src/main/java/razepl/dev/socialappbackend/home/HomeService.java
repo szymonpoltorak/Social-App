@@ -104,6 +104,11 @@ public class HomeService implements HomeServiceInterface {
         return new DataResponse("Successfully incremented like counter!");
     }
 
+    @Override
+    public final void deletePostByPostId(long postId) {
+        postRepository.deleteById(postId);
+    }
+
     private String convertNullIntoEmptyString(String value) {
         return value == null ? "" : value;
     }

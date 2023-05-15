@@ -14,4 +14,6 @@ public interface HomeServiceInterface {
     PostData createNewPost(PostRequest request);
 
     DataResponse updatePostLikeCounter(LikeRequest request);
+
+    void deletePostByPostId(long postId);
 }
