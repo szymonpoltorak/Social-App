@@ -16,7 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
-import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.List;
 

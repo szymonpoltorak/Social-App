@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { PostData } from "@core/interfaces/home/PostData";
 import { environment } from "@environments/environment";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
+import { LikeResponse } from "@core/interfaces/home/LikeResponse";
 
 @Injectable({
     providedIn: 'root'
@@ -36,10 +37,10 @@ export class PostService {
         });
     }
 
-    updateNumOfLikes(postId: number, numOfLikes: number): Observable<string> {
-        return this.http.patch<string>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {
+    updateNumOfLikes(postId: number, username: string): Observable<LikeResponse> {
+        return this.http.patch<LikeResponse>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {
             "postId": postId,
-            "numOfLikes": numOfLikes
+            "username": username
         });
     }
 

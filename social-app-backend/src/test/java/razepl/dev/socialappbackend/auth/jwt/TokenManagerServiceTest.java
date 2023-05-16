@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.user.User;
 
 @SpringBootTest
 @AutoConfigureMockMvc

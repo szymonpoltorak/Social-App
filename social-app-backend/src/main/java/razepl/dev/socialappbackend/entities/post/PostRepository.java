@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.post;
+package razepl.dev.socialappbackend.entities.post;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -8,8 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.auth.jwt.JwtToken;
-import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.entities.jwt.JwtToken;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.*;
 

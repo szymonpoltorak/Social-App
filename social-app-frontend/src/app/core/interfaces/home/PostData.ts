@@ -6,4 +6,5 @@ export interface PostData {
     numOfLikes: number;
     numOfComments: number;
     postId: number;
+    isPostLiked: boolean;
 }

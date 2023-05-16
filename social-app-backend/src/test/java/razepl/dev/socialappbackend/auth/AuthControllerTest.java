@@ -23,10 +23,10 @@ import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.user.User;
-import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.util.AuthTestUtil;
 
 import java.util.List;

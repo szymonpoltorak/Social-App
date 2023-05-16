@@ -1,8 +1,8 @@
-package razepl.dev.socialappbackend.user.interfaces;
+package razepl.dev.socialappbackend.entities.user.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.user.User;
 
 import java.util.Optional;
 

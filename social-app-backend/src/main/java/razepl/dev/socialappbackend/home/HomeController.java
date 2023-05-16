@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
@@ -34,7 +36,7 @@ public class HomeController implements HomeInterface {
 
     @Override
     @GetMapping(value = FRIENDS_LIST_MAPPING)
-    public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username) {
+    public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username, @AuthenticationPrincipal User user) {
         NullChecker.throwAppropriateException(username);
 
         log.info("Finding list of users for : {}", username);
@@ -44,10 +46,11 @@ public class HomeController implements HomeInterface {
 
     @Override
     @GetMapping(value = POST_LIST_MAPPING)
-    public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite) {
+    public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite, @AuthenticationPrincipal User user) {
         log.info("Number of site for posts : {}", numOfSite);
+        log.info("User that sent request: {}", user);
 
-        return ResponseEntity.ok(homeService.getTheListOfPostsByNumberOfSite(numOfSite));
+        return ResponseEntity.ok(homeService.getTheListOfPostsByNumberOfSite(numOfSite, user));
     }
 
     @Override
@@ -62,7 +65,7 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final ResponseEntity<DataResponse> changePostNumberOfLikes(@RequestBody LikeRequest request) {
+    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestBody LikeRequest request) {
         log.info("User wants to change number of like with data : {}", request);
 
         return ResponseEntity.ok(homeService.updatePostLikeCounter(request));

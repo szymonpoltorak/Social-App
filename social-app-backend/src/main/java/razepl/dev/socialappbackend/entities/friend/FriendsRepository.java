@@ -1,7 +1,7 @@
-package razepl.dev.socialappbackend.friend;
+package razepl.dev.socialappbackend.entities.friend;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.user.User;
 
 import java.util.List;
 import java.util.Optional;

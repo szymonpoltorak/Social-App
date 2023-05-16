@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user.constants;
+package razepl.dev.socialappbackend.entities.user.constants;
 
 /**
  * A utility class that contains constants for user validation messages.

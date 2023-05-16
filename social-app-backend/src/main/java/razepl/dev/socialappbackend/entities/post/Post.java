@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.post;
+package razepl.dev.socialappbackend.entities.post;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -11,13 +11,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import razepl.dev.socialappbackend.globals.DataBuilder;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.user.User;
 
 import java.time.LocalDate;
 
-import static razepl.dev.socialappbackend.user.constants.UserValidation.DATE_PATTERN;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.DATE_PATTERN;
 
 @Builder
 @Data
@@ -25,7 +23,7 @@ import static razepl.dev.socialappbackend.user.constants.UserValidation.DATE_PAT
 @AllArgsConstructor
 @Entity
 @Table(name = "Posts")
-public class Post implements DataBuilder<PostData> {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long postId;
@@ -43,17 +41,4 @@ public class Post implements DataBuilder<PostData> {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @Override
-    public final PostData buildData() {
-        return PostData
-                .builder()
-                .postAuthor(user.getFullName())
-                .username(user.getUsername())
-                .postContent(postContent)
-                .postDate(postDate)
-                .numOfLikes(numOfLikes)
-                .postId(postId)
-                .build();
-    }
 }

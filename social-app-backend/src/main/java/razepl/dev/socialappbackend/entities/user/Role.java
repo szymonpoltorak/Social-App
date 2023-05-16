@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user;
+package razepl.dev.socialappbackend.entities.user;
 
 /**
  * An enumeration representing user roles.

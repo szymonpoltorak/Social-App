@@ -3,6 +3,7 @@ import { PostService } from "@core/services/post.service";
 import { Subject, takeUntil } from "rxjs";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { PostData } from "@core/interfaces/home/PostData";
+import { LikeResponse } from "@core/interfaces/home/LikeResponse";
 
 @Component({
     selector: 'app-post',
@@ -15,19 +16,22 @@ export class PostComponent implements OnDestroy {
     private updateLike$: Subject<void> = new Subject<void>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
-    isPostLiked!: boolean;
+    // isPostLiked!: boolean;
     isFriendAdded!: boolean;
 
     constructor(private postService: PostService) {
     }
 
     updatePostLike(): void {
-        this.isPostLiked = !this.isPostLiked;
-        this.postData.numOfLikes = this.isPostLiked ? this.postData.numOfLikes + 1 : this.postData.numOfLikes - 1;
+        // this.isPostLiked = !this.isPostLiked;
+        // this.postData.numOfLikes = this.isPostLiked ? this.postData.numOfLikes + 1 : this.postData.numOfLikes - 1;
 
-        this.postService.updateNumOfLikes(this.postData.postId, this.postData.numOfLikes)
+        this.postService.updateNumOfLikes(this.postData.postId, this.currentUser)
             .pipe(takeUntil(this.updateLike$))
-            .subscribe();
+            .subscribe((data: LikeResponse): void => {
+                this.postData.numOfLikes = data.numOfLikes;
+                this.postData.isPostLiked = data.isPostLiked;
+            });
     }
 
     updateFriendStatus(): void {

@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.auth.jwt.interfaces;
+package razepl.dev.socialappbackend.entities.jwt.interfaces;
 
 /**
  * Interface for JwtToken entity class.

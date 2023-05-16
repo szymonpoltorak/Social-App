@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.friend.Friend;
-import razepl.dev.socialappbackend.friend.FriendsRepository;
-import razepl.dev.socialappbackend.post.Post;
-import razepl.dev.socialappbackend.post.PostRepository;
-import razepl.dev.socialappbackend.user.User;
-import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.entities.friend.Friend;
+import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
+import razepl.dev.socialappbackend.entities.post.Post;
+import razepl.dev.socialappbackend.entities.post.PostRepository;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;

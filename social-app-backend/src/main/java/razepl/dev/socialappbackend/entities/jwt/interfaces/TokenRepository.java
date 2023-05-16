@@ -1,8 +1,8 @@
-package razepl.dev.socialappbackend.auth.jwt.interfaces;
+package razepl.dev.socialappbackend.entities.jwt.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import razepl.dev.socialappbackend.auth.jwt.JwtToken;
+import razepl.dev.socialappbackend.entities.jwt.JwtToken;
 
 import java.util.List;
 import java.util.Optional;

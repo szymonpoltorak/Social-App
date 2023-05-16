@@ -16,18 +16,18 @@ import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.auth.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.*;
 import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
-import razepl.dev.socialappbackend.user.Role;
-import razepl.dev.socialappbackend.user.User;
-import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.Optional;
 
-import static razepl.dev.socialappbackend.user.constants.UserValidation.PASSWORD_PATTERN;
-import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.PASSWORD_PATTERN;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
 /**
  * Class to manage logic for {@link AuthController}.

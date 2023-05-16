@@ -1,13 +1,13 @@
-package razepl.dev.socialappbackend.friend;
+package razepl.dev.socialappbackend.entities.friend;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.globals.DataBuilder;
 import razepl.dev.socialappbackend.home.data.FriendData;
-import razepl.dev.socialappbackend.user.User;
 
 @AllArgsConstructor
 @NoArgsConstructor

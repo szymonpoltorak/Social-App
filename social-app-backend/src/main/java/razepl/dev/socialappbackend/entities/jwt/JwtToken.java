@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.auth.jwt;
+package razepl.dev.socialappbackend.entities.jwt;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import razepl.dev.socialappbackend.auth.jwt.interfaces.Token;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.Token;
+import razepl.dev.socialappbackend.entities.user.User;
 
 /**
  * Entity class that is mapped for a table in database representing JWT tokens.

@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user;
+package razepl.dev.socialappbackend.entities.user;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import razepl.dev.socialappbackend.user.interfaces.ServiceUser;
+import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
 import java.io.IOException;
 import java.io.Serial;
@@ -27,8 +27,8 @@ import java.util.Collection;
 import java.util.List;
 
 import static razepl.dev.socialappbackend.globals.GlobalConstants.USERS_TABLE_NAME;
-import static razepl.dev.socialappbackend.user.constants.UserValidation.*;
-import static razepl.dev.socialappbackend.user.constants.UserValidationMessages.*;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.*;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.*;
 
 /**
  * This class represents a user in the system.

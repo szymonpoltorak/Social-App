@@ -1,7 +1,7 @@
-package razepl.dev.socialappbackend.auth.jwt.interfaces;
+package razepl.dev.socialappbackend.entities.jwt.interfaces;
 
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.user.User;
+import razepl.dev.socialappbackend.entities.user.User;
 
 /**
  * An interface for managing authentication tokens for users.

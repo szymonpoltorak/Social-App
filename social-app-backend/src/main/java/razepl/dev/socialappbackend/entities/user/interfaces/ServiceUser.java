@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.user.interfaces;
+package razepl.dev.socialappbackend.entities.user.interfaces;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
