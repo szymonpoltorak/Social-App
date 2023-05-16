@@ -10,7 +10,8 @@
             </div>
         </div>
 
-        <app-delete-icon *ngIf="currentUser === postData.username">
+        <app-delete-icon *ngIf="currentUser === postData.username"
+                         (click)="removePost()">
 
         </app-delete-icon>
 

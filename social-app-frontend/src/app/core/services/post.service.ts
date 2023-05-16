@@ -41,6 +41,14 @@ export class PostService {
         });
     }
 
+    deletePost(postId: number): Observable<void> {
+        return this.http.delete<void>(`${ environment.httpBackend }${ HomeApiCalls.DELETE_POST }`, {
+            params: {
+                "postId": postId
+            }
+        });
+    }
+
     incrementSiteNumber(): void {
         this.numOfSite = this.numOfSite + 1;
     }

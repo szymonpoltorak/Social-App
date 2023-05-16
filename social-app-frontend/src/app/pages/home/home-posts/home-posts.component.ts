@@ -32,6 +32,10 @@ export class HomePostsComponent implements OnInit, OnDestroy {
         this.postTextInput.numOfCharacters = 0;
     }
 
+    deletePostFromList(postData: PostData): void {
+        this.posts = this.posts.filter(post => post !== postData);
+    }
+
     ngOnInit(): void {
         this.currentUser = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
         this.currentUser = this.currentUser.substring(1, this.currentUser.length - 1);

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { PostService } from "@core/services/post.service";
 import { Subject, takeUntil } from "rxjs";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
@@ -14,6 +14,8 @@ export class PostComponent implements OnDestroy {
     private addFriend$: Subject<void> = new Subject<void>();
     private removeFriend$: Subject<void> = new Subject<void>();
     private updateLike$: Subject<void> = new Subject<void>();
+    private deletePost$: Subject<void> = new Subject<void>();
+    @Output() deleteEvent: EventEmitter<PostData> = new EventEmitter<PostData>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
     isFriendAdded!: boolean;
@@ -44,6 +46,14 @@ export class PostComponent implements OnDestroy {
                     this.isFriendAdded = false;
                 });
         }
+    }
+
+    removePost(): void {
+        this.postService.deletePost(this.postData.postId)
+            .pipe(takeUntil(this.deletePost$))
+            .subscribe((): void => {
+                this.deleteEvent.emit(this.postData);
+            });
     }
 
     ngOnDestroy(): void {

@@ -13,5 +13,6 @@
 <app-post *ngFor="let post of posts"
           [postData]="post"
           [currentUser]="currentUser"
+          (deleteEvent)="deletePostFromList($event)"
 >
 </app-post>
