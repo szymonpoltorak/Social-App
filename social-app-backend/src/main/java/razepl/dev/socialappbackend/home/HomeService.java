@@ -32,8 +32,8 @@ public class HomeService implements HomeServiceInterface {
     private final LikeRepository likeRepository;
 
     @Override
-    public final UserData buildUserDataFromDb(String username) {
-        User user = userRepository.findByEmail(username).orElseThrow();
+    public final UserData buildUserDataFromDb(User authUser) {
+        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow();
 
         log.info("Building data for user : {}", user);
 
@@ -50,8 +50,8 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final List<FriendData> buildUsersFriendList(String username) {
-        User user = userRepository.findByEmail(username).orElseThrow();
+    public final List<FriendData> buildUsersFriendList(User authUser) {
+        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow();
         List<Friend> friendList = friendsRepository.findAllByUser(user).orElseThrow();
 
         log.info("Friend list for user : {}", user);
@@ -88,9 +88,7 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final PostData createNewPost(PostRequest request) {
-        User user = userRepository.findByEmail(request.authorUsername()).orElseThrow();
-
+    public final PostData createNewPost(PostRequest request, User user) {
         @Valid Post post = Post
                 .builder()
                 .postDate(LocalDate.now())
@@ -115,9 +113,8 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final LikeResponse updatePostLikeCounter(LikeRequest request) {
+    public final LikeResponse updatePostLikeCounter(LikeRequest request, User user) {
         Post post = postRepository.findById(request.postId()).orElseThrow();
-        User user = userRepository.findByEmail(request.username()).orElseThrow();
 
         log.info("Post from repository : {}", post);
         log.info("User from repository : {}", user);

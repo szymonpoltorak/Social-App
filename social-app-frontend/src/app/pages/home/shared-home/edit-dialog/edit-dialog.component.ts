@@ -21,8 +21,7 @@ export class EditDialogComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any,
                 private userDataService: UserHomeDataService,
-                private formBuilder: FormBuilder,
-                private utilService: UtilService) {
+                private formBuilder: FormBuilder) {
         this.title = data.title;
         this.url = data.url;
     }
@@ -35,16 +34,9 @@ export class EditDialogComponent implements OnInit, OnDestroy {
         if (this.editInputGroup.invalid) {
             return;
         }
-        let username: string = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
         const userData: string = this.editInputGroup.get('linkInput')?.value;
 
-        username = username.substring(1, username.length - 1);
-
-        console.log(`Username : ${ username }`);
-        console.log(`UserData : ${ userData }`);
-        console.log(`Url : ${ this.url }`);
-
-        this.userDataService.updateUsersData(username, userData, this.url)
+        this.userDataService.updateUsersData(userData, this.url)
             .pipe(takeUntil(this.destroyData$))
             .subscribe((): void => {
                 this.closeEvent.emit(userData);

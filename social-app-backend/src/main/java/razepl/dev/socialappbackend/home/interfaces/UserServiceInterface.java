@@ -1,20 +1,19 @@
 package razepl.dev.socialappbackend.home.interfaces;
 
-import razepl.dev.socialappbackend.home.data.FriendUserRequest;
-import razepl.dev.socialappbackend.home.data.UserDataRequest;
+import razepl.dev.socialappbackend.entities.user.User;
 
 public interface UserServiceInterface {
-    void updateTwitterData(UserDataRequest request);
+    void updateTwitterData(String updateData, User user);
 
-    void updateLinkedinData(UserDataRequest request);
+    void updateLinkedinData(String updateData, User user);
 
-    void updateGithubData(UserDataRequest request);
+    void updateGithubData(String updateData, User user);
 
-    void updateUsersLocation(UserDataRequest request);
+    void updateUsersLocation(String updateData, User user);
 
-    void updateUsersJob(UserDataRequest request);
+    void updateUsersJob(String updateData, User user);
 
-    void removeFriendFromUser(FriendUserRequest request);
+    void removeFriendFromUser(String friendsUsername, User user);
 
-    void addFriendToUser(FriendUserRequest request);
+    void addFriendToUser(String friendsUsername, User user);
 }

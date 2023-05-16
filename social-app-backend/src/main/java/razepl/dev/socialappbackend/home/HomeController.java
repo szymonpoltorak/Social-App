@@ -26,27 +26,28 @@ public class HomeController implements HomeInterface {
 
     @Override
     @GetMapping(value = USERDATA_MAPPING)
-    public final ResponseEntity<UserData> getUserData(@RequestParam String username) {
-        NullChecker.throwAppropriateException(username);
+    public final ResponseEntity<UserData> getUserData(@AuthenticationPrincipal User user) {
+        NullChecker.throwAppropriateException(user);
 
-        log.info("Getting userdata for user : {}", username);
+        log.info("Getting userdata for user : {}", user);
 
-        return ResponseEntity.ok(homeService.buildUserDataFromDb(username));
+        return ResponseEntity.ok(homeService.buildUserDataFromDb(user));
     }
 
     @Override
     @GetMapping(value = FRIENDS_LIST_MAPPING)
-    public final ResponseEntity<List<FriendData>> getFriendsList(@RequestParam String username, @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(username);
+    public final ResponseEntity<List<FriendData>> getFriendsList(@AuthenticationPrincipal User user) {
+        NullChecker.throwAppropriateException(user);
 
-        log.info("Finding list of users for : {}", username);
+        log.info("Finding list of users for : {}", user);
 
-        return ResponseEntity.ok(homeService.buildUsersFriendList(username));
+        return ResponseEntity.ok(homeService.buildUsersFriendList(user));
     }
 
     @Override
     @GetMapping(value = POST_LIST_MAPPING)
-    public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite, @AuthenticationPrincipal User user) {
+    public final ResponseEntity<List<PostData>> getPostsList(@RequestParam int numOfSite,
+                                                             @AuthenticationPrincipal User user) {
         log.info("Number of site for posts : {}", numOfSite);
         log.info("User that sent request: {}", user);
 
@@ -55,20 +56,22 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PostMapping(value = CREATE_POST_MAPPING)
-    public final ResponseEntity<PostData> createPost(@RequestBody PostRequest request) {
+    public final ResponseEntity<PostData> createPost(@RequestBody PostRequest request, User user) {
         NullChecker.throwAppropriateException(request);
 
         log.info("Creating post with data : {}", request);
+        log.info("User who wants to create post : {}", user);
 
-        return ResponseEntity.ok(homeService.createNewPost(request));
+        return ResponseEntity.ok(homeService.createNewPost(request, user));
     }
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestBody LikeRequest request) {
+    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestBody LikeRequest request,
+                                                                      @AuthenticationPrincipal User user) {
         log.info("User wants to change number of like with data : {}", request);
 
-        return ResponseEntity.ok(homeService.updatePostLikeCounter(request));
+        return ResponseEntity.ok(homeService.updatePostLikeCounter(request, user));
     }
 
     @Override

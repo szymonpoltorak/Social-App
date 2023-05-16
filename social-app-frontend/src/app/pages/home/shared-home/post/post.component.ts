@@ -16,17 +16,13 @@ export class PostComponent implements OnDestroy {
     private updateLike$: Subject<void> = new Subject<void>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
-    // isPostLiked!: boolean;
     isFriendAdded!: boolean;
 
     constructor(private postService: PostService) {
     }
 
     updatePostLike(): void {
-        // this.isPostLiked = !this.isPostLiked;
-        // this.postData.numOfLikes = this.isPostLiked ? this.postData.numOfLikes + 1 : this.postData.numOfLikes - 1;
-
-        this.postService.updateNumOfLikes(this.postData.postId, this.currentUser)
+        this.postService.updateNumOfLikes(this.postData.postId)
             .pipe(takeUntil(this.updateLike$))
             .subscribe((data: LikeResponse): void => {
                 this.postData.numOfLikes = data.numOfLikes;
@@ -36,13 +32,13 @@ export class PostComponent implements OnDestroy {
 
     updateFriendStatus(): void {
         if (!this.isFriendAdded) {
-            this.postService.manageFriendStatus(this.currentUser, this.postData.username, HomeApiCalls.ADD_FRIEND)
+            this.postService.manageFriendStatus(this.currentUser, HomeApiCalls.ADD_FRIEND)
                 .pipe(takeUntil(this.addFriend$))
                 .subscribe((): void => {
                     this.isFriendAdded = true;
                 });
         } else {
-            this.postService.manageFriendStatus(this.currentUser, this.postData.username, HomeApiCalls.REMOVE_FRIEND)
+            this.postService.manageFriendStatus(this.currentUser, HomeApiCalls.REMOVE_FRIEND)
                 .pipe(takeUntil(this.removeFriend$))
                 .subscribe((): void => {
                     this.isFriendAdded = false;

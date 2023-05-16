@@ -23,7 +23,7 @@ export class HomePostsComponent implements OnInit, OnDestroy {
     }
 
     createNewPost(): void {
-        this.postService.createNewPost(this.postTextInput.postText, this.currentUser)
+        this.postService.createNewPost(this.postTextInput.postText)
             .pipe(takeUntil(this.destroyCreatePost$))
             .subscribe((data: PostData): void => {
                 this.posts.unshift(data);

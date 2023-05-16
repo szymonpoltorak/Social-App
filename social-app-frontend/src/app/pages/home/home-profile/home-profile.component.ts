@@ -34,9 +34,7 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        const username: string = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
-
-        this.homeService.getUserData(username.substring(1, username.length - 1))
+        this.homeService.getUserData()
             .pipe(takeUntil(this.userDataDestroy$))
             .subscribe((data: UserData): void => {
                 console.log(data);
@@ -57,7 +55,7 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
             .subscribe((data: string): void => {
             if (data === null) {
                 this.homeDialogService.closeDialog();
-                
+
                 return;
             }
             if (title === SocialNames.JOB_DIALOG) {

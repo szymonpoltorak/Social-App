@@ -7,15 +7,15 @@ import razepl.dev.socialappbackend.home.data.*;
 import java.util.List;
 
 public interface HomeInterface {
-    ResponseEntity<UserData> getUserData(String username);
+    ResponseEntity<UserData> getUserData(User user);
 
-    ResponseEntity<List<FriendData>> getFriendsList(String username, User user);
+    ResponseEntity<List<FriendData>> getFriendsList(User user);
 
     ResponseEntity<List<PostData>> getPostsList(int offsetValue, User user);
 
-    ResponseEntity<PostData> createPost(PostRequest request);
+    ResponseEntity<PostData> createPost(PostRequest request, User user);
 
-    ResponseEntity<LikeResponse> changePostNumberOfLikes(LikeRequest request);
+    ResponseEntity<LikeResponse> changePostNumberOfLikes(LikeRequest request, User user);
 
     ResponseEntity<Void> deletePost(long postId);
 }

@@ -15,10 +15,9 @@ export class PostService {
     constructor(private http: HttpClient) {
     }
 
-    createNewPost(postContent: string, authorUsername: string): Observable<PostData> {
+    createNewPost(postContent: string): Observable<PostData> {
         return this.http.post<PostData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_POST }`, {
-            "postContent": postContent,
-            "authorUsername": authorUsername
+            "postContent": postContent
         });
     }
 
@@ -30,17 +29,15 @@ export class PostService {
         });
     }
 
-    manageFriendStatus(username: string, friendsUsername: string, url: string): Observable<string> {
+    manageFriendStatus(friendsUsername: string, url: string): Observable<string> {
         return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
-            "username": username,
             "friendsUsername": friendsUsername
         });
     }
 
-    updateNumOfLikes(postId: number, username: string): Observable<LikeResponse> {
+    updateNumOfLikes(postId: number): Observable<LikeResponse> {
         return this.http.patch<LikeResponse>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {
-            "postId": postId,
-            "username": username
+            "postId": postId
         });
     }
 

@@ -10,16 +10,14 @@ export class UserHomeDataService {
     constructor(private http: HttpClient) {
     }
 
-    updateUsersData(username: string, updateData: string, url: string): Observable<string> {
-        return this.http.patch<string>(`${environment.httpBackend}${url}`, {
-            "username": username,
+    updateUsersData(updateData: string, url: string): Observable<string> {
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
             "updateData": updateData
         });
     }
 
-    manageUsersFriendEndpoints(username: string, friendsUsername: string, url: string): Observable<string> {
-        return this.http.patch<string>(`${environment.httpBackend}${url}`, {
-            "username": username,
+    manageUsersFriendEndpoints(friendsUsername: string, url: string): Observable<string> {
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
             "friendsUsername": friendsUsername
         });
     }

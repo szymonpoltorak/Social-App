@@ -13,19 +13,11 @@ export class HomeService {
     constructor(private http: HttpClient) {
     }
 
-    getFriendList(username: string): Observable<FriendData[]> {
-        return this.http.get<FriendData[]>(`${environment.httpBackend}${HomeApiCalls.GET_FRIEND_LIST}`, {
-            params: {
-                "username": username
-            }
-        });
+    getFriendList(): Observable<FriendData[]> {
+        return this.http.get<FriendData[]>(`${ environment.httpBackend }${ HomeApiCalls.GET_FRIEND_LIST }`, {});
     }
 
-    getUserData(username: string): Observable<UserData> {
-        return this.http.get<UserData>(`${environment.httpBackend}${HomeApiCalls.GET_USERDATA}`, {
-            params: {
-                "username": username
-            }
-        });
+    getUserData(): Observable<UserData> {
+        return this.http.get<UserData>(`${ environment.httpBackend }${ HomeApiCalls.GET_USERDATA }`, {});
     }
 }

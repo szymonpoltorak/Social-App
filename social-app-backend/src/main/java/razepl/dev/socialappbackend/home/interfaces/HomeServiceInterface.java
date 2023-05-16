@@ -6,15 +6,15 @@ import razepl.dev.socialappbackend.home.data.*;
 import java.util.List;
 
 public interface HomeServiceInterface {
-    UserData buildUserDataFromDb(String username);
+    UserData buildUserDataFromDb(User user);
 
-    List<FriendData> buildUsersFriendList(String username);
+    List<FriendData> buildUsersFriendList(User user);
 
     List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user);
 
-    PostData createNewPost(PostRequest request);
+    PostData createNewPost(PostRequest request, User user);
 
-    LikeResponse updatePostLikeCounter(LikeRequest request);
+    LikeResponse updatePostLikeCounter(LikeRequest request, User user);
 
     void deletePostByPostId(long postId);
 }

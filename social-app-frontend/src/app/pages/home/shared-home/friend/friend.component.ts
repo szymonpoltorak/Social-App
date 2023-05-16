@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { StorageKeys } from "@core/enums/StorageKeys";
 import { UtilService } from "@core/services/util.service";
 import { UserHomeDataService } from "@core/services/user-home-data.service";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
@@ -22,11 +21,7 @@ export class FriendComponent implements OnDestroy {
     }
 
     removeUserFromFriends(): void {
-        let username: string = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
-
-        username = username.substring(1, username.length - 1);
-
-        this.userDataService.manageUsersFriendEndpoints(username, this.friendUsername, HomeApiCalls.REMOVE_FRIEND)
+        this.userDataService.manageUsersFriendEndpoints(this.friendUsername, HomeApiCalls.REMOVE_FRIEND)
             .pipe(takeUntil(this.destroyFriend$))
             .subscribe((): void => {
                 this.friendRemoval.emit(this.friendUsername);

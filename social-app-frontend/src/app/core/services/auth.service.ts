@@ -26,26 +26,26 @@ export class AuthService implements AuthInterface {
 
         console.log(JSON.parse(`{${ authToken }, ${ refreshToken }}`));
 
-        return this.http.post<TokenResponse>(`${environment.httpBackend}${AuthApiCalls.IS_USER_AUTHENTICATED}`,
+        return this.http.post<TokenResponse>(`${ environment.httpBackend }${ AuthApiCalls.IS_USER_AUTHENTICATED }`,
             this.buildAuthRequest(authToken));
     }
 
     logoutUser(): Observable<any> {
-        return this.http.post(`${environment.httpBackend}${AuthApiCalls.LOGOUT_URL}`, {});
+        return this.http.post(`${ environment.httpBackend }${ AuthApiCalls.LOGOUT_URL }`, {});
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REGISTER_URL}`, registerRequest)
+        return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.REGISTER_URL }`, registerRequest)
             .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
     }
 
     loginUser(loginRequest: LoginRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.LOGIN_URL}`, loginRequest)
+        return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.LOGIN_URL }`, loginRequest)
             .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
     }
 
     refreshUsersToken(refreshToken: string): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}${AuthApiCalls.REFRESH_URL}`,
+        return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.REFRESH_URL }`,
             this.buildRefreshToken(refreshToken))
             .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
     }
