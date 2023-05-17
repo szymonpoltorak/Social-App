@@ -7,7 +7,7 @@ import { SharedAuthModule } from "../shared/shared-auth.module";
 import { NameInputComponent } from './name-input/name-input.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DateComponent } from './date/date.component';
-import { DialogService } from "../../../core/services/dialog.service";
+import { AuthDialogService } from "@core/services/auth-dialog.service";
 import { MatDialogModule } from "@angular/material/dialog";
 
 
@@ -26,7 +26,7 @@ import { MatDialogModule } from "@angular/material/dialog";
         MatDialogModule
     ],
     providers: [
-        DialogService
+        AuthDialogService
     ]
 })
 export class RegisterModule {

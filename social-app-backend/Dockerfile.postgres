@@ -1,0 +1,9 @@
+FROM postgres:15.2-alpine3.17
+
+ENV POSTGRES_USER=postgres
+
+ENV POSTGRES_PASSWORD=none
+
+ENV POSTGRES_DB=socialapp
+
+EXPOSE 5432

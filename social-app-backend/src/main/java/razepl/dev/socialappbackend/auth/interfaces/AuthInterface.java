@@ -35,6 +35,7 @@ public interface AuthInterface {
                             responseCode = "422"
                     )
             }
+
     )
     ResponseEntity<AuthResponse> registerUser(RegisterRequest registerRequest);
 

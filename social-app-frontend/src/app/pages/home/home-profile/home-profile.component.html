@@ -3,9 +3,9 @@
         <app-user-icon></app-user-icon>
 
         <div class="name-friends-container">
-            <div>Users Name</div>
+            <div>{{ fullName }}</div>
 
-            <div class="friends-counter">10 friends</div>
+            <div class="friends-counter">{{ numOfFriends }} Friends</div>
         </div>
     </div>
 
@@ -14,22 +14,24 @@
     <div class="location-work-container">
         <div class="separator-container">
             <div class="icon-text-container">
-                <app-location-icon></app-location-icon>
+                <app-work-icon></app-work-icon>
 
-                <div>Warsaw, Poland</div>
+                <app-social-link [socialSiteName]="SocialNames.JOB_PROFILE"
+                                 [socialLink]="job"></app-social-link>
             </div>
 
-            <app-edit-icon></app-edit-icon>
+            <app-edit-icon (click)="openDialog(SocialNames.JOB_DIALOG, HomeApiCalls.UPDATE_JOB)"></app-edit-icon>
         </div>
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <app-work-icon></app-work-icon>
+                <app-location-icon></app-location-icon>
 
-                <div>Work position at company</div>
+                <app-social-link [socialSiteName]="SocialNames.LOCATION_PROFILE" [socialLink]="userLocation"></app-social-link>
             </div>
 
-            <app-edit-icon></app-edit-icon>
+            <app-edit-icon
+                (click)="openDialog(SocialNames.LOCATION_DIALOG, HomeApiCalls.UPDATE_LOCATION)"></app-edit-icon>
         </div>
     </div>
 
@@ -38,38 +40,48 @@
     <div class="social-container">
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="twitter !== ''" [attr.href]="twitter" target="_blank">
                     <app-twitter-icon></app-twitter-icon>
                 </a>
 
-                <div>Twitter profile</div>
+                <app-twitter-icon *ngIf="twitter === ''"></app-twitter-icon>
+
+                <app-social-link [socialSiteName]="SocialNames.TWITTER_PROFILE"
+                                 [socialLink]="twitter"></app-social-link>
             </div>
 
-            <app-edit-icon></app-edit-icon>
+            <app-edit-icon (click)="openDialog(SocialNames.TWITTER_DIALOG, HomeApiCalls.UPDATE_TWITTER)">
+            </app-edit-icon>
         </div>
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="linkedin !== ''" [attr.href]="linkedin" target="_blank">
                     <app-linked-in-icon></app-linked-in-icon>
                 </a>
 
-                <div>LinkedIn profile</div>
+                <app-linked-in-icon *ngIf="linkedin === ''"></app-linked-in-icon>
+
+                <app-social-link [socialSiteName]="SocialNames.LINKEDIN_PROFILE"
+                                 [socialLink]="linkedin"></app-social-link>
             </div>
 
-            <app-edit-icon></app-edit-icon>
+            <app-edit-icon
+                (click)="openDialog(SocialNames.LINKEDIN_DIALOG, HomeApiCalls.UPDATE_LINKEDIN)"></app-edit-icon>
         </div>
 
         <div class="separator-container">
             <div class="icon-text-container">
-                <a>
+                <a *ngIf="github !== ''" [attr.href]="github" target="_blank">
                     <app-github-icon></app-github-icon>
                 </a>
 
-                <div>Github profile</div>
+                <app-github-icon *ngIf="github === ''"></app-github-icon>
+
+                <app-social-link [socialSiteName]="SocialNames.GITHUB_PROFILE" [socialLink]="github"></app-social-link>
             </div>
 
-            <app-edit-icon></app-edit-icon>
+            <app-edit-icon (click)="openDialog(SocialNames.GITHUB_DIALOG, HomeApiCalls.UPDATE_GITHUB)"></app-edit-icon>
         </div>
     </div>
 </div>

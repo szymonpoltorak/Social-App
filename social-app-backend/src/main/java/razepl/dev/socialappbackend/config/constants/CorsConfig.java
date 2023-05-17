@@ -10,12 +10,12 @@ public final class CorsConfig {
     /**
      * List of allowed HTTP request methods.
      */
-    public static final List<String> ALLOWED_REQUESTS = List.of("GET", "POST", "PUT", "DELETE", "OPTIONS");
+    public static final List<String> ALLOWED_REQUESTS = List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH");
 
     /**
      * List of allowed frontend server addresses.
      */
-    public static final List<String> FRONTEND_ADDRESS = List.of("http://localhost:4200");
+    public static final List<String> CORS_ADDRESSES = List.of("http://localhost:4200", "http://frontend:4200");
 
     /**
      * HTTP header for specifying the content type of request or response.

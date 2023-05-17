@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FriendInterface } from "@core/interfaces/home/FriendInterface";
+import { Component, Input } from '@angular/core';
+import { FriendData } from "@core/interfaces/home/FriendData";
 
 @Component({
     selector: 'app-home-friends',
@@ -7,22 +7,12 @@ import { FriendInterface } from "@core/interfaces/home/FriendInterface";
     styleUrls: ['./home-friends.component.scss']
 })
 export class HomeFriendsComponent {
-    friendList: FriendInterface[] = [
-        {
-            friendName: "Jan Kowalski",
-            friendJob: "Software Engineer"
-        },
-        {
-            friendName: "Stefan Czarnecki",
-            friendJob: "Lecturer"
-        },
-        {
-            friendName: "Jan Sobieski",
-            friendJob: "Department of Defense"
-        },
-        {
-            friendName: "Michał Mickiewicz",
-            friendJob: "Poet"
-        }
-    ]
+    @Input() friendList!: FriendData[];
+
+    constructor() {
+    }
+
+    removeFriendFromList(friendUsername: string): void {
+        this.friendList = this.friendList.filter((friend: FriendData): boolean => friend.friendUsername !== friendUsername);
+    }
 }

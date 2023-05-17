@@ -24,7 +24,11 @@ $main-background-color: #0a0b0a;
 
 .just-background {
     background-color: $main-background-color;
+    position: fixed;
     color: white;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
 }
 
 .logo-background {

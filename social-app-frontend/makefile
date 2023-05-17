@@ -4,7 +4,6 @@ start = docker start
 app-name = social-app-frontend
 process-remove = docker rm
 image-remove = docker image rm
-port-map = -p 4200:80
 
 .PHONY: all, image, build, start, stop, clean. clean-container, clean-image
 

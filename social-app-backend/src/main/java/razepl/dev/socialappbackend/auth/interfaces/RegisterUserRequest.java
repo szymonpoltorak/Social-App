@@ -1,6 +1,6 @@
 package razepl.dev.socialappbackend.auth.interfaces;
 
-import razepl.dev.socialappbackend.user.interfaces.UserPropertyInterface;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
 
 import java.time.LocalDate;
 

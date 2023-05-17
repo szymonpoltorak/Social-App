@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FriendComponent } from "./friend/friend.component";
 import { IconsModule } from "@icons/icons.module";
 import { TextInputComponent } from './text-input/text-input.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PostComponent } from './post/post.component';
+import { SocialLinkComponent } from './social-link/social-link.component';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 
 @NgModule({
@@ -12,16 +14,20 @@ import { PostComponent } from './post/post.component';
         FriendComponent,
         TextInputComponent,
         PostComponent,
+        SocialLinkComponent,
+        EditDialogComponent,
     ],
     imports: [
         CommonModule,
         IconsModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     exports: [
         FriendComponent,
         TextInputComponent,
-        PostComponent
+        PostComponent,
+        SocialLinkComponent
     ]
 })
 export class SharedHomeModule {

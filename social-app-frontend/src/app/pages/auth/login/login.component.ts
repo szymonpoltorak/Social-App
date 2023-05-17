@@ -1,32 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { DialogContents } from "../../../core/enums/DialogContents";
-import { LoginRequest } from "../../../core/data/login-request";
-import { FormFieldNames } from "../../../core/enums/FormFieldNames";
-import { LoginInterface } from "../../../core/interfaces/auth/LoginInterface";
-import { LoginControlProviderService } from "../../../core/services/login-control-provider.service";
-import { DialogService } from "../../../core/services/dialog.service";
-import { AuthService } from "../../../core/services/auth.service";
-import { RoutePaths } from "../../../core/enums/RoutePaths";
-import { AuthResponse } from "../../../core/data/auth-response";
-import { UserService } from "../../../core/services/user.service";
-import { AuthConstants } from "../../../core/enums/AuthConstants";
-import { StorageKeys } from "../../../core/enums/StorageKeys";
-import { UtilService } from "../../../core/services/util.service";
+import { DialogContents } from "@core/enums/DialogContents";
+import { LoginRequest } from "@core/data/login-request";
+import { FormFieldNames } from "@core/enums/FormFieldNames";
+import { LoginInterface } from "@core/interfaces/auth/LoginInterface";
+import { LoginControlProviderService } from "@core/services/login-control-provider.service";
+import { AuthDialogService } from "@core/services/auth-dialog.service";
+import { AuthService } from "@core/services/auth.service";
+import { RoutePaths } from "@core/enums/RoutePaths";
+import { AuthResponse } from "@core/data/auth-response";
+import { UserService } from "@core/services/user.service";
+import { AuthConstants } from "@core/enums/AuthConstants";
+import { StorageKeys } from "@core/enums/StorageKeys";
+import { UtilService } from "@core/services/util.service";
+import { catchError, Subject, takeUntil, throwError } from "rxjs";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, LoginInterface {
+export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
     loginForm !: FormGroup;
     wasSubmitClicked: boolean = false;
     private dialogListItems !: Array<string>;
     private paragraphContent !: string;
+    private testDestroy$: Subject<any> = new Subject<any>();
+    private loginDestroy$: Subject<any> = new Subject<any>();
 
     constructor(public controlProvider: LoginControlProviderService,
-                private dialogService: DialogService,
+                private dialogService: AuthDialogService,
                 private authService: AuthService,
                 private utilService: UtilService,
                 private userService: UserService) {
@@ -44,6 +47,14 @@ export class LoginComponent implements OnInit, LoginInterface {
 
             this.userService.setWasUserLoggedOut = false;
         }
+
+        this.utilService.buildTestData()
+            .pipe(takeUntil(this.testDestroy$), catchError(error => {
+                this.utilService.clearStorage();
+
+                return throwError(error);
+            }))
+            .subscribe();
     }
 
     authenticateUser(): void {
@@ -58,20 +69,24 @@ export class LoginComponent implements OnInit, LoginInterface {
 
         console.log(request);
 
-        this.authService.loginUser(request).subscribe((data: AuthResponse): void => {
-            if (data.authToken === AuthConstants.NO_TOKEN) {
-                this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
-                    DialogContents.FORM_HEADER);
+        this.authService.loginUser(request)
+            .pipe(takeUntil(this.loginDestroy$))
+            .subscribe((data: AuthResponse): void => {
+                if (data.authToken === AuthConstants.NO_TOKEN) {
+                    this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
+                        DialogContents.FORM_HEADER);
 
-                return;
-            }
-            this.userService.setUserAuthentication = true;
+                    return;
+                }
+                const username: string = this.loginForm.get(FormFieldNames.EMAIL_FIELD)?.value;
 
-            this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-            this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+                this.userService.setUserAuthentication = true;
 
-            this.utilService.navigate(RoutePaths.HOME_PATH);
-        });
+                this.authService.saveData(data);
+
+                this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
+                this.utilService.navigate(RoutePaths.HOME_PATH);
+            });
     }
 
     private buildLoginRequest(): LoginRequest {
@@ -81,5 +96,10 @@ export class LoginComponent implements OnInit, LoginInterface {
         loginRequest.password = this.loginForm.get(FormFieldNames.LOGIN_PASSWORD)!.value;
 
         return loginRequest;
+    }
+
+    ngOnDestroy(): void {
+        this.testDestroy$.complete();
+        this.loginDestroy$.complete();
     }
 }

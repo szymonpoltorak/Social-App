@@ -16,7 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
-import razepl.dev.socialappbackend.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class AppConfiguration implements AppConfigInterface {
         CorsConfiguration configuration = new CorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        configuration.setAllowedOrigins(FRONTEND_ADDRESS);
+        configuration.setAllowedOrigins(CORS_ADDRESSES);
         configuration.setAllowedMethods(ALLOWED_REQUESTS);
         configuration.setAllowedHeaders(List.of(AUTH_HEADER, CONTENT_TYPE_HEADER));
 

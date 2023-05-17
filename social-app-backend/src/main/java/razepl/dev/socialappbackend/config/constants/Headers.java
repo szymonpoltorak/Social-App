@@ -25,6 +25,11 @@ public final class Headers {
     public static final String AUTH_MAPPING = "/auth/";
 
     /**
+     * The URL for logging out.
+     */
+    public static final String LOGOUT_URL = "/api/auth/logout";
+
+    /**
      * The Ant matcher for authentication endpoints.
      */
     private static final String AUTH_MATCHERS = "/api/auth/**";
@@ -53,12 +58,7 @@ public final class Headers {
      * List of URLs that should be excluded from authentication requirements.
      */
     public static final String[] WHITE_LIST = {AUTH_MATCHERS, SWAGGER_JSON,
-            SWAGGER_JSON_MATCHERS, SWAGGER_UI, SWAGGER_UI_MATCHERS};
-
-    /**
-     * The URL for logging out.
-     */
-    public static final String LOGOUT_URL = "/api/auth/logout";
+            SWAGGER_JSON_MATCHERS, SWAGGER_UI, SWAGGER_UI_MATCHERS, "/api/test/**"};
 
     /**
      * Private constructor to prevent instantiation of this class.

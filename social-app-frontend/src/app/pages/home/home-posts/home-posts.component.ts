@@ -1,68 +1,63 @@
-import { Component } from '@angular/core';
-import { PostInterface } from "../../../core/interfaces/home/PostInterface";
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { PostData } from "@core/interfaces/home/PostData";
+import { PostService } from "@core/services/post.service";
+import { Subject, takeUntil } from "rxjs";
+import { UtilService } from "@core/services/util.service";
+import { StorageKeys } from "@core/enums/StorageKeys";
+import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
 
 @Component({
     selector: 'app-home-posts',
     templateUrl: './home-posts.component.html',
     styleUrls: ['./home-posts.component.scss']
 })
-export class HomePostsComponent {
-    posts: PostInterface[] = [
-        {
-            postAuthor: "Artur Korulczyk",
-            postAuthorLocation: "Warsaw, Poland",
-            postContent: "Whats up guys?",
-            numOfLikes: 10,
-            numOfComments: 5
-        },
-        {
-            postAuthor: "Wojtek Lewandowski",
-            postAuthorLocation: "Berlin, Germany",
-            postContent: "Who wants to play basketball??",
-            numOfLikes: 1,
-            numOfComments: 10
-        },
-        {
-            postAuthor: "Anna Szymborska",
-            postAuthorLocation: "Wien, Austria",
-            postContent: "Live is funny!",
-            numOfLikes: 100,
-            numOfComments: 5
-        },
-        {
-            postAuthor: "Julia Dziekanowska",
-            postAuthorLocation: "Kiev, Ukraine",
-            postContent: "Yesterday I started a new work!",
-            numOfLikes: 67,
-            numOfComments: 13
-        },
-        {
-            postAuthor: "Artur Korulczyk",
-            postAuthorLocation: "Warsaw, Poland",
-            postContent: "Whats up guys?",
-            numOfLikes: 10,
-            numOfComments: 5
-        },
-        {
-            postAuthor: "Wojtek Lewandowski",
-            postAuthorLocation: "Berlin, Germany",
-            postContent: "Who wants to play basketball??",
-            numOfLikes: 1,
-            numOfComments: 10
-        },
-        {
-            postAuthor: "Anna Szymborska",
-            postAuthorLocation: "Wien, Austria",
-            postContent: "Live is funny!",
-            numOfLikes: 100,
-            numOfComments: 5
-        },
-        {
-            postAuthor: "Julia Dziekanowska",
-            postAuthorLocation: "Kiev, Ukraine",
-            postContent: "Yesterday I started a new work!",
-            numOfLikes: 67,
-            numOfComments: 13
-        },
-    ]
+export class HomePostsComponent implements OnInit, OnDestroy {
+    private destroyPostList$: Subject<void> = new Subject<void>();
+    private destroyCreatePost$: Subject<void> = new Subject<void>();
+    @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
+    @ViewChild(TextInputComponent) postTextInput !: TextInputComponent;
+    posts: PostData[] = [];
+    currentUser!: string;
+
+    constructor(private postService: PostService,
+                private utilService: UtilService) {
+    }
+
+    createNewPost(): void {
+        this.postService.createNewPost(this.postTextInput.postText)
+            .pipe(takeUntil(this.destroyCreatePost$))
+            .subscribe((data: PostData): void => {
+                this.posts.unshift(data);
+            });
+        this.postTextInput.postText = "";
+        this.postTextInput.numOfCharacters = 0;
+    }
+
+    deletePostFromList(postData: PostData): void {
+        this.posts = this.posts.filter(post => post !== postData);
+    }
+
+    updateFriendList(): void {
+        this.updateFriendListEvent.emit();
+    }
+
+    ngOnInit(): void {
+        this.currentUser = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
+        this.currentUser = this.currentUser.substring(1, this.currentUser.length - 1);
+
+        this.postService.getListOfPosts()
+            .pipe(takeUntil(this.destroyPostList$))
+            .subscribe((data: PostData[]): void => {
+                this.posts = data;
+
+                if (data.length === 100) {
+                    this.postService.incrementSiteNumber();
+                }
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.destroyPostList$.next();
+        this.destroyPostList$.complete();
+    }
 }

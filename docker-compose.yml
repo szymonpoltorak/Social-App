@@ -3,29 +3,30 @@ version: "3"
 name: social-app
 
 services:
-  db:
-    container_name: social-app-postgres
-    image: postgres
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=none
-    ports:
-      - "5000:5432"
-  backend:
-    container_name: social-app-backend
-    depends_on:
-      - db
+  postgres:
+    container_name: postgres
     build:
       context: social-app-backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.postgres
+    ports:
+      - "5432:5432"
+  backend:
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialapp
+    build:
+      context: social-app-backend
+      dockerfile: Dockerfile.backend
     ports:
       - "8080:8080"
   frontend:
-    container_name: social-app-frontend
+    container_name: frontend
     depends_on:
       - backend
     build:
       context: social-app-frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
     ports:
       - "4200:80"

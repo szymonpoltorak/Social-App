@@ -30,9 +30,9 @@ export class PasswordFieldComponent implements ControlValueAccessor {
     writeValue(obj: any): void {
     }
 
-    private onChange: any = () => {
+    private onChange: any = (): void => {
     };
 
-    private onTouched: any = () => {
+    private onTouched: any = (): void => {
     };
 }

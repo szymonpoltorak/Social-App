@@ -3,6 +3,9 @@
 
     <app-friend *ngFor="let friend of friendList"
                 [friendJob]="friend.friendJob"
-                [friendName]="friend.friendName">
+                [friendName]="friend.friendFullName"
+                [friendUsername]="friend.friendUsername"
+                (friendRemoval)="removeFriendFromList($event)"
+    >
     </app-friend>
 </div>
