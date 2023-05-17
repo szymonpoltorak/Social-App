@@ -55,7 +55,7 @@ public class HomeService implements HomeServiceInterface {
     @Override
     public final List<FriendData> buildUsersFriendList(User authUser) {
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow();
-        List<Friend> friendList = friendsRepository.findFriendsByUser(user).orElseThrow();
+        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(12)).orElseThrow();
 
         log.info("Friend list for user : {}", user);
 
