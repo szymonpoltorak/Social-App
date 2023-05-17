@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for /api/home controller.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -117,7 +120,7 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final LikeResponse updatePostLikeCounter(long postId, User user) {
+    public final LikeData updatePostLikeCounter(long postId, User user) {
         Post post = postRepository.findById(postId).orElseThrow();
 
         log.info("Post from repository : {}", post);
@@ -130,7 +133,7 @@ public class HomeService implements HomeServiceInterface {
 
             log.info("Like i got : {}", like.get());
 
-            return LikeResponse
+            return LikeData
                     .builder()
                     .numOfLikes(likeRepository.countByPost(post))
                     .isPostLiked(false)
@@ -145,7 +148,7 @@ public class HomeService implements HomeServiceInterface {
 
         likeRepository.save(newLike);
 
-        return LikeResponse
+        return LikeData
                 .builder()
                 .isPostLiked(true)
                 .numOfLikes(likeRepository.countByPost(post))

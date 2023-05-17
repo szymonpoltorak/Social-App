@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.post.Post;
+import razepl.dev.socialappbackend.entities.user.User;
 
+/**
+ * This class represents a like entity.
+ */
 @Builder
 @Data
 @NoArgsConstructor

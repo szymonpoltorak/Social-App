@@ -27,6 +27,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     Optional<User> findByName(String name);
 
+    /**
+     * Finds a user by authentication token.
+     *
+     * @param authToken the authentication token of the user to find
+     * @return an Optional containing the user associated with the given authentication token, or empty if not found
+     */
     @Query("select u from User as u inner join JwtToken as t on u.userId = t.user.userId where t.token = :authToken")
     Optional<User> findUserByToken(String authToken);
 }

@@ -9,6 +9,9 @@ import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
+/**
+ * Service class for /api/home/user controller.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService implements UserServiceInterface {

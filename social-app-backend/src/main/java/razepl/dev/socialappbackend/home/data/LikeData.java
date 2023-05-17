@@ -3,5 +3,5 @@ package razepl.dev.socialappbackend.home.data;
 import lombok.Builder;
 
 @Builder
-public record LikeResponse(long numOfLikes, boolean isPostLiked) {
+public record LikeData(long numOfLikes, boolean isPostLiked) {
 }

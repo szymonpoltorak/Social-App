@@ -22,5 +22,10 @@ public interface ServiceUser extends UserDetails, UserPropertyInterface {
      */
     int getAge();
 
+    /**
+     * Returns full name of user.
+     *
+     * @return full name of user.
+     */
     String getFullName();
 }
