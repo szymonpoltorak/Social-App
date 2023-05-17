@@ -16,8 +16,10 @@ export class PostService {
     }
 
     createNewPost(postContent: string): Observable<PostData> {
-        return this.http.post<PostData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_POST }`, {
-            "postContent": postContent
+        return this.http.post<PostData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_POST }`, {}, {
+            params: {
+                "postContent": postContent
+            }
         });
     }
 
@@ -30,14 +32,18 @@ export class PostService {
     }
 
     manageFriendStatus(friendsUsername: string, url: string): Observable<string> {
-        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
-            "friendsUsername": friendsUsername
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {}, {
+            params: {
+                "friendsUsername": friendsUsername
+            }
         });
     }
 
     updateNumOfLikes(postId: number): Observable<LikeResponse> {
-        return this.http.patch<LikeResponse>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {
-            "postId": postId
+        return this.http.patch<LikeResponse>(`${ environment.httpBackend }${ HomeApiCalls.UPDATE_LIKES }`, {}, {
+            params: {
+                "postId": postId
+            }
         });
     }
 

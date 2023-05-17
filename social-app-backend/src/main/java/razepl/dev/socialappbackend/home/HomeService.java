@@ -79,6 +79,9 @@ public class HomeService implements HomeServiceInterface {
                         .username(post.getUser().getUsername())
                         .postContent(post.getPostContent())
                         .postDate(post.getPostDate())
+                        .isUserInFriends(friendsRepository
+                                .findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent()
+                        )
                         .numOfLikes(likeRepository.countByPost(post))
                         .isPostLiked(likeRepository.findByUserAndPost(user, post).isPresent())
                         .postId(post.getPostId())
@@ -88,11 +91,11 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final PostData createNewPost(PostRequest request, User user) {
+    public final PostData createNewPost(String postContent, User user) {
         @Valid Post post = Post
                 .builder()
                 .postDate(LocalDate.now())
-                .postContent(request.postContent())
+                .postContent(postContent)
                 .numOfLikes(0L)
                 .user(user)
                 .build();
@@ -106,6 +109,7 @@ public class HomeService implements HomeServiceInterface {
                 .username(post.getUser().getUsername())
                 .postContent(post.getPostContent())
                 .postDate(post.getPostDate())
+                .isUserInFriends(false)
                 .isPostLiked(false)
                 .numOfLikes(likeRepository.countByPost(post))
                 .postId(post.getPostId())
@@ -113,8 +117,8 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final LikeResponse updatePostLikeCounter(LikeRequest request, User user) {
-        Post post = postRepository.findById(request.postId()).orElseThrow();
+    public final LikeResponse updatePostLikeCounter(long postId, User user) {
+        Post post = postRepository.findById(postId).orElseThrow();
 
         log.info("Post from repository : {}", post);
         log.info("User from repository : {}", user);

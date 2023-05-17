@@ -39,10 +39,11 @@ public class LogoutService implements LogoutHandler {
 
             return;
         }
-        log.info("Jwt in header : {}\nToken in repository : {}", jwt, token);
+        log.info("Jwt in header : {}\nToken is not null", jwt);
 
         token.setExpired(true);
         token.setRevoked(true);
+
         tokenRepository.save(token);
 
         SecurityContextHolder.clearContext();

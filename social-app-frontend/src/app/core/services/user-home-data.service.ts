@@ -11,14 +11,18 @@ export class UserHomeDataService {
     }
 
     updateUsersData(updateData: string, url: string): Observable<string> {
-        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
-            "updateData": updateData
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {}, {
+            params: {
+                "updateData": updateData
+            }
         });
     }
 
     manageUsersFriendEndpoints(friendsUsername: string, url: string): Observable<string> {
-        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {
-            "friendsUsername": friendsUsername
+        return this.http.patch<string>(`${ environment.httpBackend }${ url }`, {}, {
+            params: {
+                "friendsUsername": friendsUsername
+            }
         });
     }
 }

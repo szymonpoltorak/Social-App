@@ -15,11 +15,11 @@
 
         </app-delete-icon>
 
-        <app-add-friend-icon *ngIf="!isFriendAdded && postData.username !== currentUser"
+        <app-add-friend-icon *ngIf="!postData.isUserInFriends && postData.username !== currentUser"
                              (click)="updateFriendStatus()">
         </app-add-friend-icon>
 
-        <app-remove-friend-icon *ngIf="isFriendAdded && postData.username !== currentUser"
+        <app-remove-friend-icon *ngIf="postData.isUserInFriends && postData.username !== currentUser"
                                 (click)="updateFriendStatus()">
         </app-remove-friend-icon>
     </div>

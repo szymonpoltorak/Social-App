@@ -5,9 +5,9 @@
         <div class="grid-container">
             <app-home-profile class="sticky-element"></app-home-profile>
 
-            <app-home-posts></app-home-posts>
+            <app-home-posts (updateFriendListEvent)="updateFriendList()"></app-home-posts>
 
-            <app-home-friends class="sticky-element"></app-home-friends>
+            <app-home-friends [friendList]="friendList" class="sticky-element"></app-home-friends>
         </div>
     </main>
 </div>

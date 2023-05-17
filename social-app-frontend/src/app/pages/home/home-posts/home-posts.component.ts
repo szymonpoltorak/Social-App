@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { PostData } from "@core/interfaces/home/PostData";
 import { PostService } from "@core/services/post.service";
 import { Subject, takeUntil } from "rxjs";
@@ -14,6 +14,7 @@ import { TextInputComponent } from "@home/shared-home/text-input/text-input.comp
 export class HomePostsComponent implements OnInit, OnDestroy {
     private destroyPostList$: Subject<void> = new Subject<void>();
     private destroyCreatePost$: Subject<void> = new Subject<void>();
+    @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @ViewChild(TextInputComponent) postTextInput !: TextInputComponent;
     posts: PostData[] = [];
     currentUser!: string;
@@ -34,6 +35,10 @@ export class HomePostsComponent implements OnInit, OnDestroy {
 
     deletePostFromList(postData: PostData): void {
         this.posts = this.posts.filter(post => post !== postData);
+    }
+
+    updateFriendList(): void {
+        this.updateFriendListEvent.emit();
     }
 
     ngOnInit(): void {

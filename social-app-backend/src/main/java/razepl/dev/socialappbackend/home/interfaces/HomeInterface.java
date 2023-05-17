@@ -13,9 +13,9 @@ public interface HomeInterface {
 
     ResponseEntity<List<PostData>> getPostsList(int offsetValue, User user);
 
-    ResponseEntity<PostData> createPost(PostRequest request, User user);
+    ResponseEntity<PostData> createPost(String postContent, User user);
 
-    ResponseEntity<LikeResponse> changePostNumberOfLikes(LikeRequest request, User user);
+    ResponseEntity<LikeResponse> changePostNumberOfLikes(long postId, User user);
 
     ResponseEntity<Void> deletePost(long postId);
 }

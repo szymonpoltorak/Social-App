@@ -16,9 +16,9 @@ export class PostComponent implements OnDestroy {
     private updateLike$: Subject<void> = new Subject<void>();
     private deletePost$: Subject<void> = new Subject<void>();
     @Output() deleteEvent: EventEmitter<PostData> = new EventEmitter<PostData>();
+    @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
-    isFriendAdded!: boolean;
 
     constructor(private postService: PostService) {
     }
@@ -33,17 +33,21 @@ export class PostComponent implements OnDestroy {
     }
 
     updateFriendStatus(): void {
-        if (!this.isFriendAdded) {
-            this.postService.manageFriendStatus(this.currentUser, HomeApiCalls.ADD_FRIEND)
+        if (!this.postData.isUserInFriends) {
+            this.postService.manageFriendStatus(this.postData.username, HomeApiCalls.ADD_FRIEND)
                 .pipe(takeUntil(this.addFriend$))
                 .subscribe((): void => {
-                    this.isFriendAdded = true;
+                    this.postData.isUserInFriends = true;
+
+                    this.updateFriendListEvent.emit();
                 });
         } else {
-            this.postService.manageFriendStatus(this.currentUser, HomeApiCalls.REMOVE_FRIEND)
+            this.postService.manageFriendStatus(this.postData.username, HomeApiCalls.REMOVE_FRIEND)
                 .pipe(takeUntil(this.removeFriend$))
                 .subscribe((): void => {
-                    this.isFriendAdded = false;
+                    this.postData.isUserInFriends = false;
+
+                    this.updateFriendListEvent.emit();
                 });
         }
     }

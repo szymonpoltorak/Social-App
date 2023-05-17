@@ -7,4 +7,5 @@ export interface PostData {
     numOfComments: number;
     postId: number;
     isPostLiked: boolean;
+    isUserInFriends: boolean;
 }

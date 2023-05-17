@@ -12,9 +12,9 @@ public interface HomeServiceInterface {
 
     List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user);
 
-    PostData createNewPost(PostRequest request, User user);
+    PostData createNewPost(String postContent, User user);
 
-    LikeResponse updatePostLikeCounter(LikeRequest request, User user);
+    LikeResponse updatePostLikeCounter(long postId, User user);
 
     void deletePostByPostId(long postId);
 }

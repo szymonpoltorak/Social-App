@@ -56,22 +56,22 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PostMapping(value = CREATE_POST_MAPPING)
-    public final ResponseEntity<PostData> createPost(@RequestBody PostRequest request, User user) {
-        NullChecker.throwAppropriateException(request);
+    public final ResponseEntity<PostData> createPost(@RequestParam String postContent, User user) {
+        NullChecker.throwAppropriateException(postContent);
 
-        log.info("Creating post with data : {}", request);
+        log.info("Creating post with data : {}", postContent);
         log.info("User who wants to create post : {}", user);
 
-        return ResponseEntity.ok(homeService.createNewPost(request, user));
+        return ResponseEntity.ok(homeService.createNewPost(postContent, user));
     }
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestBody LikeRequest request,
+    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestParam long postId,
                                                                       @AuthenticationPrincipal User user) {
-        log.info("User wants to change number of like with data : {}", request);
+        log.info("User wants to change number of like with data : {}", postId);
 
-        return ResponseEntity.ok(homeService.updatePostLikeCounter(request, user));
+        return ResponseEntity.ok(homeService.updatePostLikeCounter(postId, user));
     }
 
     @Override
