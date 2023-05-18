@@ -1,4 +1,4 @@
-import { StorageKeys } from "../../enums/StorageKeys";
+import { StorageKeys } from "@enums/StorageKeys";
 
 /**
  * The interface for local storage interactions.

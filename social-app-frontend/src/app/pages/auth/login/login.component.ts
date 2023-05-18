@@ -4,15 +4,15 @@ import { DialogContents } from "@core/enums/DialogContents";
 import { LoginRequest } from "@core/data/login-request";
 import { FormFieldNames } from "@core/enums/FormFieldNames";
 import { LoginInterface } from "@core/interfaces/auth/LoginInterface";
-import { LoginControlProviderService } from "@core/services/login-control-provider.service";
-import { AuthDialogService } from "@core/services/auth-dialog.service";
-import { AuthService } from "@core/services/auth.service";
+import { LoginControlProviderService } from "@core/services/auth/login-control-provider.service";
+import { AuthDialogService } from "@core/services/auth/auth-dialog.service";
+import { AuthService } from "@core/services/auth/auth.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { AuthResponse } from "@core/data/auth-response";
-import { UserService } from "@core/services/user.service";
+import { UserService } from "@services/utils/user.service";
 import { AuthConstants } from "@core/enums/AuthConstants";
 import { StorageKeys } from "@core/enums/StorageKeys";
-import { UtilService } from "@core/services/util.service";
+import { UtilService } from "@services/utils/util.service";
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
 
 @Component({

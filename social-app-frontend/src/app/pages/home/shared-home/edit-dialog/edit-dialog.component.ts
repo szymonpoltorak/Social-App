@@ -2,17 +2,16 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@ang
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { LinkValidation } from "@core/enums/LinkValidation";
-import { UserHomeDataService } from "@core/services/user-home-data.service";
-import { UtilService } from "@core/services/util.service";
-import { StorageKeys } from "@core/enums/StorageKeys";
+import { UserHomeDataService } from "@core/services/home/user-home-data.service";
 import { Subject, takeUntil } from "rxjs";
+import { EditDialogInterface } from "@core/interfaces/home/EditDialogInterface";
 
 @Component({
     selector: 'app-edit-dialog',
     templateUrl: './edit-dialog.component.html',
     styleUrls: ['./edit-dialog.component.scss']
 })
-export class EditDialogComponent implements OnInit, OnDestroy {
+export class EditDialogComponent implements OnInit, OnDestroy, EditDialogInterface {
     private destroyData$: Subject<void> = new Subject<void>();
     @Output() closeEvent: EventEmitter<any> = new EventEmitter();
     title: string;

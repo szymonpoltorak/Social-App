@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { PostData } from "@core/interfaces/home/PostData";
-import { PostService } from "@core/services/post.service";
+import { PostService } from "@core/services/home/post.service";
 import { Subject, takeUntil } from "rxjs";
-import { UtilService } from "@core/services/util.service";
+import { UtilService } from "@services/utils/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
 

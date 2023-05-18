@@ -5,11 +5,12 @@ import { PostData } from "@core/interfaces/home/PostData";
 import { environment } from "@environments/environment";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { LikeResponse } from "@core/interfaces/home/LikeResponse";
+import { PostServiceInterface } from "@core/interfaces/home/PostServiceInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class PostService {
+export class PostService implements PostServiceInterface {
     private numOfSite: number = 0;
 
     constructor(private http: HttpClient) {

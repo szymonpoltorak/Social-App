@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
+import { UserHomeInterface } from "@core/interfaces/home/UserHomeInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserHomeDataService {
+export class UserHomeDataService implements UserHomeInterface {
     constructor(private http: HttpClient) {
     }
 
