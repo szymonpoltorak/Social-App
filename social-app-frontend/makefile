@@ -24,4 +24,4 @@ clean-container:
 clean-image:
 	$(image-remove) $(app-name) -f
 
-clean: clean-image, clean-container
+clean: clean-image clean-container
