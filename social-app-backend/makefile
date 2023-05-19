@@ -15,10 +15,6 @@ db:
 	$(build) -t social-app-postgres .
 	$(run) --name social-app-postgres -p 5432:5432 -d social-app-postgres
 
-stop:
-	$(stop) $(container)
-	$(stop) $(app-name)
-
 clean:
-	$(remove) social-app-backend social-app-postgres -f
-	$(remove-image) $(app-name) -f
+	$(remove) -f backend postgres
+	$(remove-image) -f social-app-backend social-app-postgres
