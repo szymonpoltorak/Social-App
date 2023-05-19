@@ -35,5 +35,24 @@ export interface AuthInterface {
      */
     refreshUsersToken(refreshToken: string): Observable<AuthResponse>;
 
+    /**
+     * Checks if the user is authenticated.
+     *
+     * @returns An Observable emitting a TokenResponse.
+     */
     isUserAuthenticated(): Observable<TokenResponse>;
+
+    /**
+     * Saves the authentication data.
+     *
+     * @param data - The authentication response data to be saved.
+     */
+    saveData(data: AuthResponse): void;
+
+    /**
+     * Logs out the user.
+     *
+     * @returns An Observable emitting any result after logout.
+     */
+    logoutUser(): Observable<any>;
 }

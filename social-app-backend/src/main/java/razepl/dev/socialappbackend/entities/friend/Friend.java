@@ -9,6 +9,10 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.globals.DataBuilder;
 import razepl.dev.socialappbackend.home.data.FriendData;
 
+/**
+ * Class that represents Friend entity.
+ * Implements {@link DataBuilder}
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

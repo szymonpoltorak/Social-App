@@ -16,6 +16,9 @@ import static razepl.dev.socialappbackend.home.constants.HomeMappings.*;
 import static razepl.dev.socialappbackend.home.constants.HomeMappings.JOB_MAPPING;
 import static razepl.dev.socialappbackend.home.constants.ResponseMessages.SUCCESSFUL_DATA_UPDATE;
 
+/**
+ * Controller for /api/home/user endpoints.
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor

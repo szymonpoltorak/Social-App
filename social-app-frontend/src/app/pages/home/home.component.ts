@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HomeService } from "@core/services/home.service";
+import { HomeService } from "@core/services/home/home.service";
 import { Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
 

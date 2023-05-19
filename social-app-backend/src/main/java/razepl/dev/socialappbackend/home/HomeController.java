@@ -16,6 +16,9 @@ import java.util.List;
 
 import static razepl.dev.socialappbackend.home.constants.HomeMappings.*;
 
+/**
+ * Controller for /api/home endpoints.
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -67,8 +70,8 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final ResponseEntity<LikeResponse> changePostNumberOfLikes(@RequestParam long postId,
-                                                                      @AuthenticationPrincipal User user) {
+    public final ResponseEntity<LikeData> changePostNumberOfLikes(@RequestParam long postId,
+                                                                  @AuthenticationPrincipal User user) {
         log.info("User wants to change number of like with data : {}", postId);
 
         return ResponseEntity.ok(homeService.updatePostLikeCounter(postId, user));

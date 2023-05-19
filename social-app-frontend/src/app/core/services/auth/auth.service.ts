@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { catchError, Observable, of } from "rxjs";
-import { LocalStorageService } from "./local-storage.service";
-import { RegisterRequest } from "../data/register-request";
-import { AuthResponse } from "../data/auth-response";
-import { AuthApiCalls } from "../enums/AuthApiCalls";
-import { StorageKeys } from "../enums/StorageKeys";
-import { LoginRequest } from "../data/login-request";
-import { TokenResponse } from "../data/token-response";
-import { AuthInterface } from "../interfaces/auth/AuthInterface";
-import { AuthConstants } from "../enums/AuthConstants";
+import { RegisterRequest } from "@data/register-request";
+import { AuthResponse } from "@data/auth-response";
+import { AuthApiCalls } from "@enums/AuthApiCalls";
+import { StorageKeys } from "@enums/StorageKeys";
+import { LoginRequest } from "@data/login-request";
+import { TokenResponse } from "@data/token-response";
+import { AuthInterface } from "@interfaces/auth/AuthInterface";
+import { AuthConstants } from "@enums/AuthConstants";
 import { environment } from "@environments/environment";
+import { UtilService } from "@services/utils/util.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService implements AuthInterface {
     constructor(private http: HttpClient,
-                private localStorageService: LocalStorageService) {
+                private utilService: UtilService) {
     }
 
     isUserAuthenticated(): Observable<TokenResponse> {
-        const authToken: string = this.localStorageService.getKeyValueFromStorage(StorageKeys.AUTH_TOKEN);
-        const refreshToken: string = this.localStorageService.getKeyValueFromStorage(StorageKeys.REFRESH_TOKEN);
+        const authToken: string = this.utilService.getKeyValuePairFromStorage(StorageKeys.AUTH_TOKEN);
+        const refreshToken: string = this.utilService.getKeyValuePairFromStorage(StorageKeys.REFRESH_TOKEN);
 
         console.log(JSON.parse(`{${ authToken }, ${ refreshToken }}`));
 
@@ -59,8 +59,8 @@ export class AuthService implements AuthInterface {
         console.log(data.authToken);
         console.log(data.refreshToken);
 
-        this.localStorageService.addValueIntoStorage(StorageKeys.AUTH_TOKEN, data.authToken);
-        this.localStorageService.addValueIntoStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
+        this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
+        this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
     }
 
     private buildAuthRequest(authToken: string) {

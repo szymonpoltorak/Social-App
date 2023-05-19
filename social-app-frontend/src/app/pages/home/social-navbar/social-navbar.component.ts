@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
-import { AuthService } from "@core/services/auth.service";
-import { UtilService } from "@core/services/util.service";
-import { UserService } from "@core/services/user.service";
+import { AuthService } from "@core/services/auth/auth.service";
+import { UtilService } from "@services/utils/util.service";
+import { UserService } from "@services/utils/user.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 
 @Component({

@@ -1,20 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HomeService } from "@core/services/home.service";
-import { UserHomeDataService } from "@core/services/user-home-data.service";
-import { UtilService } from "@core/services/util.service";
+import { HomeService } from "@core/services/home/home.service";
+import { UserHomeDataService } from "@core/services/home/user-home-data.service";
+import { UtilService } from "@services/utils/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { Subject, takeUntil } from "rxjs";
 import { UserData } from "@core/interfaces/home/UserData";
 import { SocialNames } from "@core/enums/SocialNames";
-import { HomeDialogService } from "@core/services/home-dialog.service";
+import { HomeDialogService } from "@core/services/home/home-dialog.service";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
+import { HomeProfileInterface } from "@core/interfaces/home/HomeProfileInterface";
 
 @Component({
     selector: 'app-home-profile',
     templateUrl: './home-profile.component.html',
     styleUrls: ['./home-profile.component.scss']
 })
-export class HomeProfileComponent implements OnInit, OnDestroy {
+export class HomeProfileComponent implements OnInit, OnDestroy, HomeProfileInterface {
     private userDataDestroy$: Subject<void> = new Subject<void>();
     private destroyDialog$: Subject<void> = new Subject<void>();
     protected readonly SocialNames = SocialNames;
@@ -28,8 +29,6 @@ export class HomeProfileComponent implements OnInit, OnDestroy {
     linkedin: string = "";
 
     constructor(private homeService: HomeService,
-                private userDataService: UserHomeDataService,
-                private utilService: UtilService,
                 private homeDialogService: HomeDialogService) {
     }
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn } from "@angular/forms";
-import { RegisterValidationInterface } from "../interfaces/auth/RegisterValidationInterface";
+import { RegisterValidationInterface } from "../../interfaces/auth/RegisterValidationInterface";
 
 @Injectable({
     providedIn: 'root'

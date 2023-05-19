@@ -4,7 +4,7 @@ import { LoginComponent } from "./login.component";
 import { LoginRoutingModule } from "./login-routing.module";
 import { SharedAuthModule } from "../shared/shared-auth.module";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AuthDialogService } from "@core/services/auth-dialog.service";
+import { AuthDialogService } from "@core/services/auth/auth-dialog.service";
 import { MatDialogModule } from "@angular/material/dialog";
 
 

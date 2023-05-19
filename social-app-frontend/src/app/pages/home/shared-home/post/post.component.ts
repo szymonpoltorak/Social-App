@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { PostService } from "@core/services/post.service";
+import { PostService } from "@core/services/home/post.service";
 import { Subject, takeUntil } from "rxjs";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { PostData } from "@core/interfaces/home/PostData";
 import { LikeResponse } from "@core/interfaces/home/LikeResponse";
+import { PostInterface } from "@core/interfaces/home/PostInterface";
 
 @Component({
     selector: 'app-post',
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnDestroy {
+export class PostComponent implements OnDestroy, PostInterface {
     private addFriend$: Subject<void> = new Subject<void>();
     private removeFriend$: Subject<void> = new Subject<void>();
     private updateLike$: Subject<void> = new Subject<void>();

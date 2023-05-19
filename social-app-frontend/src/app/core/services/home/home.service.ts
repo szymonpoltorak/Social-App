@@ -5,11 +5,12 @@ import { FriendData } from "@core/interfaces/home/FriendData";
 import { UserData } from "@core/interfaces/home/UserData";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { environment } from "@environments/environment";
+import { HomeServiceInterface } from "@core/interfaces/home/HomeServiceInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class HomeService {
+export class HomeService implements HomeServiceInterface {
     constructor(private http: HttpClient) {
     }
 

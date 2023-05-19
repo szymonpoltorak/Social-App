@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { UtilService } from "@core/services/util.service";
-import { UserHomeDataService } from "@core/services/user-home-data.service";
+import { UtilService } from "@services/utils/util.service";
+import { UserHomeDataService } from "@core/services/home/user-home-data.service";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { Subject, takeUntil } from "rxjs";
 

@@ -17,6 +17,9 @@ import java.time.LocalDate;
 
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.DATE_PATTERN;
 
+/**
+ * Class that represents post entity.
+ */
 @Builder
 @Data
 @NoArgsConstructor

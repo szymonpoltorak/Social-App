@@ -50,6 +50,18 @@
             ],
             "@environments/*": [
                 "./src/environments/*"
+            ],
+            "@data/*": [
+                "./src/app/core/data/*"
+            ],
+            "@interfaces/*": [
+                "./src/app/core/interfaces/*"
+            ],
+            "@enums/*": [
+                "./src/app/core/enums/*"
+            ],
+            "@services/*": [
+                "./src/app/core/services/*"
             ]
         }
     },

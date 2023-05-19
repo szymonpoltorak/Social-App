@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
+import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 import razepl.dev.socialappbackend.entities.like.Like;
@@ -22,6 +24,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for /api/home controller.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -33,7 +38,9 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
-        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow();
+        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
+                () -> new UsernameNotFoundException("User was not found in database!")
+        );
 
         log.info("Building data for user : {}", user);
 
@@ -51,8 +58,10 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final List<FriendData> buildUsersFriendList(User authUser) {
-        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow();
-        List<Friend> friendList = friendsRepository.findFriendsByUser(user).orElseThrow();
+        User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
+                () -> new UsernameNotFoundException("User does not exist!")
+        );
+        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(12)).orElseThrow();
 
         log.info("Friend list for user : {}", user);
 
@@ -117,8 +126,10 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final LikeResponse updatePostLikeCounter(long postId, User user) {
-        Post post = postRepository.findById(postId).orElseThrow();
+    public final LikeData updatePostLikeCounter(long postId, User user) {
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new PostNotFoundException("Post does not exist!")
+        );
 
         log.info("Post from repository : {}", post);
         log.info("User from repository : {}", user);
@@ -130,7 +141,7 @@ public class HomeService implements HomeServiceInterface {
 
             log.info("Like i got : {}", like.get());
 
-            return LikeResponse
+            return LikeData
                     .builder()
                     .numOfLikes(likeRepository.countByPost(post))
                     .isPostLiked(false)
@@ -145,7 +156,7 @@ public class HomeService implements HomeServiceInterface {
 
         likeRepository.save(newLike);
 
-        return LikeResponse
+        return LikeData
                 .builder()
                 .isPostLiked(true)
                 .numOfLikes(likeRepository.countByPost(post))
