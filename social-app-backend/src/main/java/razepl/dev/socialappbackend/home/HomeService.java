@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
@@ -25,6 +26,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static razepl.dev.socialappbackend.home.constants.PageSizes.*;
 
 /**
  * Service class for /api/home controller.
@@ -56,7 +59,7 @@ public class HomeService implements HomeServiceInterface {
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User does not exist!")
         );
-        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(12)).orElseThrow();
+        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(FRIEND_LIST_PAGE));
 
         log.info("Friend list for user : {}", user);
 
@@ -71,7 +74,7 @@ public class HomeService implements HomeServiceInterface {
         if (numOfSite < 0) {
             throw new IllegalArgumentException("Num of site cannot be less than 0");
         }
-        Page<Post> postList = postRepository.getPosts(Pageable.ofSize(100).withPage(numOfSite));
+        Page<Post> postList = postRepository.getPosts(Pageable.ofSize(POST_LIST_PAGE).withPage(numOfSite));
 
         log.info("Number of posts that has been taken: {}", postList.getNumberOfElements());
 
@@ -136,8 +139,16 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final List<CommentData> getListOfComments(long postId) {
-        return null;
+    public final List<CommentData> getListOfComments(long postId, int numOfSite) {
+        Pageable pageable = Pageable.ofSize(COMMENT_LIST_SIZE).withPage(numOfSite);
+        Page<Comment> commentList = commentRepository.findCommentsByPostId(postId, pageable);
+
+        log.info("Returning {} comments", commentList.getNumberOfElements());
+
+        return commentList
+                .stream()
+                .map(Comment::buildData)
+                .collect(Collectors.toList());
     }
 
     @Override

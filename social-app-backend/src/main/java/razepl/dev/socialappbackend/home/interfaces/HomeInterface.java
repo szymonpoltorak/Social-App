@@ -144,7 +144,7 @@ public interface HomeInterface {
     )
     ResponseEntity<Void> deletePost(long postId);
 
-    ResponseEntity<List<CommentData>> getListOfComments(long postId);
+    ResponseEntity<List<CommentData>> getListOfComments(long postId, int numOfSite);
 
     ResponseEntity<CommentData> createComment(long postId, User user);
 }

@@ -89,10 +89,12 @@ public class HomeController implements HomeInterface {
 
     @Override
     @GetMapping(value = GET_COMMENTS_MAPPING)
-    public final ResponseEntity<List<CommentData>> getListOfComments(@RequestParam long postId) {
+    public final ResponseEntity<List<CommentData>> getListOfComments(@RequestParam long postId,
+                                                                     @RequestParam int numOfSite) {
         log.info("Get list of comments for post of id: {}", postId);
+        log.info("Num Of Site : {}", numOfSite);
 
-        return ResponseEntity.ok(homeService.getListOfComments(postId));
+        return ResponseEntity.ok(homeService.getListOfComments(postId, numOfSite));
     }
 
     @Override
