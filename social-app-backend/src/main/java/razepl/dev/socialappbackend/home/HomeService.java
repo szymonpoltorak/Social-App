@@ -152,7 +152,21 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public final CommentData createComment(long postId, User user) {
-        return null;
+    public final CommentData createComment(CommentRequest request, User user) {
+        Post post = postRepository.findById(request.postId())
+                .orElseThrow(() -> new PostNotFoundException("Post does not exist!"));
+
+        @Valid Comment comment = Comment
+                .builder()
+                .post(post)
+                .user(user)
+                .commentContent(request.commentContent())
+                .commentDate(LocalDate.now())
+                .build();
+        log.info("Saving comment : {}", comment);
+
+        commentRepository.save(comment);
+
+        return comment.buildData();
     }
 }

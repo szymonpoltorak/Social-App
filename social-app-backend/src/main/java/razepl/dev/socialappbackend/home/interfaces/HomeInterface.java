@@ -146,6 +146,6 @@ public interface HomeInterface {
 
     ResponseEntity<List<CommentData>> getListOfComments(long postId, int numOfSite);
 
-    ResponseEntity<CommentData> createComment(long postId, User user);
+    ResponseEntity<CommentData> createComment(CommentRequest request, User user);
 }
 

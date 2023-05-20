@@ -99,10 +99,10 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PostMapping(value = CREATE_COMMENT_MAPPING)
-    public final ResponseEntity<CommentData> createComment(@RequestParam long postId,
+    public final ResponseEntity<CommentData> createComment(@RequestBody CommentRequest request,
                                                            @AuthenticationPrincipal User user) {
-        log.info("Creating comment for pos of id: {}\nOf User: {}", postId, user);
+        log.info("Creating comment with data: {}\nOf User: {}", request, user);
 
-        return ResponseEntity.ok(homeService.createComment(postId, user));
+        return ResponseEntity.ok(homeService.createComment(request, user));
     }
 }

@@ -61,6 +61,6 @@ public interface HomeServiceInterface {
 
     List<CommentData> getListOfComments(long postId, int numOfSite);
 
-    CommentData createComment(long postId, User user);
+    CommentData createComment(CommentRequest request, User user);
 }
 
