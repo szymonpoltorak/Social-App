@@ -102,7 +102,6 @@ public class TestDataController {
                         .postContent(contents[i])
                         .postDate(date)
                         .user(jacek)
-                        .numOfLikes(25L)
                         .build();
                 postRepository.save(post);
             } else if (i % 3 == 1) {
@@ -111,7 +110,6 @@ public class TestDataController {
                         .postContent(contents[i])
                         .postDate(date)
                         .user(ania)
-                        .numOfLikes(10L)
                         .build();
                 postRepository.save(post);
             } else {
@@ -120,7 +118,6 @@ public class TestDataController {
                         .postContent(contents[i])
                         .postDate(date)
                         .user(andrzej)
-                        .numOfLikes(34L)
                         .build();
                 postRepository.save(post);
             }
