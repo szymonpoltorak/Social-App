@@ -12,6 +12,7 @@ import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
 import razepl.dev.socialappbackend.home.data.*;
+import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 import razepl.dev.socialappbackend.entities.like.Like;
 import razepl.dev.socialappbackend.entities.like.LikeRepository;
@@ -37,6 +38,7 @@ public class HomeService implements HomeServiceInterface {
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
     private final CommentRepository commentRepository;
+    private final DataServiceInterface dataServiceInterface;
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
@@ -46,16 +48,7 @@ public class HomeService implements HomeServiceInterface {
 
         log.info("Building data for user : {}", user);
 
-        return UserData
-                .builder()
-                .fullName(user.getFullName())
-                .location(convertNullIntoEmptyString(user.getLocation()))
-                .job(convertNullIntoEmptyString(user.getJob()))
-                .github(convertNullIntoEmptyString(user.getGithub()))
-                .linkedin(convertNullIntoEmptyString(user.getLinkedin()))
-                .twitter(convertNullIntoEmptyString(user.getTwitter()))
-                .numOfFriends(friendsRepository.countFriendByUser(user))
-                .build();
+        return dataServiceInterface.buildUserData(user);
     }
 
     @Override
@@ -84,20 +77,11 @@ public class HomeService implements HomeServiceInterface {
 
         return postList
                 .stream()
-                .map(post -> PostData
-                        .builder()
-                        .postAuthor(post.getUser().getFullName())
-                        .username(post.getUser().getUsername())
-                        .postContent(post.getPostContent())
-                        .postDate(post.getPostDate())
-                        .isUserInFriends(friendsRepository
-                                .findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent()
-                        )
-                        .numOfLikes(likeRepository.countByPost(post))
-                        .isPostLiked(likeRepository.findByUserAndPost(user, post).isPresent())
-                        .postId(post.getPostId())
-                        .build()
-                )
+                .map(post -> dataServiceInterface.buildPostData(
+                        post,
+                        friendsRepository.findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent(),
+                        likeRepository.findByUserAndPost(user, post).isPresent()
+                ))
                 .collect(Collectors.toList());
     }
 
@@ -114,17 +98,7 @@ public class HomeService implements HomeServiceInterface {
 
         postRepository.save(post);
 
-        return PostData
-                .builder()
-                .postAuthor(post.getUser().getFullName())
-                .username(post.getUser().getUsername())
-                .postContent(post.getPostContent())
-                .postDate(post.getPostDate())
-                .isUserInFriends(false)
-                .isPostLiked(false)
-                .numOfLikes(likeRepository.countByPost(post))
-                .postId(post.getPostId())
-                .build();
+        return dataServiceInterface.buildPostData(post, false, false);
     }
 
     @Override
@@ -132,7 +106,6 @@ public class HomeService implements HomeServiceInterface {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post does not exist!")
         );
-
         log.info("Post from repository : {}", post);
         log.info("User from repository : {}", user);
 
@@ -143,11 +116,7 @@ public class HomeService implements HomeServiceInterface {
 
             log.info("Like i got : {}", like.get());
 
-            return LikeData
-                    .builder()
-                    .numOfLikes(likeRepository.countByPost(post))
-                    .isPostLiked(false)
-                    .build();
+            return dataServiceInterface.buidLikeData(false, post);
         }
         Like newLike = Like
                 .builder()
@@ -158,11 +127,7 @@ public class HomeService implements HomeServiceInterface {
 
         likeRepository.save(newLike);
 
-        return LikeData
-                .builder()
-                .isPostLiked(true)
-                .numOfLikes(likeRepository.countByPost(post))
-                .build();
+        return dataServiceInterface.buidLikeData(true, post);
     }
 
     @Override
@@ -178,9 +143,5 @@ public class HomeService implements HomeServiceInterface {
     @Override
     public final CommentData createComment(long postId, User user) {
         return null;
-    }
-
-    private String convertNullIntoEmptyString(String value) {
-        return value == null ? "" : value;
     }
 }
