@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
@@ -35,6 +36,7 @@ public class HomeService implements HomeServiceInterface {
     private final FriendsRepository friendsRepository;
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
@@ -166,6 +168,16 @@ public class HomeService implements HomeServiceInterface {
     @Override
     public final void deletePostByPostId(long postId) {
         postRepository.deleteById(postId);
+    }
+
+    @Override
+    public final List<CommentData> getListOfComments(long postId) {
+        return null;
+    }
+
+    @Override
+    public final CommentData createComment(long postId, User user) {
+        return null;
     }
 
     private String convertNullIntoEmptyString(String value) {

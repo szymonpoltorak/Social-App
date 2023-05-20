@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.FriendData;
-import razepl.dev.socialappbackend.home.data.LikeData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.*;
 
 import java.util.List;
 
@@ -146,5 +143,9 @@ public interface HomeInterface {
             }
     )
     ResponseEntity<Void> deletePost(long postId);
+
+    ResponseEntity<List<CommentData>> getListOfComments(long postId);
+
+    ResponseEntity<CommentData> createComment(long postId, User user);
 }
 

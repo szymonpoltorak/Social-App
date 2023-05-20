@@ -58,5 +58,9 @@ public interface HomeServiceInterface {
      * @param postId The ID of the post to delete.
      */
     void deletePostByPostId(long postId);
+
+    List<CommentData> getListOfComments(long postId);
+
+    CommentData createComment(long postId, User user);
 }
 
