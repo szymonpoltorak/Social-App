@@ -15,5 +15,7 @@ public interface DataServiceInterface {
 
     LikeData buidLikeData(boolean isPostLiked, Post post);
 
+    LikeData buildLikeData(boolean isPostLiked, Comment comment);
+
     CommentData buildCommentData(Comment comment, User user);
 }

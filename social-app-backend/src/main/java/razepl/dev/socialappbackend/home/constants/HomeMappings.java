@@ -83,6 +83,8 @@ public final class HomeMappings {
 
     public static final String CREATE_COMMENT_MAPPING = "/createComment";
 
+    public static final String COMMENT_LIKE_MAPPING = "likeComment";
+
     private HomeMappings() {
     }
 }

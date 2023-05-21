@@ -9,18 +9,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLike;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLikeRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
+import razepl.dev.socialappbackend.entities.post.Post;
+import razepl.dev.socialappbackend.entities.post.PostRepository;
+import razepl.dev.socialappbackend.entities.postlike.PostLike;
+import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.exceptions.CommentNotFoundException;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
-import razepl.dev.socialappbackend.entities.postlike.PostLike;
-import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
-import razepl.dev.socialappbackend.entities.post.Post;
-import razepl.dev.socialappbackend.entities.post.PostRepository;
-import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -42,6 +45,7 @@ public class HomeService implements HomeServiceInterface {
     private final PostLikeRepository postLikeRepository;
     private final CommentRepository commentRepository;
     private final DataServiceInterface dataServiceInterface;
+    private final CommentLikeRepository commentLikeRepository;
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
@@ -167,5 +171,34 @@ public class HomeService implements HomeServiceInterface {
         commentRepository.save(comment);
 
         return dataServiceInterface.buildCommentData(comment, user);
+    }
+
+    @Override
+    public final LikeData updateCommentLikeCounter(long commentId, User user) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new CommentNotFoundException("Comment does not exist!")
+        );
+        log.info("Post from repository : {}", comment);
+        log.info("User from repository : {}", user);
+
+        Optional<CommentLike> like = commentLikeRepository.findByUserAndComment(user, comment);
+
+        if (like.isPresent()) {
+            commentLikeRepository.delete(like.get());
+
+            log.info("Like i got : {}", like.get());
+
+            return dataServiceInterface.buildLikeData(false, comment);
+        }
+        CommentLike newLike = CommentLike
+                .builder()
+                .comment(comment)
+                .user(user)
+                .build();
+        log.info("New like to db : {}", newLike);
+
+        commentLikeRepository.save(newLike);
+
+        return dataServiceInterface.buildLikeData(true, comment);
     }
 }

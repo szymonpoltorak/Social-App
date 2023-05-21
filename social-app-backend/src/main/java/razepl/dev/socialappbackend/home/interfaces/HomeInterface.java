@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLike;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.home.data.*;
 
@@ -147,5 +148,7 @@ public interface HomeInterface {
     ResponseEntity<List<CommentData>> getListOfComments(long postId, int numOfSite, User user);
 
     ResponseEntity<CommentData> createComment(CommentRequest request, User user);
+
+    ResponseEntity<LikeData> changeCommentNumberOfLikes(long commentId, User user);
 }
 

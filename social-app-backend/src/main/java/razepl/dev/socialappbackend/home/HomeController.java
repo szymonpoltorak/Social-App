@@ -106,4 +106,13 @@ public class HomeController implements HomeInterface {
 
         return ResponseEntity.ok(homeService.createComment(request, user));
     }
+
+    @Override
+    @PatchMapping(value = COMMENT_LIKE_MAPPING)
+    public final ResponseEntity<LikeData> changeCommentNumberOfLikes(@RequestParam long commentId,
+                                                                     @AuthenticationPrincipal User user) {
+        log.info("Creating like for comment of id : {}\nBy User : {}", commentId, user);
+
+        return ResponseEntity.ok(homeService.updateCommentLikeCounter(commentId, user));
+    }
 }

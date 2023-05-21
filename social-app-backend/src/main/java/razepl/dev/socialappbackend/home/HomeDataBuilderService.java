@@ -63,6 +63,15 @@ public class HomeDataBuilderService implements DataServiceInterface {
     }
 
     @Override
+    public final LikeData buildLikeData(boolean isPostLiked, Comment comment) {
+        return LikeData
+                .builder()
+                .numOfLikes(commentLikeRepository.countByComment(comment))
+                .isPostLiked(isPostLiked)
+                .build();
+    }
+
+    @Override
     public final CommentData buildCommentData(Comment comment, User user) {
         return CommentData
                 .builder()
