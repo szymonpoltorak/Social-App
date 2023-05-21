@@ -20,6 +20,7 @@ export class PostComponent implements OnDestroy, PostInterface {
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
+    areCommentsVisible: boolean = false;
 
     constructor(private postService: PostService) {
     }
@@ -29,7 +30,7 @@ export class PostComponent implements OnDestroy, PostInterface {
             .pipe(takeUntil(this.updateLike$))
             .subscribe((data: LikeResponse): void => {
                 this.postData.numOfLikes = data.numOfLikes;
-                this.postData.isPostLiked = data.isPostLiked;
+                this.postData.isPostLiked = data.isLiked;
             });
     }
 

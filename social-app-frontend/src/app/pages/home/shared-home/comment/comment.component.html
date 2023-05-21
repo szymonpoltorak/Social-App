@@ -1,0 +1,22 @@
+<div class="comment-container">
+    <app-user-icon [width]="40" [height]="40"></app-user-icon>
+
+    <div>
+        <div class="content-container">
+            <div class="user-full-name">{{ commentData.commentAuthor }}</div>
+            <div class="comment-content">{{ commentData.commentContent }}</div>
+        </div>
+
+        <div class="like-date-container">
+            <div class="box-separator">
+                <app-like-icon (click)="updateLikeState()"
+                               [isLiked]="commentData.isCommentLiked">
+                </app-like-icon>
+
+                <div>{{ commentData.numOfLikes }}</div>
+            </div>
+
+            <div>{{ commentData.commentDate }}</div>
+        </div>
+    </div>
+</div>

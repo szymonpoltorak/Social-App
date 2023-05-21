@@ -21,11 +21,16 @@ $input-background-color: #2c2d2c;
     width: 35em;
 }
 
+app-user-icon {
+    margin-bottom: 1.5em;
+}
+
 .writing-container {
     display: flex;
     align-items: center;
-    gap: 2.5em;
+    gap: 2em;
     margin-bottom: 1em;
+    margin-left: 0.5em;
 }
 
 .post-create-bar {

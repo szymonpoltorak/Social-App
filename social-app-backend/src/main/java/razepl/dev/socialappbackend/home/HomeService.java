@@ -7,22 +7,30 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.entities.comment.Comment;
+import razepl.dev.socialappbackend.entities.comment.CommentRepository;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLike;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLikeRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
-import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
-import razepl.dev.socialappbackend.home.data.*;
-import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
-import razepl.dev.socialappbackend.entities.like.Like;
-import razepl.dev.socialappbackend.entities.like.LikeRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
+import razepl.dev.socialappbackend.entities.postlike.PostLike;
+import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.exceptions.CommentNotFoundException;
+import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
+import razepl.dev.socialappbackend.home.data.*;
+import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
+import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static razepl.dev.socialappbackend.home.constants.PageSizes.*;
 
 /**
  * Service class for /api/home controller.
@@ -34,7 +42,10 @@ public class HomeService implements HomeServiceInterface {
     private final UserRepository userRepository;
     private final FriendsRepository friendsRepository;
     private final PostRepository postRepository;
-    private final LikeRepository likeRepository;
+    private final PostLikeRepository postLikeRepository;
+    private final CommentRepository commentRepository;
+    private final DataServiceInterface dataServiceInterface;
+    private final CommentLikeRepository commentLikeRepository;
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
@@ -44,16 +55,7 @@ public class HomeService implements HomeServiceInterface {
 
         log.info("Building data for user : {}", user);
 
-        return UserData
-                .builder()
-                .fullName(user.getFullName())
-                .location(convertNullIntoEmptyString(user.getLocation()))
-                .job(convertNullIntoEmptyString(user.getJob()))
-                .github(convertNullIntoEmptyString(user.getGithub()))
-                .linkedin(convertNullIntoEmptyString(user.getLinkedin()))
-                .twitter(convertNullIntoEmptyString(user.getTwitter()))
-                .numOfFriends(friendsRepository.countFriendByUser(user))
-                .build();
+        return dataServiceInterface.buildUserData(user);
     }
 
     @Override
@@ -61,7 +63,7 @@ public class HomeService implements HomeServiceInterface {
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User does not exist!")
         );
-        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(12)).orElseThrow();
+        Page<Friend> friendList = friendsRepository.findFriendsByUser(user, Pageable.ofSize(FRIEND_LIST_PAGE));
 
         log.info("Friend list for user : {}", user);
 
@@ -76,26 +78,17 @@ public class HomeService implements HomeServiceInterface {
         if (numOfSite < 0) {
             throw new IllegalArgumentException("Num of site cannot be less than 0");
         }
-        Page<Post> postList = postRepository.getPosts(Pageable.ofSize(100).withPage(numOfSite));
+        Page<Post> postList = postRepository.getPosts(Pageable.ofSize(POST_LIST_PAGE).withPage(numOfSite));
 
         log.info("Number of posts that has been taken: {}", postList.getNumberOfElements());
 
         return postList
                 .stream()
-                .map(post -> PostData
-                        .builder()
-                        .postAuthor(post.getUser().getFullName())
-                        .username(post.getUser().getUsername())
-                        .postContent(post.getPostContent())
-                        .postDate(post.getPostDate())
-                        .isUserInFriends(friendsRepository
-                                .findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent()
-                        )
-                        .numOfLikes(likeRepository.countByPost(post))
-                        .isPostLiked(likeRepository.findByUserAndPost(user, post).isPresent())
-                        .postId(post.getPostId())
-                        .build()
-                )
+                .map(post -> dataServiceInterface.buildPostData(
+                        post,
+                        friendsRepository.findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent(),
+                        postLikeRepository.findByUserAndPost(user, post).isPresent()
+                ))
                 .collect(Collectors.toList());
     }
 
@@ -105,24 +98,13 @@ public class HomeService implements HomeServiceInterface {
                 .builder()
                 .postDate(LocalDate.now())
                 .postContent(postContent)
-                .numOfLikes(0L)
                 .user(user)
                 .build();
         log.info("Newly created post : {}", post);
 
         postRepository.save(post);
 
-        return PostData
-                .builder()
-                .postAuthor(post.getUser().getFullName())
-                .username(post.getUser().getUsername())
-                .postContent(post.getPostContent())
-                .postDate(post.getPostDate())
-                .isUserInFriends(false)
-                .isPostLiked(false)
-                .numOfLikes(likeRepository.countByPost(post))
-                .postId(post.getPostId())
-                .build();
+        return dataServiceInterface.buildPostData(post, false, false);
     }
 
     @Override
@@ -130,37 +112,28 @@ public class HomeService implements HomeServiceInterface {
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post does not exist!")
         );
-
         log.info("Post from repository : {}", post);
         log.info("User from repository : {}", user);
 
-        Optional<Like> like = likeRepository.findByUserAndPost(user, post);
+        Optional<PostLike> like = postLikeRepository.findByUserAndPost(user, post);
 
         if (like.isPresent()) {
-            likeRepository.delete(like.get());
+            postLikeRepository.delete(like.get());
 
             log.info("Like i got : {}", like.get());
 
-            return LikeData
-                    .builder()
-                    .numOfLikes(likeRepository.countByPost(post))
-                    .isPostLiked(false)
-                    .build();
+            return dataServiceInterface.buidLikeData(false, post);
         }
-        Like newLike = Like
+        PostLike newLike = PostLike
                 .builder()
                 .post(post)
                 .user(user)
                 .build();
         log.info("New like to db : {}", newLike);
 
-        likeRepository.save(newLike);
+        postLikeRepository.save(newLike);
 
-        return LikeData
-                .builder()
-                .isPostLiked(true)
-                .numOfLikes(likeRepository.countByPost(post))
-                .build();
+        return dataServiceInterface.buidLikeData(true, post);
     }
 
     @Override
@@ -168,7 +141,64 @@ public class HomeService implements HomeServiceInterface {
         postRepository.deleteById(postId);
     }
 
-    private String convertNullIntoEmptyString(String value) {
-        return value == null ? "" : value;
+    @Override
+    public final List<CommentData> getListOfComments(long postId, int numOfSite, User user) {
+        Pageable pageable = Pageable.ofSize(COMMENT_LIST_SIZE).withPage(numOfSite);
+        Page<Comment> commentList = commentRepository.findCommentsByPostId(postId, pageable);
+
+        log.info("Returning {} comments", commentList.getNumberOfElements());
+
+        return commentList
+                .stream()
+                .map(comment -> dataServiceInterface.buildCommentData(comment, user))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public final CommentData createComment(CommentRequest request, User user) {
+        Post post = postRepository.findById(request.postId())
+                .orElseThrow(() -> new PostNotFoundException("Post does not exist!"));
+
+        @Valid Comment comment = Comment
+                .builder()
+                .post(post)
+                .user(user)
+                .commentContent(request.commentContent())
+                .commentDate(LocalDate.now())
+                .build();
+        log.info("Saving comment : {}", comment);
+
+        commentRepository.save(comment);
+
+        return dataServiceInterface.buildCommentData(comment, user);
+    }
+
+    @Override
+    public final LikeData updateCommentLikeCounter(long commentId, User user) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new CommentNotFoundException("Comment does not exist!")
+        );
+        log.info("Post from repository : {}", comment);
+        log.info("User from repository : {}", user);
+
+        Optional<CommentLike> like = commentLikeRepository.findByUserAndComment(user, comment);
+
+        if (like.isPresent()) {
+            commentLikeRepository.delete(like.get());
+
+            log.info("Like i got : {}", like.get());
+
+            return dataServiceInterface.buildLikeData(false, comment);
+        }
+        CommentLike newLike = CommentLike
+                .builder()
+                .comment(comment)
+                .user(user)
+                .build();
+        log.info("New like to db : {}", newLike);
+
+        commentLikeRepository.save(newLike);
+
+        return dataServiceInterface.buildLikeData(true, comment);
     }
 }

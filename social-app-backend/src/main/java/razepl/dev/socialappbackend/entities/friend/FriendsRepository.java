@@ -25,14 +25,14 @@ public interface FriendsRepository extends JpaRepository<Friend, Long> {
      * Finds friends for a specific user.
      *
      * @param user the user to find friends for
-     * @return an Optional containing the list of friends for the user, limited to 12, or empty if not found
+     * @return a list of friends for the user, limited to 12, or empty if not found
      */
     @Query("""
             select f
             from Friends as f
             where f.user = :user
             """)
-    Optional<Page<Friend>> findFriendsByUser(User user, Pageable pageable);
+    Page<Friend> findFriendsByUser(User user, Pageable pageable);
 
     /**
      * Finds a friend by friend username and user.

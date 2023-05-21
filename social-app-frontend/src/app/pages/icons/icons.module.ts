@@ -18,6 +18,7 @@ import { LikeIconComponent } from './like-icon/like-icon.component';
 import { CommentIconComponent } from './comment-icon/comment-icon.component';
 import { ShareIconComponent } from './share-icon/share-icon.component';
 import { DeleteIconComponent } from './delete-icon/delete-icon.component';
+import { SendIconComponent } from './send-icon/send-icon.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { DeleteIconComponent } from './delete-icon/delete-icon.component';
         LikeIconComponent,
         CommentIconComponent,
         ShareIconComponent,
-        DeleteIconComponent
+        DeleteIconComponent,
+        SendIconComponent
     ],
     exports: [
         GithubIconComponent,
@@ -59,7 +61,8 @@ import { DeleteIconComponent } from './delete-icon/delete-icon.component';
         LikeIconComponent,
         CommentIconComponent,
         ShareIconComponent,
-        DeleteIconComponent
+        DeleteIconComponent,
+        SendIconComponent
     ],
     imports: [
         CommonModule

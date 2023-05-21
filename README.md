@@ -1,5 +1,9 @@
 # Social App
 
+<div align="center">
+    <img src=".github/screenshots/preview.png" alt="Preview">
+</div>
+
 This is a full stack application being created during fourth semester of Computer Science studies at Warsaw University Of Technology.
 Goal is to create a social media app covering frontend and backend side of such site.
 
@@ -65,3 +69,41 @@ database at `localhost:5000` and backend at `localhost:8080`
 during *docker-compose* build
 
 * `make stop` - command used to turn off *docker-compose* image.
+
+## Screenshots
+
+* HomePage,
+
+<div align="center">
+    <img src=".github/screenshots/home.png" alt="HomePage">
+</div>
+
+* LoginPage,
+
+<div align="center">
+    <img src=".github/screenshots/login.png" alt="LoginPage">
+</div>
+
+* RegisterPage,
+
+<div align="center">
+    <img src=".github/screenshots/register.png" alt="RegisterPage">
+</div>
+
+* NotFoundPage,
+
+<div align="center">
+    <img src=".github/screenshots/not-found.png" alt="NotFoundPage">
+</div>
+
+* Posts with comments,
+
+<div align="center">
+    <img src=".github/screenshots/posts-comments.png" alt="Posts with comments">
+</div>
+
+* User details modification,
+
+<div align="center">
+    <img src=".github/screenshots/details-modify.png" alt="User details modification">
+</div>

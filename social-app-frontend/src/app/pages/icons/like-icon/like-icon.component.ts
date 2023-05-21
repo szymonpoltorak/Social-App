@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./like-icon.component.scss']
 })
 export class LikeIconComponent {
-    @Input() isPostLiked!: boolean;
+    @Input() isLiked!: boolean;
 }

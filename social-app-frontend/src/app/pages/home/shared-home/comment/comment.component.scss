@@ -1,0 +1,41 @@
+@import "variables";
+
+$content-font-size: 0.7em;
+
+app-user-icon {
+    margin-top: 1em;
+}
+
+.comment-container {
+    display: flex;
+    gap: 1em;
+}
+
+.content-container {
+    background-color: $input-background-color;
+    border-radius: 1em;
+    padding: 0.6em;
+    min-width: 10em;
+}
+
+.user-full-name {
+    font-size: 0.8em;
+}
+
+.comment-content {
+    font-size: $content-font-size;
+}
+
+.box-separator {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.like-date-container {
+    display: flex;
+    gap: 1.5em;
+    align-items: center;
+    padding: 0.5em;
+    font-size: $content-font-size;
+}

@@ -10,5 +10,5 @@ export interface LikeResponse {
     /**
      * Indicates whether the post is liked.
      */
-    isPostLiked: boolean;
+    isLiked: boolean;
 }

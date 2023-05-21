@@ -31,13 +31,13 @@
     <div class="separator-container">
         <div class="statistics-icons">
             <div class="vote-container">
-                <app-like-icon (click)="updatePostLike()" [isPostLiked]="postData.isPostLiked"></app-like-icon>
+                <app-like-icon (click)="updatePostLike()" [isLiked]="postData.isPostLiked"></app-like-icon>
 
                 <div>{{ postData.numOfLikes }}</div>
             </div>
 
             <div class="vote-container">
-                <app-comment-icon></app-comment-icon>
+                <app-comment-icon (click)="areCommentsVisible = !areCommentsVisible"></app-comment-icon>
 
                 <div>{{ postData.numOfComments }}</div>
             </div>
@@ -45,4 +45,8 @@
 
         <app-share-icon></app-share-icon>
     </div>
+
+    <mat-divider class="divider" *ngIf="areCommentsVisible"></mat-divider>
+
+    <app-comment-list [postId]="this.postData.postId" *ngIf="areCommentsVisible"></app-comment-list>
 </div>

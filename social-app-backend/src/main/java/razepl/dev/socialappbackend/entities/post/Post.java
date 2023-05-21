@@ -34,8 +34,6 @@ public class Post {
     @Size(min = 1, max = 120)
     private String postContent;
 
-    private long numOfLikes;
-
     @DateTimeFormat(pattern = DATE_PATTERN)
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

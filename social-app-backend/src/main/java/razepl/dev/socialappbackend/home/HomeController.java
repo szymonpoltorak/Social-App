@@ -86,4 +86,33 @@ public class HomeController implements HomeInterface {
 
         return ResponseEntity.ok().build();
     }
+
+    @Override
+    @GetMapping(value = GET_COMMENTS_MAPPING)
+    public final ResponseEntity<List<CommentData>> getListOfComments(@RequestParam long postId,
+                                                                     @RequestParam int numOfSite,
+                                                                     @AuthenticationPrincipal User user) {
+        log.info("Get list of comments for post of id: {}", postId);
+        log.info("Num Of Site : {}", numOfSite);
+
+        return ResponseEntity.ok(homeService.getListOfComments(postId, numOfSite, user));
+    }
+
+    @Override
+    @PostMapping(value = CREATE_COMMENT_MAPPING)
+    public final ResponseEntity<CommentData> createComment(@RequestBody CommentRequest request,
+                                                           @AuthenticationPrincipal User user) {
+        log.info("Creating comment with data: {}\nOf User: {}", request, user);
+
+        return ResponseEntity.ok(homeService.createComment(request, user));
+    }
+
+    @Override
+    @PatchMapping(value = COMMENT_LIKE_MAPPING)
+    public final ResponseEntity<LikeData> changeCommentNumberOfLikes(@RequestParam long commentId,
+                                                                     @AuthenticationPrincipal User user) {
+        log.info("Creating like for comment of id : {}\nBy User : {}", commentId, user);
+
+        return ResponseEntity.ok(homeService.updateCommentLikeCounter(commentId, user));
+    }
 }

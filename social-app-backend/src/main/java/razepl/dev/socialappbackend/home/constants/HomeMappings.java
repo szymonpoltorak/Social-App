@@ -79,6 +79,12 @@ public final class HomeMappings {
      */
     public static final String DELETE_POST_MAPPING = "/deletePost";
 
+    public static final String GET_COMMENTS_MAPPING = "/comments";
+
+    public static final String CREATE_COMMENT_MAPPING = "/createComment";
+
+    public static final String COMMENT_LIKE_MAPPING = "likeComment";
+
     private HomeMappings() {
     }
 }
