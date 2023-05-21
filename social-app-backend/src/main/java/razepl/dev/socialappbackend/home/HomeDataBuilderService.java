@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.home;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.like.LikeRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
@@ -16,6 +17,7 @@ import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
 public class HomeDataBuilderService implements DataServiceInterface {
     private final LikeRepository likeRepository;
     private final FriendsRepository friendsRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public final UserData buildUserData(User user) {
@@ -41,6 +43,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
                 .postDate(post.getPostDate())
                 .isUserInFriends(isUserInFriends)
                 .numOfLikes(likeRepository.countByPost(post))
+                .numOfComments(commentRepository.countCommentsByPost(post))
                 .isPostLiked(isPostLiked)
                 .postId(post.getPostId())
                 .build();
