@@ -7,11 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class TextInputComponent {
     @Input() windowWidth !: string;
-    postText!: string;
+    inputText!: string;
     numOfCharacters: number = 0;
 
     updateCharacterCounter(): void {
-        this.numOfCharacters = this.postText.length;
+        this.numOfCharacters = this.inputText.length;
     }
 
     getInputSize(): string {

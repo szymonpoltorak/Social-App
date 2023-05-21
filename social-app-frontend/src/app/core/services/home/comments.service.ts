@@ -21,7 +21,7 @@ export class CommentsService {
         });
     }
 
-    createPost(commentContent: string, postId: number): Observable<CommentData> {
+    createComment(commentContent: string, postId: number): Observable<CommentData> {
         return this.http.post<CommentData>(`${environment.httpBackend}${HomeApiCalls.CREATE_COMMENT}`, {
             "commentContent": commentContent,
             "postId": postId

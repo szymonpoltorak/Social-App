@@ -13,5 +13,5 @@ export enum HomeApiCalls {
     UPDATE_LIKES = "/api/home/likePost",
     DELETE_POST = "/api/home/deletePost",
     COMMENT_LIST = "/api/home/comments",
-    CREATE_COMMENT = "/api/home/createPost"
+    CREATE_COMMENT = "/api/home/createComment"
 }

@@ -10,6 +10,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             select c
             from Comment as c
             where c.post.postId = :postId
+            order by c.commentDate
             """)
     Page<Comment> findCommentsByPostId(long postId, Pageable pageable);
 }

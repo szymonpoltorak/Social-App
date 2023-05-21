@@ -24,12 +24,12 @@ export class HomePostsComponent implements OnInit, OnDestroy {
     }
 
     createNewPost(): void {
-        this.postService.createNewPost(this.postTextInput.postText)
+        this.postService.createNewPost(this.postTextInput.inputText)
             .pipe(takeUntil(this.destroyCreatePost$))
             .subscribe((data: PostData): void => {
                 this.posts.unshift(data);
             });
-        this.postTextInput.postText = "";
+        this.postTextInput.inputText = "";
         this.postTextInput.numOfCharacters = 0;
     }
 
