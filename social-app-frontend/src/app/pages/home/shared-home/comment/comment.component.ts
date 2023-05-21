@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CommentComponent {
     @Input() commentAuthor !: string;
-    @Input() commentDate !: string;
+    @Input() commentDate !: Date;
     @Input() commentContent !: string;
     @Input() commentId !: number;
 }

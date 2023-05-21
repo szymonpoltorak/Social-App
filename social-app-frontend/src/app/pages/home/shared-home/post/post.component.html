@@ -48,5 +48,5 @@
 
     <mat-divider class="divider" *ngIf="areCommentsVisible"></mat-divider>
 
-    <app-comment-list *ngIf="areCommentsVisible"></app-comment-list>
+    <app-comment-list [postId]="this.postData.postId" *ngIf="areCommentsVisible"></app-comment-list>
 </div>
