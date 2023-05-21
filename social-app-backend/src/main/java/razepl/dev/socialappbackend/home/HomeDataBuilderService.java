@@ -58,7 +58,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
         return LikeData
                 .builder()
                 .numOfLikes(postLikeRepository.countByPost(post))
-                .isPostLiked(isPostLiked)
+                .isLiked(isPostLiked)
                 .build();
     }
 
@@ -67,7 +67,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
         return LikeData
                 .builder()
                 .numOfLikes(commentLikeRepository.countByComment(comment))
-                .isPostLiked(isPostLiked)
+                .isLiked(isPostLiked)
                 .build();
     }
 

@@ -3,4 +3,6 @@ export interface CommentData {
     commentContent: string;
     commentId: number;
     commentDate: Date;
+    isCommentLiked: boolean;
+    numOfLikes: number;
 }

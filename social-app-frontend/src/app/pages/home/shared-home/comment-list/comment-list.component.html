@@ -12,10 +12,7 @@
     <mat-divider></mat-divider>
 
     <app-comment *ngFor="let comment of comments"
-                 [commentContent]="comment.commentContent"
-                 [commentAuthor]="comment.commentAuthor"
-                 [commentId]="comment.commentId"
-                 [commentDate]="comment.commentDate"
+                 [commentData]="comment"
     >
     </app-comment>
 </div>

@@ -31,7 +31,7 @@
     <div class="separator-container">
         <div class="statistics-icons">
             <div class="vote-container">
-                <app-like-icon (click)="updatePostLike()" [isPostLiked]="postData.isPostLiked"></app-like-icon>
+                <app-like-icon (click)="updatePostLike()" [isLiked]="postData.isPostLiked"></app-like-icon>
 
                 <div>{{ postData.numOfLikes }}</div>
             </div>
