@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PostComponent } from './post/post.component';
 import { SocialLinkComponent } from './social-link/social-link.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { CommentComponent } from './comment/comment.component';
+import { MatListModule } from "@angular/material/list";
 
 
 @NgModule({
@@ -16,12 +19,15 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
         PostComponent,
         SocialLinkComponent,
         EditDialogComponent,
+        CommentListComponent,
+        CommentComponent,
     ],
     imports: [
         CommonModule,
         IconsModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatListModule
     ],
     exports: [
         FriendComponent,

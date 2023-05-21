@@ -20,6 +20,7 @@ export class PostComponent implements OnDestroy, PostInterface {
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @Input() postData !: PostData;
     @Input() currentUser !: string;
+    areCommentsVisible: boolean = false;
 
     constructor(private postService: PostService) {
     }

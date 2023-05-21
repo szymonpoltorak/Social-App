@@ -1,6 +1,6 @@
 import { Environment } from "@core/interfaces/Environment";
 
 export const environment: Environment = {
-    production: false,
+    production: true,
     httpBackend: "http://backend:8080"
 };

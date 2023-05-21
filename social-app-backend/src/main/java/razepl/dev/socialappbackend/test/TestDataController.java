@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.entities.comment.Comment;
+import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
@@ -28,6 +30,7 @@ public class TestDataController {
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
     @PostMapping
     public final ResponseEntity<AuthResponse> buildExampleDatabase() {
@@ -91,6 +94,9 @@ public class TestDataController {
                 "Lets play football!", "Its time for sleep.", "Yesterday I started a new work!",
                 "Live is funny!", "Who wants to play basketball??", "Life is funny!"
         };
+        String[] comments = {"That's the issue", "It works on my machine", "Well sus", "Go to work", "Go back to school",
+                "Where do you go?", "Lets go", "Hello you fellow kids", "Can you see the difference?"
+        };
         User jacek = userRepository.findByEmail("jacek0@gmail.com").orElseThrow();
         User ania = userRepository.findByEmail("ania1@gmail.com").orElseThrow();
         User andrzej = userRepository.findByEmail("andrzej2@gmail.com").orElseThrow();
@@ -104,6 +110,15 @@ public class TestDataController {
                         .user(jacek)
                         .build();
                 postRepository.save(post);
+
+                Comment comment = Comment
+                        .builder()
+                        .user(andrzej)
+                        .post(post)
+                        .commentContent(comments[i])
+                        .commentDate(LocalDate.now())
+                        .build();
+                commentRepository.save(comment);
             } else if (i % 3 == 1) {
                 Post post = Post
                         .builder()
@@ -112,6 +127,15 @@ public class TestDataController {
                         .user(ania)
                         .build();
                 postRepository.save(post);
+
+                Comment comment = Comment
+                        .builder()
+                        .user(jacek)
+                        .post(post)
+                        .commentContent(comments[i])
+                        .commentDate(LocalDate.now())
+                        .build();
+                commentRepository.save(comment);
             } else {
                 Post post = Post
                         .builder()
@@ -120,6 +144,15 @@ public class TestDataController {
                         .user(andrzej)
                         .build();
                 postRepository.save(post);
+
+                Comment comment = Comment
+                        .builder()
+                        .user(ania)
+                        .post(post)
+                        .commentContent(comments[i])
+                        .commentDate(LocalDate.now())
+                        .build();
+                commentRepository.save(comment);
             }
         }
     }

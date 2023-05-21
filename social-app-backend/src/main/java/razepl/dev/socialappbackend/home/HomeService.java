@@ -94,7 +94,6 @@ public class HomeService implements HomeServiceInterface {
                 .builder()
                 .postDate(LocalDate.now())
                 .postContent(postContent)
-                .numOfLikes(0L)
                 .user(user)
                 .build();
         log.info("Newly created post : {}", post);

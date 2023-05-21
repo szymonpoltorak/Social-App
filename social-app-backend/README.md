@@ -83,6 +83,16 @@ java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
 mvn clean spring-boot:run
 ```
 
+## Important
+
+If you want to run app inside Intellij you need to declare environment variable like this:
+
+```pwsh
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/socialapp
+```
+
+And if you want to run tests inside Intellij you need to line above to your tests run configuration.
+
 ## Documentation
 
 There are two different documentation tools included in this project.
@@ -97,7 +107,7 @@ mvn clean javadoc:javadoc
 And then run `target/site/apidocs/index.html`.
 
 * Api documentation created via swagger. When you run your spring application go to
-  `http://localhost/swagger-ui/index.html` and you will se your api documentation.
+  `http://localhost:8080/swagger-ui/index.html` and you will se your api documentation.
 
 ## Troubleshooting
 

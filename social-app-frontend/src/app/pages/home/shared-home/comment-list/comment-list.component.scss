@@ -1,0 +1,16 @@
+@import "mixins";
+
+.create-post-container {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.separator {
+    display: flex;
+    gap: 0.5em;
+}
+
+mat-divider {
+    margin-bottom: 1em;
+}
