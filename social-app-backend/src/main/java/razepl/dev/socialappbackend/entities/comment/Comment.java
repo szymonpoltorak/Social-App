@@ -4,7 +4,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +19,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.globals.DataBuilder;
-import razepl.dev.socialappbackend.home.data.CommentData;
 
 import java.time.LocalDate;
 
@@ -26,7 +30,7 @@ import static razepl.dev.socialappbackend.entities.user.constants.UserValidation
 @Table(name = "Comments")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment implements DataBuilder<CommentData> {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long commentId;
@@ -46,15 +50,4 @@ public class Comment implements DataBuilder<CommentData> {
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate commentDate;
-
-    @Override
-    public CommentData buildData() {
-        return CommentData
-                .builder()
-                .commentAuthor(user.getFullName())
-                .commentContent(commentContent)
-                .commentDate(commentDate)
-                .commentId(commentId)
-                .build();
-    }
 }

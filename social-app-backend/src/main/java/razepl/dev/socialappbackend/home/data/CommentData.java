@@ -9,5 +9,7 @@ import java.time.LocalDate;
 public record CommentData(String commentAuthor,
                           String commentContent,
                           long commentId,
-                          LocalDate commentDate) implements EntityData {
+                          LocalDate commentDate,
+                          long numOfLikes,
+                          boolean isCommentLiked) implements EntityData {
 }

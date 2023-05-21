@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.entities.like;
+package razepl.dev.socialappbackend.entities.postlike;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  * This interface provides data access methods for managing likes in the repository.
  */
-public interface LikeRepository extends JpaRepository<Like, Long> {
+public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     /**
      * Counts the number of likes for a specific post.
      *
@@ -28,8 +28,8 @@ public interface LikeRepository extends JpaRepository<Like, Long> {
      */
     @Query("""
             select l
-            from Like as l
+            from PostLike as l
             where l.post = :post and l.user = :user
             """)
-    Optional<Like> findByUserAndPost(User user, Post post);
+    Optional<PostLike> findByUserAndPost(User user, Post post);
 }

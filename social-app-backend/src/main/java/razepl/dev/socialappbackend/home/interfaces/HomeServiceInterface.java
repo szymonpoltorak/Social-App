@@ -59,7 +59,7 @@ public interface HomeServiceInterface {
      */
     void deletePostByPostId(long postId);
 
-    List<CommentData> getListOfComments(long postId, int numOfSite);
+    List<CommentData> getListOfComments(long postId, int numOfSite, User user);
 
     CommentData createComment(CommentRequest request, User user);
 }
