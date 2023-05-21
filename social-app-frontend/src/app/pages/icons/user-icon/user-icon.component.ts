@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-user-icon',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./user-icon.component.scss']
 })
 export class UserIconComponent {
-
+    @Input() width: number = 55;
+    @Input() height: number = 55;
 }

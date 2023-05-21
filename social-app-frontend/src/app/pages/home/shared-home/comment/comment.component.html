@@ -1,1 +1,12 @@
-<p>comment works!</p>
+<div class="comment-container">
+    <app-user-icon [width]="40" [height]="40"></app-user-icon>
+
+    <div class="box-separator">
+        <div class="content-container">
+            <div class="user-full-name">{{ commentAuthor }}</div>
+            <div class="comment-content">{{ commentContent }}</div>
+        </div>
+
+        <div class="date-container">{{ commentDate }}</div>
+    </div>
+</div>

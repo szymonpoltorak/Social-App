@@ -1,6 +1,6 @@
 <div class="comment-list-container">
     <div class="create-post-container">
-        <app-user-icon></app-user-icon>
+        <app-user-icon [width]="50"></app-user-icon>
 
         <div class="separator">
             <app-text-input [windowWidth]="'26em'"></app-text-input>
@@ -11,5 +11,11 @@
 
     <mat-divider></mat-divider>
 
-    <app-comment></app-comment>
+    <app-comment
+        [commentContent]="'Hello what is going on?'"
+        [commentAuthor]="'Wojciech Wasilewski'"
+        [commentId]="1"
+        [commentDate]="'11-11-2137'"
+    >
+    </app-comment>
 </div>

@@ -1,3 +1,31 @@
-* {
-    background-color: #16a1f6;
+@import "variables";
+
+$content-font-size: 0.7em;
+
+app-user-icon {
+    margin-top: 1em;
+}
+
+.comment-container {
+    display: flex;
+    gap: 1em;
+}
+
+.content-container {
+    background-color: $input-background-color;
+    border-radius: 1em;
+    padding: 0.6em;
+}
+
+.user-full-name {
+    font-size: 0.8em;
+}
+
+.comment-content {
+    font-size: $content-font-size;
+}
+
+.date-container {
+    padding: 0.5em;
+    font-size: $content-font-size;
 }

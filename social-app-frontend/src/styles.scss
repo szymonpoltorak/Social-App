@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
+@import "mixins";
 
 @import "@angular/material/theming";
 
@@ -30,6 +31,17 @@ $angular-dark-theme: mat.define-dark-theme(
 );
 
 @include mat.all-component-themes($angular-default-theme);
+
+*::-webkit-scrollbar {
+    width: 0.7em;
+}
+*::-webkit-scrollbar-track {
+    background: $input-background-color;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #565756;
+    border-radius: 3em;
+}
 
 html, body {
     height: 100%;
