@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { TextInputInterface } from "@interfaces/home/TextInputInterface";
 
 @Component({
     selector: 'app-text-input',
     templateUrl: './text-input.component.html',
     styleUrls: ['./text-input.component.scss']
 })
-export class TextInputComponent {
+export class TextInputComponent implements TextInputInterface {
     @Input() windowWidth !: string;
     inputText!: string;
     numOfCharacters: number = 0;

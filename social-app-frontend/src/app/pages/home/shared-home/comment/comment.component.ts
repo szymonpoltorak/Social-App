@@ -3,13 +3,14 @@ import { CommentData } from "@interfaces/home/CommentData";
 import { CommentsService } from "@services/home/comments.service";
 import { Subject, takeUntil } from "rxjs";
 import { LikeResponse } from "@interfaces/home/LikeResponse";
+import { CommentsInterface } from "@interfaces/home/CommentsInterface";
 
 @Component({
     selector: 'app-comment',
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnDestroy {
+export class CommentComponent implements OnDestroy, CommentsInterface {
     private likeComment$: Subject<void> = new Subject<void>();
     @Input() commentData !: CommentData;
 

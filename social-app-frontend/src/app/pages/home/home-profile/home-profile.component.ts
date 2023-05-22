@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from "@core/services/home/home.service";
-import { UserHomeDataService } from "@core/services/home/user-home-data.service";
-import { UtilService } from "@services/utils/util.service";
-import { StorageKeys } from "@core/enums/StorageKeys";
 import { Subject, takeUntil } from "rxjs";
 import { UserData } from "@core/interfaces/home/UserData";
 import { SocialNames } from "@core/enums/SocialNames";

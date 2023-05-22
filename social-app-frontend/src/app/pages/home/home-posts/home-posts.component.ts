@@ -5,13 +5,14 @@ import { Subject, takeUntil } from "rxjs";
 import { UtilService } from "@services/utils/util.service";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
+import { HomePostsInterface } from "@interfaces/home/HomePostsInterface";
 
 @Component({
     selector: 'app-home-posts',
     templateUrl: './home-posts.component.html',
     styleUrls: ['./home-posts.component.scss']
 })
-export class HomePostsComponent implements OnInit, OnDestroy {
+export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface {
     private destroyPostList$: Subject<void> = new Subject<void>();
     private destroyCreatePost$: Subject<void> = new Subject<void>();
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
