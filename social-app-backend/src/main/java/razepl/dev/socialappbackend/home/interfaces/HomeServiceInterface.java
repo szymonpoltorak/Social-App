@@ -59,10 +59,32 @@ public interface HomeServiceInterface {
      */
     void deletePostByPostId(long postId);
 
+    /**
+     * Retrieves a list of comments for a post.
+     *
+     * @param postId - The ID of the post.
+     * @param numOfSite - The number of comments per page.
+     * @param user - The user making the request.
+     * @return A list of CommentData objects representing the comments.
+     */
     List<CommentData> getListOfComments(long postId, int numOfSite, User user);
 
+    /**
+     * Creates a new comment for a post.
+     *
+     * @param request - The CommentRequest object containing the comment details.
+     * @param user - The user creating the comment.
+     * @return The created CommentData object.
+     */
     CommentData createComment(CommentRequest request, User user);
 
+    /**
+     * Updates the number of likes for a comment.
+     *
+     * @param commentId - The ID of the comment.
+     * @param user - The user making the request.
+     * @return The updated LikeData object.
+     */
     LikeData updateCommentLikeCounter(long commentId, User user);
 }
 
