@@ -33,7 +33,7 @@ public class TokenManagerService implements TokenManager {
 
     @Override
     public final AuthResponse buildTokensIntoResponse(User user, boolean shouldIRevoke) {
-        NullChecker.throwAppropriateException(user);
+        NullChecker.throwIfNull(user);
 
         String authToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -48,7 +48,7 @@ public class TokenManagerService implements TokenManager {
 
     @Override
     public final void revokeUserTokens(User user) {
-        NullChecker.throwAppropriateException(user);
+        NullChecker.throwIfNull(user);
 
         List<JwtToken> userTokens = tokenRepository.findAllValidTokensByUserId(user.getUserId());
 
@@ -64,7 +64,7 @@ public class TokenManagerService implements TokenManager {
     }
 
     private AuthResponse buildResponse(String authToken, String refreshToken) {
-        NullChecker.throwAppropriateException(authToken, refreshToken);
+        NullChecker.throwIfNull(authToken, refreshToken);
 
         return AuthResponse.builder()
                 .authToken(authToken)
@@ -73,7 +73,7 @@ public class TokenManagerService implements TokenManager {
     }
 
     private JwtToken buildToken(String jwtToken, User user) {
-        NullChecker.throwAppropriateException(jwtToken, user);
+        NullChecker.throwIfNull(jwtToken, user);
 
         return JwtToken.builder()
                 .token(jwtToken)

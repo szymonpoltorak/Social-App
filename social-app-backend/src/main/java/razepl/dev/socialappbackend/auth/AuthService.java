@@ -45,7 +45,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse register(RegisterUserRequest userRequest) {
-        NullChecker.throwAppropriateException(userRequest);
+        NullChecker.throwIfNull(userRequest);
 
         String password = userRequest.getPassword();
 
@@ -78,7 +78,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse login(LoginUserRequest loginRequest) {
-        NullChecker.throwAppropriateException(loginRequest);
+        NullChecker.throwIfNull(loginRequest);
 
         String username = loginRequest.getUsername();
 
@@ -96,7 +96,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
-        NullChecker.throwAppropriateException(request, response);
+        NullChecker.throwIfNull(request, response);
 
         String refreshToken = jwtService.getJwtRefreshToken(request);
 
@@ -130,7 +130,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final TokenResponse validateUsersTokens(TokenRequest request) {
-        NullChecker.throwAppropriateException(request);
+        NullChecker.throwIfNull(request);
 
         User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
 

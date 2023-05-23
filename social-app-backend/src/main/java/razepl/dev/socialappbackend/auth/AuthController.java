@@ -32,7 +32,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REGISTER_MAPPING)
     public final ResponseEntity<AuthResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
-        NullChecker.throwAppropriateException(registerRequest);
+        NullChecker.throwIfNull(registerRequest);
 
         log.info("Registering user with data: \n{}", registerRequest);
 
@@ -42,7 +42,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = LOGIN_MAPPING)
     public final ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-        NullChecker.throwAppropriateException(loginRequest);
+        NullChecker.throwIfNull(loginRequest);
 
         log.info("Logging user with data: \n{}", loginRequest);
 
@@ -52,7 +52,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REFRESH_MAPPING)
     public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
-        NullChecker.throwAppropriateException(request, response);
+        NullChecker.throwIfNull(request, response);
 
         log.info("Refreshing users token.");
 
@@ -62,7 +62,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = AUTHENTICATE_MAPPING)
     public final ResponseEntity<TokenResponse> authenticateUser(@RequestBody TokenRequest request) {
-        NullChecker.throwAppropriateException(request);
+        NullChecker.throwIfNull(request);
 
         log.info("Authenticating user with data:\n{}", request);
 

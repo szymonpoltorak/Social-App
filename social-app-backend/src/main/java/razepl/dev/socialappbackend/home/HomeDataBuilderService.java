@@ -9,6 +9,7 @@ import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.CommentData;
 import razepl.dev.socialappbackend.home.data.LikeData;
 import razepl.dev.socialappbackend.home.data.PostData;
@@ -25,6 +26,8 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final UserData buildUserData(User user) {
+        NullChecker.throwIfNull(user);
+
         return UserData
                 .builder()
                 .fullName(user.getFullName())
@@ -39,6 +42,8 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final PostData buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked) {
+        NullChecker.throwIfNull(post);
+
         return PostData
                 .builder()
                 .postAuthor(post.getUser().getFullName())
@@ -55,6 +60,8 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final LikeData buidLikeData(boolean isPostLiked, Post post) {
+        NullChecker.throwIfNull(post);
+
         return LikeData
                 .builder()
                 .numOfLikes(postLikeRepository.countByPost(post))
@@ -64,6 +71,8 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final LikeData buildLikeData(boolean isPostLiked, Comment comment) {
+        NullChecker.throwIfNull(comment);
+
         return LikeData
                 .builder()
                 .numOfLikes(commentLikeRepository.countByComment(comment))
@@ -73,6 +82,8 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final CommentData buildCommentData(Comment comment, User user) {
+        NullChecker.throwIfNull(comment, user);
+
         return CommentData
                 .builder()
                 .commentAuthor(comment.getUser().getFullName())

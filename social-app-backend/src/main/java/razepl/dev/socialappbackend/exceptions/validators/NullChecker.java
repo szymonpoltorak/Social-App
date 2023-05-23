@@ -9,7 +9,7 @@ public class NullChecker {
     private NullChecker() {
     }
 
-    public static void throwAppropriateException(Object... objects) {
+    public static void throwIfNull(Object... objects) {
         if (!NullChecker.areArgumentsNullSafe(objects)) {
             throw new NullArgumentException("Encountered null arguments in method!");
         }

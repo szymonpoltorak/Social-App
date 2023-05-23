@@ -37,14 +37,14 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getUsernameFromToken(String jwtToken) {
-        NullChecker.throwAppropriateException(jwtToken);
+        NullChecker.throwIfNull(jwtToken);
 
         return getClaimFromToken(jwtToken, Claims::getSubject);
     }
 
     @Override
     public final <T> T getClaimFromToken(String jwtToken, Function<Claims, T> claimsHandler) {
-        NullChecker.throwAppropriateException(jwtToken, claimsHandler);
+        NullChecker.throwIfNull(jwtToken, claimsHandler);
 
         Claims claims = getAllClaims(jwtToken);
 
@@ -53,28 +53,28 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String generateRefreshToken(UserDetails userDetails) {
-        NullChecker.throwAppropriateException(userDetails);
+        NullChecker.throwIfNull(userDetails);
 
         return buildToken(Collections.emptyMap(), userDetails, refreshTime);
     }
 
     @Override
     public final String generateToken(UserDetails userDetails) {
-        NullChecker.throwAppropriateException(userDetails);
+        NullChecker.throwIfNull(userDetails);
 
         return generateToken(Collections.emptyMap(), userDetails, expirationTime);
     }
 
     @Override
     public final String generateToken(Map<String, Object> additionalClaims, UserDetails userDetails, long expiration) {
-        NullChecker.throwAppropriateException(additionalClaims, userDetails);
+        NullChecker.throwIfNull(additionalClaims, userDetails);
 
         return buildToken(additionalClaims, userDetails, expiration);
     }
 
     @Override
     public final boolean isTokenValid(String jwtToken, UserDetails userDetails) {
-        NullChecker.throwAppropriateException(jwtToken, userDetails);
+        NullChecker.throwIfNull(jwtToken, userDetails);
 
         String username = getUsernameFromToken(jwtToken);
 
@@ -83,7 +83,7 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getJwtToken(HttpServletRequest request) {
-        NullChecker.throwAppropriateException(request);
+        NullChecker.throwIfNull(request);
 
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
@@ -95,7 +95,7 @@ public class JwtService implements JwtServiceInterface {
 
     @Override
     public final String getJwtRefreshToken(HttpServletRequest request) {
-        NullChecker.throwAppropriateException(request);
+        NullChecker.throwIfNull(request);
 
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 

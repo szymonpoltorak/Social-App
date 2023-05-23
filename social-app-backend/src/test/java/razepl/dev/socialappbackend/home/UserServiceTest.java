@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class UserServiceTest {
+class UserServiceTest {
     @Autowired
     private UserService userService;
 
@@ -29,7 +29,7 @@ public class UserServiceTest {
     private static User jacek;
 
     @BeforeEach
-    void init() {
+    final void init() {
         jacek = User
                 .builder()
                 .name("Jacek")
@@ -42,7 +42,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateUsersJob_null() {
+    final void test_updateUsersJob_null() {
         // given
 
         // when
@@ -52,7 +52,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateGithubData_null() {
+    final void test_updateGithubData_null() {
         // given
 
         // when
@@ -62,7 +62,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateUsersLocation_null() {
+    final void test_updateUsersLocation_null() {
         // given
 
         // when
@@ -72,7 +72,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateTwitterData_null() {
+    final void test_updateTwitterData_null() {
         // given
 
         // when
@@ -82,7 +82,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateLinkedinData_null() {
+    final void test_updateLinkedinData_null() {
         // given
 
         // when
@@ -92,7 +92,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateTwitterData_correct_usage() {
+    final void test_updateTwitterData_correct_usage() {
         // given
         String expected = "myUrlData";
 
@@ -107,7 +107,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateGithubData_correct_usage() {
+    final void test_updateGithubData_correct_usage() {
         // given
         String expected = "myUrlData";
 
@@ -120,7 +120,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateLinkedinData_correct_usage() {
+    final void test_updateLinkedinData_correct_usage() {
         // given
         String expected = "myUrlData";
 
@@ -135,7 +135,62 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateUsersLocation_correct_usage() {
+    final void test_updateTwitterData_blank_string() {
+        // given
+        String value = "  ";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateGithubData_blank_string() {
+        // given
+        String value = "  ";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateLinkedinData_blank_string() {
+        // given
+        String value = "  ";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateUsersLocation_blank_string() {
+        // given
+        String value = "  ";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateUsersJob_blank_string() {
+        // given
+        String value = "  ";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateUsersLocation_correct_usage() {
         // given
         String expected = "myUrlData";
 
@@ -148,7 +203,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void test_updateUsersJob_correct_usage() {
+    final void test_updateUsersJob_correct_usage() {
         // given
         String expected = "myUrlData";
 
@@ -158,5 +213,60 @@ public class UserServiceTest {
 
         // then
         assertEquals(expected, result);
+    }
+
+    @Test
+    final void test_updateTwitterData_empty_string() {
+        // given
+        String value = "";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateGithubData_empty_string() {
+        // given
+        String value = "";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateLinkedinData_empty_string() {
+        // given
+        String value = "";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateUsersLocation_empty_string() {
+        // given
+        String value = "";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
+    }
+
+    @Test
+    final void test_updateUsersJob_empty_string() {
+        // given
+        String value = "";
+
+        // when
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(value, jacek));
     }
 }

@@ -23,7 +23,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateTwitterData(String updateData, User user) {
-        NullChecker.throwAppropriateException(updateData);
+        NullChecker.throwIfNull(updateData);
+        validateString(updateData);
 
         user.setTwitter(updateData);
 
@@ -32,7 +33,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateLinkedinData(String updateData, User user) {
-        NullChecker.throwAppropriateException(updateData);
+        NullChecker.throwIfNull(updateData);
+        validateString(updateData);
 
         user.setLinkedin(updateData);
 
@@ -41,7 +43,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateGithubData(String updateData, User user) {
-        NullChecker.throwAppropriateException(updateData);
+        NullChecker.throwIfNull(updateData);
+        validateString(updateData);
 
         user.setGithub(updateData);
 
@@ -50,7 +53,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateUsersLocation(String updateData, User user) {
-        NullChecker.throwAppropriateException(updateData);
+        NullChecker.throwIfNull(updateData);
+        validateString(updateData);
 
         user.setLocation(updateData);
 
@@ -59,7 +63,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateUsersJob(String updateData, User user) {
-        NullChecker.throwAppropriateException(updateData);
+        NullChecker.throwIfNull(updateData);
+        validateString(updateData);
 
         user.setJob(updateData);
 
@@ -68,7 +73,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void removeFriendFromUser(String friendsUsername, User user) {
-        NullChecker.throwAppropriateException(friendsUsername);
+        NullChecker.throwIfNull(friendsUsername);
 
         Friend friend = friendsRepository.findByFriendUsernameAndUser(friendsUsername, user).orElseThrow(
                 () -> new FriendNotFoundException("Friend does not exist!")
@@ -79,7 +84,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void addFriendToUser(String friendsUsername, User user) {
-        NullChecker.throwAppropriateException(friendsUsername);
+        NullChecker.throwIfNull(friendsUsername);
 
         if (friendsRepository.findByFriendUsernameAndUser(friendsUsername, user).isPresent()) {
             throw new UsersAlreadyFriendsException("User already exists!");
@@ -96,5 +101,11 @@ public class UserService implements UserServiceInterface {
                 .user(user)
                 .build();
         friendsRepository.save(newFriend);
+    }
+
+    private void validateString(String string) {
+        if (string.isEmpty() || string.isBlank()) {
+            throw new IllegalArgumentException("Value is empty or blank!");
+        }
     }
 }
