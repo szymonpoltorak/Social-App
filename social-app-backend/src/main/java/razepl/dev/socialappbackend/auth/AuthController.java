@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 
@@ -32,7 +32,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REGISTER_MAPPING)
     public final ResponseEntity<AuthResponse> registerUser(@RequestBody RegisterRequest registerRequest) {
-        NullChecker.throwAppropriateException(registerRequest);
+        ArgumentValidator.throwIfNull(registerRequest);
 
         log.info("Registering user with data: \n{}", registerRequest);
 
@@ -42,7 +42,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = LOGIN_MAPPING)
     public final ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-        NullChecker.throwAppropriateException(loginRequest);
+        ArgumentValidator.throwIfNull(loginRequest);
 
         log.info("Logging user with data: \n{}", loginRequest);
 
@@ -52,7 +52,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = REFRESH_MAPPING)
     public final ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response) {
-        NullChecker.throwAppropriateException(request, response);
+        ArgumentValidator.throwIfNull(request, response);
 
         log.info("Refreshing users token.");
 
@@ -62,7 +62,7 @@ public class AuthController implements AuthInterface {
     @Override
     @PostMapping(value = AUTHENTICATE_MAPPING)
     public final ResponseEntity<TokenResponse> authenticateUser(@RequestBody TokenRequest request) {
-        NullChecker.throwAppropriateException(request);
+        ArgumentValidator.throwIfNull(request);
 
         log.info("Authenticating user with data:\n{}", request);
 

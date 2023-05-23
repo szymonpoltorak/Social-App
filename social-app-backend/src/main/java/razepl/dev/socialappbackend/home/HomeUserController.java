@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.DataResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeUserInterface;
 import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;
@@ -31,8 +30,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = ADD_FRIEND_MAPPING)
     public final ResponseEntity<DataResponse> addToUsersFriends(@RequestParam String friendsUsername,
                                                                 @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(friendsUsername);
-
         log.info("Adding friend: {}, for user : {}", friendsUsername, user);
 
         userService.addFriendToUser(friendsUsername, user);
@@ -44,8 +41,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = REMOVE_FRIEND_MAPPING)
     public final ResponseEntity<DataResponse> removeFromUsersFriends(@RequestParam String friendsUsername,
                                                                      @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(friendsUsername);
-
         log.info("Removing friend: {}, from user : {}", friendsUsername, user);
 
         userService.removeFriendFromUser(friendsUsername, user);
@@ -57,8 +52,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = TWITTER_MAPPING)
     public final ResponseEntity<DataResponse> updateTwitterData(@RequestParam String updateData,
                                                                 @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(updateData);
-
         log.info("Updating users twitter data with: \n{}", updateData);
 
         userService.updateTwitterData(updateData, user);
@@ -70,8 +63,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = LINKEDIN_MAPPING)
     public final ResponseEntity<DataResponse> updateLinkedinData(@RequestParam String updateData,
                                                                  @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(updateData);
-
         log.info("Updating users linkedin data with: \n{}", updateData);
 
         userService.updateLinkedinData(updateData, user);
@@ -83,8 +74,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = GITHUB_MAPPING)
     public final ResponseEntity<DataResponse> updateGithubData(@RequestParam String updateData,
                                                                @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(updateData);
-
         log.info("Updating users github data with: \n{}", updateData);
 
         userService.updateGithubData(updateData, user);
@@ -96,8 +85,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = LOCATION_MAPPING)
     public final ResponseEntity<DataResponse> updateUsersLocation(@RequestParam String updateData,
                                                                   @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(updateData);
-
         log.info("Updating users location data with: \n{}", updateData);
 
         userService.updateUsersLocation(updateData, user);
@@ -109,8 +96,6 @@ public class HomeUserController implements HomeUserInterface {
     @PatchMapping(value = JOB_MAPPING)
     public final ResponseEntity<DataResponse> updateUsersJob(@RequestParam String updateData,
                                                              @AuthenticationPrincipal User user) {
-        NullChecker.throwAppropriateException(updateData);
-
         log.info("Updating users friendJob data with: \n{}", updateData);
 
         userService.updateUsersJob(updateData, user);

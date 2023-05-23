@@ -63,7 +63,7 @@ Makefile scripts may need administrator priviliges due to *docker* command usage
 
 * `make`, `make all`, `make build` - uses *docker-compose* to build the whole project.
 Frontend of the app will be available at `localhost:4200`,
-database at `localhost:5000` and backend at `localhost:8080`
+database at `localhost:5432` and backend at `localhost:8080`
 
 * `make clean` - command used to remove with force images created ,
 during *docker-compose* build

@@ -21,6 +21,7 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.CommentNotFoundException;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
@@ -49,6 +50,8 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final UserData buildUserDataFromDb(User authUser) {
+        ArgumentValidator.throwIfNull(authUser);
+
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User was not found in database!")
         );
@@ -60,6 +63,8 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final List<FriendData> buildUsersFriendList(User authUser) {
+        ArgumentValidator.throwIfNull(authUser);
+
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User does not exist!")
         );
@@ -75,6 +80,9 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user) {
+        ArgumentValidator.throwIfNull(user);
+        ArgumentValidator.throwIfNegativeId(numOfSite);
+
         if (numOfSite < 0) {
             throw new IllegalArgumentException("Num of site cannot be less than 0");
         }
@@ -94,6 +102,8 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final PostData createNewPost(String postContent, User user) {
+        ArgumentValidator.throwIfNull(postContent, user);
+
         @Valid Post post = Post
                 .builder()
                 .postDate(LocalDate.now())
@@ -109,6 +119,9 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final LikeData updatePostLikeCounter(long postId, User user) {
+        ArgumentValidator.throwIfNull(user);
+        ArgumentValidator.throwIfNegativeId(postId);
+
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post does not exist!")
         );
@@ -138,11 +151,17 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final void deletePostByPostId(long postId) {
+        ArgumentValidator.throwIfNegativeId(postId);
+
         postRepository.deleteById(postId);
     }
 
     @Override
     public final List<CommentData> getListOfComments(long postId, int numOfSite, User user) {
+        ArgumentValidator.throwIfNull(user);
+        ArgumentValidator.throwIfNegativeId(postId);
+        ArgumentValidator.throwIfNegativeId(numOfSite);
+
         Pageable pageable = Pageable.ofSize(COMMENT_LIST_SIZE).withPage(numOfSite);
         Page<Comment> commentList = commentRepository.findCommentsByPostId(postId, pageable);
 
@@ -156,6 +175,8 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final CommentData createComment(CommentRequest request, User user) {
+        ArgumentValidator.throwIfNull(request, user);
+
         Post post = postRepository.findById(request.postId())
                 .orElseThrow(() -> new PostNotFoundException("Post does not exist!"));
 
@@ -175,6 +196,9 @@ public class HomeService implements HomeServiceInterface {
 
     @Override
     public final LikeData updateCommentLikeCounter(long commentId, User user) {
+        ArgumentValidator.throwIfNull(user);
+        ArgumentValidator.throwIfNegativeId(commentId);
+
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new CommentNotFoundException("Comment does not exist!")
         );

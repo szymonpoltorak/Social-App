@@ -19,7 +19,7 @@ import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.exceptions.*;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
@@ -45,7 +45,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse register(RegisterUserRequest userRequest) {
-        NullChecker.throwAppropriateException(userRequest);
+        ArgumentValidator.throwIfNull(userRequest);
 
         String password = userRequest.getPassword();
 
@@ -78,7 +78,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse login(LoginUserRequest loginRequest) {
-        NullChecker.throwAppropriateException(loginRequest);
+        ArgumentValidator.throwIfNull(loginRequest);
 
         String username = loginRequest.getUsername();
 
@@ -96,7 +96,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
-        NullChecker.throwAppropriateException(request, response);
+        ArgumentValidator.throwIfNull(request, response);
 
         String refreshToken = jwtService.getJwtRefreshToken(request);
 
@@ -130,7 +130,7 @@ public class AuthService implements AuthServiceInterface {
 
     @Override
     public final TokenResponse validateUsersTokens(TokenRequest request) {
-        NullChecker.throwAppropriateException(request);
+        ArgumentValidator.throwIfNull(request);
 
         User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
 

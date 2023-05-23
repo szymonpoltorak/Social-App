@@ -3,13 +3,14 @@ import { CommentData } from "@interfaces/home/CommentData";
 import { CommentsService } from "@services/home/comments.service";
 import { Subject, takeUntil } from "rxjs";
 import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
+import { CommentListInterface } from "@interfaces/home/CommentListInterface";
 
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.scss']
 })
-export class CommentListComponent implements OnInit, OnDestroy {
+export class CommentListComponent implements OnInit, OnDestroy, CommentListInterface {
     private commentList$: Subject<void> = new Subject<void>();
     private createPost$: Subject<void> = new Subject<void>();
     @ViewChild(TextInputComponent) commentInput !: TextInputComponent;

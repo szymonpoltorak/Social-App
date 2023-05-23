@@ -5,11 +5,12 @@ import { CommentData } from "@interfaces/home/CommentData";
 import { environment } from "@environments/environment";
 import { HomeApiCalls } from "@enums/HomeApiCalls";
 import { LikeResponse } from "@interfaces/home/LikeResponse";
+import { CommentsServiceInterface } from "@interfaces/home/CommentsServiceInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class CommentsService {
+export class CommentsService implements CommentsServiceInterface {
     constructor(private http: HttpClient) {
     }
 
