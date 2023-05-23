@@ -7,6 +7,7 @@ import razepl.dev.socialappbackend.exceptions.FriendNotFoundException;
 import razepl.dev.socialappbackend.exceptions.UsersAlreadyFriendsException;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
+import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
@@ -22,6 +23,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateTwitterData(String updateData, User user) {
+        NullChecker.throwAppropriateException(updateData);
+
         user.setTwitter(updateData);
 
         userRepository.save(user);
@@ -29,6 +32,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateLinkedinData(String updateData, User user) {
+        NullChecker.throwAppropriateException(updateData);
+
         user.setLinkedin(updateData);
 
         userRepository.save(user);
@@ -36,6 +41,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateGithubData(String updateData, User user) {
+        NullChecker.throwAppropriateException(updateData);
+
         user.setGithub(updateData);
 
         userRepository.save(user);
@@ -43,6 +50,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateUsersLocation(String updateData, User user) {
+        NullChecker.throwAppropriateException(updateData);
+
         user.setLocation(updateData);
 
         userRepository.save(user);
@@ -50,6 +59,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void updateUsersJob(String updateData, User user) {
+        NullChecker.throwAppropriateException(updateData);
+
         user.setJob(updateData);
 
         userRepository.save(user);
@@ -57,6 +68,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void removeFriendFromUser(String friendsUsername, User user) {
+        NullChecker.throwAppropriateException(friendsUsername);
+
         Friend friend = friendsRepository.findByFriendUsernameAndUser(friendsUsername, user).orElseThrow(
                 () -> new FriendNotFoundException("Friend does not exist!")
         );
@@ -66,6 +79,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public final void addFriendToUser(String friendsUsername, User user) {
+        NullChecker.throwAppropriateException(friendsUsername);
+
         if (friendsRepository.findByFriendUsernameAndUser(friendsUsername, user).isPresent()) {
             throw new UsersAlreadyFriendsException("User already exists!");
         }
