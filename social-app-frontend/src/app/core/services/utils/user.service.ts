@@ -7,9 +7,6 @@ export class UserService {
     private isAuthenticated !: boolean;
     private wasLoggedOut !: boolean;
 
-    constructor() {
-    }
-
     /**
      * Gets the flag indicating whether the user is authenticated.
      */
