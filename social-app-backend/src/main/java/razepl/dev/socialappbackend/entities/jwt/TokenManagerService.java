@@ -6,7 +6,7 @@ import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.entities.user.User;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class TokenManagerService implements TokenManager {
 
     @Override
     public final AuthResponse buildTokensIntoResponse(User user, boolean shouldIRevoke) {
-        NullChecker.throwIfNull(user);
+        ArgumentValidator.throwIfNull(user);
 
         String authToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -48,7 +48,7 @@ public class TokenManagerService implements TokenManager {
 
     @Override
     public final void revokeUserTokens(User user) {
-        NullChecker.throwIfNull(user);
+        ArgumentValidator.throwIfNull(user);
 
         List<JwtToken> userTokens = tokenRepository.findAllValidTokensByUserId(user.getUserId());
 
@@ -64,7 +64,7 @@ public class TokenManagerService implements TokenManager {
     }
 
     private AuthResponse buildResponse(String authToken, String refreshToken) {
-        NullChecker.throwIfNull(authToken, refreshToken);
+        ArgumentValidator.throwIfNull(authToken, refreshToken);
 
         return AuthResponse.builder()
                 .authToken(authToken)
@@ -73,7 +73,7 @@ public class TokenManagerService implements TokenManager {
     }
 
     private JwtToken buildToken(String jwtToken, User user) {
-        NullChecker.throwIfNull(jwtToken, user);
+        ArgumentValidator.throwIfNull(jwtToken, user);
 
         return JwtToken.builder()
                 .token(jwtToken)

@@ -9,7 +9,7 @@ import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.data.CommentData;
 import razepl.dev.socialappbackend.home.data.LikeData;
 import razepl.dev.socialappbackend.home.data.PostData;
@@ -26,7 +26,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final UserData buildUserData(User user) {
-        NullChecker.throwIfNull(user);
+        ArgumentValidator.throwIfNull(user);
 
         return UserData
                 .builder()
@@ -42,7 +42,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final PostData buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked) {
-        NullChecker.throwIfNull(post);
+        ArgumentValidator.throwIfNull(post);
 
         return PostData
                 .builder()
@@ -60,7 +60,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final LikeData buidLikeData(boolean isPostLiked, Post post) {
-        NullChecker.throwIfNull(post);
+        ArgumentValidator.throwIfNull(post);
 
         return LikeData
                 .builder()
@@ -71,7 +71,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final LikeData buildLikeData(boolean isPostLiked, Comment comment) {
-        NullChecker.throwIfNull(comment);
+        ArgumentValidator.throwIfNull(comment);
 
         return LikeData
                 .builder()
@@ -82,7 +82,7 @@ public class HomeDataBuilderService implements DataServiceInterface {
 
     @Override
     public final CommentData buildCommentData(Comment comment, User user) {
-        NullChecker.throwIfNull(comment, user);
+        ArgumentValidator.throwIfNull(comment, user);
 
         return CommentData
                 .builder()

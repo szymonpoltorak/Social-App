@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.DataResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeUserInterface;
 import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;

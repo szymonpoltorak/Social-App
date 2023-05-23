@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.NullChecker;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.HomeInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
@@ -30,8 +29,6 @@ public class HomeController implements HomeInterface {
     @Override
     @GetMapping(value = USERDATA_MAPPING)
     public final ResponseEntity<UserData> getUserData(@AuthenticationPrincipal User user) {
-        NullChecker.throwIfNull(user);
-
         log.info("Getting userdata for user : {}", user);
 
         return ResponseEntity.ok(homeService.buildUserDataFromDb(user));
@@ -40,8 +37,6 @@ public class HomeController implements HomeInterface {
     @Override
     @GetMapping(value = FRIENDS_LIST_MAPPING)
     public final ResponseEntity<List<FriendData>> getFriendsList(@AuthenticationPrincipal User user) {
-        NullChecker.throwIfNull(user);
-
         log.info("Finding list of users for : {}", user);
 
         return ResponseEntity.ok(homeService.buildUsersFriendList(user));
@@ -60,8 +55,6 @@ public class HomeController implements HomeInterface {
     @Override
     @PostMapping(value = CREATE_POST_MAPPING)
     public final ResponseEntity<PostData> createPost(@RequestParam String postContent, User user) {
-        NullChecker.throwIfNull(postContent);
-
         log.info("Creating post with data : {}", postContent);
         log.info("User who wants to create post : {}", user);
 
