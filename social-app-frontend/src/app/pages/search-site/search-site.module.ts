@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchSiteComponent } from "@pages/search-site/search-site.component";
 import { SharedHomeModule } from "@home/shared-home/shared-home.module";
 import { SearchSiteRoutingModule } from "@pages/search-site/search-site-routing.module";
+import { MatDividerModule } from "@angular/material/divider";
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SearchSiteRoutingModule } from "@pages/search-site/search-site-routing.
     imports: [
         CommonModule,
         SharedHomeModule,
-        SearchSiteRoutingModule
+        SearchSiteRoutingModule,
+        MatDividerModule,
     ]
 })
 export class SearchSiteModule {

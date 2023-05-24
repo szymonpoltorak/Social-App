@@ -1,9 +1,10 @@
 package razepl.dev.socialappbackend.search.interfaces;
 
-import razepl.dev.socialappbackend.home.data.FriendData;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.search.data.UserSearchData;
 
 import java.util.List;
 
 public interface SearchServiceInterface {
-    List<FriendData> getListOfUserBasedOnPattern(String pattern, int numOfSite);
+    List<UserSearchData> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user);
 }

@@ -1,10 +1,17 @@
-<app-social-navbar [logoUrl]="'/home'"></app-social-navbar>
+<div class="background">
+    <app-social-navbar (searchEvent)="loadData()" [logoUrl]="'/home'"></app-social-navbar>
 
-<div class="friends-container">
-    <app-friend *ngFor="let friend of friendList"
-                [friendUsername]="friend.friendUsername"
-                [friendJob]="friend.friendJob"
-                [friendName]="friend.friendFullName"
-    >
-    </app-friend>
+    <div class="friends-container">
+        <div *ngFor="let user of userList" class="search-container">
+            <app-friend
+                [friendUsername]="user.username"
+                [friendJob]="user.job"
+                [friendName]="user.fullName"
+                [isUsersFriend]="user.isUsersFriend"
+            >
+            </app-friend>
+
+            <mat-divider></mat-divider>
+        </div>
+    </div>
 </div>

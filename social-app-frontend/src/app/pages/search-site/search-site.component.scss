@@ -1,0 +1,20 @@
+@import "mixins";
+
+.background {
+    @include main-background;
+}
+
+.friends-container {
+    @include content-field;
+    margin-top: 3em;
+    width: 50em;
+    margin-left: 40em;
+}
+
+app-social-navbar {
+    @include position-sticky;
+}
+
+.search-container {
+    margin-bottom: 1em;
+}

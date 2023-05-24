@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
 import { AuthService } from "@core/services/auth/auth.service";
 import { UtilService } from "@services/utils/util.service";
 import { UserService } from "@services/utils/user.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
+import { SearchService } from "@services/search/search.service";
 
 @Component({
     selector: 'app-social-navbar',
@@ -13,10 +14,13 @@ import { RoutePaths } from "@core/enums/RoutePaths";
 export class SocialNavbarComponent implements OnDestroy {
     private onDestroy$: Subject<void> = new Subject<void>();
     @Input() logoUrl: string = "";
+    @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();
+    searchValue !: string;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
-                private userService: UserService) {
+                private userService: UserService,
+                private searchService: SearchService) {
     }
 
     logoutUserFromSite(): void {
@@ -27,6 +31,11 @@ export class SocialNavbarComponent implements OnDestroy {
 
             this.utilService.navigate(RoutePaths.LOGIN_DIRECT);
         });
+    }
+
+    searchForUser(): void {
+        this.searchService.searchPattern = this.searchValue;
+        this.searchEvent.emit();
     }
 
     navigateToUrl(): void {

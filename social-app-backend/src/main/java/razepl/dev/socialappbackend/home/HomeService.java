@@ -29,7 +29,6 @@ import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static razepl.dev.socialappbackend.home.constants.PageSizes.*;
 
@@ -75,7 +74,7 @@ public class HomeService implements HomeServiceInterface {
         return friendList
                 .stream()
                 .map(Friend::buildData)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -97,7 +96,7 @@ public class HomeService implements HomeServiceInterface {
                         friendsRepository.findByFriendUsernameAndUser(post.getUser().getUsername(), user).isPresent(),
                         postLikeRepository.findByUserAndPost(user, post).isPresent()
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -170,7 +169,7 @@ public class HomeService implements HomeServiceInterface {
         return commentList
                 .stream()
                 .map(comment -> dataServiceInterface.buildCommentData(comment, user))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
