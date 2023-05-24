@@ -18,3 +18,8 @@ app-social-navbar {
 .search-container {
     margin-bottom: 1em;
 }
+
+.not-found {
+    @include flex-center;
+    font-weight: bold;
+}

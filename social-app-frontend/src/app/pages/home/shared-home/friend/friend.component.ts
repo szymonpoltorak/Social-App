@@ -17,7 +17,6 @@ export class FriendComponent implements OnDestroy {
     @Input() friendJob !: string;
     @Input() isUsersFriend : boolean = true;
     @Output() friendRemoval: EventEmitter<string> = new EventEmitter<string>();
-    // @Output() friendAdd: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(private utilService: UtilService,
                 private userDataService: UserHomeDataService) {
@@ -38,8 +37,6 @@ export class FriendComponent implements OnDestroy {
             .pipe(takeUntil(this.addFriend$))
             .subscribe((): void => {
                 this.isUsersFriend = !this.isUsersFriend;
-
-                // this.friendAdd.emit()
             });
     }
 
