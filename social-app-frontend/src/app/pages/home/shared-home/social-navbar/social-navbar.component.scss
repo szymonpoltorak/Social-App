@@ -23,6 +23,10 @@
     color: white;
 }
 
+.logo-background:hover {
+    cursor: pointer;
+}
+
 .navbar-container {
     @include grid-three-columns;
     @include navbar-background;
