@@ -1,0 +1,19 @@
+<div class="background">
+    <app-social-navbar (searchEvent)="loadData()" [logoUrl]="'/home'"></app-social-navbar>
+
+    <div class="friends-container">
+        <div *ngFor="let user of userList" class="search-container">
+            <app-friend
+                [friendUsername]="user.username"
+                [friendJob]="user.job"
+                [friendName]="user.fullName"
+                [isUsersFriend]="user.isUsersFriend"
+            >
+            </app-friend>
+
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="not-found" *ngIf="userList.length === 0">I did not find any account matching this pattern</div>
+    </div>
+</div>

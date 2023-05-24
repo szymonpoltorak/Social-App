@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from "@core/services/home/home.service";
 import { Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
+import { UtilService } from "@services/utils/util.service";
+import { RoutePaths } from "@enums/RoutePaths";
 
 @Component({
     selector: 'app-home',
@@ -13,7 +15,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private updateFriendList$: Subject<void> = new Subject<void>();
     friendList !: FriendData[];
 
-    constructor(private homeService: HomeService) {
+    constructor(private homeService: HomeService,
+                private utilService: UtilService) {
     }
 
     ngOnInit(): void {
@@ -30,6 +33,10 @@ export class HomeComponent implements OnInit, OnDestroy {
             .subscribe((data: FriendData[]): void => {
                 this.friendList = data;
             });
+    }
+
+    navigateToSearch(): void {
+        this.utilService.navigate(RoutePaths.SEARCH_SITE_PATH);
     }
 
     ngOnDestroy(): void {
