@@ -1,5 +1,7 @@
 package razepl.dev.socialappbackend.entities.user.interfaces;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import razepl.dev.socialappbackend.entities.user.User;
@@ -35,4 +37,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     @Query("select u from User as u inner join JwtToken as t on u.userId = t.user.userId where t.token = :authToken")
     Optional<User> findUserByToken(String authToken);
+
+    @Query("""
+            select u
+            from User as u
+            where concat(u.name, ' ', u.surname) like :pattern%
+            """)
+    Page<User> findAllByPattern(String pattern, Pageable pageable);
 }
