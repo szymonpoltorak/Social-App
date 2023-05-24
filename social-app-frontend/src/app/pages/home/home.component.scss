@@ -33,6 +33,7 @@ $main-background-color: #0a0b0a;
 
 .logo-background {
     @include navbar-background;
+    cursor: pointer;
 }
 
 .grid-container {

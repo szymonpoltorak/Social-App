@@ -1,0 +1,10 @@
+<app-social-navbar [logoUrl]="'/home'"></app-social-navbar>
+
+<div class="friends-container">
+    <app-friend *ngFor="let friend of friendList"
+                [friendUsername]="friend.friendUsername"
+                [friendJob]="friend.friendJob"
+                [friendName]="friend.friendFullName"
+    >
+    </app-friend>
+</div>

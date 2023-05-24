@@ -10,6 +10,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { CommentComponent } from './comment/comment.component';
 import { MatListModule } from "@angular/material/list";
+import { SocialNavbarComponent } from "@home/shared-home/social-navbar/social-navbar.component";
+import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 
 @NgModule({
@@ -21,19 +23,22 @@ import { MatListModule } from "@angular/material/list";
         EditDialogComponent,
         CommentListComponent,
         CommentComponent,
+        SocialNavbarComponent
     ],
     imports: [
         CommonModule,
         IconsModule,
         FormsModule,
         ReactiveFormsModule,
-        MatListModule
+        MatListModule,
+        SharedAuthModule
     ],
     exports: [
         FriendComponent,
         TextInputComponent,
         PostComponent,
-        SocialLinkComponent
+        SocialLinkComponent,
+        SocialNavbarComponent
     ]
 })
 export class SharedHomeModule {

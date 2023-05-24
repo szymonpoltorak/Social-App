@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from "./home.component";
+import { SearchSiteComponent } from "@pages/search-site/search-site.component";
 import { RoutePaths } from "@enums/RoutePaths";
 import { AuthGuard } from "@core/guards/auth.guard";
 
 const routes: Routes = [
     {
         path: RoutePaths.CURRENT_PATH,
-        component: HomeComponent,
+        component: SearchSiteComponent,
         pathMatch: "full"
     },
     {
-        path: RoutePaths.SEARCH_SITE,
-        loadChildren: () => import("../search-site/search-site.module")
-            .then(module => module.SearchSiteModule),
+        path: RoutePaths.HOME_PATH,
+        loadChildren: () => import("../home/home.module")
+            .then(module => module.HomeModule),
         canActivate: [AuthGuard]
     }
 ];
@@ -22,5 +22,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class HomeRoutingModule {
+export class SearchSiteRoutingModule {
 }

@@ -12,4 +12,6 @@ export const enum RoutePaths {
     HOME_PATH = "home",
     NOT_FOUND_PATH = "error",
     ERROR_MATCHER = "**",
+
+    SEARCH_SITE = "search"
 }
