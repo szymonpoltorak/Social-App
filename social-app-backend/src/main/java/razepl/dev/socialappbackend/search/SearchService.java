@@ -13,6 +13,9 @@ import razepl.dev.socialappbackend.search.interfaces.SearchServiceInterface;
 
 import java.util.List;
 
+/**
+ * Service class for a Search Controller in /api/search endpoints.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor

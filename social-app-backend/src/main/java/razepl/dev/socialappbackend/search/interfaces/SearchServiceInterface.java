@@ -5,6 +5,17 @@ import razepl.dev.socialappbackend.search.data.UserSearchData;
 
 import java.util.List;
 
+/**
+ * An interface for searching users and retrieving a list of user search data.
+ */
 public interface SearchServiceInterface {
+    /**
+     * Retrieves a list of users based on the specified search pattern.
+     *
+     * @param pattern    The search pattern to match against users names or emails.
+     * @param numOfSite  The number of users to retrieve per page.
+     * @param user       The authenticated user making the request.
+     * @return The list of user search data matching the search pattern.
+     */
     List<UserSearchData> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user);
 }

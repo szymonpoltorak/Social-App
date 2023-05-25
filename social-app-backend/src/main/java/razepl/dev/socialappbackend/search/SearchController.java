@@ -18,6 +18,9 @@ import java.util.List;
 import static razepl.dev.socialappbackend.search.constants.SearchMapping.SEARCH_SITE_MAPPING;
 import static razepl.dev.socialappbackend.search.constants.SearchMapping.USERS_LIST_MAPPING;
 
+/**
+ * Controller for /api/search endpoints
+ */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
