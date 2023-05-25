@@ -107,3 +107,9 @@ during *docker-compose* build
 <div align="center">
     <img src=".github/screenshots/details-modify.png" alt="User details modification">
 </div>
+
+* Search site,
+
+<div align="center">
+    <img src=".github/screenshots/search.png" alt="Search">
+</div>
