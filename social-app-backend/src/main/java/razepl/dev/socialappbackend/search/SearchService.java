@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.search.data.UserSearchData;
 import razepl.dev.socialappbackend.search.interfaces.SearchServiceInterface;
 
@@ -26,8 +27,11 @@ public class SearchService implements SearchServiceInterface {
 
     @Override
     public final List<UserSearchData> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user) {
+        ArgumentValidator.throwIfNull(pattern, user);
+        ArgumentValidator.throwIfNegativeId(numOfSite);
+
         Pageable pageable = Pageable.ofSize(PAGE_SIZE).withPage(numOfSite);
-        Page<User> users = userRepository.findAllByPattern(pattern, pageable);
+        Page<User> users = userRepository.findAllByPattern(pattern, pageable, user);
 
         log.info("Got : {} users", users.getNumberOfElements());
 
