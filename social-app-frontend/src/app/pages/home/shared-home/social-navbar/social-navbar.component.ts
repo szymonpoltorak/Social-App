@@ -5,13 +5,14 @@ import { UtilService } from "@services/utils/util.service";
 import { UserService } from "@services/utils/user.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { SearchService } from "@services/search/search.service";
+import { SocialNavbarInterface } from "@interfaces/home/SocialNavbarInterface";
 
 @Component({
     selector: 'app-social-navbar',
     templateUrl: './social-navbar.component.html',
     styleUrls: ['./social-navbar.component.scss']
 })
-export class SocialNavbarComponent implements OnDestroy {
+export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     private onDestroy$: Subject<void> = new Subject<void>();
     @Input() logoUrl: string = "";
     @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();

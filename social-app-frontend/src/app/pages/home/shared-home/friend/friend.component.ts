@@ -3,13 +3,14 @@ import { UtilService } from "@services/utils/util.service";
 import { UserHomeDataService } from "@core/services/home/user-home-data.service";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
 import { Subject, takeUntil } from "rxjs";
+import { FriendInterface } from "@interfaces/home/FriendInterface";
 
 @Component({
     selector: 'app-friend',
     templateUrl: './friend.component.html',
     styleUrls: ['./friend.component.scss']
 })
-export class FriendComponent implements OnDestroy {
+export class FriendComponent implements OnDestroy, FriendInterface {
     private destroyFriend$ : Subject<void> = new Subject<void>();
     private addFriend$: Subject<void> = new Subject<void>();
     @Input() friendUsername !: string;
