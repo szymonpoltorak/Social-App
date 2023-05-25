@@ -4,11 +4,12 @@ import { Observable } from "rxjs";
 import { UserSearchData } from "@interfaces/home/UserSearchData";
 import { environment } from "@environments/environment";
 import { SearchApiCalls } from "@enums/SearchApiCalls";
+import { SearchServiceInterface } from "@interfaces/search/SearchServiceInterface";
 
 @Injectable({
     providedIn: 'root'
 })
-export class SearchService {
+export class SearchService implements SearchServiceInterface {
     searchPattern !: string;
     numOfSite: number = 0;
 

@@ -41,7 +41,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("""
             select u
             from User as u
-            where concat(u.name, ' ', u.surname) like :pattern%
+            where concat(u.name, ' ', u.surname) like :pattern% and u != :user
             """)
-    Page<User> findAllByPattern(String pattern, Pageable pageable);
+    Page<User> findAllByPattern(String pattern, Pageable pageable, User user);
 }

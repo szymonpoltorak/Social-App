@@ -152,6 +152,20 @@ public interface HomeInterface {
      * @param user - The user making the request.
      * @return A ResponseEntity containing a list of CommentData objects representing the comments.
      */
+    @Operation(
+            summary = "Get endpoint for getting list of comments",
+            description = "Returning list of comments of a given post on the given site",
+            responses = {
+                    @ApiResponse(
+                            description = "Successfully got comments",
+                            responseCode = "200"
+                    )
+            },
+            parameters = @Parameter(
+                    name = "user",
+                    hidden = true
+            )
+    )
     ResponseEntity<List<CommentData>> getListOfComments(long postId, int numOfSite, User user);
 
     /**
@@ -161,6 +175,20 @@ public interface HomeInterface {
      * @param user - The user creating the comment.
      * @return A ResponseEntity containing the created CommentData object.
      */
+    @Operation(
+            summary = "Post endpoint for creating post",
+            description = "Creates new comment by the user and for the given postId",
+            responses = {
+                    @ApiResponse(
+                            description = "Successfully created comment",
+                            responseCode = "200"
+                    )
+            },
+            parameters = @Parameter(
+                    name = "user",
+                    hidden = true
+            )
+    )
     ResponseEntity<CommentData> createComment(CommentRequest request, User user);
 
     /**
@@ -170,6 +198,20 @@ public interface HomeInterface {
      * @param user - The user making the request.
      * @return A ResponseEntity containing the updated LikeData object.
      */
+    @Operation(
+            summary = "Patch endpoint for updating number of likes on comment",
+            description = "Changes number of likes for comment of given id",
+            responses = {
+                    @ApiResponse(
+                            description = "Successfully changed number of likes",
+                            responseCode = "200"
+                    )
+            },
+            parameters = @Parameter(
+                    name = "user",
+                    hidden = true
+            )
+    )
     ResponseEntity<LikeData> changeCommentNumberOfLikes(long commentId, User user);
 }
 
