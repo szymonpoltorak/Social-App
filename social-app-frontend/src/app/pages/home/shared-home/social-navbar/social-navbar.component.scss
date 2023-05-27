@@ -104,7 +104,7 @@ app-menu-icon {
 
 @media screen and (max-width: 620px) {
     .navbar-container {
-        gap: 0.5em;
+        gap: 0.2em;
     }
 
     .search-bar {
@@ -117,6 +117,7 @@ app-menu-icon {
 
     .search-input {
         width: 15em;
+        margin-left: 0.1em;
     }
 
     app-logo {
