@@ -74,6 +74,10 @@ app-menu-icon {
         gap: 2em;
     }
 
+    .dropdown {
+        right: 10em;
+    }
+
     app-menu-icon {
         display: block;
     }
@@ -99,6 +103,18 @@ app-menu-icon {
         font-size: 0.7em;
         margin-right: 2em;
         margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .dropdown {
+        right: 6em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .dropdown {
+        right: 4em;
     }
 }
 

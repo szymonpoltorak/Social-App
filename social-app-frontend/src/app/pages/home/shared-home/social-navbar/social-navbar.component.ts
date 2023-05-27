@@ -6,6 +6,7 @@ import { UserService } from "@services/utils/user.service";
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { SearchService } from "@services/search/search.service";
 import { SocialNavbarInterface } from "@interfaces/home/SocialNavbarInterface";
+import { ColumnIndex } from "@enums/ColumnIndex";
 
 @Component({
     selector: 'app-social-navbar',
@@ -75,4 +76,6 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
         this.onDestroy$.next();
         this.onDestroy$.complete();
     }
+
+    protected readonly ColumnIndex = ColumnIndex;
 }

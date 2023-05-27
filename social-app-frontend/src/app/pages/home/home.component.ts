@@ -4,6 +4,7 @@ import { Observable, of, Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { UtilService } from "@services/utils/util.service";
 import { RoutePaths } from "@enums/RoutePaths";
+import { ColumnIndex } from "@enums/ColumnIndex";
 
 @Component({
     selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     areFriendsVisible: boolean = false;
     areAllVisible: boolean = true;
     isDoubleColumnGrid: boolean = true;
-    currentColumn: number = 0;
+    currentColumn: number = ColumnIndex.USER_COLUMN;
 
     constructor(private homeService: HomeService,
                 private utilService: UtilService) {
@@ -35,8 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.areAllVisible = window.innerWidth >= 1250;
         this.isDoubleColumnGrid = window.innerWidth > 800;
 
-        if (this.isDoubleColumnGrid && this.currentColumn === 1) {
-            this.currentColumn = 0;
+        if (this.isDoubleColumnGrid && this.currentColumn === ColumnIndex.POSTS_COLUMN) {
+            this.currentColumn = ColumnIndex.USER_COLUMN;
         }
     }
 
