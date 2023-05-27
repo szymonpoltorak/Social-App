@@ -37,3 +37,9 @@ app-user-icon {
     @include flex-center;
     gap: 1.5em;
 }
+
+.no-posts {
+    @include flex-center;
+    @include content-field;
+    width: 35em;
+}

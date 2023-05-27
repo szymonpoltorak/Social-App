@@ -1,6 +1,8 @@
 <div class="friends-container">
     <p>Friend list</p>
 
+    <mat-divider></mat-divider>
+
     <app-friend *ngFor="let friend of friendList"
                 [friendJob]="friend.friendJob"
                 [friendName]="friend.friendFullName"
@@ -8,4 +10,6 @@
                 (friendRemoval)="removeFriendFromList($event)"
     >
     </app-friend>
+
+    <div class="no-friends" *ngIf="friendList.length === 0">No friends yet!</div>
 </div>

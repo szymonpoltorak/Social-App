@@ -17,3 +17,5 @@
           (updateFriendListEvent)="updateFriendList()"
 >
 </app-post>
+
+<div class="no-posts" *ngIf="posts.length === 0">No posts found yet</div>

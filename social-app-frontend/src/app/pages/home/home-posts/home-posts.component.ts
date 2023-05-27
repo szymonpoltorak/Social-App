@@ -15,6 +15,7 @@ import { HomePostsInterface } from "@interfaces/home/HomePostsInterface";
 export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface {
     private destroyPostList$: Subject<void> = new Subject<void>();
     private destroyCreatePost$: Subject<void> = new Subject<void>();
+    private numOfSite: number = 0;
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @ViewChild(TextInputComponent) postTextInput !: TextInputComponent;
     posts: PostData[] = [];
@@ -46,13 +47,15 @@ export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface
         this.currentUser = this.utilService.getValueFromStorage(StorageKeys.USERNAME);
         this.currentUser = this.currentUser.substring(1, this.currentUser.length - 1);
 
-        this.postService.getListOfPosts()
+        this.postService.getListOfPosts(this.numOfSite)
             .pipe(takeUntil(this.destroyPostList$))
             .subscribe((data: PostData[]): void => {
-                this.posts = data;
+                for (let postData of data) {
+                    this.posts.push(postData);
+                }
 
                 if (data.length === 100) {
-                    this.postService.incrementSiteNumber();
+                    this.numOfSite++;
                 }
             });
     }

@@ -13,7 +13,7 @@ import { RoutePaths } from "@enums/RoutePaths";
 export class HomeComponent implements OnInit, OnDestroy {
     private destroyFriendList$: Subject<void> = new Subject<void>();
     private updateFriendList$: Subject<void> = new Subject<void>();
-    friendList !: FriendData[];
+    friendList: FriendData[] = [];
 
     constructor(private homeService: HomeService,
                 private utilService: UtilService) {

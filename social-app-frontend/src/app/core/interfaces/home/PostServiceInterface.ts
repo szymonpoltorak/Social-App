@@ -17,9 +17,10 @@ export interface PostServiceInterface {
     /**
      * Retrieves a list of posts.
      *
+     * @param numOfSite number of site used for pagination
      * @returns An Observable of an array of PostData representing the list of posts.
      */
-    getListOfPosts(): Observable<PostData[]>;
+    getListOfPosts(numOfSite: number): Observable<PostData[]>;
 
     /**
      * Manages the friend status of a user.
@@ -45,9 +46,4 @@ export interface PostServiceInterface {
      * @returns An Observable of void.
      */
     deletePost(postId: number): Observable<void>;
-
-    /**
-     * Increments the site number.
-     */
-    incrementSiteNumber(): void;
 }

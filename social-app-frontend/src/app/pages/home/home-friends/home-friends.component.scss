@@ -4,3 +4,11 @@
     @include content-field;
     padding: 2em;
 }
+
+mat-divider {
+    margin-bottom: 1em;
+}
+
+.no-friends {
+    @include flex-center;
+}

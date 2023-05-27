@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { HomeFriendsInterface } from "@interfaces/home/HomeFriendsInterface";
 
@@ -8,7 +8,7 @@ import { HomeFriendsInterface } from "@interfaces/home/HomeFriendsInterface";
     styleUrls: ['./home-friends.component.scss']
 })
 export class HomeFriendsComponent implements HomeFriendsInterface {
-    @Input() friendList!: FriendData[];
+    @Input() friendList: FriendData[] = [];
 
     removeFriendFromList(friendUsername: string): void {
         this.friendList = this.friendList.filter((friend: FriendData): boolean => friend.friendUsername !== friendUsername);
