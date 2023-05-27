@@ -45,3 +45,16 @@
     margin-bottom: 1em;
     margin-top: 1em;
 }
+
+@media screen and (max-width: 1250px) {
+    .posts-container {
+        width: 30em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .posts-container {
+        width: 25em;
+    }
+}
+

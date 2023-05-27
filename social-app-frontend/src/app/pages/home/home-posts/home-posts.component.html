@@ -17,3 +17,7 @@
           (updateFriendListEvent)="updateFriendList()"
 >
 </app-post>
+
+<div (click)="loadNewPosts()" *ngIf="posts.length !== 0 && !isAllLoaded" class="load-more">Load more posts</div>
+
+<div class="no-posts" *ngIf="posts.length === 0">No posts found yet</div>

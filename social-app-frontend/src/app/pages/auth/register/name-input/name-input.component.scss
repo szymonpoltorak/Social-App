@@ -32,3 +32,28 @@
 .correct {
     border-color: green;
 }
+
+@media screen and (max-width: 762px) {
+    .name-input {
+        width: 18em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .name-input {
+        width: 14em;
+    }
+}
+
+@media screen and (max-width: 492px){
+    .name-input {
+        width: 11em;
+    }
+}
+
+@media screen and (max-width: 403px){
+    .name-input {
+        width: 13em;
+    }
+}
+

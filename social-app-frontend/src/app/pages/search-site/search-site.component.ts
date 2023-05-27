@@ -12,28 +12,55 @@ import { SearchSiteInterface } from "@interfaces/search/SearchSiteInterface";
 export class SearchSiteComponent implements OnInit, OnDestroy, SearchSiteInterface {
     private initUsersList$: Subject<void> = new Subject<void>();
     private loadingData$: Subject<void> = new Subject<void>();
+    private loadMore$: Subject<void> = new Subject<void>();
+    private numOfSite: number = 0;
+    isItAll !: boolean;
     userList: UserSearchData[] = [];
 
     constructor(private searchService: SearchService) {
     }
 
+    loadMoreData(): void {
+        this.searchService.getListOfUsersOfPattern(this.numOfSite)
+            .pipe(takeUntil(this.loadMore$))
+            .subscribe((data: UserSearchData[]): void => {
+                this.userList = data;
+
+                if (data.length === 100) {
+                    this.numOfSite++;
+                } else {
+                    this.isItAll = true;
+                }
+            });
+    }
+
     loadData(): void {
-        this.searchService.getListOfUsersOfPattern()
+        this.searchService.getListOfUsersOfPattern(this.numOfSite)
             .pipe(takeUntil(this.loadingData$))
             .subscribe((data: UserSearchData[]): void => {
-                console.log(data);
-
                 this.userList = data;
+
+                if (data.length === 100) {
+                    this.numOfSite++;
+                } else {
+                    this.isItAll = true;
+                }
             });
     }
 
     ngOnInit(): void {
-        this.searchService.getListOfUsersOfPattern()
+        this.isItAll = false;
+
+        this.searchService.getListOfUsersOfPattern(this.numOfSite)
             .pipe(takeUntil(this.userList))
             .subscribe((data: UserSearchData[]): void => {
-                console.log(data);
-
                 this.userList = data;
+
+                if (data.length === 100) {
+                    this.numOfSite++;
+                } else {
+                    this.isItAll = true;
+                }
             });
     }
 

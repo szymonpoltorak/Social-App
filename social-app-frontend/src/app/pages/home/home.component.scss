@@ -47,9 +47,23 @@ $main-background-color: #0a0b0a;
 .sticky-navbar {
     @include position-sticky;
     top: 0;
+    z-index: 1000;
 }
 
 .sticky-element {
     @include position-sticky;
     top: 8em;
+}
+
+@media screen and (max-width: 1169px){
+    .grid-container {
+        grid-template-columns: repeat(2, 0.5fr);
+        gap: 1em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .grid-container {
+        @include flex-center;
+    }
 }

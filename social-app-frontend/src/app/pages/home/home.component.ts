@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from "@core/services/home/home.service";
-import { Subject, takeUntil } from "rxjs";
+import { Observable, of, Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { UtilService } from "@services/utils/util.service";
 import { RoutePaths } from "@enums/RoutePaths";
+import { ColumnIndex } from "@enums/ColumnIndex";
 
 @Component({
     selector: 'app-home',
@@ -13,10 +14,31 @@ import { RoutePaths } from "@enums/RoutePaths";
 export class HomeComponent implements OnInit, OnDestroy {
     private destroyFriendList$: Subject<void> = new Subject<void>();
     private updateFriendList$: Subject<void> = new Subject<void>();
-    friendList !: FriendData[];
+    friendList: FriendData[] = [];
+    areFriendsVisible: boolean = false;
+    areAllVisible: boolean = true;
+    isDoubleColumnGrid: boolean = true;
+    currentColumn: number = ColumnIndex.USER_COLUMN;
 
     constructor(private homeService: HomeService,
                 private utilService: UtilService) {
+    }
+
+    hideColumn(event: number): void {
+        this.areAllVisible = window.innerWidth >= 1250;
+
+        this.currentColumn = event;
+        this.areFriendsVisible = !this.areFriendsVisible;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onWindowResize(event: any): void {
+        this.areAllVisible = window.innerWidth >= 1250;
+        this.isDoubleColumnGrid = window.innerWidth > 800;
+
+        if (this.isDoubleColumnGrid && this.currentColumn === ColumnIndex.POSTS_COLUMN) {
+            this.currentColumn = ColumnIndex.USER_COLUMN;
+        }
     }
 
     ngOnInit(): void {

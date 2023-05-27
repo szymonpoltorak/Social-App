@@ -11,8 +11,6 @@ import { PostServiceInterface } from "@core/interfaces/home/PostServiceInterface
     providedIn: 'root'
 })
 export class PostService implements PostServiceInterface {
-    private numOfSite: number = 0;
-
     constructor(private http: HttpClient) {
     }
 
@@ -24,10 +22,10 @@ export class PostService implements PostServiceInterface {
         });
     }
 
-    getListOfPosts(): Observable<PostData[]> {
+    getListOfPosts(numOfSite: number): Observable<PostData[]> {
         return this.http.get<PostData[]>(`${ environment.httpBackend }${ HomeApiCalls.POST_LIST }`, {
             params: {
-                "numOfSite": this.numOfSite
+                "numOfSite": numOfSite
             }
         });
     }
@@ -54,9 +52,5 @@ export class PostService implements PostServiceInterface {
                 "postId": postId
             }
         });
-    }
-
-    incrementSiteNumber(): void {
-        this.numOfSite = this.numOfSite + 1;
     }
 }

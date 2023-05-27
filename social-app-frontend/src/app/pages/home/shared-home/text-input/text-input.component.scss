@@ -13,3 +13,15 @@
     color: white;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+@media screen and (max-width: 1250px) {
+    .post-input {
+        max-width: 20em;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .post-input {
+        max-width: 15em;
+    }
+}

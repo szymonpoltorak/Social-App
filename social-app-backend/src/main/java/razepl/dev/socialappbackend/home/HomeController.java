@@ -54,7 +54,8 @@ public class HomeController implements HomeInterface {
 
     @Override
     @PostMapping(value = CREATE_POST_MAPPING)
-    public final ResponseEntity<PostData> createPost(@RequestParam String postContent, User user) {
+    public final ResponseEntity<PostData> createPost(@RequestParam String postContent,
+                                                     @AuthenticationPrincipal User user) {
         log.info("Creating post with data : {}", postContent);
         log.info("User who wants to create post : {}", user);
 
