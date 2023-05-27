@@ -6,11 +6,15 @@
     margin-bottom: 1em;
 }
 
+app-logo {
+    margin-top: 0.3em;
+}
+
 .icon-bar {
     display: flex;
     justify-content: flex-end;
     margin-left: 3em;
-    margin-top: 0.2em;
+    margin-top: 0.1em;
     margin-right: 3em;
     gap: 2em;
 }
@@ -36,4 +40,109 @@
     @include navbar-background;
     height: 3em;
     padding: 1em;
+}
+
+app-menu-icon {
+    display: none;
+}
+
+.dropdown {
+    top: 5em;
+    right: 4em;
+    padding: 0.5em;
+    position: absolute;
+    background-color: $input-background-color;
+    border-radius: 0.5em;
+}
+
+.option {
+    padding: 0.4em;
+    border-radius: 0.3em;
+}
+
+.option:hover {
+    background-color: #565756;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1162px) {
+    .search-input {
+        width: 30em;
+    }
+
+    .icon-bar {
+        margin-left: 1.5em;
+        margin-right: 1em;
+        gap: 1em;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    .search-input {
+        width: 20em;
+    }
+
+    app-logo {
+        width: 10em;
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    .navbar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+    }
+
+    app-menu-icon {
+        display: block;
+    }
+
+    .search-bar {
+        margin-bottom: 0;
+    }
+
+    .icon {
+        display: none;
+    }
+
+    .search-input {
+        width: 20em;
+    }
+
+    .icon-bar {
+        margin-left: 2em;
+        margin-right: 0;
+    }
+
+    app-logo {
+        font-size: 0.7em;
+        margin-right: 2em;
+        margin-top: 1em;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .navbar-container {
+        gap: 0.5em;
+    }
+
+    .search-bar {
+        gap: 0.5em;
+    }
+
+    .icon-bar {
+        margin-left: 0;
+    }
+
+    .search-input {
+        width: 15em;
+    }
+
+    app-logo {
+        margin-top: 2em;
+        font-size: 0.45em;
+    }
 }

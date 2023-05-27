@@ -49,3 +49,8 @@ $upper-navbar-color: #191819;
     font-size: 11px;
 }
 
+@media screen and (max-width: 1518px) {
+    .user-container {
+        width: 20em;
+    }
+}

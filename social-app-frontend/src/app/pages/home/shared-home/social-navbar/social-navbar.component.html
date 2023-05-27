@@ -8,12 +8,21 @@
     </div>
 
     <div class="icon-bar">
-        <app-chat-icon></app-chat-icon>
+        <app-chat-icon class="icon"></app-chat-icon>
 
-        <app-notify-icon></app-notify-icon>
+        <app-notify-icon class="icon"></app-notify-icon>
 
-        <app-settings-icon></app-settings-icon>
+        <app-settings-icon class="icon"></app-settings-icon>
 
-        <app-logout-icon (click)="logoutUserFromSite()"></app-logout-icon>
+        <app-logout-icon class="icon" (click)="logoutUserFromSite()"></app-logout-icon>
+
+        <app-menu-icon (click)="toggleMenu()" class="menu"></app-menu-icon>
+
+        <div class="dropdown" *ngIf="!isMenuVisible">
+            <div class="option">Messages</div>
+            <div class="option">Notifications</div>
+            <div class="option">Settings</div>
+            <div (click)="logoutUserFromSite()" class="option">Logout</div>
+        </div>
     </div>
 </nav>

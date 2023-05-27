@@ -53,3 +53,8 @@ $main-background-color: #0a0b0a;
     @include position-sticky;
     top: 8em;
 }
+
+@media screen and (max-width: 1518px) {
+    .grid-container {
+    }
+}

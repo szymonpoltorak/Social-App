@@ -31,7 +31,7 @@ import { SharedAuthModule } from "@auth/shared/shared-auth.module";
         FormsModule,
         ReactiveFormsModule,
         MatListModule,
-        SharedAuthModule
+        SharedAuthModule,
     ],
     exports: [
         FriendComponent,

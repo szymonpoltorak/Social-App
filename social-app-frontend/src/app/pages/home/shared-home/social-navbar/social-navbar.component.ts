@@ -17,11 +17,16 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     @Input() logoUrl: string = "";
     @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();
     searchValue !: string;
+    isMenuVisible : boolean = true;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
                 private userService: UserService,
                 private searchService: SearchService) {
+    }
+
+    toggleMenu(): void {
+        this.isMenuVisible = !this.isMenuVisible;
     }
 
     logoutUserFromSite(): void {

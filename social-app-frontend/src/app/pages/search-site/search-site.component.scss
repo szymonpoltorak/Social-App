@@ -1,22 +1,21 @@
 @import "mixins";
 
-@mixin positioning {
-    width: 50em;
-    margin-left: 40em;
+app-social-navbar {
+    @include position-sticky;
+    width: 100%;
 }
 
 .background {
     @include main-background;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .friends-container {
     @include content-field;
     margin-top: 3em;
-    @include positioning;
-}
-
-app-social-navbar {
-    @include position-sticky;
+    width: 50em;
 }
 
 .search-container {
@@ -33,7 +32,7 @@ app-social-navbar {
     @include flex-center;
     margin-top: 1em;
     margin-bottom: 2em;
-    @include positioning;
+    width: 50em;
 }
 
 .load-more:hover {
@@ -42,4 +41,34 @@ app-social-navbar {
 
 .load-more:active {
     background-color: #565756;
+}
+
+@media screen and (max-width: 970px) {
+    .load-more {
+        width: 40em;
+    }
+
+    .friends-container {
+        width: 40em;
+    }
+}
+
+@media screen and (max-width: 790px) {
+    .load-more {
+        width: 30em;
+    }
+
+    .friends-container {
+        width: 30em;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .load-more {
+        width: 20em;
+    }
+
+    .friends-container {
+        width: 23em;
+    }
 }

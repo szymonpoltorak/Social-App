@@ -12,3 +12,9 @@ mat-divider {
 .no-friends {
     @include flex-center;
 }
+
+@media screen and (max-width: 1518px) {
+    .friends-container {
+        width: 20em;
+    }
+}
