@@ -1,18 +1,22 @@
 <div class="just-background">
     <app-social-navbar [isOnHomeSite]="true"
                        (searchEvent)="navigateToSearch()"
-                       (columnEvent)="hideColumn()"
+                       (columnEvent)="hideColumn($event)"
                        class="sticky-navbar">
     </app-social-navbar>
 
     <main class="flex-container">
         <div class="grid-container">
-            <app-home-profile *ngIf="!areFriendsVisible || areAllVisible" class="sticky-element"></app-home-profile>
+            <app-home-profile *ngIf="areAllVisible || currentColumn === 0"
+                              class="sticky-element">
+            </app-home-profile>
 
-            <app-home-posts (updateFriendListEvent)="updateFriendList()"></app-home-posts>
+            <app-home-posts *ngIf="areAllVisible || currentColumn === 1 || isDoubleColumnGrid"
+                            (updateFriendListEvent)="updateFriendList()">
+            </app-home-posts>
 
             <app-home-friends [friendList]="friendList"
-                              *ngIf="areFriendsVisible || areAllVisible"
+                              *ngIf="areAllVisible || currentColumn === 2"
                               class="sticky-element">
             </app-home-friends>
         </div>

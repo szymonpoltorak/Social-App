@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
 import { AuthService } from "@core/services/auth/auth.service";
 import { UtilService } from "@services/utils/util.service";
@@ -16,12 +16,12 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     private onDestroy$: Subject<void> = new Subject<void>();
     @Input() logoUrl: string = "";
     @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();
-    @Output() columnEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() columnEvent: EventEmitter<number> = new EventEmitter<number>();
     searchValue !: string;
     isMenuVisible : boolean = true;
     @Input() isOnHomeSite : boolean = false;
-    areFriendsVisible: boolean = false;
-    currentColumn: number = 0;
+    isOneColumnOnly: boolean = false;
+    currentColumn: number = 1;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
@@ -33,10 +33,16 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
         this.isMenuVisible = !this.isMenuVisible;
     }
 
-    changeColumn(): void {
-        this.areFriendsVisible = !this.areFriendsVisible;
+    @HostListener('window:resize', ['$event'])
+    onWindowResize(event: any) {
+        this.isOneColumnOnly = window.innerWidth <= 800;
+    }
 
-        this.columnEvent.emit(this.areFriendsVisible);
+
+    changeColumn(column: number): void {
+        this.currentColumn = column;
+
+        this.columnEvent.emit(this.currentColumn);
     }
 
     logoutUserFromSite(): void {

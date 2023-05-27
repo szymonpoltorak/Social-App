@@ -14,38 +14,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     private destroyFriendList$: Subject<void> = new Subject<void>();
     private updateFriendList$: Subject<void> = new Subject<void>();
     friendList: FriendData[] = [];
-    event: EventEmitter<void> = new EventEmitter<void>();
     areFriendsVisible: boolean = false;
     areAllVisible: boolean = true;
+    isDoubleColumnGrid: boolean = true;
+    currentColumn: number = 0;
 
     constructor(private homeService: HomeService,
                 private utilService: UtilService) {
     }
 
-    hideColumn(): void {
+    hideColumn(event: number): void {
         this.areAllVisible = window.innerWidth >= 1250;
-        this.areFriendsVisible = !this.areFriendsVisible;
 
-        this.event.emit();
+        this.currentColumn = event;
+        this.areFriendsVisible = !this.areFriendsVisible;
     }
 
     @HostListener('window:resize', ['$event'])
     onWindowResize(event: any) {
         this.areAllVisible = window.innerWidth >= 1250;
-    }
-
-    shouldFriendsBeVisible(): Observable<boolean> {
-        if (window.innerWidth >= 1250) {
-            return of(true);
-        }
-        return of(this.areFriendsVisible);
-    }
-
-    shouldUserBeVisible(): Observable<boolean> {
-        if (window.innerWidth >= 1250) {
-            return of(true);
-        }
-        return of(!this.areFriendsVisible);
+        this.isDoubleColumnGrid = window.innerWidth > 800;
     }
 
     ngOnInit(): void {

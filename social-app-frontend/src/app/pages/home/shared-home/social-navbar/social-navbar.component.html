@@ -27,9 +27,11 @@
 
             <div (click)="logoutUserFromSite()" class="option">Logout</div>
 
-            <div (click)="changeColumn()" *ngIf="areFriendsVisible && isOnHomeSite" class="option">Show friends</div>
+            <div (click)="changeColumn(2)" *ngIf="isOnHomeSite" class="option">Show friends</div>
 
-            <div (click)="changeColumn()" *ngIf="!areFriendsVisible && isOnHomeSite" class="option">Show users details</div>
+            <div (click)="changeColumn(0)" *ngIf="isOnHomeSite" class="option">Show users details</div>
+
+            <div (click)="changeColumn(1)" *ngIf="isOnHomeSite && isOneColumnOnly" class="option">Show posts</div>
         </div>
     </div>
 </nav>

@@ -61,3 +61,9 @@ $main-background-color: #0a0b0a;
         gap: 1em;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .grid-container {
+        @include flex-center;
+    }
+}
