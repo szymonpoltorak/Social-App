@@ -70,3 +70,35 @@
     opacity: 0.5;
     color: black;
 }
+
+@media screen and (max-width: 870px) {
+    .agenda {
+        margin-right: 4em;
+    }
+}
+
+@media screen and (max-width: 702px) {
+    .agenda {
+        margin-right: 1em;
+    }
+
+    .login-block {
+        padding: 1em;
+        margin-left: 1em;
+    }
+}
+
+@media screen and (max-width: 584px) {
+    :host {
+        flex-direction: column;
+    }
+
+    .agenda {
+        margin-right: 0;
+    }
+
+    .login-block {
+        padding: 1em;
+        margin-left: 0;
+    }
+}
