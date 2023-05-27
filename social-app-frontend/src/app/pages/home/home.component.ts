@@ -31,9 +31,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     @HostListener('window:resize', ['$event'])
-    onWindowResize(event: any) {
+    onWindowResize(event: any): void {
         this.areAllVisible = window.innerWidth >= 1250;
         this.isDoubleColumnGrid = window.innerWidth > 800;
+
+        if (this.isDoubleColumnGrid && this.currentColumn === 1) {
+            this.currentColumn = 0;
+        }
     }
 
     ngOnInit(): void {

@@ -53,3 +53,19 @@
         width: 4em;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .post-create-bar {
+        width: 25em;
+        gap: 1em;
+    }
+
+    .attach-option {
+        width: 3em;
+        padding: 0.8em;
+    }
+
+    svg {
+        display: none;
+    }
+}

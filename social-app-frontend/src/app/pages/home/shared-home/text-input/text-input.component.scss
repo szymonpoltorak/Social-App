@@ -19,3 +19,9 @@
         max-width: 20em;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .post-input {
+        max-width: 15em;
+    }
+}

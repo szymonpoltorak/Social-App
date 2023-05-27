@@ -21,7 +21,7 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     isMenuVisible : boolean = true;
     @Input() isOnHomeSite : boolean = false;
     isOneColumnOnly: boolean = false;
-    currentColumn: number = 1;
+    currentColumn: number = 0;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
@@ -34,8 +34,12 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     }
 
     @HostListener('window:resize', ['$event'])
-    onWindowResize(event: any) {
+    onWindowResize(event: any): void {
         this.isOneColumnOnly = window.innerWidth <= 800;
+
+        if (!this.isOneColumnOnly && this.currentColumn === 1) {
+            this.currentColumn = 0;
+        }
     }
 
 

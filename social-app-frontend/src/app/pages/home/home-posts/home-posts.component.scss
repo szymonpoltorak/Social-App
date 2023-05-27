@@ -70,3 +70,13 @@ app-user-icon {
         width: 30em;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .posts-container {
+        width: 25em;
+    }
+
+    .writing-container {
+        width: 25em;
+    }
+}
