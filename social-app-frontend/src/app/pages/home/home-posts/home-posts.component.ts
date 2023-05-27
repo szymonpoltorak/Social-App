@@ -38,7 +38,6 @@ export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface
                 if (data.length === 100) {
                     this.numOfSite++;
                 } else {
-                    this.numOfSite = 0;
                     this.isAllLoaded = true;
                 }
             });
@@ -75,7 +74,6 @@ export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface
                 if (data.length === 100) {
                     this.numOfSite++;
                 } else {
-                    this.numOfSite = 0;
                     this.isAllLoaded = true;
                 }
             });

@@ -11,16 +11,15 @@ import { SearchServiceInterface } from "@interfaces/search/SearchServiceInterfac
 })
 export class SearchService implements SearchServiceInterface {
     searchPattern !: string;
-    numOfSite: number = 0;
 
     constructor(private http: HttpClient) {
     }
 
-    getListOfUsersOfPattern(): Observable<UserSearchData[]> {
+    getListOfUsersOfPattern(numOfSite: number): Observable<UserSearchData[]> {
         return this.http.get<UserSearchData[]>(`${ environment.httpBackend }${ SearchApiCalls.USERS_LIST_PATTERN }`, {
             params: {
                 "pattern": this.searchPattern,
-                "numOfSite": this.numOfSite
+                "numOfSite": numOfSite
             }
         });
     }

@@ -11,5 +11,5 @@ export interface SearchServiceInterface {
      * Retrieves a list of users based on a search pattern.
      * @returns An Observable that emits an array of UserSearchData objects.
      */
-    getListOfUsersOfPattern(): Observable<UserSearchData[]>;
+    getListOfUsersOfPattern(numOfSite: number): Observable<UserSearchData[]>;
 }

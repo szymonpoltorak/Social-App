@@ -1,5 +1,10 @@
 @import "mixins";
 
+@mixin positioning {
+    width: 50em;
+    margin-left: 40em;
+}
+
 .background {
     @include main-background;
 }
@@ -7,8 +12,7 @@
 .friends-container {
     @include content-field;
     margin-top: 3em;
-    width: 50em;
-    margin-left: 40em;
+    @include positioning;
 }
 
 app-social-navbar {
@@ -22,4 +26,20 @@ app-social-navbar {
 .not-found {
     @include flex-center;
     font-weight: bold;
+}
+
+.load-more {
+    @include content-field;
+    @include flex-center;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    @include positioning;
+}
+
+.load-more:hover {
+    background-color: $input-background-color;
+}
+
+.load-more:active {
+    background-color: #565756;
 }
