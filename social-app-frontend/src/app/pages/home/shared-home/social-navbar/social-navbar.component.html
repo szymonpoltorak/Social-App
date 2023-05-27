@@ -20,9 +20,16 @@
 
         <div class="dropdown" *ngIf="!isMenuVisible">
             <div class="option">Messages</div>
+
             <div class="option">Notifications</div>
+
             <div class="option">Settings</div>
+
             <div (click)="logoutUserFromSite()" class="option">Logout</div>
+
+            <div (click)="changeColumn()" *ngIf="areFriendsVisible && isOnHomeSite" class="option">Show friends</div>
+
+            <div (click)="changeColumn()" *ngIf="!areFriendsVisible && isOnHomeSite" class="option">Show users details</div>
         </div>
     </div>
 </nav>

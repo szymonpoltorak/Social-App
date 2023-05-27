@@ -16,8 +16,12 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
     private onDestroy$: Subject<void> = new Subject<void>();
     @Input() logoUrl: string = "";
     @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();
+    @Output() columnEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     searchValue !: string;
     isMenuVisible : boolean = true;
+    @Input() isOnHomeSite : boolean = false;
+    areFriendsVisible: boolean = false;
+    currentColumn: number = 0;
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
@@ -27,6 +31,12 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
 
     toggleMenu(): void {
         this.isMenuVisible = !this.isMenuVisible;
+    }
+
+    changeColumn(): void {
+        this.areFriendsVisible = !this.areFriendsVisible;
+
+        this.columnEvent.emit(this.areFriendsVisible);
     }
 
     logoutUserFromSite(): void {

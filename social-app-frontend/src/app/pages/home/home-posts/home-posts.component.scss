@@ -17,6 +17,8 @@ $input-background-color: #2c2d2c;
 
 .posts-container {
     @include content-field;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 2em;
     width: 35em;
 }
@@ -57,4 +59,14 @@ app-user-icon {
 
 .load-more:active {
     background-color: #565756;
+}
+
+@media screen and (max-width: 1250px) {
+    .posts-container {
+        width: 30em;
+    }
+
+    .writing-container {
+        width: 30em;
+    }
 }

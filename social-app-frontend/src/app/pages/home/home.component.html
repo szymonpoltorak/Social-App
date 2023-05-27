@@ -1,13 +1,20 @@
 <div class="just-background">
-    <app-social-navbar (searchEvent)="navigateToSearch()" class="sticky-navbar"></app-social-navbar>
+    <app-social-navbar [isOnHomeSite]="true"
+                       (searchEvent)="navigateToSearch()"
+                       (columnEvent)="hideColumn()"
+                       class="sticky-navbar">
+    </app-social-navbar>
 
     <main class="flex-container">
         <div class="grid-container">
-            <app-home-profile class="sticky-element"></app-home-profile>
+            <app-home-profile *ngIf="!areFriendsVisible || areAllVisible" class="sticky-element"></app-home-profile>
 
             <app-home-posts (updateFriendListEvent)="updateFriendList()"></app-home-posts>
 
-            <app-home-friends [friendList]="friendList" class="sticky-element"></app-home-friends>
+            <app-home-friends [friendList]="friendList"
+                              *ngIf="areFriendsVisible || areAllVisible"
+                              class="sticky-element">
+            </app-home-friends>
         </div>
     </main>
 </div>

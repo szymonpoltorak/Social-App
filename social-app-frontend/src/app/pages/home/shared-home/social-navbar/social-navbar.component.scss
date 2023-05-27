@@ -53,6 +53,7 @@ app-menu-icon {
     position: absolute;
     background-color: $input-background-color;
     border-radius: 0.5em;
+    z-index: 1000;
 }
 
 .option {
@@ -65,30 +66,7 @@ app-menu-icon {
     cursor: pointer;
 }
 
-@media screen and (max-width: 1162px) {
-    .search-input {
-        width: 30em;
-    }
-
-    .icon-bar {
-        margin-left: 1.5em;
-        margin-right: 1em;
-        gap: 1em;
-    }
-}
-
-@media screen and (max-width: 970px) {
-    .search-input {
-        width: 20em;
-    }
-
-    app-logo {
-        width: 10em;
-        font-size: 0.8em;
-    }
-}
-
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 1169px) {
     .navbar-container {
         display: flex;
         justify-content: center;

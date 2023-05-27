@@ -42,3 +42,14 @@
 .attach-option:active {
     background-color: #414241;
 }
+
+@media screen and (max-width: 1250px) {
+    .post-create-bar {
+        width: 30em;
+    }
+
+    .attach-option {
+        padding: 0.5em;
+        width: 4em;
+    }
+}

@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from "@core/services/home/home.service";
-import { Subject, takeUntil } from "rxjs";
+import { Observable, of, Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { UtilService } from "@services/utils/util.service";
 import { RoutePaths } from "@enums/RoutePaths";
@@ -14,9 +14,38 @@ export class HomeComponent implements OnInit, OnDestroy {
     private destroyFriendList$: Subject<void> = new Subject<void>();
     private updateFriendList$: Subject<void> = new Subject<void>();
     friendList: FriendData[] = [];
+    event: EventEmitter<void> = new EventEmitter<void>();
+    areFriendsVisible: boolean = false;
+    areAllVisible: boolean = true;
 
     constructor(private homeService: HomeService,
                 private utilService: UtilService) {
+    }
+
+    hideColumn(): void {
+        this.areAllVisible = window.innerWidth >= 1250;
+        this.areFriendsVisible = !this.areFriendsVisible;
+
+        this.event.emit();
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onWindowResize(event: any) {
+        this.areAllVisible = window.innerWidth >= 1250;
+    }
+
+    shouldFriendsBeVisible(): Observable<boolean> {
+        if (window.innerWidth >= 1250) {
+            return of(true);
+        }
+        return of(this.areFriendsVisible);
+    }
+
+    shouldUserBeVisible(): Observable<boolean> {
+        if (window.innerWidth >= 1250) {
+            return of(true);
+        }
+        return of(!this.areFriendsVisible);
     }
 
     ngOnInit(): void {
