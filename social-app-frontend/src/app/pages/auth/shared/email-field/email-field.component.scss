@@ -27,3 +27,27 @@
 .correct-mail {
     border-color: green;
 }
+
+@media screen and (max-width: 762px) {
+    .email {
+        width: 18em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .email {
+        width: 14em;
+    }
+}
+
+@media screen and (max-width: 492px){
+    .email {
+        width: 11em;
+    }
+}
+
+@media screen and (max-width: 403px){
+    .email {
+        width: 13em;
+    }
+}

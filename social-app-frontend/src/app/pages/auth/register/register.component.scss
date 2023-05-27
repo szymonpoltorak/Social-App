@@ -19,7 +19,6 @@
 
 .register-container {
     display: grid;
-    min-width: 50em;
     max-width: 50em;
     margin: 10em auto 0;
     border: $border-width $main-blue solid;
@@ -77,4 +76,59 @@
 
 .invalid-form {
     border-color: red;
+}
+
+@media screen and (max-width: 762px) {
+    .register-container {
+        padding: 1em;
+        max-width: 42em;
+    }
+
+    .inputs {
+        gap: 1em
+    }
+
+    .lawyer-speech {
+        max-width: 42em;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .register-container {
+        max-width: 33em;
+    }
+
+    .inputs {
+        gap: 0.2em;
+    }
+}
+
+@media screen and (max-width: 492px) {
+    .logo-block {
+        @include flex-center;
+    }
+
+    .register-container {
+        margin-top: 0.2em;
+        max-width: 28em;
+        padding: 0.5em;
+    }
+
+    .lawyer-speech {
+        font-size: 0.6em;
+    }
+
+    .submit-button {
+        padding: 0.5em;
+    }
+}
+
+@media screen and (max-width: 403px) {
+    .inputs {
+        flex-direction: column;
+    }
+
+    .register-container {
+        max-width: 18em;
+    }
 }
