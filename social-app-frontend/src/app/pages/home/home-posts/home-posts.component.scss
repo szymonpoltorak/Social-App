@@ -43,3 +43,18 @@ app-user-icon {
     @include content-field;
     width: 35em;
 }
+
+.load-more {
+    @include content-field;
+    @include flex-center;
+    width: 35em;
+    margin-bottom: 2em;
+}
+
+.load-more:hover {
+    background-color: $input-background-color;
+}
+
+.load-more:active {
+    background-color: #565756;
+}

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { HomeFriendsInterface } from "@interfaces/home/HomeFriendsInterface";
 
