@@ -17,5 +17,5 @@
         <div class="not-found" *ngIf="userList.length === 0">I did not find any account matching this pattern!</div>
     </div>
 
-    <div (click)="loadMoreData()" *ngIf="userList.length === 0 && !isItAll" class="load-more">Load more</div>
+    <div (click)="loadMoreData()" *ngIf="userList.length !== 0 && !isItAll" class="load-more">Load more</div>
 </div>
