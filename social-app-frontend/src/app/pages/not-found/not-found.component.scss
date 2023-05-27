@@ -64,3 +64,31 @@ button:active {
     opacity: 0.5;
     color: black;
 }
+
+@media screen and (max-width: 948px) {
+    .error-number {
+        font-size: 10em;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 552px) {
+    .error-number {
+        font-size: 7em;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+
+    button {
+        padding: 1.3em;
+    }
+}
