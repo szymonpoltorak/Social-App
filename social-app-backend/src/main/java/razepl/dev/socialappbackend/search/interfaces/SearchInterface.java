@@ -1,6 +1,5 @@
 package razepl.dev.socialappbackend.search.interfaces;
 
-import org.springframework.http.ResponseEntity;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.search.data.UserSearchData;
 
@@ -18,5 +17,5 @@ public interface SearchInterface {
      * @param user       The authenticated user making the request.
      * @return A ResponseEntity containing the list of user search data.
      */
-    ResponseEntity<List<UserSearchData>> getTheListOfUsers(String pattern, int numOfSite, User user);
+    List<UserSearchData> getTheListOfUsers(String pattern, int numOfSite, User user);
 }

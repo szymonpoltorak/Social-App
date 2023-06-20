@@ -51,6 +51,8 @@ public class HomeService implements HomeServiceInterface {
     public final UserData buildUserDataFromDb(User authUser) {
         ArgumentValidator.throwIfNull(authUser);
 
+        log.info("Getting userdata for user : {}", authUser);
+
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User was not found in database!")
         );
@@ -63,6 +65,8 @@ public class HomeService implements HomeServiceInterface {
     @Override
     public final List<FriendData> buildUsersFriendList(User authUser) {
         ArgumentValidator.throwIfNull(authUser);
+
+        log.info("Finding list of users for : {}", authUser);
 
         User user = userRepository.findByEmail(authUser.getEmail()).orElseThrow(
                 () -> new UsernameNotFoundException("User does not exist!")
@@ -81,6 +85,9 @@ public class HomeService implements HomeServiceInterface {
     public final List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(numOfSite);
+
+        log.info("Number of site for posts : {}", numOfSite);
+        log.info("User that sent request: {}", user);
 
         if (numOfSite < 0) {
             throw new IllegalArgumentException("Num of site cannot be less than 0");
@@ -103,6 +110,9 @@ public class HomeService implements HomeServiceInterface {
     public final PostData createNewPost(String postContent, User user) {
         ArgumentValidator.throwIfNull(postContent, user);
 
+        log.info("Creating post with data : {}", postContent);
+        log.info("User who wants to create post : {}", user);
+
         @Valid Post post = Post
                 .builder()
                 .postDate(LocalDate.now())
@@ -120,6 +130,8 @@ public class HomeService implements HomeServiceInterface {
     public final LikeData updatePostLikeCounter(long postId, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(postId);
+
+        log.info("User wants to change number of like with data : {}", postId);
 
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new PostNotFoundException("Post does not exist!")
@@ -152,6 +164,8 @@ public class HomeService implements HomeServiceInterface {
     public final void deletePostByPostId(long postId) {
         ArgumentValidator.throwIfNegativeId(postId);
 
+        log.info("Removing post of id : {}", postId);
+
         postRepository.deleteById(postId);
     }
 
@@ -160,6 +174,9 @@ public class HomeService implements HomeServiceInterface {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(postId);
         ArgumentValidator.throwIfNegativeId(numOfSite);
+
+        log.info("Get list of comments for post of id: {}", postId);
+        log.info("Num Of Site : {}", numOfSite);
 
         Pageable pageable = Pageable.ofSize(COMMENT_LIST_SIZE).withPage(numOfSite);
         Page<Comment> commentList = commentRepository.findCommentsByPostId(postId, pageable);
@@ -175,6 +192,8 @@ public class HomeService implements HomeServiceInterface {
     @Override
     public final CommentData createComment(CommentRequest request, User user) {
         ArgumentValidator.throwIfNull(request, user);
+
+        log.info("Creating comment with data: {}\nOf User: {}", request, user);
 
         Post post = postRepository.findById(request.postId())
                 .orElseThrow(() -> new PostNotFoundException("Post does not exist!"));
@@ -197,6 +216,8 @@ public class HomeService implements HomeServiceInterface {
     public final LikeData updateCommentLikeCounter(long commentId, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(commentId);
+
+        log.info("Creating like for comment of id : {}\nBy User : {}", commentId, user);
 
         Comment comment = commentRepository.findById(commentId).orElseThrow(
                 () -> new CommentNotFoundException("Comment does not exist!")

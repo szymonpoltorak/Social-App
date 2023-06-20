@@ -2,7 +2,6 @@ package razepl.dev.socialappbackend.search;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,11 +29,10 @@ public class SearchController implements SearchInterface {
 
     @Override
     @GetMapping(value = USERS_LIST_MAPPING)
-    public final ResponseEntity<List<UserSearchData>> getTheListOfUsers(@RequestParam String pattern,
-                                                                        @RequestParam int numOfSite,
-                                                                        @AuthenticationPrincipal User user) {
+    public final List<UserSearchData> getTheListOfUsers(@RequestParam String pattern, @RequestParam int numOfSite,
+                                                        @AuthenticationPrincipal User user) {
         log.info("Getting list of users based on pattern : {}", pattern);
 
-        return ResponseEntity.ok(searchService.getListOfUserBasedOnPattern(pattern, numOfSite, user));
+        return searchService.getListOfUserBasedOnPattern(pattern, numOfSite, user);
     }
 }

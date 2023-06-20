@@ -33,7 +33,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<UserData> getUserData(User user);
+    UserData getUserData(User user);
 
     /**
      * Retrieves a list of friend data for a given user.
@@ -55,7 +55,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<List<FriendData>> getFriendsList(User user);
+    List<FriendData> getFriendsList(User user);
 
     /**
      * Retrieves a list of post data with an offset value for a given user.
@@ -78,7 +78,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<List<PostData>> getPostsList(int numOfSite, User user);
+    List<PostData> getPostsList(int numOfSite, User user);
 
     /**
      * Creates a new post with the specified content for a given user.
@@ -101,7 +101,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<PostData> createPost(String postContent, User user);
+    PostData createPost(String postContent, User user);
 
     /**
      * Changes the number of likes for a specific post for a given user.
@@ -124,7 +124,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<LikeData> changePostNumberOfLikes(long postId, User user);
+    LikeData changePostNumberOfLikes(long postId, User user);
 
     /**
      * Deletes a specific post for a given user.
@@ -142,7 +142,7 @@ public interface HomeInterface {
                     )
             }
     )
-    ResponseEntity<Void> deletePost(long postId);
+    void deletePost(long postId);
 
     /**
      * Retrieves a list of comments for a post.
@@ -166,7 +166,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<List<CommentData>> getListOfComments(long postId, int numOfSite, User user);
+    List<CommentData> getListOfComments(long postId, int numOfSite, User user);
 
     /**
      * Creates a new comment for a post.
@@ -189,7 +189,7 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<CommentData> createComment(CommentRequest request, User user);
+    CommentData createComment(CommentRequest request, User user);
 
     /**
      * Changes the number of likes for a comment.
@@ -212,6 +212,6 @@ public interface HomeInterface {
                     hidden = true
             )
     )
-    ResponseEntity<LikeData> changeCommentNumberOfLikes(long commentId, User user);
+    LikeData changeCommentNumberOfLikes(long commentId, User user);
 }
 

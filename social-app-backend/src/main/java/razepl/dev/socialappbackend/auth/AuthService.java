@@ -94,7 +94,7 @@ public class AuthService implements AuthServiceInterface {
         log.info("Refreshing users token.");
 
         String refreshToken = jwtService.getJwtRefreshToken(request);
-        User user = validateRefreshTokenData(request, refreshToken);
+        User user = validateRefreshTokenData(refreshToken);
         String authToken = jwtService.generateToken(user);
 
         log.info("New auth token : {}\nFor user : {}", authToken, user);
@@ -141,7 +141,7 @@ public class AuthService implements AuthServiceInterface {
         return password;
     }
 
-    private User validateRefreshTokenData(HttpServletRequest request, String refreshToken) {
+    private User validateRefreshTokenData(String refreshToken) {
         if (refreshToken == null) {
             throw new TokenDoesNotExistException("Token does not exist!");
         }
