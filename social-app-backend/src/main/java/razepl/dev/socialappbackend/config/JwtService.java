@@ -84,6 +84,7 @@ public class JwtService implements JwtServiceInterface {
     @Override
     public final String getJwtToken(HttpServletRequest request) {
         ArgumentValidator.throwIfNull(request);
+        ArgumentValidator.throwIfNull(request.getServletPath());
 
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
