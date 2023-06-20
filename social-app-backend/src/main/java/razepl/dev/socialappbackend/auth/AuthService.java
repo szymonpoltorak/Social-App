@@ -18,6 +18,7 @@ import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
 import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
 import razepl.dev.socialappbackend.exceptions.*;
 import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.entities.user.Role;
@@ -44,28 +45,18 @@ public class AuthService implements AuthServiceInterface {
     private final JwtServiceInterface jwtService;
 
     @Override
-    public final AuthResponse register(RegisterUserRequest userRequest) {
-        ArgumentValidator.throwIfNull(userRequest);
+    public final AuthResponse register(RegisterUserRequest registerRequest) {
+        ArgumentValidator.throwIfNull(registerRequest);
 
-        String password = userRequest.getPassword();
+        log.info("Registering user with data: \n{}", registerRequest);
 
-        if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            log.error("Password was not valid! Password: {}", password);
+        String password = validateUserRegisterData(registerRequest);
 
-            throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
-        }
-        Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
-
-        if (existingUser.isPresent()) {
-            log.error("User already exists! Found user: {}", existingUser.get());
-
-            throw new UserAlreadyExistsException("User already exists!");
-        }
         @Valid User user = User.builder()
-                .name(userRequest.getName())
-                .email(userRequest.getEmail())
-                .dateOfBirth(userRequest.getDateOfBirth())
-                .surname(userRequest.getSurname())
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .dateOfBirth(registerRequest.getDateOfBirth())
+                .surname(registerRequest.getSurname())
                 .role(Role.USER)
                 .password(passwordEncoder.encode(password))
                 .build();
@@ -79,6 +70,8 @@ public class AuthService implements AuthServiceInterface {
     @Override
     public final AuthResponse login(LoginUserRequest loginRequest) {
         ArgumentValidator.throwIfNull(loginRequest);
+
+        log.info("Logging user with data: \n{}", loginRequest);
 
         String username = loginRequest.getUsername();
 
@@ -98,8 +91,57 @@ public class AuthService implements AuthServiceInterface {
     public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         ArgumentValidator.throwIfNull(request, response);
 
-        String refreshToken = jwtService.getJwtRefreshToken(request);
+        log.info("Refreshing users token.");
 
+        String refreshToken = jwtService.getJwtRefreshToken(request);
+        User user = validateRefreshTokenData(request, refreshToken);
+        String authToken = jwtService.generateToken(user);
+
+        log.info("New auth token : {}\nFor user : {}", authToken, user);
+
+        tokenManager.revokeUserTokens(user);
+
+        tokenManager.saveUsersToken(authToken, user);
+
+        return tokenManager.buildTokensIntoResponse(authToken, refreshToken);
+    }
+
+    @Override
+    public final TokenResponse validateUsersTokens(TokenRequest request) {
+        ArgumentValidator.throwIfNull(request);
+
+        log.info("Authenticating user with data:\n{}", request);
+
+        User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
+
+        boolean isAuthTokenValid = jwtService.isTokenValid(request.authToken(), user);
+
+        log.info("Is token valid : {}\nFor user : {}", isAuthTokenValid, user);
+
+        return TokenResponse.builder()
+                .isAuthTokenValid(isAuthTokenValid)
+                .build();
+    }
+
+    private String validateUserRegisterData(UserPropertyInterface registerRequest) {
+        String password = registerRequest.getPassword();
+
+        if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            log.error("Password was not valid! Password: {}", password);
+
+            throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
+        }
+        Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
+
+        if (existingUser.isPresent()) {
+            log.error("User already exists! Found user: {}", existingUser.get());
+
+            throw new UserAlreadyExistsException("User already exists!");
+        }
+        return password;
+    }
+
+    private User validateRefreshTokenData(HttpServletRequest request, String refreshToken) {
         if (refreshToken == null) {
             throw new TokenDoesNotExistException("Token does not exist!");
         }
@@ -117,29 +159,6 @@ public class AuthService implements AuthServiceInterface {
         if (!jwtService.isTokenValid(refreshToken, user)) {
             throw new InvalidTokenException("Token is not valid!");
         }
-        String authToken = jwtService.generateToken(user);
-
-        log.info("New auth token : {}\nFor user : {}", authToken, user);
-
-        tokenManager.revokeUserTokens(user);
-
-        tokenManager.saveUsersToken(authToken, user);
-
-        return tokenManager.buildTokensIntoResponse(authToken, refreshToken);
-    }
-
-    @Override
-    public final TokenResponse validateUsersTokens(TokenRequest request) {
-        ArgumentValidator.throwIfNull(request);
-
-        User user = userRepository.findUserByToken(request.authToken()).orElseThrow(TokensUserNotFoundException::new);
-
-        boolean isAuthTokenValid = jwtService.isTokenValid(request.authToken(), user);
-
-        log.info("Is token valid : {}\nFor user : {}", isAuthTokenValid, user);
-
-        return TokenResponse.builder()
-                .isAuthTokenValid(isAuthTokenValid)
-                .build();
+        return user;
     }
 }

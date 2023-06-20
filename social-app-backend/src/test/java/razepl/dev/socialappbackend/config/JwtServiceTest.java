@@ -112,7 +112,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void getUsernameFromToken_ValidToken_ReturnsUsername() {
+    final void test_getUsernameFromToken_ValidToken_ReturnsUsername() {
         // given
         String token = jwtService.generateToken(User
                 .builder()
@@ -131,7 +131,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void generateRefreshToken_ValidUserDetails_ReturnsToken() {
+    final void test_generateRefreshToken_ValidUserDetails_ReturnsToken() {
         // given
         UserDetails userDetails = User
                 .builder()
@@ -149,7 +149,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void generateToken_ValidUserDetails_ReturnsToken() {
+    final void test_generateToken_ValidUserDetails_ReturnsToken() {
         // given
         UserDetails userDetails = User
                 .builder()
@@ -167,7 +167,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void isTokenValid_ValidTokenAndUserDetails_ReturnsTrue() {
+    final void test_isTokenValid_ValidTokenAndUserDetails_ReturnsTrue() {
         // given
         UserDetails userDetails = User
                 .builder()
@@ -186,7 +186,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void getJwtToken_ValidHttpServletRequest_ReturnsToken() {
+    final void test_getJwtToken_ValidHttpServletRequest_ReturnsToken() {
         // given
         String authHeader = "Bearer valid-token";
 
@@ -198,7 +198,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void getJwtToken_InvalidHttpServletRequest_ReturnsNull() {
+    final void test_getJwtToken_InvalidHttpServletRequest_ReturnsNull() {
         // given
 
         // when
@@ -209,7 +209,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void getJwtRefreshToken_ValidHttpServletRequest_ReturnsToken() {
+    final void test_getJwtRefreshToken_ValidHttpServletRequest_ReturnsToken() {
         // given
         String authHeader = "Bearer valid-refresh-token";
 
@@ -223,7 +223,7 @@ class JwtServiceTest {
     }
 
     @Test
-    final void getJwtRefreshToken_InvalidHttpServletRequest_ReturnsNull() {
+    final void test_getJwtRefreshToken_InvalidHttpServletRequest_ReturnsNull() {
         // given
 
         // when
