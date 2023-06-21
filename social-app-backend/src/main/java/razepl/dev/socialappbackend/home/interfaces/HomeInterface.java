@@ -3,7 +3,6 @@ package razepl.dev.socialappbackend.home.interfaces;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.http.ResponseEntity;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.home.data.*;
 
@@ -147,9 +146,9 @@ public interface HomeInterface {
     /**
      * Retrieves a list of comments for a post.
      *
-     * @param postId - The ID of the post.
+     * @param postId    - The ID of the post.
      * @param numOfSite - The number of comments per page.
-     * @param user - The user making the request.
+     * @param user      - The user making the request.
      * @return A ResponseEntity containing a list of CommentData objects representing the comments.
      */
     @Operation(
@@ -172,7 +171,7 @@ public interface HomeInterface {
      * Creates a new comment for a post.
      *
      * @param request - The CommentRequest object containing the comment details.
-     * @param user - The user creating the comment.
+     * @param user    - The user creating the comment.
      * @return A ResponseEntity containing the created CommentData object.
      */
     @Operation(
@@ -195,7 +194,7 @@ public interface HomeInterface {
      * Changes the number of likes for a comment.
      *
      * @param commentId - The ID of the comment.
-     * @param user - The user making the request.
+     * @param user      - The user making the request.
      * @return A ResponseEntity containing the updated LikeData object.
      */
     @Operation(

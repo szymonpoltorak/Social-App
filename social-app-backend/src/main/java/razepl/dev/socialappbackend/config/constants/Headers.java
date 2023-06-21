@@ -58,7 +58,7 @@ public final class Headers {
      * List of URLs that should be excluded from authentication requirements.
      */
     public static final String[] WHITE_LIST = {AUTH_MATCHERS, SWAGGER_JSON,
-            SWAGGER_JSON_MATCHERS, SWAGGER_UI, SWAGGER_UI_MATCHERS, "/api/test/**"};
+            SWAGGER_JSON_MATCHERS, SWAGGER_UI, SWAGGER_UI_MATCHERS, "/api/test/**", "/oauth/**"};
 
     /**
      * Private constructor to prevent instantiation of this class.

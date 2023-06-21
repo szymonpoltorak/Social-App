@@ -15,7 +15,7 @@ public interface HomeUserInterface {
      * Adds a user to the friend list of the specified user.
      *
      * @param friendsUsername The username of the friend to add.
-     * @param user The user who is adding the friend.
+     * @param user            The user who is adding the friend.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -38,7 +38,7 @@ public interface HomeUserInterface {
      * Removes a user from the friend list of the specified user.
      *
      * @param friendsUsername The username of the friend to remove.
-     * @param user The user who is removing the friend.
+     * @param user            The user who is removing the friend.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -61,7 +61,7 @@ public interface HomeUserInterface {
      * Updates the Twitter data for the specified user.
      *
      * @param updateData The updated Twitter data.
-     * @param user The user whose Twitter data is being updated.
+     * @param user       The user whose Twitter data is being updated.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -84,7 +84,7 @@ public interface HomeUserInterface {
      * Updates the LinkedIn data for the specified user.
      *
      * @param updateData The updated LinkedIn data.
-     * @param user The user whose LinkedIn data is being updated.
+     * @param user       The user whose LinkedIn data is being updated.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -107,7 +107,7 @@ public interface HomeUserInterface {
      * Updates the GitHub data for the specified user.
      *
      * @param updateData The updated GitHub data.
-     * @param user The user whose GitHub data is being updated.
+     * @param user       The user whose GitHub data is being updated.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -130,7 +130,7 @@ public interface HomeUserInterface {
      * Updates the location data for the specified user.
      *
      * @param updateData The updated location data.
-     * @param user The user whose location data is being updated.
+     * @param user       The user whose location data is being updated.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(
@@ -153,7 +153,7 @@ public interface HomeUserInterface {
      * Updates the job data for the specified user.
      *
      * @param updateData The updated job data.
-     * @param user The user whose job data is being updated.
+     * @param user       The user whose job data is being updated.
      * @return A ResponseEntity containing the response data.
      */
     @Operation(

@@ -30,8 +30,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -99,7 +98,7 @@ class HomeServiceTest {
         LikeData result = homeService.updateCommentLikeCounter(1L, user);
 
         // then
-        assertEquals(true, result.isLiked());
+        assertTrue(result.isLiked());
         assertEquals(1L, result.numOfLikes());
     }
 
@@ -124,7 +123,7 @@ class HomeServiceTest {
         LikeData result = homeService.updateCommentLikeCounter(1L, user);
 
         // then
-        assertEquals(false, result.isLiked());
+        assertFalse(result.isLiked());
         assertEquals(0L, result.numOfLikes());
     }
 
@@ -147,7 +146,7 @@ class HomeServiceTest {
         LikeData result = homeService.updatePostLikeCounter(1L, user);
 
         // then
-        assertEquals(true, result.isLiked());
+        assertTrue(result.isLiked());
         assertEquals(1L, result.numOfLikes());
     }
 
@@ -171,7 +170,7 @@ class HomeServiceTest {
         LikeData result = homeService.updatePostLikeCounter(1L, user);
 
         // then
-        assertEquals(false, result.isLiked());
+        assertFalse(result.isLiked());
         assertEquals(0L, result.numOfLikes());
     }
 
@@ -214,11 +213,11 @@ class HomeServiceTest {
         assertEquals(comment1.getCommentId(), result.get(0).commentId());
         assertEquals(comment1.getCommentContent(), result.get(0).commentContent());
         assertEquals(comment1.getCommentDate(), result.get(0).commentDate());
-        assertEquals(false, result.get(0).isCommentLiked());
+        assertFalse(result.get(0).isCommentLiked());
         assertEquals(comment2.getCommentId(), result.get(1).commentId());
         assertEquals(comment2.getCommentContent(), result.get(1).commentContent());
         assertEquals(comment2.getCommentDate(), result.get(1).commentDate());
-        assertEquals(false, result.get(1).isCommentLiked());
+        assertFalse(result.get(1).isCommentLiked());
     }
 
     @Test
@@ -226,7 +225,7 @@ class HomeServiceTest {
         // given
         User user = new User();
         Post post = new Post(1L, "Hello world", LocalDate.now(), user);
-        CommentRequest request = new CommentRequest( "Nice post", 1L);
+        CommentRequest request = new CommentRequest("Nice post", 1L);
 
         when(postRepository.findById(any()))
                 .thenReturn(Optional.of(post));
@@ -246,7 +245,7 @@ class HomeServiceTest {
         // then
         assertEquals(request.commentContent(), result.commentContent());
         assertEquals(LocalDate.now(), result.commentDate());
-        assertEquals(false, result.isCommentLiked());
+        assertFalse(result.isCommentLiked());
     }
 
     @Test

@@ -13,6 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
+import razepl.dev.socialappbackend.oauth.interfaces.IOAuthFailureHandler;
+import razepl.dev.socialappbackend.oauth.interfaces.IOAuthService;
+import razepl.dev.socialappbackend.oauth.interfaces.IOAuthSuccessHandler;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
 import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
@@ -28,6 +31,9 @@ public class SecurityConfiguration implements SecurityConfigInterface {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;
+    private final IOAuthService oauthService;
+    private final IOAuthFailureHandler authFailureHandler;
+    private final IOAuthSuccessHandler authSuccessHandler;
 
     @Bean
     @Override
@@ -47,13 +53,19 @@ public class SecurityConfiguration implements SecurityConfigInterface {
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
+                    .oauth2Login()
+                    .userInfoEndpoint()
+                    .userService(oauthService)
+                    .and()
+                    .successHandler(authSuccessHandler)
+                    .failureHandler(authFailureHandler)
+                    .and()
                     .authenticationProvider(authenticationProvider)
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .logout()
                     .logoutUrl(LOGOUT_URL)
                     .addLogoutHandler(logoutHandler)
                     .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()));
-
             return httpSecurity.build();
         } catch (Exception exception) {
             throw new SecurityChainException("Security chain has come with an error!");

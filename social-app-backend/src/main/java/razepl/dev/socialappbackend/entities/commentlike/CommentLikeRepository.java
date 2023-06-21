@@ -23,7 +23,7 @@ public interface CommentLikeRepository extends JpaRepository<CommentLike, Long> 
     /**
      * Retrieves a like for a specific comment and user.
      *
-     * @param user - The user who liked the comment.
+     * @param user    - The user who liked the comment.
      * @param comment - The comment to find the like for.
      * @return An Optional containing the like for the specified comment and user, or empty if not found.
      */

@@ -16,14 +16,14 @@ import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
 import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
-import razepl.dev.socialappbackend.exceptions.*;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.exceptions.*;
+import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 
 import java.util.Optional;
 

@@ -12,6 +12,7 @@ import razepl.dev.socialappbackend.entities.jwt.JwtToken;
 import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -97,8 +98,8 @@ class LogoutServiceTest {
         // then
         verify(tokenRepository).findByToken(any());
         verify(tokenRepository).save(any());
-        assertEquals(true, token.isExpired());
-        assertEquals(true, token.isRevoked());
+        assertTrue(token.isExpired());
+        assertTrue(token.isRevoked());
         SecurityContextHolder.clearContext();
     }
 }

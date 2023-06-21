@@ -14,9 +14,9 @@ public interface SearchInterface {
     /**
      * Retrieves the list of users matching the specified search pattern.
      *
-     * @param pattern    The search pattern to match against users names or emails.
-     * @param numOfSite  The number of users to retrieve per page.
-     * @param user       The authenticated user making the request.
+     * @param pattern   The search pattern to match against users names or emails.
+     * @param numOfSite The number of users to retrieve per page.
+     * @param user      The authenticated user making the request.
      * @return A ResponseEntity containing the list of user search data.
      */
     @Operation(
