@@ -30,6 +30,8 @@ public class SearchService implements SearchServiceInterface {
         ArgumentValidator.throwIfNull(pattern, user);
         ArgumentValidator.throwIfNegativeId(numOfSite);
 
+        log.info("Getting list of users based on pattern : {}\n On site : {}", pattern, numOfSite);
+
         Pageable pageable = Pageable.ofSize(PAGE_SIZE).withPage(numOfSite);
         Page<User> users = userRepository.findAllByPattern(pattern, pageable, user);
 

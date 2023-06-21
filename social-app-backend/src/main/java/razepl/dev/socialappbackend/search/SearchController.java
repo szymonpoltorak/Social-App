@@ -31,8 +31,6 @@ public class SearchController implements SearchInterface {
     @GetMapping(value = USERS_LIST_MAPPING)
     public final List<UserSearchData> getTheListOfUsers(@RequestParam String pattern, @RequestParam int numOfSite,
                                                         @AuthenticationPrincipal User user) {
-        log.info("Getting list of users based on pattern : {}", pattern);
-
         return searchService.getListOfUserBasedOnPattern(pattern, numOfSite, user);
     }
 }

@@ -28,12 +28,6 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class UserServiceTest {
-//    @Autowired
-//    private UserService userService;
-
-//    @Autowired
-//    private UserRepository userRepository;
-
     private static User jacek;
 
     @Mock
@@ -52,7 +46,7 @@ class UserServiceTest {
     private Friend friendEntity;
 
     @BeforeEach
-    void setUp() {
+    final void setUp() {
         user = User.builder()
                 .name("John")
                 .surname("Doe")
@@ -91,7 +85,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateTwitterData_should_update_user_and_save_it() {
+    final void test_updateTwitterData_should_update_user_and_save_it() {
         // given
         String updateData = "john_doe";
 
@@ -104,27 +98,31 @@ class UserServiceTest {
     }
 
     @Test
-    void updateTwitterData_should_throw_exception_if_update_data_is_null() {
+    final void test_updateTwitterData_should_throw_exception_if_update_data_is_null() {
         // given
         String updateData = null;
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateTwitterData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateTwitterData_should_throw_exception_if_update_data_is_empty() {
+    final void test_updateTwitterData_should_throw_exception_if_update_data_is_empty() {
         // given
         String updateData = "";
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateTwitterData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateLinkedinData_should_update_user_and_save_it() {
+    final void test_updateLinkedinData_should_update_user_and_save_it() {
         // given
         String updateData = "john-doe";
 
@@ -137,27 +135,31 @@ class UserServiceTest {
     }
 
     @Test
-    void updateLinkedinData_should_throw_exception_if_update_data_is_null() {
+    final void test_updateLinkedinData_should_throw_exception_if_update_data_is_null() {
         // given
         String updateData = null;
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateLinkedinData_should_throw_exception_if_update_data_is_empty() {
+    final void test_updateLinkedinData_should_throw_exception_if_update_data_is_empty() {
         // given
         String updateData = "";
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateLinkedinData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateGithubData_should_update_user_and_save_it() {
+    final void test_updateGithubData_should_update_user_and_save_it() {
         // given
         String updateData = "johndoe";
 
@@ -170,27 +172,31 @@ class UserServiceTest {
     }
 
     @Test
-    void updateGithubData_should_throw_exception_if_update_data_is_null() {
+    final void test_updateGithubData_should_throw_exception_if_update_data_is_null() {
         // given
         String updateData = null;
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateGithubData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateGithubData_should_throw_exception_if_update_data_is_empty() {
+    final void test_updateGithubData_should_throw_exception_if_update_data_is_empty() {
         // given
         String updateData = "";
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateGithubData(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateUsersLocation_should_update_user_and_save_it() {
+    final void test_updateUsersLocation_should_update_user_and_save_it() {
         // given
         String updateData = "New York";
 
@@ -203,27 +209,31 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUsersLocation_should_throw_exception_if_update_data_is_null() {
+    final void test_updateUsersLocation_should_throw_exception_if_update_data_is_null() {
         // given
         String updateData = null;
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateUsersLocation(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateUsersLocation_should_throw_exception_if_update_data_is_empty() {
+    final void test_updateUsersLocation_should_throw_exception_if_update_data_is_empty() {
         // given
         String updateData = "";
 
-        // when and then
+        // when
+
+        // then
         assertThrows(IllegalArgumentException.class, () -> userService.updateUsersLocation(updateData, user));
         verify(userRepository, never()).save(any(User.class));
     }
 
     @Test
-    void updateUsersJob_should_update_user_and_save_it() {
+    final void test_updateUsersJob_should_update_user_and_save_it() {
         // given
         String updateData = "Software Engineer";
 
@@ -236,7 +246,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUsersJob_should_throw_exception_if_update_data_is_null() {
+    final void test_updateUsersJob_should_throw_exception_if_update_data_is_null() {
         // given
         String updateData = null;
 
@@ -246,7 +256,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUsersJob_should_throw_exception_if_update_data_is_empty() {
+    final void test_updateUsersJob_should_throw_exception_if_update_data_is_empty() {
         // given
         String updateData = "";
 
@@ -256,7 +266,7 @@ class UserServiceTest {
     }
 
     @Test
-    void removeFriendFromUser_should_delete_friend_from_repository() {
+    final void test_removeFriendFromUser_should_delete_friend_from_repository() {
         // given
         String friendsUsername = "jane.doe@example.com";
 
@@ -270,7 +280,7 @@ class UserServiceTest {
     }
 
     @Test
-    void removeFriendFromUser_should_throw_exception_if_friend_does_not_exist() {
+    final void test_removeFriendFromUser_should_throw_exception_if_friend_does_not_exist() {
         // given
         String friendsUsername = "jane.doe@example.com";
 
@@ -282,7 +292,7 @@ class UserServiceTest {
     }
 
     @Test
-    void addFriendToUser_should_save_friend_to_repository() {
+    final void test_addFriendToUser_should_save_friend_to_repository() {
         // given
         String friendsUsername = "jane.doe@example.com";
 
@@ -297,7 +307,7 @@ class UserServiceTest {
     }
 
     @Test
-    void addFriendToUser_should_throw_exception_if_user_already_exists() {
+    final void test_addFriendToUser_should_throw_exception_if_user_already_exists() {
         // given
         String friendsUsername = "jane.doe@example.com";
 
@@ -309,7 +319,7 @@ class UserServiceTest {
     }
 
     @Test
-    void addFriendToUser_should_throw_exception_if_user_does_not_exist() {
+    final void test_addFriendToUser_should_throw_exception_if_user_does_not_exist() {
         // given
         String friendsUsername = "jane.doe@example.com";
 

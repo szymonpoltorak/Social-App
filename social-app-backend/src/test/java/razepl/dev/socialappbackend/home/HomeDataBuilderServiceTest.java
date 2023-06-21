@@ -1,15 +1,17 @@
 package razepl.dev.socialappbackend.home;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
+import razepl.dev.socialappbackend.entities.commentlike.CommentLikeRepository;
+import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
+import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
@@ -24,22 +26,29 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@AutoConfigureMockMvc
-@Transactional
 class HomeDataBuilderServiceTest {
-    @Autowired
+    @Mock
+    private PostLikeRepository postLikeRepository;
+
+    @Mock
+    private FriendsRepository friendsRepository;
+
+    @Mock
+    private CommentRepository commentRepository;
+
+    @Mock
+    private CommentLikeRepository commentLikeRepository;
+
+    @Mock
     private DataServiceInterface dataServiceInterface;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PostRepository postRepository;
-
-    @Autowired
-    private CommentRepository commentRepository;
+    @InjectMocks
+    private HomeDataBuilderService homeDataBuilderService;
 
     private User user;
 
@@ -71,9 +80,140 @@ class HomeDataBuilderServiceTest {
                 .commentDate(LocalDate.now())
                 .commentContent("Well come on")
                 .build();
-        userRepository.save(user);
-        postRepository.save(post);
-        commentRepository.save(comment);
+    }
+
+    @Test
+    final void test_buildUserData_shouldReturnUserDataWithNonNullFields() {
+        // given
+        User user = new User();
+        user.setLocation("New York");
+        user.setGithub("github.com/user1");
+        user.setLinkedin("linkedin.com/user1");
+        user.setTwitter("twitter.com/user1");
+
+        when(friendsRepository.countFriendByUser(any()))
+                .thenReturn(10L);
+
+        // when
+        UserData result = homeDataBuilderService.buildUserData(user);
+
+        // then
+        assertEquals(user.getFullName(), result.fullName());
+        assertEquals(user.getLocation(), result.location());
+        assertEquals("", result.job());
+        assertEquals(user.getGithub(), result.github());
+        assertEquals(user.getLinkedin(), result.linkedin());
+        assertEquals(user.getTwitter(), result.twitter());
+        assertEquals(10L, result.numOfFriends());
+    }
+
+    @Test
+    final void test_buildUserData_shouldReturnUserDataWithEmptyStringsForNullFields() {
+        // given
+        User user = new User();
+
+        when(friendsRepository.countFriendByUser(any()))
+                .thenReturn(10L);
+
+        // when
+        UserData result = homeDataBuilderService.buildUserData(user);
+
+        // then
+        assertEquals(user.getFullName(), result.fullName());
+        assertEquals("", result.location());
+        assertEquals("", result.job());
+        assertEquals("", result.github());
+        assertEquals("", result.linkedin());
+        assertEquals("", result.twitter());
+        assertEquals(10L, result.numOfFriends());
+    }
+
+    @Test
+    final void test_buildPostData_shouldReturnPostDataWithGivenValues() {
+        // given
+        User user = new User();
+        Post post = new Post(1L, "Hello world", LocalDate.now(), user);
+        boolean isUserInFriends = true;
+        boolean isPostLiked = false;
+
+        when(postLikeRepository.countByPost(any()))
+                .thenReturn(5L);
+
+        when(commentRepository.countCommentsByPost(any()))
+                .thenReturn(3L);
+
+        // when
+        PostData result = homeDataBuilderService.buildPostData(post, isUserInFriends, isPostLiked);
+
+        // then
+        assertEquals(post.getUser().getFullName(), result.postAuthor());
+        assertEquals(post.getUser().getUsername(), result.username());
+        assertEquals(post.getPostContent(), result.postContent());
+        assertEquals(post.getPostDate(), result.postDate());
+        assertEquals(isUserInFriends, result.isUserInFriends());
+        assertEquals(3L, result.numOfComments());
+        assertEquals(isPostLiked, result.isPostLiked());
+        assertEquals(post.getPostId(), result.postId());
+    }
+
+    @Test
+    final void test_buidLikeData_shouldReturnLikeDataWithGivenValuesForPost() {
+        // given
+        User user = new User();
+        Post post = new Post(1L, "Hello world", LocalDate.now(), user);
+        boolean isPostLiked = true;
+
+        when(postLikeRepository.countByPost(any()))
+                .thenReturn(5L);
+
+        // when
+        LikeData result = homeDataBuilderService.buidLikeData(isPostLiked, post);
+
+        // then
+        assertEquals(isPostLiked, result.isLiked());
+        assertEquals(5L, result.numOfLikes());
+    }
+
+    @Test
+    final void test_buildLikeData_shouldReturnLikeDataWithGivenValuesForComment() {
+        // given
+        User user = new User();
+        Post post = new Post(1L, "Hello world", LocalDate.now(), user);
+        Comment comment = new Comment(1L, user, post, "Nice post", LocalDate.now());
+        boolean isCommentLiked = false;
+
+        when(commentLikeRepository.countByComment(any()))
+                .thenReturn(3L);
+
+        // when
+        LikeData result = homeDataBuilderService.buildLikeData(isCommentLiked, comment);
+
+        // then
+        assertEquals(isCommentLiked, result.isLiked());
+        assertEquals(3L, result.numOfLikes());
+    }
+
+    @Test
+    final void test_buildCommentData_shouldReturnCommentDataWithGivenValues() {
+        // given
+        User user = new User();
+        Post post = new Post(1L, "Hello world", LocalDate.now(), user);
+        Comment comment = new Comment(1L, user, post, "Nice post", LocalDate.now());
+        boolean isCommentLiked = false;
+
+        when(commentLikeRepository.countByComment(any()))
+                .thenReturn(3L);
+
+        // when
+        CommentData result = homeDataBuilderService.buildCommentData(comment, user);
+
+        // then
+        assertEquals(comment.getUser().getFullName(), result.commentAuthor());
+        assertEquals(comment.getCommentContent(), result.commentContent());
+        assertEquals(comment.getCommentDate(), result.commentDate());
+        assertEquals(comment.getCommentId(), result.commentId());
+        assertEquals(isCommentLiked, result.isCommentLiked());
+        assertEquals(3L, result.numOfLikes());
     }
 
     @Test
@@ -81,6 +221,8 @@ class HomeDataBuilderServiceTest {
         // given
 
         // when
+        when(dataServiceInterface.buildUserData(null))
+                .thenThrow(new NullArgumentException("Encountered null arguments in method!"));
 
         // then
         assertThrows(NullArgumentException.class, () -> dataServiceInterface.buildUserData(null));
@@ -91,6 +233,8 @@ class HomeDataBuilderServiceTest {
         // given
 
         // when
+        when(dataServiceInterface.buildPostData(null, false, false))
+                .thenThrow(new NullArgumentException("Encountered null arguments in method!"));
 
         // then
         assertThrows(NullArgumentException.class, () -> dataServiceInterface.buildPostData(null, false, false));
@@ -101,6 +245,8 @@ class HomeDataBuilderServiceTest {
         // given
 
         // when
+        when(dataServiceInterface.buidLikeData(false, null))
+                .thenThrow(new NullArgumentException("Encountered null arguments in method!"));
 
         // then
         assertThrows(NullArgumentException.class, () -> dataServiceInterface.buidLikeData(false, null));
@@ -111,6 +257,8 @@ class HomeDataBuilderServiceTest {
         // given
 
         // when
+        when(dataServiceInterface.buildLikeData(false, null))
+                .thenThrow(new NullArgumentException("Encountered null arguments in method!"));
 
         // then
         assertThrows(NullArgumentException.class, () -> dataServiceInterface.buildLikeData(false, null));
@@ -121,6 +269,8 @@ class HomeDataBuilderServiceTest {
         // given
 
         // when
+        when(dataServiceInterface.buildCommentData(null, null))
+                .thenThrow(new NullArgumentException("Encountered null arguments in method!"));
 
         // then
         assertThrows(NullArgumentException.class, () -> dataServiceInterface.buildCommentData(null, null));
@@ -140,6 +290,9 @@ class HomeDataBuilderServiceTest {
                 .build();
 
         // when
+        when(dataServiceInterface.buildUserData(user))
+                .thenReturn(expected);
+
         UserData result = dataServiceInterface.buildUserData(user);
 
         // then
@@ -160,6 +313,9 @@ class HomeDataBuilderServiceTest {
                 .build();
 
         // when
+        when(dataServiceInterface.buildCommentData(comment, user))
+                .thenReturn(expected);
+
         CommentData result = dataServiceInterface.buildCommentData(comment, user);
 
         // then
@@ -180,6 +336,9 @@ class HomeDataBuilderServiceTest {
                 .build();
 
         // when
+        when(dataServiceInterface.buildPostData(post, false, false))
+                .thenReturn(expected);
+
         PostData result = dataServiceInterface.buildPostData(post, false, false);
 
         // then
@@ -196,6 +355,8 @@ class HomeDataBuilderServiceTest {
                 .build();
 
         // when
+        when(dataServiceInterface.buidLikeData(false, post)).thenReturn(expected);
+
         LikeData result = dataServiceInterface.buidLikeData(false, post);
 
         // then
@@ -212,6 +373,8 @@ class HomeDataBuilderServiceTest {
                 .build();
 
         // when
+        when(dataServiceInterface.buildLikeData(false, comment)).thenReturn(expected);
+
         LikeData result = dataServiceInterface.buildLikeData(false, comment);
 
         // then
