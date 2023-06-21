@@ -1,5 +1,6 @@
 package razepl.dev.socialappbackend.search;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import static razepl.dev.socialappbackend.search.constants.SearchMapping.USERS_L
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = SEARCH_SITE_MAPPING)
+@Tag(name = "Searching for users")
 public class SearchController implements SearchInterface {
     private final SearchServiceInterface searchService;
 
