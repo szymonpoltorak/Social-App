@@ -25,7 +25,7 @@ export class UtilService implements UtilServiceInterface {
         this.localStorageService.clearStorage();
     }
 
-    addValueToStorage<V>(key: StorageKeys, value: V): void {
+    addValueToStorage(key: StorageKeys, value: string): void {
         this.localStorageService.addValueIntoStorage(key, value);
     }
 

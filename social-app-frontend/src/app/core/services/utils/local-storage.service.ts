@@ -9,29 +9,27 @@ export class LocalStorageService implements LocalStorageInterface {
     constructor() {
     }
 
-    addValueIntoStorage<V>(key: StorageKeys, value: V): void {
-        window.localStorage.setItem(key, JSON.stringify(value));
+    addValueIntoStorage(key: StorageKeys, value: string): void {
+        localStorage.setItem(key, value);
     }
 
     removeValueFromStorage(key: StorageKeys): void {
-        window.localStorage.removeItem(key);
+        localStorage.removeItem(key);
     }
 
     getKeyValueFromStorage(key: StorageKeys): string {
-        const value: string | null = window.localStorage.getItem(key);
+        const value: string | null = localStorage.getItem(key);
 
-        console.log(value);
-
-        return value === null ? "" : `"${ key }": ${ value }`;
+        return value === null ? "" : `${ key }: ${ value }`;
     }
 
     getValueFromStorage(key: StorageKeys): string {
-        const value: string | null = window.localStorage.getItem(key);
+        const value: string | null = localStorage.getItem(key);
 
         return value === null ? "" : value;
     }
 
     clearStorage(): void {
-        window.localStorage.clear();
+        localStorage.clear();
     }
 }

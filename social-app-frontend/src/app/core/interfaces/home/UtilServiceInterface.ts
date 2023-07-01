@@ -22,7 +22,7 @@ export interface UtilServiceInterface {
      * @param key - The key to identify the value in the storage.
      * @param value - The value to be stored.
      */
-    addValueToStorage<V>(key: StorageKeys, value: V): void;
+    addValueToStorage(key: StorageKeys, value: string): void;
 
     /**
      * Retrieves the value from the storage.

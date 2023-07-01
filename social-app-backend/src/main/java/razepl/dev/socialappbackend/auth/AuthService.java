@@ -91,9 +91,10 @@ public class AuthService implements AuthServiceInterface {
     public final AuthResponse refreshToken(HttpServletRequest request, HttpServletResponse response) {
         ArgumentValidator.throwIfNull(request, response);
 
-        log.info("Refreshing users token.");
-
         String refreshToken = jwtService.getJwtRefreshToken(request);
+
+        log.info("Refresh token : {}", refreshToken);
+
         User user = validateRefreshTokenData(refreshToken);
         String authToken = jwtService.generateToken(user);
 

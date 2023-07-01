@@ -1,6 +1,6 @@
 version: "3"
 
-name: social-app
+  # name: social-app
 
 services:
   postgres:

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { catchError, Observable, of } from "rxjs";
+import { catchError, Observable, of, tap } from "rxjs";
 import { RegisterRequest } from "@data/register-request";
 import { AuthResponse } from "@data/auth-response";
 import { AuthApiCalls } from "@enums/AuthApiCalls";
@@ -46,8 +46,9 @@ export class AuthService implements AuthInterface {
 
     refreshUsersToken(refreshToken: string): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.REFRESH_URL }`,
-            this.buildRefreshToken(refreshToken))
-            .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
+            this.buildRefreshToken(refreshToken)).pipe(tap((response: AuthResponse) => {
+            this.saveData(response);
+        }));
     }
 
     saveData(data: AuthResponse): void {
@@ -56,9 +57,6 @@ export class AuthService implements AuthInterface {
         if (data.authToken === AuthConstants.NO_TOKEN || data.refreshToken === AuthConstants.NO_TOKEN) {
             return;
         }
-        console.log(data.authToken);
-        console.log(data.refreshToken);
-
         this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, data.authToken);
         this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, data.refreshToken);
     }
@@ -70,6 +68,6 @@ export class AuthService implements AuthInterface {
     }
 
     private buildRefreshToken(refreshToken: string) {
-        return JSON.parse(`{${ refreshToken }}`);
+        return JSON.parse(`{"refreshToken": "${ refreshToken }"}`);
     }
 }

@@ -1,7 +1,5 @@
 version: "3"
 
-name: social-app
-
 services:
   postgres:
     container_name: postgres

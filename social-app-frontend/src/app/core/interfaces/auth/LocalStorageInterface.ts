@@ -10,7 +10,7 @@ export interface LocalStorageInterface {
      * @param key The key to use for storing the value in local storage.
      * @param value The value to store in local storage.
      */
-    addValueIntoStorage<V>(key: StorageKeys, value: V): void;
+    addValueIntoStorage(key: StorageKeys, value: string): void;
 
     /**
      * Removes the value associated with the specified key from local storage.
