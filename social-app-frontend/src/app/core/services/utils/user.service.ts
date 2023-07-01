@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { UtilService } from "@services/utils/util.service";
+import { StorageKeys } from "@enums/StorageKeys";
 
 @Injectable({
     providedIn: 'root'
@@ -7,11 +9,19 @@ export class UserService {
     private isAuthenticated !: boolean;
     private wasLoggedOut !: boolean;
 
+    constructor(private utilService: UtilService) {
+    }
+
     /**
      * Gets the flag indicating whether the user is authenticated.
      */
     get isUserAuthenticated(): boolean {
-        return this.isAuthenticated;
+        if (!this.isAuthenticated) {
+            this.isAuthenticated = !!this.utilService.getValueFromStorage(StorageKeys.AUTH_TOKEN);
+
+            return this.isAuthenticated;
+        }
+        return true;
     }
 
     /**

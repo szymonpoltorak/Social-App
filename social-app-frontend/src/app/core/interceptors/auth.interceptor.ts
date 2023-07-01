@@ -10,7 +10,7 @@ import { AuthResponse } from "@data/auth-response";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    private isRefreshing = false;
+    private isRefreshing: boolean = false;
     private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
 
@@ -27,6 +27,8 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(this.addTokenToRequest(token, request)).pipe(
             catchError((error: any) => {
                 if (error instanceof HttpErrorResponse && error.status === 403) {
+                    this.utilService.removeValueFromStorage(StorageKeys.AUTH_TOKEN);
+
                     return this.refreshUsersTokenIfPossible(request, next);
                 }
                 return throwError(error);
@@ -54,8 +56,6 @@ export class AuthInterceptor implements HttpInterceptor {
             filter(token => token != null),
             take(1),
             switchMap((authToken: string) => {
-                console.log(`This sus data : ${ authToken }`);
-
                 return next.handle(this.addTokenToRequest(authToken, request));
             }));
     }
