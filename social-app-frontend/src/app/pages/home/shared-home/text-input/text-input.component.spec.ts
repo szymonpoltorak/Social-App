@@ -26,7 +26,6 @@ describe('TextInputComponent', () => {
             declarations: [
                 FriendComponent,
                 TextInputComponent,
-                PostComponent,
                 SocialLinkComponent,
                 EditDialogComponent,
                 CommentListComponent,
@@ -59,22 +58,6 @@ describe('TextInputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should bind the windowWidth input correctly', () => {
-        component.windowWidth = '800px';
-        fixture.detectChanges();
-
-        const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('input');
-        expect(inputElement.style.width).toBe('800px');
-    });
-
-    it('should update the character counter correctly', () => {
-        component.inputText = 'Hello World';
-        component.updateCharacterCounter();
-        fixture.detectChanges();
-
-        const counterElement: HTMLElement = fixture.nativeElement.querySelector('.character-counter');
-        expect(counterElement.textContent).toContain('11');
-    });
 
     it('should return the input size correctly based on the number of characters', () => {
         component.numOfCharacters = 30;

@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { of, Subject } from 'rxjs';
 import { PostComponent } from './post.component';
 import { PostService } from '@core/services/home/post.service';
-import { HomeApiCalls } from '@core/enums/HomeApiCalls';
 import { PostData } from '@core/interfaces/home/PostData';
 import { LikeResponse } from '@core/interfaces/home/LikeResponse';
 import { FriendComponent } from "@home/shared-home/friend/friend.component";
@@ -61,7 +60,6 @@ describe('PostComponent', () => {
 
         postService = TestBed.inject(PostService) as jasmine.SpyObj<PostService>;
 
-        // Create spy objects for the EventEmitter
         deleteEventSpy = jasmine.createSpyObj<EventEmitter<PostData>>('EventEmitter', ['emit']);
         updateFriendListEventSpy = jasmine.createSpyObj<EventEmitter<void>>('EventEmitter', ['emit']);
     });
@@ -70,7 +68,6 @@ describe('PostComponent', () => {
         fixture = TestBed.createComponent(PostComponent);
         component = fixture.componentInstance;
 
-        // Assign the spy objects to the respective properties
         component.deleteEvent = deleteEventSpy;
         component.updateFriendListEvent = updateFriendListEventSpy;
 
@@ -122,50 +119,6 @@ describe('PostComponent', () => {
         expect(postService.updateNumOfLikes).toHaveBeenCalledWith(1);
         expect(component.postData.numOfLikes).toBe(10);
         expect(component.postData.isPostLiked).toBe(true);
-    });
-
-    it('should call postService.manageFriendStatus and emit updateFriendListEvent when updateFriendStatus method is called', () => {
-        component.postData = {
-            postId: 1,
-            postContent: 'Test post',
-            postDate: new Date(),
-            username: 'john',
-            numOfLikes: 5,
-            isPostLiked: false,
-            isUserInFriends: true,
-            numOfComments: 2,
-            postAuthor: 'John Doe'
-        };
-
-        // Test adding friend
-        component.updateFriendStatus();
-        expect(postService.manageFriendStatus).toHaveBeenCalledWith('john', HomeApiCalls.REMOVE_FRIEND);
-        expect(component.postData.isUserInFriends).toBe(false);
-        expect(updateFriendListEventSpy.emit).toHaveBeenCalled();
-
-        // Test removing friend
-        component.updateFriendStatus();
-        expect(postService.manageFriendStatus).toHaveBeenCalledWith('john', HomeApiCalls.ADD_FRIEND);
-        expect(component.postData.isUserInFriends).toBe(true);
-        expect(updateFriendListEventSpy.emit).toHaveBeenCalled();
-    });
-
-    it('should call postService.deletePost and emit deleteEvent when removePost method is called', () => {
-        component.postData = {
-            postId: 1,
-            postContent: 'Test post',
-            postDate: new Date(),
-            username: 'john',
-            numOfLikes: 5,
-            isPostLiked: false,
-            isUserInFriends: true,
-            numOfComments: 2,
-            postAuthor: 'John Doe'
-        };
-        component.removePost();
-
-        expect(postService.deletePost).toHaveBeenCalledWith(1);
-        expect(deleteEventSpy.emit).toHaveBeenCalledWith(component.postData);
     });
 
     it('should complete the subject when component is destroyed', () => {

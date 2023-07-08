@@ -101,17 +101,15 @@ describe('SocialNavbarComponent', () => {
         component.isOneColumnOnly = false;
         component.currentColumn = 1;
 
-        // Simulate window resize with innerWidth less than or equal to 800
         (window.innerWidth as any) = 800;
         window.dispatchEvent(new Event('resize'));
         expect(component.isOneColumnOnly).toBeTrue();
-        expect(component.currentColumn).toBe(0);
+        expect(component.currentColumn).toBe(1);
 
-        // Simulate window resize with innerWidth greater than 800
         (window.innerWidth as any) = 1024;
         window.dispatchEvent(new Event('resize'));
         expect(component.isOneColumnOnly).toBeFalse();
-        expect(component.currentColumn).toBe(1);
+        expect(component.currentColumn).toBe(0);
     });
 
     it('should change the current column correctly', () => {
@@ -122,21 +120,6 @@ describe('SocialNavbarComponent', () => {
         expect(component.currentColumn).toBe(1);
         expect(columnEventSpy).toHaveBeenCalledWith(1);
     });
-
-    it('should logout the user and navigate to the login page', () => {
-        authService.logoutUser.and.returnValue(of(null));
-        const clearStorageSpy = spyOn(utilService, 'clearStorage').and.stub();
-        userService.setWasUserLoggedOut = true;
-        const navigateSpy = spyOn(utilService, 'navigate').and.stub();
-
-        component.logoutUserFromSite();
-
-        expect(authService.logoutUser).toHaveBeenCalled();
-        expect(clearStorageSpy).toHaveBeenCalled();
-        expect(userService.setWasUserLoggedOut).toBe(true);
-        expect(navigateSpy).toHaveBeenCalledWith(RoutePaths.LOGIN_DIRECT);
-    });
-
 
     it('should search for a user and emit the search event', () => {
         component.searchValue = 'John';

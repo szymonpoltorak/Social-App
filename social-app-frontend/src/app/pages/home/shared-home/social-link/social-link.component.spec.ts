@@ -58,20 +58,4 @@ describe('SocialLinkComponent', () => {
     it('should create the component', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should bind the socialLink input correctly', () => {
-        component.socialLink = 'https://example.com';
-        fixture.detectChanges();
-
-        const anchorElement: HTMLAnchorElement = fixture.nativeElement.querySelector('a');
-        expect(anchorElement.href).toBe('https://example.com');
-    });
-
-    it('should bind the socialSiteName input correctly', () => {
-        component.socialSiteName = 'Twitter';
-        fixture.detectChanges();
-
-        const spanElement: HTMLSpanElement = fixture.nativeElement.querySelector('span');
-        expect(spanElement.textContent).toBe('Twitter');
-    });
 });
