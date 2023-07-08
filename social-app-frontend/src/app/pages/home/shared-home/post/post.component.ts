@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { PostService } from "@core/services/home/post.service";
 import { Subject, takeUntil } from "rxjs";
 import { HomeApiCalls } from "@core/enums/HomeApiCalls";
@@ -11,7 +11,7 @@ import { PostInterface } from "@core/interfaces/home/PostInterface";
     templateUrl: './post.component.html',
     styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnDestroy, PostInterface {
+export class PostComponent implements OnDestroy, PostInterface, OnInit {
     private addFriend$: Subject<void> = new Subject<void>();
     private removeFriend$: Subject<void> = new Subject<void>();
     private updateLike$: Subject<void> = new Subject<void>();
@@ -19,10 +19,26 @@ export class PostComponent implements OnDestroy, PostInterface {
     @Output() deleteEvent: EventEmitter<PostData> = new EventEmitter<PostData>();
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @Input() postData !: PostData;
-    @Input() currentUser !: string;
+    @Input() currentUser: string = "";
     areCommentsVisible: boolean = false;
 
     constructor(private postService: PostService) {
+    }
+
+    ngOnInit(): void {
+        if (!this.postData) {
+            this.postData = {
+                postId: 0,
+                postContent: "",
+                postDate: new Date(),
+                username: "",
+                numOfLikes: 0,
+                isPostLiked: false,
+                isUserInFriends: false,
+                numOfComments: 0,
+                postAuthor: ""
+            };
+        }
     }
 
     updatePostLike(): void {

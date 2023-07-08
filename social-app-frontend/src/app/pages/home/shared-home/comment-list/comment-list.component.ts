@@ -11,11 +11,11 @@ import { CommentListInterface } from "@interfaces/home/CommentListInterface";
   styleUrls: ['./comment-list.component.scss']
 })
 export class CommentListComponent implements OnInit, OnDestroy, CommentListInterface {
-    private commentList$: Subject<void> = new Subject<void>();
+    commentList$: Subject<void> = new Subject<void>();
     private createPost$: Subject<void> = new Subject<void>();
     @ViewChild(TextInputComponent) commentInput !: TextInputComponent;
-    @Input() postId !: number;
-    comments !: CommentData[];
+    @Input() postId : number = 0;
+    comments: CommentData[] = [];
     numOfSite: number = 0;
 
     constructor(private commentService: CommentsService) {

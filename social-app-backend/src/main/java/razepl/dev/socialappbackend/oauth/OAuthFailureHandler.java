@@ -4,13 +4,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import razepl.dev.socialappbackend.oauth.interfaces.IOAuthFailureHandler;
 
 import java.io.IOException;
 
 @Component
-public class OAuthFailureHandler implements IOAuthFailureHandler {
+public class OAuthFailureHandler extends SimpleUrlAuthenticationSuccessHandler implements IOAuthFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,

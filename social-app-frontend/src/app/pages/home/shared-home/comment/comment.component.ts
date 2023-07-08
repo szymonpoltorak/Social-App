@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommentData } from "@interfaces/home/CommentData";
 import { CommentsService } from "@services/home/comments.service";
 import { Subject, takeUntil } from "rxjs";
@@ -10,8 +10,8 @@ import { CommentsInterface } from "@interfaces/home/CommentsInterface";
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnDestroy, CommentsInterface {
-    private likeComment$: Subject<void> = new Subject<void>();
+export class CommentComponent implements OnDestroy, CommentsInterface, OnInit {
+    likeComment$: Subject<void> = new Subject<void>();
     @Input() commentData !: CommentData;
 
     constructor(private commentsService: CommentsService) {
@@ -31,5 +31,18 @@ export class CommentComponent implements OnDestroy, CommentsInterface {
     ngOnDestroy(): void {
         this.likeComment$.next();
         this.likeComment$.complete();
+    }
+
+    ngOnInit(): void {
+        if (!this.commentData) {
+            this.commentData = {
+                commentAuthor: '',
+                commentContent: '',
+                commentId: 0,
+                commentDate: new Date(),
+                isCommentLiked: false,
+                numOfLikes: 0,
+            };
+        }
     }
 }

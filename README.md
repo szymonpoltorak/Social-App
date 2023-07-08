@@ -16,6 +16,8 @@ I used various technologies which I will list below.
 * Angular 15.2.0,
 * TypeScript 4.9.5,
 * SCSS 1.58.3,
+* Karma 6.4.1,
+* Jasmine 4.5.0,
 * Angular Material.
 
 ### BackEnd

@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./social-link.component.scss']
 })
 export class SocialLinkComponent {
-    @Input() socialLink !: string;
-    @Input() socialSiteName !: string;
+    @Input() socialLink: string = "";
+    @Input() socialSiteName: string = "";
 }

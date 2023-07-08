@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TextInputInterface } from "@interfaces/home/TextInputInterface";
 
 @Component({
@@ -6,9 +6,9 @@ import { TextInputInterface } from "@interfaces/home/TextInputInterface";
     templateUrl: './text-input.component.html',
     styleUrls: ['./text-input.component.scss']
 })
-export class TextInputComponent implements TextInputInterface {
-    @Input() windowWidth !: string;
-    inputText!: string;
+export class TextInputComponent implements TextInputInterface, OnInit {
+    @Input() windowWidth: string = "";
+    inputText: string = "";
     numOfCharacters: number = 0;
 
     updateCharacterCounter(): void {
@@ -23,5 +23,8 @@ export class TextInputComponent implements TextInputInterface {
             return '4em';
         }
         return '4.5em';
+    }
+
+    ngOnInit(): void {
     }
 }
