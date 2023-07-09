@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.oauth.constants.AuthProvider;
 import razepl.dev.socialappbackend.config.oauth.data.GithubOAuthUser;
-import razepl.dev.socialappbackend.config.oauth.data.GoogleOAuthUser;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.Map;
@@ -21,7 +21,6 @@ public class OAuthUserService implements IOAuthUserService {
     @Override
     public final IOAuthUser getOAuthUser(String registrationId, Map<String, Object> attributes) {
         Map<String, IOAuthUser> oAuthUserMap = Map.of(
-                AuthProvider.GOOGLE, new GoogleOAuthUser(attributes),
                 AuthProvider.GITHUB, new GithubOAuthUser(attributes)
         );
         registrationId = registrationId.toUpperCase();
@@ -33,7 +32,7 @@ public class OAuthUserService implements IOAuthUserService {
     }
 
     @Override
-    public final User updateExisitingUser(User user, IOAuthUser oAuthUser) {
+    public final ServiceUser updateExistingUser(User user, IOAuthUser oAuthUser) {
         user.setName(oAuthUser.getName());
         user.setEmail(oAuthUser.getUsername());
 
@@ -41,7 +40,7 @@ public class OAuthUserService implements IOAuthUserService {
     }
 
     @Override
-    public final User registerOAuthUser(IOAuthUser oAuthUser) {
+    public final ServiceUser registerOAuthUser(IOAuthUser oAuthUser) {
         User user = User
                 .builder()
                 .name(oAuthUser.getName())

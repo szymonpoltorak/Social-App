@@ -12,6 +12,7 @@ import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.Optional;
@@ -25,8 +26,6 @@ public class OAuthService extends DefaultOAuth2UserService implements IOAuthServ
 
     @Override
     public final OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        log.error("UserRequest: {}", userRequest.getAccessToken().getTokenValue());
-
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         log.info("OAuth2User: {}", oAuth2User.getAttributes());
@@ -49,11 +48,11 @@ public class OAuthService extends DefaultOAuth2UserService implements IOAuthServ
         Optional<User> authenticatedUser = userRepository.findByEmail(username);
 
         if (authenticatedUser.isPresent()) {
-            User user = oauthUserService.updateExisitingUser(authenticatedUser.get(), oAuthUser);
+            ServiceUser user = oauthUserService.updateExistingUser(authenticatedUser.get(), oAuthUser);
 
             return OAuthUserPrincipal.create(user, oAuthUser.attributes());
         }
-        User user = oauthUserService.registerOAuthUser(oAuthUser);
+        ServiceUser user = oauthUserService.registerOAuthUser(oAuthUser);
 
         return OAuthUserPrincipal.create(user, oAuthUser.attributes());
     }

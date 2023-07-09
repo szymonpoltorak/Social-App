@@ -24,8 +24,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
     public final void onAuthenticationSuccess(HttpServletRequest request,
                                               HttpServletResponse response,
                                               Authentication authentication) throws IOException, ServletException {
-        log.error("Wtf ?");
-
         handle(request, response, authentication);
 
         super.clearAuthenticationAttributes(request);

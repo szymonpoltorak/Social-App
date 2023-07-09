@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.config.oidc.data.OidcUserPrincipal;
 import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcService;
 import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcUser;
 import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcUserService;
@@ -26,8 +25,6 @@ public class OidcService extends OidcUserService implements IOidcService {
 
     @Override
     public final OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        log.error("Chuj mi w dupe");
-
         OidcUser oidcUser = super.loadUser(userRequest);
 
         return processOidcUserAuthRequest(userRequest, oidcUser);
@@ -49,11 +46,11 @@ public class OidcService extends OidcUserService implements IOidcService {
         Optional<User> authenticatedUser = userRepository.findByEmail(username);
 
         if (authenticatedUser.isPresent()) {
-            User user = oidcUserService.updateExisitingUser(authenticatedUser.get(), newOidcUser);
+            oidcUserService.updateExistingUser(authenticatedUser.get(), newOidcUser);
 
             return newOidcUser;
         }
-        User user = oidcUserService.registerOidcUser(newOidcUser);
+        oidcUserService.registerOidcUser(newOidcUser);
 
         return newOidcUser;
     }

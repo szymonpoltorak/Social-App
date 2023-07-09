@@ -18,9 +18,6 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationSuccessHandler i
     public final void onAuthenticationFailure(HttpServletRequest request,
                                               HttpServletResponse response,
                                               AuthenticationException exception) throws IOException, ServletException {
-        log.error("LOL");
-        log.error("Http request : {}", request);
-        log.error("Authentication exception : {}", exception.getLocalizedMessage());
         String targetUrl = "http://localhost:4200/auth/login";
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);

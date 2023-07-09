@@ -30,11 +30,6 @@ public record GithubOAuthUser(Map<String, Object> attributes) implements IOAuthU
 
     @Override
     public LocalDate getDateOfBirth() {
-        Object date = attributes.get("birthdate");
-
-        if (date == null) {
-            throw new IllegalStateException("Date of birth cannot be null!");
-        }
-        return LocalDate.parse(date.toString());
+        return LocalDate.now();
     }
 }

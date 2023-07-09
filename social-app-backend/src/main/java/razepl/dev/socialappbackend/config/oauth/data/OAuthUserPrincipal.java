@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserPrincipal;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
 import java.io.*;
 import java.util.Collection;
@@ -29,7 +30,7 @@ public class OAuthUserPrincipal implements IOAuthUserPrincipal {
         this.authorities = authorities;
     }
 
-    public static OAuthUserPrincipal create(User user) {
+    public static OAuthUserPrincipal create(ServiceUser user) {
         List<GrantedAuthority> authorities = Collections.
                 singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
@@ -41,7 +42,7 @@ public class OAuthUserPrincipal implements IOAuthUserPrincipal {
         );
     }
 
-    public static OAuthUserPrincipal create(User user, Map<String, Object> attributes) {
+    public static OAuthUserPrincipal create(ServiceUser user, Map<String, Object> attributes) {
         OAuthUserPrincipal userPrincipal = OAuthUserPrincipal.create(user);
 
         userPrincipal.setAttributes(attributes);
