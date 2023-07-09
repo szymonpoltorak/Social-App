@@ -36,13 +36,13 @@ public class TestDataController {
     public final ResponseEntity<AuthResponse> buildExampleDatabase() {
         log.info("Entering building example data!");
 
-        AuthResponse response = registerUsers();
+//        AuthResponse response = registerUsers();
+//
+//        addFriendsFor("jacek0@gmail.com");
+//
+//        addPosts();
 
-        addFriendsFor("jacek0@gmail.com");
-
-        addPosts();
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(null);
     }
 
     private AuthResponse registerUsers() {

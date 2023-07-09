@@ -16,7 +16,6 @@ import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
@@ -48,7 +47,8 @@ public class AuthService implements AuthServiceInterface {
 
         String password = validateUserRegisterData(registerRequest);
 
-        @Valid User user = User.builder()
+        @Valid User user = User
+                .builder()
                 .name(registerRequest.name())
                 .email(registerRequest.email())
                 .dateOfBirth(registerRequest.dateOfBirth())
@@ -115,7 +115,8 @@ public class AuthService implements AuthServiceInterface {
 
         log.info("Is token valid : {}\nFor user : {}", isAuthTokenValid, user);
 
-        return TokenResponse.builder()
+        return TokenResponse
+                .builder()
                 .isAuthTokenValid(isAuthTokenValid)
                 .build();
     }

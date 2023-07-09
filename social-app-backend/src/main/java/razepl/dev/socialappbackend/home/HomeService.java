@@ -21,10 +21,10 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.CommentNotFoundException;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
-import razepl.dev.socialappbackend.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.data.*;
 import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
 import razepl.dev.socialappbackend.home.interfaces.HomeServiceInterface;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.time.LocalDate;
 import java.util.List;

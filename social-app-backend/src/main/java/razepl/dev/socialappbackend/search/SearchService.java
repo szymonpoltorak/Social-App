@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
-import razepl.dev.socialappbackend.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.search.data.UserSearchData;
 import razepl.dev.socialappbackend.search.interfaces.SearchServiceInterface;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.List;
 

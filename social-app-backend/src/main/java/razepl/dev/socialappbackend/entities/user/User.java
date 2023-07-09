@@ -19,8 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
-import java.io.IOException;
-import java.io.Serial;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
@@ -129,12 +128,12 @@ public class User implements ServiceUser {
     }
 
     @Serial
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        throw new java.io.NotSerializableException(USER_PACKAGE);
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        throw new NotSerializableException(USER_PACKAGE);
     }
 
     @Serial
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
-        throw new java.io.NotSerializableException(USER_PACKAGE);
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        throw new NotSerializableException(USER_PACKAGE);
     }
 }

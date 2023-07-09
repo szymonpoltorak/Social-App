@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config;
+package razepl.dev.socialappbackend.config.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Assertions;

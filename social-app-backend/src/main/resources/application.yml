@@ -1,3 +1,6 @@
+server:
+    port: 8080
+
 spring:
     datasource:
         url: ${SPRING_DATASOURCE_URL}
@@ -11,6 +14,20 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
+    security:
+      oauth2:
+        client:
+            registration:
+                google:
+                    client-id: ${GOOGLE_CLIENT_ID}
+                    client-secret: ${GOOGLE_CLIENT_SECRET}
+                    scope:
+                        - email
+                        - profile
+                        - openid
+                github:
+                    client-id: ${GITHUB_CLIENT_ID}
+                    client-secret: ${GITHUB_CLIENT_SECRET}
 logging:
     level:
         org.springframework: info
