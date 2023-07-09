@@ -1,10 +1,10 @@
-package razepl.dev.socialappbackend.oauth;
+package razepl.dev.socialappbackend.config.oauth;
 
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.oauth.interfaces.IOAuthService;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
 
 @Service
 public class OAuthService implements IOAuthService {

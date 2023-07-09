@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config;
+package razepl.dev.socialappbackend.config.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,8 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 
 import java.io.IOException;
 
@@ -24,15 +25,15 @@ import java.io.IOException;
  */
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter implements JwtFilter {
     private final UserDetailsService userDetailsService;
     private final JwtServiceInterface jwtService;
     private final TokenRepository tokenRepository;
 
     @Override
-    protected final void doFilterInternal(@NonNull HttpServletRequest request,
-                                          @NonNull HttpServletResponse response,
-                                          @NonNull FilterChain filterChain) throws ServletException, IOException {
+    public final void doFilterInternal(@NonNull HttpServletRequest request,
+                                       @NonNull HttpServletResponse response,
+                                       @NonNull FilterChain filterChain) throws ServletException, IOException {
         String token = jwtService.getJwtToken(request);
 
         if (token == null) {

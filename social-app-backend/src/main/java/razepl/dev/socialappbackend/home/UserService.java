@@ -9,7 +9,7 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.FriendNotFoundException;
 import razepl.dev.socialappbackend.exceptions.UsersAlreadyFriendsException;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.interfaces.UserServiceInterface;
 
 /**

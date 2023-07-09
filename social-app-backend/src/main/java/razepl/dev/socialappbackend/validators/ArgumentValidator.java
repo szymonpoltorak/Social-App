@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.exceptions.validators;
+package razepl.dev.socialappbackend.validators;
 
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;

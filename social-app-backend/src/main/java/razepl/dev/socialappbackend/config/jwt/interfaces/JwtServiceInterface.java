@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.interfaces;
+package razepl.dev.socialappbackend.config.jwt.interfaces;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;

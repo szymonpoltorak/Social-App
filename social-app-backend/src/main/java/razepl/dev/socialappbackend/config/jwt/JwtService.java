@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config;
+package razepl.dev.socialappbackend.config.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.constants.Headers;
 import razepl.dev.socialappbackend.config.constants.Properties;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.security.Key;
 import java.util.Collections;

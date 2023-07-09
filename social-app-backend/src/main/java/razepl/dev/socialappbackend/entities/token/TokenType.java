@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.entities.jwt;
+package razepl.dev.socialappbackend.entities.token;
 
 /**
  * An enumeration representing types of tokens in application.

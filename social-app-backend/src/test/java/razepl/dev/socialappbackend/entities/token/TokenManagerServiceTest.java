@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.entities.jwt;
+package razepl.dev.socialappbackend.entities.token;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,11 +8,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
+import razepl.dev.socialappbackend.config.jwt.TokenManagerService;
 
 import java.util.ArrayList;
 import java.util.List;

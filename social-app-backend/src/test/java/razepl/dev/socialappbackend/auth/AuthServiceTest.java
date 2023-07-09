@@ -18,10 +18,8 @@ import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
 import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
-import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
-import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
@@ -59,9 +57,9 @@ class AuthServiceTest {
 
     private User user;
 
-    private RegisterUserRequest registerUserRequest;
+    private RegisterRequest registerUserRequest;
 
-    private LoginUserRequest loginUserRequest;
+    private LoginRequest loginUserRequest;
 
     @BeforeEach
     final void setUp() {
@@ -300,7 +298,7 @@ class AuthServiceTest {
     @Test
     final void test_register_wrong_password() {
         // given
-        RegisterUserRequest request = new RegisterRequest("name", "surname", "email", "password", LocalDate.now());
+        RegisterRequest request = new RegisterRequest("name", "surname", "email", "password", LocalDate.now());
 
         // when
 

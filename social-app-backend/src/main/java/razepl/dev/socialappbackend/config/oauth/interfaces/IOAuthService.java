@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.oauth.interfaces;
+package razepl.dev.socialappbackend.config.oauth.interfaces;
 
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;

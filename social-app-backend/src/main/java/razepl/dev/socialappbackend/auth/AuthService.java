@@ -10,20 +10,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
-import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
+import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
-import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserPropertyInterface;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.Optional;
 
@@ -45,7 +41,7 @@ public class AuthService implements AuthServiceInterface {
     private final JwtServiceInterface jwtService;
 
     @Override
-    public final AuthResponse register(RegisterUserRequest registerRequest) {
+    public final AuthResponse register(RegisterRequest registerRequest) {
         ArgumentValidator.throwIfNull(registerRequest);
 
         log.info("Registering user with data: \n{}", registerRequest);
@@ -53,10 +49,10 @@ public class AuthService implements AuthServiceInterface {
         String password = validateUserRegisterData(registerRequest);
 
         @Valid User user = User.builder()
-                .name(registerRequest.getName())
-                .email(registerRequest.getEmail())
-                .dateOfBirth(registerRequest.getDateOfBirth())
-                .surname(registerRequest.getSurname())
+                .name(registerRequest.name())
+                .email(registerRequest.email())
+                .dateOfBirth(registerRequest.dateOfBirth())
+                .surname(registerRequest.surname())
                 .role(Role.USER)
                 .password(passwordEncoder.encode(password))
                 .build();
@@ -68,15 +64,15 @@ public class AuthService implements AuthServiceInterface {
     }
 
     @Override
-    public final AuthResponse login(LoginUserRequest loginRequest) {
+    public final AuthResponse login(LoginRequest loginRequest) {
         ArgumentValidator.throwIfNull(loginRequest);
 
         log.info("Logging user with data: \n{}", loginRequest);
 
-        String username = loginRequest.getUsername();
+        String username = loginRequest.username();
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                username, loginRequest.getPassword())
+                username, loginRequest.password())
         );
 
         User user = userRepository.findByEmail(username).orElseThrow(
@@ -124,15 +120,15 @@ public class AuthService implements AuthServiceInterface {
                 .build();
     }
 
-    private String validateUserRegisterData(UserPropertyInterface registerRequest) {
-        String password = registerRequest.getPassword();
+    private String validateUserRegisterData(RegisterRequest registerRequest) {
+        String password = registerRequest.password();
 
         if (!PASSWORD_PATTERN.matcher(password).matches()) {
             log.error("Password was not valid! Password: {}", password);
 
             throw new PasswordValidationException(PASSWORD_PATTERN_MESSAGE);
         }
-        Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
+        Optional<User> existingUser = userRepository.findByEmail(registerRequest.email());
 
         if (existingUser.isPresent()) {
             log.error("User already exists! Found user: {}", existingUser.get());

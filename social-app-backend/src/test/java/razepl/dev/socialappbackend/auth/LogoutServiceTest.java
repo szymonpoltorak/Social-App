@@ -8,8 +8,8 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import razepl.dev.socialappbackend.entities.jwt.JwtToken;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.entities.token.JwtToken;
+import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

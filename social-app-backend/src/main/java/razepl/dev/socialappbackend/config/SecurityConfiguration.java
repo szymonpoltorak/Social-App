@@ -13,9 +13,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
-import razepl.dev.socialappbackend.oauth.interfaces.IOAuthFailureHandler;
-import razepl.dev.socialappbackend.oauth.interfaces.IOAuthService;
-import razepl.dev.socialappbackend.oauth.interfaces.IOAuthSuccessHandler;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthFailureHandler;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthSuccessHandler;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
 import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
@@ -29,7 +30,7 @@ import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
 @RequiredArgsConstructor
 public class SecurityConfiguration implements SecurityConfigInterface {
     private final AuthenticationProvider authenticationProvider;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;
     private final IOAuthService oauthService;
     private final IOAuthFailureHandler authFailureHandler;

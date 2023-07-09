@@ -20,10 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
+import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
-import razepl.dev.socialappbackend.auth.interfaces.LoginUserRequest;
-import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
@@ -63,7 +62,7 @@ class AuthControllerTest {
     final void test_registerUser_successful_register() throws Exception {
         // given
         String password = "Abc1!l1.DKk";
-        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
+        RegisterRequest request = AuthTestUtil.createUserForRegister(password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
@@ -73,7 +72,7 @@ class AuthControllerTest {
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Optional<User> result = userRepository.findByName(request.getName());
+        Optional<User> result = userRepository.findByName(request.name());
 
         // then
         Assertions.assertNotNull(result, "Registering user has failed!");
@@ -91,7 +90,7 @@ class AuthControllerTest {
     final void test_registerUser_parametrized(String password) throws Exception {
         // given
         Optional<User> expected = Optional.empty();
-        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
+        RegisterRequest request = AuthTestUtil.createUserForRegister(password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
@@ -101,7 +100,7 @@ class AuthControllerTest {
                         .with(SecurityMockMvcRequestPostProcessors.csrf()))
                 .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
 
-        Optional<User> result = userRepository.findByName(request.getName());
+        Optional<User> result = userRepository.findByName(request.name());
 
         // then
         Assertions.assertEquals(expected, result, "Registering user has failed!");
@@ -111,7 +110,7 @@ class AuthControllerTest {
     final void test_registerUser() throws Exception {
         // given
         String password = "Abc1!l1.DKk";
-        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
+        RegisterRequest request = AuthTestUtil.createUserForRegister(password);
 
         // when
         mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
@@ -120,7 +119,7 @@ class AuthControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .with(SecurityMockMvcRequestPostProcessors.csrf()));
 
-        User user = userRepository.findByName(request.getName()).orElseThrow();
+        User user = userRepository.findByName(request.name()).orElseThrow();
 
         boolean result = tokenRepository.findAllValidTokensByUserId(user.getUserId()).isEmpty();
 
@@ -132,10 +131,10 @@ class AuthControllerTest {
     final void test_loginUser() throws Exception {
         // given
         String password = "Abc1!l1.DKk";
-        RegisterUserRequest request = AuthTestUtil.createUserForRegister(password);
-        LoginUserRequest loginRequest = LoginRequest.builder()
-                .username(request.getEmail())
-                .password(request.getPassword())
+        RegisterRequest request = AuthTestUtil.createUserForRegister(password);
+        LoginRequest loginRequest = LoginRequest.builder()
+                .username(request.email())
+                .password(request.password())
                 .build();
 
         // when

@@ -9,7 +9,7 @@ import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.data.CommentData;
 import razepl.dev.socialappbackend.home.data.LikeData;
 import razepl.dev.socialappbackend.home.data.PostData;

@@ -1,13 +1,15 @@
-package razepl.dev.socialappbackend.entities.jwt;
+package razepl.dev.socialappbackend.config.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.config.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenManager;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.entities.token.JwtToken;
+import razepl.dev.socialappbackend.entities.token.TokenType;
+import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.List;
 
