@@ -62,6 +62,8 @@ public class OidcUserService implements IOidcUserService {
     private IOidcUser buildGoogleOidcUser(OidcUser oidcUser) {
         Map<String, Object> attributes = oidcUser.getAttributes();
 
+        LocalDate birthdate = oidcUser.getBirthdate() == null ? LocalDate.now() : LocalDate.parse(oidcUser.getBirthdate());
+
         log.error(attributes.toString());
 
         return GoogleOidcUser
@@ -73,7 +75,7 @@ public class OidcUserService implements IOidcUserService {
                 .authorities(oidcUser.getAuthorities())
                 .attributes(oidcUser.getAttributes())
                 .username(attributes.get("email").toString())
-                .birthdate(oidcUser.getBirthdate())
+                .birthdate(birthdate)
                 .familyName(attributes.get("family_name").toString())
                 .build();
     }

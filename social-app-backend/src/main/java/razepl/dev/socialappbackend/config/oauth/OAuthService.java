@@ -7,12 +7,10 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.config.oauth.data.OAuthUserPrincipal;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.util.Optional;
@@ -36,7 +34,7 @@ public class OAuthService extends DefaultOAuth2UserService implements IOAuthServ
     private OAuth2User processOAuthUserAuthRequest(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
         IOAuthUser oAuthUser = oauthUserService.getOAuthUser(
                 userRequest.getClientRegistration().getRegistrationId(),
-                oAuth2User.getAttributes()
+                oAuth2User
         );
         String username = oAuthUser.getUsername();
 
@@ -48,12 +46,12 @@ public class OAuthService extends DefaultOAuth2UserService implements IOAuthServ
         Optional<User> authenticatedUser = userRepository.findByEmail(username);
 
         if (authenticatedUser.isPresent()) {
-            ServiceUser user = oauthUserService.updateExistingUser(authenticatedUser.get(), oAuthUser);
+            oauthUserService.updateExistingUser(authenticatedUser.get(), oAuthUser);
 
-            return OAuthUserPrincipal.create(user, oAuthUser.attributes());
+            return oAuthUser;
         }
-        ServiceUser user = oauthUserService.registerOAuthUser(oAuthUser);
+        oauthUserService.registerOAuthUser(oAuthUser);
 
-        return OAuthUserPrincipal.create(user, oAuthUser.attributes());
+        return oAuthUser;
     }
 }

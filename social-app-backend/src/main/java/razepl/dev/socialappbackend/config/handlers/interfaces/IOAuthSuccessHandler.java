@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.oauth.interfaces;
+package razepl.dev.socialappbackend.config.handlers.interfaces;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

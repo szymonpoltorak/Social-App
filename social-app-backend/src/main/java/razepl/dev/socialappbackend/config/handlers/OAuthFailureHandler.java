@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.oauth;
+package razepl.dev.socialappbackend.config.handlers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthFailureHandler;
+import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthFailureHandler;
 
 import java.io.IOException;
 

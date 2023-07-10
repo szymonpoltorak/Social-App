@@ -14,13 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
-import razepl.dev.socialappbackend.config.oauth.OAuthFailureHandler;
-import razepl.dev.socialappbackend.config.oauth.OAuthService;
-import razepl.dev.socialappbackend.config.oauth.OAuthSuccessHandler;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthFailureHandler;
+import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthFailureHandler;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthSuccessHandler;
-import razepl.dev.socialappbackend.config.oidc.OidcService;
+import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthSuccessHandler;
+import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcService;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
@@ -44,7 +41,7 @@ public class SecurityConfiguration implements SecurityConfigInterface {
     private final IOAuthService oauthService;
     private final IOAuthFailureHandler authFailureHandler;
     private final IOAuthSuccessHandler authSuccessHandler;
-    private final OidcService oidcService;
+    private final IOidcService oidcService;
 
     @Bean
     @Override
@@ -61,9 +58,9 @@ public class SecurityConfiguration implements SecurityConfigInterface {
                     )
                     .cors()
                     .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
+                    .sessionManagement(
+                            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    )
                     .oauth2Login(oauth -> oauth
                             .authorizationEndpoint(endpoint -> endpoint
                                     .baseUri("/login/oauth2/authorization")

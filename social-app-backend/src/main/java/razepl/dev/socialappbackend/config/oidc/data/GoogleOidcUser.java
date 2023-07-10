@@ -7,6 +7,8 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcUser;
 
+import java.io.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -23,50 +25,55 @@ public class GoogleOidcUser implements IOidcUser {
     private Collection<? extends GrantedAuthority> authorities;
     private String name;
     private String familyName;
-    private String birthdate;
+    private LocalDate birthdate;
 
     @Override
-    public String getPassword() {
+    public final LocalDate getBirthDate() {
+        return birthdate;
+    }
+
+    @Override
+    public final String getPassword() {
         return password;
     }
 
     @Override
-    public String getUsername() {
+    public final String getUsername() {
         return username;
     }
 
     @Override
-    public boolean isAccountNonExpired() {
+    public final boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() {
+    public final boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() {
+    public final boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isEnabled() {
+    public final boolean isEnabled() {
         return true;
     }
 
     @Override
-    public Map<String, Object> getClaims() {
+    public final Map<String, Object> getClaims() {
         return Collections.unmodifiableMap(claims);
     }
 
     @Override
-    public OidcUserInfo getUserInfo() {
+    public final OidcUserInfo getUserInfo() {
         return userInfo;
     }
 
     @Override
-    public OidcIdToken getIdToken() {
+    public final OidcIdToken getIdToken() {
         return idToken;
     }
 
@@ -81,7 +88,17 @@ public class GoogleOidcUser implements IOidcUser {
     }
 
     @Override
-    public String getName() {
+    public final String getName() {
         return name;
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        throw new NotSerializableException("razepl.dev.socialappbackend.config.oauth.data.OAuthUserPrincipal");
+    }
+
+    @Serial
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        throw new NotSerializableException("razepl.dev.socialappbackend.config.oauth.data.OAuthUserPrincipal");
     }
 }

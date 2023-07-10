@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.oauth.interfaces;
+package razepl.dev.socialappbackend.config.handlers.interfaces;
 
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 

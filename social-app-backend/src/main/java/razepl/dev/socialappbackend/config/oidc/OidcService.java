@@ -35,9 +35,9 @@ public class OidcService extends OidcUserService implements IOidcService {
                 userRequest.getClientRegistration().getRegistrationId(),
                 oidcUser
         );
-        log.error("Email : {}", oidcUser.getAttributes().get("email"));
         String username = newOidcUser.getUsername();
 
+        log.error("Email : {}", oidcUser.getAttributes().get("email"));
         log.info("Username: {}", username);
 
         if (username == null || username.isEmpty()) {

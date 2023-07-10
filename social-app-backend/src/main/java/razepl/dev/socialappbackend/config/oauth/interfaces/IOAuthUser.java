@@ -1,18 +1,14 @@
 package razepl.dev.socialappbackend.config.oauth.interfaces;
 
-import java.time.LocalDate;
-import java.util.Map;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-public interface IOAuthUser {
+import java.time.LocalDate;
+
+public interface IOAuthUser extends OAuth2User, UserDetails {
     String getId();
 
-    String getSurname();
+    String getFamilyName();
 
-    String getUsername();
-
-    String getName();
-
-    LocalDate getDateOfBirth();
-
-    Map<String, Object> attributes();
+    LocalDate getBirthdate();
 }
