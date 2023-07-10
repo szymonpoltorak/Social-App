@@ -64,7 +64,7 @@ public class OAuthUserService implements IOAuthUserService {
         return userRepository.save(user);
     }
 
-    private IOAuthUser returnProperProviderObject(String provider, OAuth2User oAuth2User) {
+    private IOAuthUser returnProperProviderObject(String provider, OAuth2AuthenticatedPrincipal oAuth2User) {
         return provider.equals(AuthProvider.GOOGLE) ? buildGoogleOidcUser((OidcUser) oAuth2User) : buildGithubOAuthUser(oAuth2User);
     }
 
