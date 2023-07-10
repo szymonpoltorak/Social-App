@@ -1,11 +1,11 @@
-package razepl.dev.socialappbackend.config.oidc.data;
+package razepl.dev.socialappbackend.config.data;
 
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcUser;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -15,12 +15,10 @@ import java.util.Map;
 
 @Data
 @Builder
-public class GoogleOidcUser implements IOidcUser {
+public class GithubOAuth2User implements IOAuthUser {
     private String password;
     private String username;
     private Map<String, Object> claims;
-    private OidcUserInfo userInfo;
-    private OidcIdToken idToken;
     private Map<String, Object> attributes;
     private Collection<? extends GrantedAuthority> authorities;
     private String name;
@@ -28,8 +26,13 @@ public class GoogleOidcUser implements IOidcUser {
     private LocalDate birthdate;
 
     @Override
-    public final LocalDate getBirthDate() {
-        return birthdate;
+    public final String getId() {
+        return attributes.get("id").toString();
+    }
+
+    @Override
+    public final String getFamilyName() {
+        return familyName;
     }
 
     @Override
@@ -63,18 +66,13 @@ public class GoogleOidcUser implements IOidcUser {
     }
 
     @Override
-    public final Map<String, Object> getClaims() {
-        return Collections.unmodifiableMap(claims);
+    public final String getName() {
+        return name;
     }
 
     @Override
-    public final OidcUserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    @Override
-    public final OidcIdToken getIdToken() {
-        return idToken;
+    public final LocalDate getBirthDate() {
+        return birthdate;
     }
 
     @Override
@@ -87,11 +85,6 @@ public class GoogleOidcUser implements IOidcUser {
         return Collections.unmodifiableCollection(authorities);
     }
 
-    @Override
-    public final String getName() {
-        return name;
-    }
-
     @Serial
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         throw new NotSerializableException("razepl.dev.socialappbackend.config.oauth.data.OAuthUserPrincipal");
@@ -100,5 +93,15 @@ public class GoogleOidcUser implements IOidcUser {
     @Serial
     private void writeObject(ObjectOutputStream out) throws IOException {
         throw new NotSerializableException("razepl.dev.socialappbackend.config.oauth.data.OAuthUserPrincipal");
+    }
+
+    @Override
+    public final OidcUserInfo getUserInfo() {
+        return null;
+    }
+
+    @Override
+    public final OidcIdToken getIdToken() {
+        return null;
     }
 }

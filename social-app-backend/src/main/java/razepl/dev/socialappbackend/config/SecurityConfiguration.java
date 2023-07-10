@@ -15,9 +15,9 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
 import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthFailureHandler;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthService;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuth2Service;
 import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthSuccessHandler;
-import razepl.dev.socialappbackend.config.oidc.interfaces.IOidcService;
+import razepl.dev.socialappbackend.config.oauth.interfaces.IOidcService;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
@@ -38,7 +38,7 @@ public class SecurityConfiguration implements SecurityConfigInterface {
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;
-    private final IOAuthService oauthService;
+    private final IOAuth2Service oauthService;
     private final IOAuthFailureHandler authFailureHandler;
     private final IOAuthSuccessHandler authSuccessHandler;
     private final IOidcService oidcService;

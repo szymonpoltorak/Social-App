@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.oauth.data;
+package razepl.dev.socialappbackend.config.data;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,11 +7,7 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serial;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +15,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class GithubOAuthUser implements IOAuthUser {
+public class GoogleOidcUser implements IOAuthUser {
     private String password;
     private String username;
     private Map<String, Object> claims;
@@ -32,13 +28,8 @@ public class GithubOAuthUser implements IOAuthUser {
     private LocalDate birthdate;
 
     @Override
-    public final String getId() {
-        return attributes.get("id").toString();
-    }
-
-    @Override
-    public final String getFamilyName() {
-        return familyName;
+    public final LocalDate getBirthDate() {
+        return birthdate;
     }
 
     @Override
@@ -49,6 +40,16 @@ public class GithubOAuthUser implements IOAuthUser {
     @Override
     public final String getUsername() {
         return username;
+    }
+
+    @Override
+    public final String getId() {
+        return attributes.get("sub").toString();
+    }
+
+    @Override
+    public final String getFamilyName() {
+        return familyName;
     }
 
     @Override
@@ -72,13 +73,18 @@ public class GithubOAuthUser implements IOAuthUser {
     }
 
     @Override
-    public final String getName() {
-        return name;
+    public final Map<String, Object> getClaims() {
+        return Collections.unmodifiableMap(claims);
     }
 
     @Override
-    public final LocalDate getBirthdate() {
-        return birthdate;
+    public final OidcUserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    @Override
+    public final OidcIdToken getIdToken() {
+        return idToken;
     }
 
     @Override
@@ -89,6 +95,11 @@ public class GithubOAuthUser implements IOAuthUser {
     @Override
     public final Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.unmodifiableCollection(authorities);
+    }
+
+    @Override
+    public final String getName() {
+        return name;
     }
 
     @Serial

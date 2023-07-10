@@ -5,9 +5,9 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
 public interface IOAuthUserService {
-    IOAuthUser getOAuthUser(String registrationId, OAuth2User oAuth2User);
+    <T extends OAuth2User> IOAuthUser getOAuthUser(String registrationId, T oauthUser);
 
-    ServiceUser updateExistingUser(User user, IOAuthUser oAuthUser);
+    ServiceUser updateExistingUser(User user, IOAuthUser oidcUser);
 
-    ServiceUser registerOAuthUser(IOAuthUser oAuthUser);
+    ServiceUser registerOAuthUser(IOAuthUser oidcUser);
 }
