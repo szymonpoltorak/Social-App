@@ -7,13 +7,12 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuth2Service;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserProcessor;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OAuth2Service extends DefaultOAuth2UserService implements IOAuth2Service {
+public class OAuth2Service extends DefaultOAuth2UserService {
     private final IOAuthUserProcessor<OAuth2UserRequest, OAuth2User> oauthUserProcessor;
 
     @Override

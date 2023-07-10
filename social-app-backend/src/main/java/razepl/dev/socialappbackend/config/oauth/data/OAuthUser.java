@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.data;
+package razepl.dev.socialappbackend.config.oauth.data;
 
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +15,11 @@ import java.util.Map;
 
 @Data
 @Builder
-public class GoogleOidcUser implements IOAuthUser {
+public class OAuthUser implements IOAuthUser {
     private String password;
     private String username;
     private Map<String, Object> claims;
+    private String id;
     private OidcUserInfo userInfo;
     private OidcIdToken idToken;
     private Map<String, Object> attributes;
@@ -33,23 +34,13 @@ public class GoogleOidcUser implements IOAuthUser {
     }
 
     @Override
-    public final String getPassword() {
-        return password;
+    public final Map<String, Object> getAttributes() {
+        return Collections.unmodifiableMap(attributes);
     }
 
     @Override
-    public final String getUsername() {
-        return username;
-    }
-
-    @Override
-    public final String getId() {
-        return attributes.get("sub").toString();
-    }
-
-    @Override
-    public final String getFamilyName() {
-        return familyName;
+    public final Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.unmodifiableCollection(authorities);
     }
 
     @Override
@@ -70,36 +61,6 @@ public class GoogleOidcUser implements IOAuthUser {
     @Override
     public final boolean isEnabled() {
         return true;
-    }
-
-    @Override
-    public final Map<String, Object> getClaims() {
-        return Collections.unmodifiableMap(claims);
-    }
-
-    @Override
-    public final OidcUserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    @Override
-    public final OidcIdToken getIdToken() {
-        return idToken;
-    }
-
-    @Override
-    public final Map<String, Object> getAttributes() {
-        return Collections.unmodifiableMap(attributes);
-    }
-
-    @Override
-    public final Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.unmodifiableCollection(authorities);
-    }
-
-    @Override
-    public final String getName() {
-        return name;
     }
 
     @Serial

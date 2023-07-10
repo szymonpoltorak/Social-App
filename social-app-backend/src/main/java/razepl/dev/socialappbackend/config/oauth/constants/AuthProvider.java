@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.constants;
+package razepl.dev.socialappbackend.config.oauth.constants;
 
 public final class AuthProvider {
     public static final String GOOGLE = "GOOGLE";

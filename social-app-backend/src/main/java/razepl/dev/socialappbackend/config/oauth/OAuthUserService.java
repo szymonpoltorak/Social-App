@@ -7,9 +7,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.config.constants.AuthProvider;
-import razepl.dev.socialappbackend.config.data.GithubOAuth2User;
-import razepl.dev.socialappbackend.config.data.GoogleOidcUser;
+import razepl.dev.socialappbackend.config.oauth.constants.AuthProvider;
+import razepl.dev.socialappbackend.config.oauth.data.OAuthUser;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.entities.user.Role;
@@ -57,7 +56,7 @@ public class OAuthUserService implements IOAuthUserService {
                 .surname(oAuthUser.getFamilyName())
                 .email(oAuthUser.getUsername())
                 .dateOfBirth(LocalDate.now())
-                .password(passwordEncoder.encode("Abc1!l1.DKk"))
+                .password(passwordEncoder.encode(oAuthUser.getPassword()))
                 .role(Role.USER)
                 .build();
         log.error(user.toString());
@@ -80,7 +79,7 @@ public class OAuthUserService implements IOAuthUserService {
         log.error("Name : {}", name);
         log.error("FamilyName : {}", familyName);
 
-        return GithubOAuth2User
+        return OAuthUser
                 .builder()
                 .name(name)
                 .authorities(oAuth2User.getAuthorities())
@@ -99,13 +98,14 @@ public class OAuthUserService implements IOAuthUserService {
 
         log.error(attributes.toString());
 
-        return GoogleOidcUser
+        return OAuthUser
                 .builder()
                 .name(attributes.get("given_name").toString())
                 .userInfo(oidcUser.getUserInfo())
                 .claims(oidcUser.getClaims())
                 .idToken(oidcUser.getIdToken())
                 .authorities(oidcUser.getAuthorities())
+                .password("Abc1!l1.DKk")
                 .attributes(oidcUser.getAttributes())
                 .username(attributes.get("email").toString())
                 .birthdate(birthdate)

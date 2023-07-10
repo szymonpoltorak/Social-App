@@ -8,12 +8,11 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserProcessor;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOidcService;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OidcService extends OidcUserService implements IOidcService {
+public class OidcService extends OidcUserService {
     private final IOAuthUserProcessor<OidcUserRequest, OidcUser> oauthUserProcessor;
 
     @Override

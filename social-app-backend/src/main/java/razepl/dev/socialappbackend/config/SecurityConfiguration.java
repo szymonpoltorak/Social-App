@@ -9,15 +9,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
 import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthFailureHandler;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuth2Service;
 import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthSuccessHandler;
-import razepl.dev.socialappbackend.config.oauth.interfaces.IOidcService;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
@@ -38,10 +41,10 @@ public class SecurityConfiguration implements SecurityConfigInterface {
     private final AuthenticationProvider authenticationProvider;
     private final JwtFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;
-    private final IOAuth2Service oauthService;
+    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oauthService;
     private final IOAuthFailureHandler authFailureHandler;
     private final IOAuthSuccessHandler authSuccessHandler;
-    private final IOidcService oidcService;
+    private final OAuth2UserService<OidcUserRequest, OidcUser> oidcService;
 
     @Bean
     @Override
