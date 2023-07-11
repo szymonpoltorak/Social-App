@@ -13,7 +13,6 @@ import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 
 import java.time.LocalDate;
@@ -41,15 +40,15 @@ public class OAuthUserService implements IOAuthUserService {
     }
 
     @Override
-    public final ServiceUser updateExistingUser(User user, IOAuthUser oidcUser) {
+    public final void updateExistingUser(User user, IOAuthUser oidcUser) {
         user.setName(oidcUser.getName());
         user.setEmail(oidcUser.getUsername());
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
-    public final ServiceUser registerOAuthUser(IOAuthUser oAuthUser) {
+    public final void registerOAuthUser(IOAuthUser oAuthUser) {
         User user = User
                 .builder()
                 .name(oAuthUser.getName())
@@ -61,7 +60,7 @@ public class OAuthUserService implements IOAuthUserService {
                 .build();
         log.error(user.toString());
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     private IOAuthUser returnProperProviderObject(String provider, OAuth2AuthenticatedPrincipal oAuth2User) {

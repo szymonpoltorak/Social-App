@@ -1,4 +1,4 @@
-package razepl.dev.socialappbackend.config.handlers;
+package razepl.dev.socialappbackend.config.oauth;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,14 +9,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.config.handlers.interfaces.IOAuthSuccessHandler;
 
 import java.io.IOException;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements IOAuthSuccessHandler {
+public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtServiceInterface jwtService;
 
     @Override
