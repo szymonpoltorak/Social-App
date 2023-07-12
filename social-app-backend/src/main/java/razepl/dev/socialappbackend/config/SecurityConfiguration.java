@@ -25,6 +25,7 @@ import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
 import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
+import static razepl.dev.socialappbackend.config.oauth.constants.RedirectUrls.OAUTH_URL;
 
 /**
  * Class made to configure security filter chain in app.
@@ -66,7 +67,7 @@ public class SecurityConfiguration implements SecurityConfigInterface {
                     )
                     .oauth2Login(oauth -> oauth
                             .authorizationEndpoint(endpoint -> endpoint
-                                    .baseUri("/login/oauth2/authorization")
+                                    .baseUri(OAUTH_URL)
                             )
                             .userInfoEndpoint()
                             .oidcUserService(oidcService)

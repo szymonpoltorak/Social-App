@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.oauth.constants.CustomHeaders;
+import razepl.dev.socialappbackend.config.oauth.constants.RedirectUrls;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthSuccessHandler;
 
 import java.io.IOException;
@@ -33,8 +35,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
     public final void handle(HttpServletRequest request,
                              HttpServletResponse response,
                              Authentication authentication) throws IOException {
-        String targetUrl = "http://localhost:8080/login";
-
         log.error("Principal : {}", authentication.getPrincipal());
         log.error("Credentials : {}", authentication.getCredentials());
 
@@ -43,9 +43,9 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
         String token = jwtService.generateToken(userDetails);
         String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        response.addHeader("AuthToken", token);
-        response.addHeader("RefreshToken", refreshToken);
+        response.addHeader(CustomHeaders.AUTH_TOKEN, token);
+        response.addHeader(CustomHeaders.REFRESH_TOKEN, refreshToken);
 
-        response.sendRedirect(targetUrl);
+        response.sendRedirect(RedirectUrls.SUCCESS_URL);
     }
 }

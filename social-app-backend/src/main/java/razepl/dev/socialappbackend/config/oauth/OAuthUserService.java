@@ -18,7 +18,10 @@ import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.*;
 
 @Slf4j
 @Service
@@ -69,10 +72,11 @@ public class OAuthUserService implements IOAuthUserService {
 
     private IOAuthUser buildGithubOAuthUser(OAuth2AuthenticatedPrincipal oAuth2User) {
         Map<String, Object> attributes = oAuth2User.getAttributes();
-        String[] value = attributes.get("name").toString().split(" ");
-
+        String[] value = attributes.get(GITHUB_FULL_NAME).toString().split(" ");
         String name = value[0];
         String familyName = value[1];
+        String login = attributes.get(GITHUB_LOGIN).toString() + "@github.com";
+        Optional<String> location = Optional.of(attributes.get(GITHUB_LOCATION).toString());
 
         log.info("Full name : {}", Arrays.toString(value));
         log.error("Name : {}", name);
@@ -81,34 +85,34 @@ public class OAuthUserService implements IOAuthUserService {
         return OAuthUser
                 .builder()
                 .name(name)
+                .github(login)
                 .authorities(oAuth2User.getAuthorities())
-                .attributes(oAuth2User.getAttributes())
-                .username(attributes.get("login").toString() + "@github.com")
+                .attributes(attributes)
+                .location(location.orElse(""))
+                .username(login)
                 .birthdate(LocalDate.now())
-                .password("Abc1!l1.DKk")
+                .password(attributes.get(GITHUB_TOKEN).toString())
                 .familyName(familyName)
                 .build();
     }
 
     private IOAuthUser buildGoogleOidcUser(OidcUser oidcUser) {
         Map<String, Object> attributes = oidcUser.getAttributes();
-
-        LocalDate birthdate = oidcUser.getBirthdate() == null ? LocalDate.now() : LocalDate.parse(oidcUser.getBirthdate());
-
+        Optional<LocalDate> birthDate = Optional.ofNullable(oidcUser.getBirthdate()).map(LocalDate::parse);
         log.error(attributes.toString());
 
         return OAuthUser
                 .builder()
-                .name(attributes.get("given_name").toString())
+                .name(attributes.get(GOOGLE_NAME).toString())
                 .userInfo(oidcUser.getUserInfo())
                 .claims(oidcUser.getClaims())
                 .idToken(oidcUser.getIdToken())
                 .authorities(oidcUser.getAuthorities())
-                .password("Abc1!l1.DKk")
-                .attributes(oidcUser.getAttributes())
-                .username(attributes.get("email").toString())
-                .birthdate(birthdate)
-                .familyName(attributes.get("family_name").toString())
+                .password(attributes.get(GOOGLE_TOKEN).toString())
+                .attributes(attributes)
+                .username(attributes.get(GOOGLE_LOGIN).toString())
+                .birthdate(birthDate.orElse(LocalDate.now()))
+                .familyName(attributes.get(GOOGLE_FAMILY_NAME).toString())
                 .build();
     }
 }

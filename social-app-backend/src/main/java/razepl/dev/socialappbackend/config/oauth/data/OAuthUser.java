@@ -24,6 +24,8 @@ public class OAuthUser implements IOAuthUser {
     private OidcIdToken idToken;
     private Map<String, Object> attributes;
     private Collection<? extends GrantedAuthority> authorities;
+    private String location;
+    private String github;
     private String name;
     private String familyName;
     private LocalDate birthdate;

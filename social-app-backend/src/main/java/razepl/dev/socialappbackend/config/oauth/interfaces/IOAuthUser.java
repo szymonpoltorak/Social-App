@@ -12,4 +12,8 @@ public interface IOAuthUser extends OidcUser, UserDetails {
     String getFamilyName();
 
     LocalDate getBirthDate();
+
+    String getLocation();
+
+    String getGithub();
 }

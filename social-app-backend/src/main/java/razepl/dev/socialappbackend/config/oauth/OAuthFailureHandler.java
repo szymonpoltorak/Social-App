@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import razepl.dev.socialappbackend.config.oauth.constants.RedirectUrls;
 
 import java.io.IOException;
 
@@ -17,8 +18,6 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     public final void onAuthenticationFailure(HttpServletRequest request,
                                               HttpServletResponse response,
                                               AuthenticationException exception) throws IOException, ServletException {
-        String targetUrl = "http://localhost:4200/auth/login";
-
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+        getRedirectStrategy().sendRedirect(request, response, RedirectUrls.FAILURE_URL);
     }
 }
