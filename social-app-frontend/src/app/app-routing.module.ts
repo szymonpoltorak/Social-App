@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { AuthGuard } from "@core/guards/auth.guard";
+import { environment } from "@environments/environment";
 
 const routes: Routes = [
     {

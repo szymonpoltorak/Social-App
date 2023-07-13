@@ -28,9 +28,11 @@ spring:
                 github:
                     client-id: ${GITHUB_CLIENT_ID}
                     client-secret: ${GITHUB_CLIENT_SECRET}
+
 logging:
     level:
         org.springframework: info
+
 security:
     jwt:
         expiration-time: 86400000

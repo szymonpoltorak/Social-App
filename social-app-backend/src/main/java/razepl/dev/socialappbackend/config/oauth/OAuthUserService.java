@@ -52,12 +52,17 @@ public class OAuthUserService implements IOAuthUserService {
 
     @Override
     public final void registerOAuthUser(IOAuthUser oAuthUser) {
+        Optional<String> github = Optional.ofNullable(oAuthUser.getGithub());
+        Optional<String> location = Optional.ofNullable(oAuthUser.getLocation());
+
         User user = User
                 .builder()
                 .name(oAuthUser.getName())
                 .surname(oAuthUser.getFamilyName())
                 .email(oAuthUser.getUsername())
+                .location(location.orElse(""))
                 .dateOfBirth(LocalDate.now())
+                .github(github.orElse(""))
                 .password(passwordEncoder.encode(oAuthUser.getPassword()))
                 .role(Role.USER)
                 .build();
