@@ -13,6 +13,7 @@ import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
 import razepl.dev.socialappbackend.entities.token.JwtToken;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 
 import java.util.ArrayList;
@@ -34,12 +35,15 @@ class TokenManagerServiceTest {
     private JwtServiceInterface mockJwtService;
 
     @Mock
+    private UserRepository mockUserRepository;
+
+    @Mock
     private TokenManager tokenManagerService;
 
     @BeforeEach
     final void setUp() {
         MockitoAnnotations.openMocks(this);
-        tokenManagerService = new TokenManagerService(mockTokenRepository, mockJwtService);
+        tokenManagerService = new TokenManagerService(mockTokenRepository, mockJwtService, mockUserRepository);
     }
 
     @Test

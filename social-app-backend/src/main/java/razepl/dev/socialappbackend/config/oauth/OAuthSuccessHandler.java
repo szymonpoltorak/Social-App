@@ -51,8 +51,9 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
                 .append("?")
                 .append("authToken=").append(authToken).append("&")
                 .append("refreshToken=").append(refreshToken);
-        tokenManager.saveUsersToken(authToken, userDetails.getUsername());
+
         tokenManager.revokeUserTokens(userDetails.getUsername());
+        tokenManager.saveUsersToken(authToken, userDetails.getUsername());
 
         response.sendRedirect(redirectBuilder.toString());
     }

@@ -9,8 +9,8 @@ const routes: Routes = [
         component: OauthComponent
     },
     {
-        path: "home",
-        redirectTo: "home",
+        path: RoutePaths.HOME_PATH,
+        redirectTo: RoutePaths.HOME_PATH,
     }
 ];
 
