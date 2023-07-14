@@ -8,6 +8,8 @@ export const enum RoutePaths {
     REGISTER_PATH = 'auth/register',
     REGISTER_AUTH_PATH = "register",
 
+    OAUTH_AUTH_CALLBACK_PATH = "oauth",
+
     AUTH_PATH = "auth",
     HOME_PATH = "home",
     NOT_FOUND_PATH = "error",

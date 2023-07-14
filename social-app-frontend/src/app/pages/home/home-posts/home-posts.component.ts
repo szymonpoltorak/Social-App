@@ -13,10 +13,10 @@ import { HomePostsInterface } from "@interfaces/home/HomePostsInterface";
     styleUrls: ['./home-posts.component.scss']
 })
 export class HomePostsComponent implements OnInit, OnDestroy, HomePostsInterface {
-    private destroyPostList$: Subject<void> = new Subject<void>();
-    private destroyCreatePost$: Subject<void> = new Subject<void>();
-    private loadMorePosts$: Subject<void> = new Subject<void>();
-    private numOfSite: number = 0;
+    destroyPostList$: Subject<void> = new Subject<void>();
+    destroyCreatePost$: Subject<void> = new Subject<void>();
+    loadMorePosts$: Subject<void> = new Subject<void>();
+    numOfSite: number = 0;
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @ViewChild(TextInputComponent) postTextInput !: TextInputComponent;
     posts: PostData[] = [];

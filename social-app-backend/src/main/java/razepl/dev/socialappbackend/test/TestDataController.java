@@ -42,7 +42,7 @@ public class TestDataController {
 
         addPosts();
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(null);
     }
 
     private AuthResponse registerUsers() {

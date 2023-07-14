@@ -14,7 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     /**
      * Retrieves a page of comments for a specific post, sorted by comment date.
      *
-     * @param postId - The ID of the post to retrieve comments for.
+     * @param postId   - The ID of the post to retrieve comments for.
      * @param pageable - The pageable object specifying the page number, size, and sort criteria.
      * @return A page of comments for the specified post.
      */

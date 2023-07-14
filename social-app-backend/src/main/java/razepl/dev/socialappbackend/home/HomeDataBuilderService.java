@@ -6,15 +6,15 @@ import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.commentlike.CommentLikeRepository;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
-import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
+import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.exceptions.validators.ArgumentValidator;
 import razepl.dev.socialappbackend.home.data.CommentData;
 import razepl.dev.socialappbackend.home.data.LikeData;
 import razepl.dev.socialappbackend.home.data.PostData;
 import razepl.dev.socialappbackend.home.data.UserData;
 import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
+import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 @Service
 @RequiredArgsConstructor

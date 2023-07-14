@@ -28,7 +28,7 @@ public final class UserValidation {
     /**
      * The pattern for a valid name. It should contain only alphabetic characters.
      */
-    public static final String NAME_PATTERN = "[a-zA-Z]+";
+    public static final String NAME_PATTERN = "[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+";
 
     /**
      * The pattern for a valid password. It should contain at least one lowercase letter, one uppercase letter, one

@@ -17,8 +17,7 @@ import razepl.dev.socialappbackend.search.interfaces.SearchServiceInterface;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -101,6 +100,6 @@ class SearchServiceTest {
         List<UserSearchData> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
 
         // then
-        assertTrue(result.size() == 1);
+        assertEquals(1, result.size());
     }
 }

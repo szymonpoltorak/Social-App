@@ -29,7 +29,7 @@ public interface HomeServiceInterface {
      * Retrieves a list of post data by the number of site for a given user.
      *
      * @param numOfSite The number of site for pagination.
-     * @param user The user for whom to retrieve the post list.
+     * @param user      The user for whom to retrieve the post list.
      * @return The list of post data.
      */
     List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user);
@@ -38,7 +38,7 @@ public interface HomeServiceInterface {
      * Creates a new post with the specified content for a given user.
      *
      * @param postContent The content of the post to create.
-     * @param user The user who is creating the post.
+     * @param user        The user who is creating the post.
      * @return The created post data.
      */
     PostData createNewPost(String postContent, User user);
@@ -47,7 +47,7 @@ public interface HomeServiceInterface {
      * Updates the like counter for a specific post for a given user.
      *
      * @param postId The ID of the post for which to update the like counter.
-     * @param user The user who is updating the like counter.
+     * @param user   The user who is updating the like counter.
      * @return The updated like data.
      */
     LikeData updatePostLikeCounter(long postId, User user);
@@ -62,9 +62,9 @@ public interface HomeServiceInterface {
     /**
      * Retrieves a list of comments for a post.
      *
-     * @param postId - The ID of the post.
+     * @param postId    - The ID of the post.
      * @param numOfSite - The number of comments per page.
-     * @param user - The user making the request.
+     * @param user      - The user making the request.
      * @return A list of CommentData objects representing the comments.
      */
     List<CommentData> getListOfComments(long postId, int numOfSite, User user);
@@ -73,7 +73,7 @@ public interface HomeServiceInterface {
      * Creates a new comment for a post.
      *
      * @param request - The CommentRequest object containing the comment details.
-     * @param user - The user creating the comment.
+     * @param user    - The user creating the comment.
      * @return The created CommentData object.
      */
     CommentData createComment(CommentRequest request, User user);
@@ -82,7 +82,7 @@ public interface HomeServiceInterface {
      * Updates the number of likes for a comment.
      *
      * @param commentId - The ID of the comment.
-     * @param user - The user making the request.
+     * @param user      - The user making the request.
      * @return The updated LikeData object.
      */
     LikeData updateCommentLikeCounter(long commentId, User user);

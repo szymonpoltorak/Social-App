@@ -13,14 +13,14 @@ import { HomeProfileInterface } from "@core/interfaces/home/HomeProfileInterface
     styleUrls: ['./home-profile.component.scss']
 })
 export class HomeProfileComponent implements OnInit, OnDestroy, HomeProfileInterface {
-    private userDataDestroy$: Subject<void> = new Subject<void>();
-    private destroyDialog$: Subject<void> = new Subject<void>();
+    userDataDestroy$: Subject<void> = new Subject<void>();
+    destroyDialog$: Subject<void> = new Subject<void>();
     protected readonly SocialNames = SocialNames;
     protected readonly HomeApiCalls = HomeApiCalls;
-    job!: string;
-    userLocation!: string;
-    numOfFriends!: number;
-    fullName !: string;
+    job: string = "";
+    userLocation: string = "";
+    numOfFriends: number = 0;
+    fullName : string = "";
     twitter: string = "";
     github: string = "";
     linkedin: string = "";

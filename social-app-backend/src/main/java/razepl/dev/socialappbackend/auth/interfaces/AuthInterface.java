@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.ResponseEntity;
 import razepl.dev.socialappbackend.auth.apicalls.*;
 
 /**
@@ -37,7 +36,7 @@ public interface AuthInterface {
             }
 
     )
-    ResponseEntity<AuthResponse> registerUser(RegisterRequest registerRequest);
+    AuthResponse registerUser(RegisterRequest registerRequest);
 
     /**
      * Logs a user in with the provided login request data.
@@ -59,7 +58,7 @@ public interface AuthInterface {
                     )
             }
     )
-    ResponseEntity<AuthResponse> loginUser(LoginRequest loginRequest);
+    AuthResponse loginUser(LoginRequest loginRequest);
 
     /**
      * Refreshes a user's authentication token using their refresh token.
@@ -82,7 +81,7 @@ public interface AuthInterface {
                     )
             }
     )
-    ResponseEntity<AuthResponse> refreshUserToken(HttpServletRequest request, HttpServletResponse response);
+    AuthResponse refreshUserToken(HttpServletRequest request, HttpServletResponse response);
 
     /**
      * Authenticates a user with the given token request.
@@ -104,5 +103,5 @@ public interface AuthInterface {
                     )
             }
     )
-    ResponseEntity<TokenResponse> authenticateUser(TokenRequest request);
+    TokenResponse authenticateUser(TokenRequest request);
 }

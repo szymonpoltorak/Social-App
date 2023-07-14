@@ -14,6 +14,7 @@ import { AuthConstants } from "@core/enums/AuthConstants";
 import { StorageKeys } from "@core/enums/StorageKeys";
 import { UtilService } from "@services/utils/util.service";
 import { catchError, Subject, takeUntil, throwError } from "rxjs";
+import { environment } from "@environments/environment";
 
 @Component({
     selector: 'app-login',
@@ -61,7 +62,8 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
         if (this.loginForm.invalid) {
             this.wasSubmitClicked = true;
 
-            this.dialogService.openDialogWindow(this.paragraphContent, this.dialogListItems, DialogContents.FORM_HEADER);
+            this.dialogService.openDialogWindow(this.paragraphContent,
+                this.dialogListItems, DialogContents.FORM_HEADER);
 
             return;
         }
@@ -73,8 +75,8 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
             .pipe(takeUntil(this.loginDestroy$))
             .subscribe((data: AuthResponse): void => {
                 if (data.authToken === AuthConstants.NO_TOKEN) {
-                    this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH, this.dialogListItems,
-                        DialogContents.FORM_HEADER);
+                    this.dialogService.openDialogWindow(DialogContents.LOGIN_WRONG_PARAGRAPH,
+                        this.dialogListItems, DialogContents.FORM_HEADER);
 
                     return;
                 }
@@ -101,5 +103,13 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
     ngOnDestroy(): void {
         this.testDestroy$.complete();
         this.loginDestroy$.complete();
+    }
+
+    redirectToGoogleOauth(): void {
+        window.location.href = `${ environment.httpBackend }/oauth2/authorization/google`;
+    }
+
+    redirectToGithubOauth(): void {
+        window.location.href = `${ environment.httpBackend }/oauth2/authorization/github`;
     }
 }

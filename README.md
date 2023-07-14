@@ -16,12 +16,14 @@ I used various technologies which I will list below.
 * Angular 15.2.0,
 * TypeScript 4.9.5,
 * SCSS 1.58.3,
+* Karma 6.4.1,
+* Jasmine 4.5.0,
 * Angular Material.
 
 ### BackEnd
 
 * SpringBoot 3.0.4,
-* Java JDK 17.0.6 (language level Java 11),
+* Java JDK 17.0.6,
 * Apache Maven 3.8.5,
 * SpringData JPA,
 * SpringSecurity,
@@ -29,6 +31,7 @@ I used various technologies which I will list below.
 * lombok,
 * javadoc,
 * jwt,
+* oauth2,
 * jackson,
 * swagger,
 * logback.

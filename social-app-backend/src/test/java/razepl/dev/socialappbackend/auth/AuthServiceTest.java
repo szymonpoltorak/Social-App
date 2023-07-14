@@ -1,77 +1,245 @@
 package razepl.dev.socialappbackend.auth;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
+import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
 import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
-import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
-import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.auth.interfaces.RegisterUserRequest;
-import razepl.dev.socialappbackend.entities.jwt.JwtToken;
-import razepl.dev.socialappbackend.entities.jwt.interfaces.TokenRepository;
-import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
-import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
-import razepl.dev.socialappbackend.util.AuthTestUtil;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
+import razepl.dev.socialappbackend.exceptions.*;
 
 import java.time.LocalDate;
-import java.util.Map;
+import java.util.Optional;
 
-import static razepl.dev.socialappbackend.constants.ApiRequests.REGISTER_REQUEST;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 class AuthServiceTest {
-    @Autowired
-    private MockMvc mockMvc;
+    @Mock
+    private UserRepository userRepository;
 
-    @Autowired
-    private AuthServiceInterface authService;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private TokenRepository tokenRepository;
+    @Mock
+    private AuthenticationManager authenticationManager;
+
+    @Mock
+    private TokenManager tokenManager;
+
+    @Mock
+    private JwtServiceInterface jwtService;
+
+    @InjectMocks
+    private AuthService authService;
+
+    private User user;
+
+    private RegisterRequest registerUserRequest;
+
+    private LoginRequest loginUserRequest;
+
+    @BeforeEach
+    final void setUp() {
+        user = User.builder()
+                .name("John")
+                .surname("Doe")
+                .email("john.doe@example.com")
+                .dateOfBirth(LocalDate.of(1990, 1, 1))
+                .role(Role.USER)
+                .password("hashedPassword")
+                .build();
+
+        registerUserRequest = RegisterRequest.builder()
+                .name("John")
+                .surname("Doe")
+                .email("john.doe@example.com")
+                .dateOfBirth(LocalDate.of(1990, 1, 1))
+                .password("plinPword123123#?!")
+                .build();
+
+        loginUserRequest = LoginRequest.builder()
+                .username("john.doe@example.com")
+                .password("plainPassword")
+                .build();
+    }
 
     @Test
-    final void test_validateUsersTokens() throws Exception {
+    final void test_register_should_save_user_and_return_tokens() {
         // given
-        String password = "Abc1!l1.DKk";
-        RegisterUserRequest registerRequest = AuthTestUtil.createUserForRegister(password);
-        ObjectMapper objectMapper = new ObjectMapper();
-        TokenResponse expected = TokenResponse.builder().isAuthTokenValid(true).build();
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
+        when(passwordEncoder.encode(anyString())).thenReturn("hashedPassword");
+        when(tokenManager.buildTokensIntoResponse(any(User.class), anyBoolean())).thenReturn(AuthResponse.builder().build());
 
         // when
-        String response = mockMvc.perform(MockMvcRequestBuilders.post(REGISTER_REQUEST)
-                        .content(AuthTestUtil.asJsonString(registerRequest))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .with(SecurityMockMvcRequestPostProcessors.csrf()))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn().getResponse().getContentAsString();
+        AuthResponse authResponse = authService.register(registerUserRequest);
 
-        Map<String, String> responseMap = objectMapper.readValue(response, new TypeReference<>() {
-        });
-        System.out.println(responseMap.toString());
+        // then
+        assertNotNull(authResponse);
+        verify(userRepository).save(any(User.class));
+        verify(tokenManager).buildTokensIntoResponse(any(User.class), eq(false));
+    }
 
-        TokenRequest request = TokenRequest.builder()
-                .authToken(responseMap.get("authToken"))
+    @Test
+    final void test_register_should_throw_exception_if_password_is_invalid() {
+        // given
+        RegisterRequest registerRequest = RegisterRequest.builder()
+                .name("John")
+                .surname("Doe")
+                .email("john.doe@example.com")
+                .dateOfBirth(LocalDate.of(1990, 1, 1))
+                .password("nope")
                 .build();
-        System.out.println(request.toString());
 
-        TokenResponse result = authService.validateUsersTokens(request);
+        // when
 
-        Assertions.assertEquals(expected, result, "Objects differs from each other!");
+        // then
+        assertThrows(PasswordValidationException.class, () -> authService.register(registerRequest));
+        verify(userRepository, never()).save(any(User.class));
+        verify(tokenManager, never()).buildTokensIntoResponse(any(User.class), anyBoolean());
+    }
+
+    @Test
+    final void test_register_should_throw_exception_if_user_already_exists() {
+        // given
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+
+        // when and then
+        assertThrows(UserAlreadyExistsException.class, () -> authService.register(registerUserRequest));
+        verify(userRepository, never()).save(any(User.class));
+        verify(tokenManager, never()).buildTokensIntoResponse(any(User.class), anyBoolean());
+    }
+
+    @Test
+    final void test_login_should_authenticate_user_and_return_tokens() {
+        // given
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+        when(authenticationManager.authenticate(any(Authentication.class))).thenReturn(null);
+        when(tokenManager.buildTokensIntoResponse(any(User.class), anyBoolean())).thenReturn(AuthResponse.builder().build());
+
+        // when
+        AuthResponse authResponse = authService.login(loginUserRequest);
+
+        // then
+        assertNotNull(authResponse);
+        verify(authenticationManager).authenticate(any(Authentication.class));
+        verify(tokenManager).buildTokensIntoResponse(any(User.class), eq(true));
+    }
+
+    @Test
+    final void test_login_should_throw_exception_if_user_does_not_exist() {
+        // given
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        // when
+
+        // then
+        assertThrows(UsernameNotFoundException.class, () -> authService.login(loginUserRequest));
+        verify(tokenManager, never()).buildTokensIntoResponse(any(User.class), anyBoolean());
+    }
+
+    @Test
+    final void test_refreshToken_should_return_new_tokens_if_refresh_token_is_valid() {
+        // given
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(jwtService.getJwtRefreshToken(request)).thenReturn("refreshToken");
+        when(jwtService.getUsernameFromToken("refreshToken")).thenReturn("john.doe@example.com");
+
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+        when(jwtService.isTokenValid("refreshToken", user)).thenReturn(true);
+        when(jwtService.generateToken(user)).thenReturn("authToken");
+        when(tokenManager.buildTokensIntoResponse(anyString(), anyString())).thenReturn(AuthResponse.builder().build());
+
+        // when
+        AuthResponse authResponse = authService.refreshToken(request, response);
+
+        // then
+        assertNotNull(authResponse);
+        verify(tokenManager).revokeUserTokens(user);
+        verify(tokenManager).saveUsersToken("authToken", user);
+        verify(tokenManager).buildTokensIntoResponse("authToken", "refreshToken");
+    }
+
+    @Test
+    final void test_refreshToken_should_throw_exception_if_refresh_token_does_not_exist() {
+        // given
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(jwtService.getJwtRefreshToken(request)).thenReturn(null);
+
+        // when
+
+        // then
+        assertThrows(TokenDoesNotExistException.class, () -> authService.refreshToken(request, response));
+        verify(tokenManager, never()).revokeUserTokens(any(User.class));
+        verify(tokenManager, never()).saveUsersToken(anyString(), any(User.class));
+        verify(tokenManager, never()).buildTokensIntoResponse(anyString(), anyString());
+    }
+
+    @Test
+    final void test_refreshToken_should_throw_exception_if_user_does_not_exist() {
+        // given
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(jwtService.getJwtRefreshToken(request)).thenReturn("refreshToken");
+        when(jwtService.getUsernameFromToken("refreshToken")).thenReturn("john.doe@example.com");
+
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
+
+        // when
+
+        // then
+        assertThrows(UsernameNotFoundException.class, () -> authService.refreshToken(request, response));
+        verify(tokenManager, never()).revokeUserTokens(any(User.class));
+        verify(tokenManager, never()).saveUsersToken(anyString(), any(User.class));
+        verify(tokenManager, never()).buildTokensIntoResponse(anyString(), anyString());
+    }
+
+    @Test
+    final void test_refreshToken_should_throw_exception_if_refresh_token_is_invalid() {
+        // given
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        when(jwtService.getJwtRefreshToken(request)).thenReturn("refreshToken");
+        when(jwtService.getUsernameFromToken("refreshToken")).thenReturn("john.doe@example.com");
+
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+        when(jwtService.isTokenValid("refreshToken", user)).thenReturn(false);
+
+        // when
+
+        // then
+        assertThrows(InvalidTokenException.class, () -> authService.refreshToken(request, response));
+        verify(tokenManager, never()).revokeUserTokens(any(User.class));
+        verify(tokenManager, never()).saveUsersToken(anyString(), any(User.class));
+        verify(tokenManager, never()).buildTokensIntoResponse(anyString(), anyString());
     }
 
     @Test
@@ -84,7 +252,6 @@ class AuthServiceTest {
         // when
 
         // then
-
         Assertions.assertThrows(TokensUserNotFoundException.class, () -> authService.validateUsersTokens(request));
     }
 
@@ -131,20 +298,11 @@ class AuthServiceTest {
     @Test
     final void test_register_wrong_password() {
         // given
-        RegisterUserRequest request = new RegisterRequest("name", "surname", "email", "password", LocalDate.now());
+        RegisterRequest request = new RegisterRequest("name", "surname", "email", "password", LocalDate.now());
 
         // when
 
         // then
         Assertions.assertThrows(PasswordValidationException.class, () -> authService.register(request));
-    }
-
-    private void revokeUsersTokens(String token) {
-        JwtToken jwtToken = tokenRepository.findByToken(token).orElseThrow();
-
-        jwtToken.setExpired(true);
-        jwtToken.setRevoked(true);
-
-        tokenRepository.save(jwtToken);
     }
 }

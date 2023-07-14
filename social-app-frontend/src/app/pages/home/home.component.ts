@@ -1,6 +1,6 @@
-import { Component, EventEmitter, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from "@core/services/home/home.service";
-import { Observable, of, Subject, takeUntil } from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { FriendData } from "@core/interfaces/home/FriendData";
 import { UtilService } from "@services/utils/util.service";
 import { RoutePaths } from "@enums/RoutePaths";
@@ -12,8 +12,8 @@ import { ColumnIndex } from "@enums/ColumnIndex";
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-    private destroyFriendList$: Subject<void> = new Subject<void>();
-    private updateFriendList$: Subject<void> = new Subject<void>();
+    destroyFriendList$: Subject<void> = new Subject<void>();
+    updateFriendList$: Subject<void> = new Subject<void>();
     friendList: FriendData[] = [];
     areFriendsVisible: boolean = false;
     areAllVisible: boolean = true;

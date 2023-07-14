@@ -26,6 +26,10 @@ const routes: Routes = [
             .then(module => module.NotFoundModule)
     },
     {
+        path: RoutePaths.OAUTH_AUTH_CALLBACK_PATH,
+        loadChildren: () => import('./pages/oauth/oauth.module').then(module => module.OauthModule)
+    },
+    {
         path: RoutePaths.ERROR_MATCHER,
         redirectTo: RoutePaths.NOT_FOUND_PATH
     },
