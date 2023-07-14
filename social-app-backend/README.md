@@ -53,33 +53,70 @@ If you leave settings as it is you will get 1 min expiration time to change it t
 security.jwt.expiration-time=86400000
 ```
 
+## OAuth2
+
+To use OAuth2 you need to set up your own google client id and secret.
+Store them as environment variables:
+
+```properties
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
+
+Login urls are:
+
+```properties
+http://localhost:8080/oauth2/authorization/google
+http://localhost:8080/oauth2/authorization/github
+
+http://backend:8080/oauth2/authorization/google
+http://backend:8080/oauth2/authorization/github
+```
+
+Callback urls on backend are:
+
+```properties
+http://localhost:8080/login/oauth2/code/google
+http://localhost:8080/login/oauth2/code/github
+
+http://backend:8080/login/oauth2/code/google
+http://backend:8080/login/oauth2/code/github
+```
+
+Auth token are refresh token will be sent to frontend as request params.
+
+These are urls that you need to set up in your google and github developer console.
+
 ## How to run without docker
 
 You have to install Java in version `at least` 17 and maven.
 
 On linux:
 
-```bash
+```properties
 sudo apt install -y openjdk
 sudo apt install -y maven
 ```
+
 * Using jar:
 
 Then run maven lifecycle
 
-```maven
+```properties
 mvn clean package
 ```
 
 And at last run jar file in `target/`.
 
-```bash
+```properties
 java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
 ```
 
 * Using maven simply just run using this command:
 
-```maven
+```properties
 mvn clean spring-boot:run
 ```
 
@@ -87,7 +124,7 @@ mvn clean spring-boot:run
 
 If you want to run app inside Intellij you need to declare environment variable like this:
 
-```pwsh
+```properties
 SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/socialapp
 ```
 
@@ -100,7 +137,7 @@ There are two different documentation tools included in this project.
 * First is JavaDoc which will generate documentation for whole code based on docstrings,
   To generate docs use command:
 
-```maven
+```properties
 mvn clean javadoc:javadoc
 ```
 
@@ -112,4 +149,4 @@ And then run `target/site/apidocs/index.html`.
 ## Troubleshooting
 
 * I am getting an error on start of app about filters and connections.
-This means you have not `socialapp` database in your docker container.
+  This means you have not `socialapp` database in your docker container.

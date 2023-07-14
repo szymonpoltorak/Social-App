@@ -18,6 +18,7 @@ services:
       - GOOGLE_CLIENT_SECRET=YourSecret
       - GITHUB_CLIENT_ID=YourID
       - GITHUB_CLIENT_SECRET=YourSecret
+      - FRONTEND_URL=http://frontend:4200
     build:
       context: social-app-backend
       dockerfile: Dockerfile.backend
