@@ -89,6 +89,29 @@ Auth token are refresh token will be sent to frontend as request params.
 
 These are urls that you need to set up in your google and github developer console.
 
+If you want to run this in docker container environment you need to change the frontend url in the class
+below to `http://frontend:4200`.
+
+```java
+/**
+ * This class defines constants for redirect URLs used in the authentication process.
+ */
+public final class RedirectUrls {
+    /**
+     * The URL to redirect to in case of authentication failure.
+     */
+    public static final String FAILURE_URL = "http://frontend:4200/auth/login";
+
+    /**
+     * The URL to redirect to in case of authentication success.
+     */
+    public static final String SUCCESS_URL = "http://frontend:4200/oauth";
+
+    private RedirectUrls() {
+    }
+}
+```
+
 ## How to run without docker
 
 You have to install Java in version `at least` 17 and maven.

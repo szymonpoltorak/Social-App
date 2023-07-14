@@ -1,6 +1,5 @@
 server:
     port: 8080
-    frontend_url: ${FRONTEND_URL}
 
 spring:
     datasource:
