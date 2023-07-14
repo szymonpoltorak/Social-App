@@ -32,6 +32,8 @@ public interface TokenManager {
      */
     void revokeUserTokens(User user);
 
+    void revokeUserTokens(String username);
+
     /**
      * Saves the given JWT token for the given user.
      *
@@ -39,4 +41,6 @@ public interface TokenManager {
      * @param user     the user for whom to save the token
      */
     void saveUsersToken(String jwtToken, User user);
+
+    void saveUsersToken(String jwtToken, String username);
 }

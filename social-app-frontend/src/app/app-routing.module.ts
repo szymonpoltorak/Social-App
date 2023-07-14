@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoutePaths } from "@core/enums/RoutePaths";
 import { AuthGuard } from "@core/guards/auth.guard";
-import { environment } from "@environments/environment";
 
 const routes: Routes = [
     {
@@ -25,6 +24,10 @@ const routes: Routes = [
         path: RoutePaths.NOT_FOUND_PATH,
         loadChildren: () => import("./pages/not-found/not-found.module")
             .then(module => module.NotFoundModule)
+    },
+    {
+        path: RoutePaths.OAUTH_AUTH_CALLBACK_PATH,
+        loadChildren: () => import('./pages/oauth/oauth.module').then(module => module.OauthModule)
     },
     {
         path: RoutePaths.ERROR_MATCHER,

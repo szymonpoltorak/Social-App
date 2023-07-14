@@ -9,6 +9,7 @@ import razepl.dev.socialappbackend.entities.token.JwtToken;
 import razepl.dev.socialappbackend.entities.token.TokenType;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
+import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.List;
@@ -22,10 +23,19 @@ import java.util.List;
 public class TokenManagerService implements TokenManager {
     private final TokenRepository tokenRepository;
     private final JwtServiceInterface jwtService;
+    private final UserRepository userRepository;
 
     @Override
     public final void saveUsersToken(String jwtToken, User user) {
         tokenRepository.save(buildToken(jwtToken, user));
+    }
+
+    @Override
+    public final void saveUsersToken(String jwtToken, String username) {
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+
+        saveUsersToken(jwtToken, user);
     }
 
     @Override
@@ -63,6 +73,14 @@ public class TokenManagerService implements TokenManager {
             token.setExpired(true);
         });
         tokenRepository.saveAll(userTokens);
+    }
+
+    @Override
+    public final void revokeUserTokens(String username) {
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found!"));
+
+        revokeUserTokens(user);
     }
 
     private AuthResponse buildResponse(String authToken, String refreshToken) {
