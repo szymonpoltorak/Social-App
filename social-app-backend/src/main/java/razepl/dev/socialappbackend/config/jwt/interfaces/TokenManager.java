@@ -32,6 +32,11 @@ public interface TokenManager {
      */
     void revokeUserTokens(User user);
 
+    /**
+     * This method revokes all tokens associated with a given username.
+     *
+     * @param username The username for which to revoke tokens.
+     */
     void revokeUserTokens(String username);
 
     /**
@@ -42,5 +47,11 @@ public interface TokenManager {
      */
     void saveUsersToken(String jwtToken, User user);
 
+    /**
+     * This method saves a JWT token associated with a given username.
+     *
+     * @param jwtToken  The JWT token to save.
+     * @param username  The username associated with the token.
+     */
     void saveUsersToken(String jwtToken, String username);
 }
