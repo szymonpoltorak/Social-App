@@ -19,7 +19,6 @@ import razepl.dev.socialappbackend.entities.user.User;
 @Entity
 @Table(name = "Tokens")
 public class JwtToken implements Token {
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tokenId;

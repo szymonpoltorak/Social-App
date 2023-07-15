@@ -11,13 +11,13 @@ import { FriendInterface } from "@interfaces/home/FriendInterface";
     styleUrls: ['./friend.component.scss']
 })
 export class FriendComponent implements OnDestroy, FriendInterface {
-    private destroyFriend$ : Subject<void> = new Subject<void>();
-    private addFriend$: Subject<void> = new Subject<void>();
     @Input() friendUsername: string = "";
     @Input() friendName: string = "";
     @Input() friendJob: string = "";
-    @Input() isUsersFriend : boolean = true;
+    @Input() isUsersFriend: boolean = true;
     @Output() friendRemoval: EventEmitter<string> = new EventEmitter<string>();
+    private destroyFriend$: Subject<void> = new Subject<void>();
+    private addFriend$: Subject<void> = new Subject<void>();
 
     constructor(private utilService: UtilService,
                 private userDataService: UserHomeDataService) {

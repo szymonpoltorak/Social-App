@@ -3,13 +3,13 @@
 
     <mat-divider></mat-divider>
 
-    <app-friend *ngFor="let friend of friendList"
+    <app-friend (friendRemoval)="removeFriendFromList($event)"
+                *ngFor="let friend of friendList"
                 [friendJob]="friend.friendJob"
                 [friendName]="friend.friendFullName"
                 [friendUsername]="friend.friendUsername"
-                (friendRemoval)="removeFriendFromList($event)"
     >
     </app-friend>
 
-    <div class="no-friends" *ngIf="friendList.length === 0">No friends yet!</div>
+    <div *ngIf="friendList.length === 0" class="no-friends">No friends yet!</div>
 </div>

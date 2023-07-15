@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 import { TextInputComponent } from '@home/shared-home/text-input/text-input.component';
 import { HomePostsComponent } from "@home/home-posts/home-posts.component";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { SocialNavbarComponent } from "@home/shared-home/social-navbar/social-navbar.component";
 import { IconsModule } from "@icons/icons.module";
 import { SharedHomeModule } from "@home/shared-home/shared-home.module";
 import { HomeComponent } from "@home/home.component";

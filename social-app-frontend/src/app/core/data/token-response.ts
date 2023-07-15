@@ -1,3 +1,3 @@
 export interface TokenResponse {
-    isAuthTokenValid : boolean;
+    isAuthTokenValid: boolean;
 }

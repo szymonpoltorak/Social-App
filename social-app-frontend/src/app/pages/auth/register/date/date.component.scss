@@ -26,10 +26,6 @@
     filter: invert(100%);
 }
 
-.wrong-date {
-    border-color: red;
-}
-
 .correct-date {
     border-color: green;
 }
@@ -46,13 +42,13 @@
     }
 }
 
-@media screen and (max-width: 492px){
+@media screen and (max-width: 492px) {
     .date-input {
         width: 11em;
     }
 }
 
-@media screen and (max-width: 403px){
+@media screen and (max-width: 403px) {
     .date-input {
         width: 13em;
     }

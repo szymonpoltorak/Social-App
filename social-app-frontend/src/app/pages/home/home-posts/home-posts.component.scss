@@ -35,11 +35,6 @@ app-user-icon {
     margin-left: 0.5em;
 }
 
-.post-create-bar {
-    @include flex-center;
-    gap: 1.5em;
-}
-
 .no-posts {
     @include flex-center;
     @include content-field;

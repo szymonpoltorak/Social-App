@@ -9,7 +9,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { IconsModule } from "@icons/icons.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('CommentComponent', () => {
     let component: CommentComponent;

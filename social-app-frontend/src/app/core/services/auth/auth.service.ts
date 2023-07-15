@@ -35,7 +35,8 @@ export class AuthService implements AuthInterface {
     }
 
     registerUser(registerRequest: RegisterRequest): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.REGISTER_URL }`, registerRequest)
+        return this.http.post<AuthResponse>(`${ environment.httpBackend }${ AuthApiCalls.REGISTER_URL }`,
+            registerRequest)
             .pipe(catchError(() => of(JSON.parse(AuthApiCalls.ERROR_FOUND))));
     }
 

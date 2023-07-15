@@ -21,14 +21,14 @@ export class OauthComponent implements OnInit, OnDestroy {
         this.activatedRoute.queryParams
             .pipe(takeUntil(this.destroyRoute$))
             .subscribe(params => {
-            const authToken = params['authToken'];
-            const refreshToken = params['refreshToken'];
+                const authToken = params['authToken'];
+                const refreshToken = params['refreshToken'];
 
-            this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, authToken);
-            this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, refreshToken);
+                this.utilService.addValueToStorage(StorageKeys.AUTH_TOKEN, authToken);
+                this.utilService.addValueToStorage(StorageKeys.REFRESH_TOKEN, refreshToken);
 
-            this.utilService.navigate(RoutePaths.HOME_PATH);
-        });
+                this.utilService.navigate(RoutePaths.HOME_PATH);
+            });
     }
 
     ngOnDestroy(): void {

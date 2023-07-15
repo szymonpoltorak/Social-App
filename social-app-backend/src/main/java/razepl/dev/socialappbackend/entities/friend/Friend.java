@@ -34,7 +34,7 @@ public class Friend implements DataBuilder<FriendData> {
     private User user;
 
     @Override
-    public FriendData buildData() {
+    public final FriendData buildData() {
         return FriendData
                 .builder()
                 .friendFullName(friendName)

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { SocialLinkComponent } from './social-link.component';
 import { FriendComponent } from "@home/shared-home/friend/friend.component";
 import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
@@ -15,7 +15,8 @@ import { MatListModule } from "@angular/material/list";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('SocialLinkComponent', () => {
     let component: SocialLinkComponent;

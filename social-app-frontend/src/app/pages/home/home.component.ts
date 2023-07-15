@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.areFriendsVisible = !this.areFriendsVisible;
     }
 
-    @HostListener('window:resize', ['$event'])
-    onWindowResize(event: any): void {
+    @HostListener('window:resize')
+    onWindowResize(): void {
         this.areAllVisible = window.innerWidth >= 1250;
         this.isDoubleColumnGrid = window.innerWidth > 800;
 

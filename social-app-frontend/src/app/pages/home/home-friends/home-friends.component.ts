@@ -11,6 +11,7 @@ export class HomeFriendsComponent implements HomeFriendsInterface {
     @Input() friendList: FriendData[] = [];
 
     removeFriendFromList(friendUsername: string): void {
-        this.friendList = this.friendList.filter((friend: FriendData): boolean => friend.friendUsername !== friendUsername);
+        this.friendList = this.friendList
+            .filter((friend: FriendData): boolean => friend.friendUsername !== friendUsername);
     }
 }

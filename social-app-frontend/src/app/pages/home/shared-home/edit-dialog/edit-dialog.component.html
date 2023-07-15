@@ -1,15 +1,15 @@
-<form [formGroup]="editInputGroup" (ngSubmit)="submitValue()" class="edit-dialog-container">
+<form (ngSubmit)="submitValue()" [formGroup]="editInputGroup" class="edit-dialog-container">
     <h1 class="dialog-header">Enter your {{ title }}</h1>
 
     <p class="dialog-text">When you enter your data your profile data will be updated.</p>
 
     <div class="input-container">
-        <input formControlName="linkInput"
-               class="link-input"
-               type="text"
-               placeholder="https://example.com"
-               [class.correct-link]="editInputGroup.valid"
+        <input [class.correct-link]="editInputGroup.valid"
                [class.wrong-link]="editInputGroup.touched && editInputGroup.invalid"
+               class="link-input"
+               formControlName="linkInput"
+               placeholder="https://example.com"
+               type="text"
         >
 
         <div class="button-container">

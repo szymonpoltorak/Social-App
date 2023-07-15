@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FriendComponent } from "@home/shared-home/friend/friend.component";
-import { PostComponent } from "@home/shared-home/post/post.component";
 import { SocialLinkComponent } from "@home/shared-home/social-link/social-link.component";
 import { EditDialogComponent } from "@home/shared-home/edit-dialog/edit-dialog.component";
 import { CommentListComponent } from "@home/shared-home/comment-list/comment-list.component";
@@ -15,7 +14,8 @@ import { MatListModule } from "@angular/material/list";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('TextInputComponent', () => {
     let component: TextInputComponent;

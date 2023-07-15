@@ -1,7 +1,7 @@
 <div class="just-background">
-    <app-social-navbar [isOnHomeSite]="true"
+    <app-social-navbar (columnEvent)="hideColumn($event)"
                        (searchEvent)="navigateToSearch()"
-                       (columnEvent)="hideColumn($event)"
+                       [isOnHomeSite]="true"
                        class="sticky-navbar">
     </app-social-navbar>
 
@@ -11,12 +11,12 @@
                               class="sticky-element">
             </app-home-profile>
 
-            <app-home-posts *ngIf="areAllVisible || currentColumn === 1 || isDoubleColumnGrid"
-                            (updateFriendListEvent)="updateFriendList()">
+            <app-home-posts (updateFriendListEvent)="updateFriendList()"
+                            *ngIf="areAllVisible || currentColumn === 1 || isDoubleColumnGrid">
             </app-home-posts>
 
-            <app-home-friends [friendList]="friendList"
-                              *ngIf="areAllVisible || currentColumn === 2"
+            <app-home-friends *ngIf="areAllVisible || currentColumn === 2"
+                              [friendList]="friendList"
                               class="sticky-element">
             </app-home-friends>
         </div>

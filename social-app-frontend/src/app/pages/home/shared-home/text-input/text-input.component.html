@@ -1,10 +1,10 @@
 <textarea
     (input)="updateCharacterCounter()"
     [(ngModel)]="inputText"
+    [ngStyle]="{ 'height': getInputSize(), 'width': windowWidth }"
     class="post-input"
     maxlength="120"
     placeholder="Say hello to world..."
-    [ngStyle]="{ 'height': getInputSize(), 'width': windowWidth }"
 >
 </textarea>
 

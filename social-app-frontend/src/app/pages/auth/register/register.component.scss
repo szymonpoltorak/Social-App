@@ -17,6 +17,10 @@
     margin-bottom: 0;
 }
 
+.invalid-form {
+    border-color: red;
+}
+
 .register-container {
     display: grid;
     max-width: 50em;
@@ -72,10 +76,6 @@
 
 .button-box {
     padding: 0.5em;
-}
-
-.invalid-form {
-    border-color: red;
 }
 
 @media screen and (max-width: 762px) {

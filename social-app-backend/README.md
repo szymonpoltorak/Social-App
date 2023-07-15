@@ -67,7 +67,7 @@ GITHUB_CLIENT_SECRET=
 
 Login urls are:
 
-```properties
+```
 http://localhost:8080/oauth2/authorization/google
 http://localhost:8080/oauth2/authorization/github
 
@@ -77,7 +77,7 @@ http://backend:8080/oauth2/authorization/github
 
 Callback urls on backend are:
 
-```properties
+```
 http://localhost:8080/login/oauth2/code/google
 http://localhost:8080/login/oauth2/code/github
 
@@ -118,7 +118,7 @@ You have to install Java in version `at least` 17 and maven.
 
 On linux:
 
-```properties
+```bash
 sudo apt install -y openjdk
 sudo apt install -y maven
 ```
@@ -127,19 +127,19 @@ sudo apt install -y maven
 
 Then run maven lifecycle
 
-```properties
+```bash
 mvn clean package
 ```
 
 And at last run jar file in `target/`.
 
-```properties
+```bash
 java -jar target/social-app-backend-0.0.1-SNAPSHOT.jar
 ```
 
 * Using maven simply just run using this command:
 
-```properties
+```bash
 mvn clean spring-boot:run
 ```
 
@@ -160,7 +160,7 @@ There are two different documentation tools included in this project.
 * First is JavaDoc which will generate documentation for whole code based on docstrings,
   To generate docs use command:
 
-```properties
+```bash
 mvn clean javadoc:javadoc
 ```
 

@@ -1,6 +1,5 @@
 package razepl.dev.socialappbackend.config.oauth;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,7 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public final void onAuthenticationFailure(HttpServletRequest request,
                                               HttpServletResponse response,
-                                              AuthenticationException exception) throws IOException, ServletException {
+                                              AuthenticationException exception) throws IOException {
         getRedirectStrategy().sendRedirect(request, response, RedirectUrls.FAILURE_URL);
     }
 }

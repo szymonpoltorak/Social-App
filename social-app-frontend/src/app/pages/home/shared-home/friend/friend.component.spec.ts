@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, EventEmitter } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { of, Subject } from 'rxjs';
 import { FriendComponent } from './friend.component';
 import { UtilService } from '@services/utils/util.service';
@@ -20,7 +19,8 @@ import { MatListModule } from "@angular/material/list";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('FriendComponent', () => {
     let component: FriendComponent;
@@ -87,7 +87,8 @@ describe('FriendComponent', () => {
         component.isUsersFriend = true;
         component.removeUserFromFriends();
 
-        expect(userDataService.manageUsersFriendEndpoints).toHaveBeenCalledWith('john@gmail.com', HomeApiCalls.REMOVE_FRIEND);
+        expect(userDataService.manageUsersFriendEndpoints).toHaveBeenCalledWith('john@gmail.com',
+            HomeApiCalls.REMOVE_FRIEND);
         expect(component.isUsersFriend).toBeFalse();
         expect(friendRemovalEventSpy.emit).toHaveBeenCalledWith('john@gmail.com');
     });
@@ -97,7 +98,8 @@ describe('FriendComponent', () => {
         component.isUsersFriend = false;
         component.addUserToFriends();
 
-        expect(userDataService.manageUsersFriendEndpoints).toHaveBeenCalledWith('john@gmail.com', HomeApiCalls.ADD_FRIEND);
+        expect(userDataService.manageUsersFriendEndpoints).toHaveBeenCalledWith('john@gmail.com',
+            HomeApiCalls.ADD_FRIEND);
         expect(component.isUsersFriend).toBeTrue();
         expect(friendRemovalEventSpy.emit).not.toHaveBeenCalled();
     });

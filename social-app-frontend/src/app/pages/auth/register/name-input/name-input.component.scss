@@ -25,12 +25,12 @@
     border-color: $main-blue;
 }
 
-.wrong-input {
-    border-color: red;
-}
-
 .correct {
     border-color: green;
+}
+
+.wrong-input {
+    border-color: red;
 }
 
 @media screen and (max-width: 762px) {
@@ -45,13 +45,13 @@
     }
 }
 
-@media screen and (max-width: 492px){
+@media screen and (max-width: 492px) {
     .name-input {
         width: 11em;
     }
 }
 
-@media screen and (max-width: 403px){
+@media screen and (max-width: 403px) {
     .name-input {
         width: 13em;
     }

@@ -1,407 +1,408 @@
 {
-	"info": {
-		"_postman_id": "949a3f1f-0324-42aa-8874-8e7b94fa9fe5",
-		"name": "SocialApp",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Jacek\",\r\n    \"surname\": \"Kowalski\",\r\n    \"email\": \"jacek@gmail.com\",\r\n    \"dateOfBirth\": \"2000-01-01\",\r\n    \"password\": \"Abc1!l1.DKk\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/auth/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"jacek@gmail.com\",\r\n    \"password\": \"Abc1!l1.DKk\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/auth/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "RefreshToken",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODE2NDg3NzIsImV4cCI6MTY4MjI1MzU3Mn0.S2mcpeHv-y19erA6EjXVmYLnF_SaqYCLjVTja5y4R2Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/auth/refreshToken",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"refreshToken"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Authenticate",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"authToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODIyNDg3ODEsImV4cCI6MTY4MjI0ODg0MX0.7_JCBk5gAjsM5qlW7rT3Y3GnyDIlCF19RQLxX-DQlNU\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/auth/authenticate",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"authenticate"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Logout",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/auth/logout",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"auth",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetUserData",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODMyMjg0NTcsImV4cCI6MTY4MzIyODUxN30.PZi82GkD9lOCFeqlN3U9uyFWsdebXL02rDRsOMCMWfA",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jacek@gmail.com",
-							"type": "text"
-						}
-					],
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/home/userData",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"home",
-						"userData"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "TestData",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/test",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"test"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "FriendsList",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNlazBAZ21haWwuY29tIiwiaWF0IjoxNjgzMjg1NDIwLCJleHAiOjE2ODMyODU0ODB9.0ukSU356iTOWmnfClGhkUolEPatvTOiNvSRtyh_OUOc",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "jacek0@gmail.com",
-							"type": "default"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8080/home/friendsList",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"home",
-						"friendsList"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Post List",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjaW5AZ21haWwuY29tIiwiaWF0IjoxNjgzNzM2NDA1LCJleHAiOjE2ODM4MjI4MDV9.XzhyDDI132Echr8wEKCauFkVR_daDiFnwuoOiMxFLZQ",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/home/postList?numOfSite=0",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"home",
-						"postList"
-					],
-					"query": [
-						{
-							"key": "numOfSite",
-							"value": "0"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Post",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjaW5AZ21haWwuY29tIiwiaWF0IjoxNjgzNzQxMTA1LCJleHAiOjE2ODM4Mjc1MDV9.5AiaPr_vwDfsavjEy91FIHef2JBpqLkY92v11Q0egnk",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"postContent\": \"Lorem ipsum is perfect!\",\r\n    \"authorUsername\": \"jacek0@gmail.com\",\r\n    \"dateOfCreation\": \"2000-11-11\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/home/createPost",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"home",
-						"createPost"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "LikePost",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaW90cjlAZ21haWwuY29tIiwiaWF0IjoxNjgzNzQ4MTc0LCJleHAiOjE2ODM4MzQ1NzR9.cgrhPynCRvf4y4HBq8HB6YKmE5GNY4OVVeWFZUCN8LE",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PATCH",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/home/likePost?postId=1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"home",
-						"likePost"
-					],
-					"query": [
-						{
-							"key": "postId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "949a3f1f-0324-42aa-8874-8e7b94fa9fe5",
+    "name": "SocialApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Jacek\",\r\n    \"surname\": \"Kowalski\",\r\n    \"email\": \"jacek@gmail.com\",\r\n    \"dateOfBirth\": \"2000-01-01\",\r\n    \"password\": \"Abc1!l1.DKk\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"jacek@gmail.com\",\r\n    \"password\": \"Abc1!l1.DKk\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RefreshToken",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODE2NDg3NzIsImV4cCI6MTY4MjI1MzU3Mn0.S2mcpeHv-y19erA6EjXVmYLnF_SaqYCLjVTja5y4R2Q",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/refreshToken",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "refreshToken"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Authenticate",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"authToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODIyNDg3ODEsImV4cCI6MTY4MjI0ODg0MX0.7_JCBk5gAjsM5qlW7rT3Y3GnyDIlCF19RQLxX-DQlNU\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/authenticate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "authenticate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/logout",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetUserData",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNla0BnbWFpbC5jb20iLCJpYXQiOjE2ODMyMjg0NTcsImV4cCI6MTY4MzIyODUxN30.PZi82GkD9lOCFeqlN3U9uyFWsdebXL02rDRsOMCMWfA",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jacek@gmail.com",
+              "type": "text"
+            }
+          ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/home/userData",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "home",
+            "userData"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TestData",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/test",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "test"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "FriendsList",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWNlazBAZ21haWwuY29tIiwiaWF0IjoxNjgzMjg1NDIwLCJleHAiOjE2ODMyODU0ODB9.0ukSU356iTOWmnfClGhkUolEPatvTOiNvSRtyh_OUOc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "username",
+              "value": "jacek0@gmail.com",
+              "type": "default"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8080/home/friendsList",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "home",
+            "friendsList"
+          ]
+        }
+      },
+      "response": [],
+      "item": []
+    },
+    {
+      "name": "Get Post List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjaW5AZ21haWwuY29tIiwiaWF0IjoxNjgzNzM2NDA1LCJleHAiOjE2ODM4MjI4MDV9.XzhyDDI132Echr8wEKCauFkVR_daDiFnwuoOiMxFLZQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/home/postList?numOfSite=0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "home",
+            "postList"
+          ],
+          "query": [
+            {
+              "key": "numOfSite",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Post",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjaW5AZ21haWwuY29tIiwiaWF0IjoxNjgzNzQxMTA1LCJleHAiOjE2ODM4Mjc1MDV9.5AiaPr_vwDfsavjEy91FIHef2JBpqLkY92v11Q0egnk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"postContent\": \"Lorem ipsum is perfect!\",\r\n    \"authorUsername\": \"jacek0@gmail.com\",\r\n    \"dateOfCreation\": \"2000-11-11\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/home/createPost",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "home",
+            "createPost"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LikePost",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaW90cjlAZ21haWwuY29tIiwiaWF0IjoxNjgzNzQ4MTc0LCJleHAiOjE2ODM4MzQ1NzR9.cgrhPynCRvf4y4HBq8HB6YKmE5GNY4OVVeWFZUCN8LE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/home/likePost?postId=1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "home",
+            "likePost"
+          ],
+          "query": [
+            {
+              "key": "postId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
 }

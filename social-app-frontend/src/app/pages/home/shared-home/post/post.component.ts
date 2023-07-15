@@ -12,15 +12,15 @@ import { PostInterface } from "@core/interfaces/home/PostInterface";
     styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnDestroy, PostInterface, OnInit {
-    private addFriend$: Subject<void> = new Subject<void>();
-    private removeFriend$: Subject<void> = new Subject<void>();
-    private updateLike$: Subject<void> = new Subject<void>();
-    private deletePost$: Subject<void> = new Subject<void>();
     @Output() deleteEvent: EventEmitter<PostData> = new EventEmitter<PostData>();
     @Output() updateFriendListEvent: EventEmitter<void> = new EventEmitter<void>();
     @Input() postData !: PostData;
     @Input() currentUser: string = "";
     areCommentsVisible: boolean = false;
+    private addFriend$: Subject<void> = new Subject<void>();
+    private removeFriend$: Subject<void> = new Subject<void>();
+    private updateLike$: Subject<void> = new Subject<void>();
+    private deletePost$: Subject<void> = new Subject<void>();
 
     constructor(private postService: PostService) {
     }
@@ -51,19 +51,19 @@ export class PostComponent implements OnDestroy, PostInterface, OnInit {
     }
 
     updateFriendStatus(): void {
-        if (!this.postData.isUserInFriends) {
-            this.postService.manageFriendStatus(this.postData.username, HomeApiCalls.ADD_FRIEND)
-                .pipe(takeUntil(this.addFriend$))
-                .subscribe((): void => {
-                    this.postData.isUserInFriends = true;
-
-                    this.updateFriendListEvent.emit();
-                });
-        } else {
+        if (this.postData.isUserInFriends) {
             this.postService.manageFriendStatus(this.postData.username, HomeApiCalls.REMOVE_FRIEND)
                 .pipe(takeUntil(this.removeFriend$))
                 .subscribe((): void => {
                     this.postData.isUserInFriends = false;
+
+                    this.updateFriendListEvent.emit();
+                });
+        } else {
+            this.postService.manageFriendStatus(this.postData.username, HomeApiCalls.ADD_FRIEND)
+                .pipe(takeUntil(this.addFriend$))
+                .subscribe((): void => {
+                    this.postData.isUserInFriends = true;
 
                     this.updateFriendListEvent.emit();
                 });

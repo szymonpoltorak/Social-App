@@ -129,7 +129,6 @@ public interface HomeInterface {
      * Deletes a specific post for a given user.
      *
      * @param postId The ID of the post to delete.
-     * @return A ResponseEntity indicating the success of the deletion.
      */
     @Operation(
             summary = "Delete endpoint for deleting post from database",
