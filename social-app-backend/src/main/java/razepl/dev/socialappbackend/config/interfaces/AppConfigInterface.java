@@ -1,5 +1,6 @@
 package razepl.dev.socialappbackend.config.interfaces;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -48,4 +49,11 @@ public interface AppConfigInterface {
      * @return CorsConfigurationSource
      */
     CorsConfigurationSource corsConfigurationSource();
+
+    /**
+     * Returns the CommandLineRunner to be used for authentication.
+     *
+     * @return the CommandLineRunner.
+     */
+    CommandLineRunner commandLineRunner();
 }

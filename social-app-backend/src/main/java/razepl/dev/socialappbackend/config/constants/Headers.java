@@ -55,6 +55,16 @@ public final class Headers {
     private static final String SWAGGER_UI_MATCHERS = "/swagger-ui/**";
 
     /**
+     * Admin endpoints matcher.
+     */
+    public static final String ADMIN_MATCHERS = "/api/admin/**";
+
+    /**
+     * Moderator endpoints matcher.
+     */
+    public static final String MODERATOR_MATCHERS = "/api/moderator/**";
+
+    /**
      * List of URLs that should be excluded from authentication requirements.
      */
     public static final String[] WHITE_LIST = {AUTH_MATCHERS, SWAGGER_JSON,

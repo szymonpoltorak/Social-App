@@ -11,7 +11,7 @@ import razepl.dev.socialappbackend.entities.commentlike.CommentLikeRepository;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
-import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.home.data.CommentData;

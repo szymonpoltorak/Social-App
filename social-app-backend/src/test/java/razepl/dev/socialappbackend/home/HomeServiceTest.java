@@ -18,7 +18,7 @@ import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
 import razepl.dev.socialappbackend.entities.postlike.PostLike;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
-import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;

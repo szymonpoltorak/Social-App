@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;

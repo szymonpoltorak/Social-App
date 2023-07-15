@@ -20,7 +20,7 @@ import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
 import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
-import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;

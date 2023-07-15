@@ -3,6 +3,7 @@ package razepl.dev.socialappbackend.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,8 +24,10 @@ import razepl.dev.socialappbackend.config.interfaces.SecurityConfigInterface;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtFilter;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.LOGOUT_URL;
-import static razepl.dev.socialappbackend.config.constants.Headers.WHITE_LIST;
+import static razepl.dev.socialappbackend.config.constants.Headers.*;
+import static razepl.dev.socialappbackend.config.enums.Permissions.*;
+import static razepl.dev.socialappbackend.config.enums.Role.ADMIN;
+import static razepl.dev.socialappbackend.config.enums.Role.MODERATOR;
 
 /**
  * Class made to configure security filter chain in app.
@@ -56,6 +59,35 @@ public class SecurityConfiguration implements SecurityConfigInterface {
                     .authorizeHttpRequests(request -> request
                             .requestMatchers(WHITE_LIST)
                             .permitAll()
+
+                            .requestMatchers(ADMIN_MATCHERS).hasRole(ADMIN.name())
+
+                            .requestMatchers(HttpMethod.GET, ADMIN_MATCHERS)
+                            .hasAuthority(ADMIN_READ.name())
+
+                            .requestMatchers(HttpMethod.POST, ADMIN_MATCHERS)
+                            .hasAuthority(ADMIN_WRITE.name())
+
+                            .requestMatchers(HttpMethod.PATCH, ADMIN_MATCHERS)
+                            .hasAuthority(ADMIN_UPDATE.name())
+
+                            .requestMatchers(HttpMethod.DELETE, ADMIN_MATCHERS)
+                            .hasAuthority(ADMIN_DELETE.name())
+
+                            .requestMatchers(MODERATOR_MATCHERS).hasAnyRole(ADMIN.name(), MODERATOR.name())
+
+                            .requestMatchers(HttpMethod.GET, MODERATOR_MATCHERS)
+                            .hasAnyAuthority(ADMIN_READ.name(), MODERATOR_READ.name())
+
+                            .requestMatchers(HttpMethod.POST, MODERATOR_MATCHERS)
+                            .hasAnyAuthority(ADMIN_WRITE.name(), MODERATOR_WRITE.name())
+
+                            .requestMatchers(HttpMethod.PATCH, MODERATOR_MATCHERS)
+                            .hasAnyAuthority(ADMIN_UPDATE.name(), MODERATOR_UPDATE.name())
+
+                            .requestMatchers(HttpMethod.DELETE, MODERATOR_MATCHERS)
+                            .hasAnyAuthority(ADMIN_DELETE.name(), MODERATOR_DELETE.name())
+
                             .anyRequest()
                             .authenticated()
                     )

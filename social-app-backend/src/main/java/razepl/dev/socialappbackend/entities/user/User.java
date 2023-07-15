@@ -16,14 +16,13 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
-import java.util.List;
 
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.*;
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.*;
@@ -99,7 +98,7 @@ public class User implements ServiceUser {
 
     @Override
     public final Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override
