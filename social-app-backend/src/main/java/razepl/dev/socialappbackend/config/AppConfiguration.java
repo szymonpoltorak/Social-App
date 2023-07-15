@@ -1,6 +1,7 @@
 package razepl.dev.socialappbackend.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.config.interfaces.AppConfigInterface;
+import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static razepl.dev.socialappbackend.config.constants.CorsConfig.*;
@@ -80,5 +84,22 @@ public class AppConfiguration implements AppConfigInterface {
         } catch (Exception exception) {
             throw new AuthManagerInstanceException("Could not create authManager bean!");
         }
+    }
+
+    @Bean
+    @Override
+    public CommandLineRunner commandLineRunner() {
+        return args -> {
+            User admin = User
+                    .builder()
+                    .name("Admin")
+                    .surname("admin")
+                    .role(Role.ADMIN)
+                    .email("admin@gmail.com")
+                    .password(passwordEncoder().encode("Ab!#$123zncA"))
+                    .dateOfBirth(LocalDate.parse("2000-01-01"))
+                    .build();
+            userRepository.save(admin);
+        };
     }
 }

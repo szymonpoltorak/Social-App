@@ -11,7 +11,7 @@ import razepl.dev.socialappbackend.config.oauth.constants.AuthProvider;
 import razepl.dev.socialappbackend.config.oauth.data.OAuthUser;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUser;
 import razepl.dev.socialappbackend.config.oauth.interfaces.IOAuthUserService;
-import razepl.dev.socialappbackend.entities.user.Role;
+import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 

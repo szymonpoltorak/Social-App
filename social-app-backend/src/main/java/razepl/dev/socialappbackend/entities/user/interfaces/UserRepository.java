@@ -44,4 +44,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             where concat(u.name, ' ', u.surname) like :pattern% and u != :user
             """)
     Page<User> findAllByPattern(String pattern, Pageable pageable, User user);
+
+    /**
+     * Represents a method to delete a user by email.
+     *
+     * @param email - The email of the user to delete.
+     */
+    void deleteByEmail(String email);
 }
