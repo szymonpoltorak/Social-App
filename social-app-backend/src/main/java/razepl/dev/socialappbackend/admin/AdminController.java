@@ -13,14 +13,14 @@ import razepl.dev.socialappbackend.home.data.UserData;
 
 import java.util.List;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.ADMIN_MATCHERS;
+import static razepl.dev.socialappbackend.admin.Constants.ADMIN_MAPPING;
+import static razepl.dev.socialappbackend.admin.Constants.ENDPOINT_MATCHER;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = ADMIN_MATCHERS)
+@RequestMapping(value = ADMIN_MAPPING)
 public class AdminController implements IAdminController {
-    private static final String ENDPOINT_MATCHER = "/users";
     private final IAdminService adminService;
     private final AuthInterface authInterface;
 

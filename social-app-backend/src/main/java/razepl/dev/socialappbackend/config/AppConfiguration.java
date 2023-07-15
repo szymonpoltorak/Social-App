@@ -100,6 +100,17 @@ public class AppConfiguration implements AppConfigInterface {
                     .dateOfBirth(LocalDate.parse("2000-01-01"))
                     .build();
             userRepository.save(admin);
+
+            User moderator = User
+                    .builder()
+                    .name("moderator")
+                    .surname("moderator")
+                    .role(Role.MODERATOR)
+                    .email("moderator@gmail.com")
+                    .password(passwordEncoder().encode("Ab!#$789asdhjaksA"))
+                    .dateOfBirth(LocalDate.parse("2000-01-01"))
+                    .build();
+            userRepository.save(moderator);
         };
     }
 }

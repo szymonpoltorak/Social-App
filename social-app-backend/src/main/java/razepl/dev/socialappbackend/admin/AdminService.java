@@ -30,11 +30,16 @@ public class AdminService implements IAdminService {
 
     @Override
     public final void deleteUser(String email) {
+        log.info("Deleting user with email: {}", email);
+
         userRepository.deleteByEmail(email);
     }
 
     @Override
     public final void updateUsersName(String email, String newName) {
+        log.info("Updating user with email: {}", email);
+        log.info("New name: {}", newName);
+
         userRepository
                 .findByEmail(email)
                 .ifPresent(user -> {
