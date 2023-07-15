@@ -1,6 +1,7 @@
 package razepl.dev.socialappbackend.auth.interfaces;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,7 +38,7 @@ public interface AuthExceptionInterface {
      * @param exception The exception to handle.
      * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
      */
-    ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception);
+    ResponseEntity<ExceptionResponse> handlePasswordValidationException(ValidationException exception);
 
     /**
      * Handles an exception related to a user not being found.
@@ -53,7 +54,7 @@ public interface AuthExceptionInterface {
      * @param exception The exception to handle.
      * @return A ResponseEntity containing an ExceptionResponse object with error message and exception class name.
      */
-    ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception);
+    ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(InstantiationException exception);
 
     /**
      * Handles exceptions related to JWT tokens.
@@ -63,7 +64,19 @@ public interface AuthExceptionInterface {
      */
     ResponseEntity<ExceptionResponse> handleTokenExceptions(IllegalArgumentException exception);
 
-    ResponseEntity<ExceptionResponse> handleUserExistException(UserAlreadyExistsException exception);
+    /**
+     * Handles an exception related to user existence and returns a ResponseEntity containing an ExceptionResponse.
+     *
+     * @param exception - The IllegalStateException that occurred.
+     * @return A ResponseEntity containing an ExceptionResponse.
+     */
+    ResponseEntity<ExceptionResponse> handleUserExistException(IllegalStateException exception);
 
-    ResponseEntity<TokenResponse> handleTokenExceptions(TokensUserNotFoundException exception);
+    /**
+     * Handles an exception related to token operations and returns a ResponseEntity containing a TokenResponse.
+     *
+     * @param exception - The IllegalStateException that occurred.
+     * @return A ResponseEntity containing a TokenResponse.
+     */
+    ResponseEntity<TokenResponse> handleTokenExceptions(IllegalStateException exception);
 }

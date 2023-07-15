@@ -1,6 +1,7 @@
 package razepl.dev.socialappbackend.auth;
 
 import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +57,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
     @Override
     @ExceptionHandler(PasswordValidationException.class)
-    public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(PasswordValidationException exception) {
+    public final ResponseEntity<ExceptionResponse> handlePasswordValidationException(ValidationException exception) {
         return buildResponseEntity(exception, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
@@ -68,7 +69,7 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
     @Override
     @ExceptionHandler(AuthManagerInstanceException.class)
-    public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(AuthManagerInstanceException exception) {
+    public final ResponseEntity<ExceptionResponse> handleAuthManagerInstanceException(InstantiationException exception) {
         return buildResponseEntity(exception, HttpStatus.FAILED_DEPENDENCY);
     }
 
@@ -80,13 +81,13 @@ public class AuthExceptionHandler implements AuthExceptionInterface {
 
     @Override
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public final ResponseEntity<ExceptionResponse> handleUserExistException(UserAlreadyExistsException exception) {
+    public final ResponseEntity<ExceptionResponse> handleUserExistException(IllegalStateException exception) {
         return buildResponseEntity(exception, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @Override
     @ExceptionHandler(TokensUserNotFoundException.class)
-    public final ResponseEntity<TokenResponse> handleTokenExceptions(TokensUserNotFoundException exception) {
+    public final ResponseEntity<TokenResponse> handleTokenExceptions(IllegalStateException exception) {
         String className = exception.getClass().getSimpleName();
         TokenResponse response = TokenResponse.builder().isAuthTokenValid(false).build();
 

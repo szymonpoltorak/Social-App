@@ -17,7 +17,7 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     @Override
     public final void onAuthenticationFailure(HttpServletRequest request,
                                               HttpServletResponse response,
-                                              AuthenticationException exception) throws IOException, ServletException {
+                                              AuthenticationException exception) throws IOException {
         getRedirectStrategy().sendRedirect(request, response, RedirectUrls.FAILURE_URL);
     }
 }

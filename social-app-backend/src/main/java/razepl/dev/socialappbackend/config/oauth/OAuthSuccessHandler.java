@@ -26,7 +26,7 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
     @Override
     public final void onAuthenticationSuccess(HttpServletRequest request,
                                               HttpServletResponse response,
-                                              Authentication authentication) throws IOException, ServletException {
+                                              Authentication authentication) throws IOException {
         handle(request, response, authentication);
 
         super.clearAuthenticationAttributes(request);

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -103,7 +102,7 @@ class TokenManagerServiceTest {
         User user = new User();
         JwtToken token1 = new JwtToken();
         JwtToken token2 = new JwtToken();
-        List<JwtToken> userTokens = new ArrayList<>();
+        List<JwtToken> userTokens = new ArrayList<>(100);
 
         userTokens.add(token1);
         userTokens.add(token2);
@@ -129,7 +128,8 @@ class TokenManagerServiceTest {
         User user = new User();
 
         // when
-        when(mockTokenRepository.findAllValidTokensByUserId(user.getUserId())).thenReturn(new ArrayList<>());
+        when(mockTokenRepository.findAllValidTokensByUserId(user.getUserId()))
+                .thenReturn(new ArrayList<>(100));
 
         tokenManagerService.revokeUserTokens(user);
 
