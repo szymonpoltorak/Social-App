@@ -18,6 +18,7 @@ I used various technologies which I will list below.
 * SCSS 1.58.3,
 * Karma 6.4.1,
 * Jasmine 4.5.0,
+* Ngx-Markdown.
 * Angular Material.
 
 ### BackEnd
