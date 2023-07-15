@@ -12,6 +12,7 @@ import { CommentComponent } from './comment/comment.component';
 import { MatListModule } from "@angular/material/list";
 import { SocialNavbarComponent } from "@home/shared-home/social-navbar/social-navbar.component";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
+import { MarkdownModule } from "ngx-markdown";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SharedAuthModule } from "@auth/shared/shared-auth.module";
         ReactiveFormsModule,
         MatListModule,
         SharedAuthModule,
+        MarkdownModule.forRoot(),
     ],
     exports: [
         FriendComponent,

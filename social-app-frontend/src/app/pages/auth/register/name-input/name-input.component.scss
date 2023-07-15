@@ -29,6 +29,10 @@
     border-color: green;
 }
 
+.wrong-input {
+    border-color: red;
+}
+
 @media screen and (max-width: 762px) {
     .name-input {
         width: 18em;

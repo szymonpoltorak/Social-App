@@ -17,6 +17,10 @@
     margin-bottom: 0;
 }
 
+.invalid-form {
+    border-color: red;
+}
+
 .register-container {
     display: grid;
     max-width: 50em;

@@ -4,7 +4,7 @@
     <div>
         <div class="content-container">
             <div class="user-full-name">{{ commentData.commentAuthor }}</div>
-            <div class="comment-content">{{ commentData.commentContent }}</div>
+            <markdown class="comment-content" [data]="commentData.commentContent"></markdown>
         </div>
 
         <div class="like-date-container">

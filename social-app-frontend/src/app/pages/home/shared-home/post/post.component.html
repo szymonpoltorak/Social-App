@@ -24,9 +24,7 @@
         </app-remove-friend-icon>
     </div>
 
-    <div class="post-content">
-        {{ postData.postContent }}
-    </div>
+    <markdown class="post-content" [data]="postData.postContent"></markdown>
 
     <div class="separator-container">
         <div class="statistics-icons">
