@@ -35,9 +35,11 @@ $angular-dark-theme: mat.define-dark-theme(
 *::-webkit-scrollbar {
     width: 0.7em;
 }
+
 *::-webkit-scrollbar-track {
     background: $input-background-color;
 }
+
 *::-webkit-scrollbar-thumb {
     background-color: #565756;
     border-radius: 3em;

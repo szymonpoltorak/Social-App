@@ -10,17 +10,17 @@
             </div>
         </div>
 
-        <app-delete-icon *ngIf="currentUser === postData.username"
-                         (click)="removePost()">
+        <app-delete-icon (click)="removePost()"
+                         *ngIf="currentUser === postData.username">
 
         </app-delete-icon>
 
-        <app-add-friend-icon *ngIf="!postData.isUserInFriends && postData.username !== currentUser"
-                             (click)="updateFriendStatus()">
+        <app-add-friend-icon (click)="updateFriendStatus()"
+                             *ngIf="!postData.isUserInFriends && postData.username !== currentUser">
         </app-add-friend-icon>
 
-        <app-remove-friend-icon *ngIf="postData.isUserInFriends && postData.username !== currentUser"
-                                (click)="updateFriendStatus()">
+        <app-remove-friend-icon (click)="updateFriendStatus()"
+                                *ngIf="postData.isUserInFriends && postData.username !== currentUser">
         </app-remove-friend-icon>
     </div>
 
@@ -46,7 +46,7 @@
         <app-share-icon></app-share-icon>
     </div>
 
-    <mat-divider class="divider" *ngIf="areCommentsVisible"></mat-divider>
+    <mat-divider *ngIf="areCommentsVisible" class="divider"></mat-divider>
 
-    <app-comment-list [postId]="this.postData.postId" *ngIf="areCommentsVisible"></app-comment-list>
+    <app-comment-list *ngIf="areCommentsVisible" [postId]="this.postData.postId"></app-comment-list>
 </div>

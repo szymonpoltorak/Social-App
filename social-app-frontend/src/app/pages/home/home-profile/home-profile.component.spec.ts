@@ -17,7 +17,8 @@ import { MatListModule } from "@angular/material/list";
 import { IconsModule } from "@icons/icons.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('HomeProfileComponent', () => {
     let component: HomeProfileComponent;

@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { PostButtonBarComponent } from "@home/post-button-bar/post-button-bar.component";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('PostButtonBarComponent', () => {
     let component: PostButtonBarComponent;

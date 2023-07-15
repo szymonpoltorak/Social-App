@@ -1,14 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { of, Subject } from 'rxjs';
+import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SocialNavbarComponent } from './social-navbar.component';
 import { AuthService } from '@core/services/auth/auth.service';
 import { UtilService } from '@services/utils/util.service';
 import { UserService } from '@services/utils/user.service';
-import { RoutePaths } from '@core/enums/RoutePaths';
 import { SearchService } from '@services/search/search.service';
-import { SocialNavbarInterface } from '@interfaces/home/SocialNavbarInterface';
 import { ColumnIndex } from '@enums/ColumnIndex';
 import { FriendComponent } from "@home/shared-home/friend/friend.component";
 import { TextInputComponent } from "@home/shared-home/text-input/text-input.component";
@@ -24,7 +21,8 @@ import { MatListModule } from "@angular/material/list";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('SocialNavbarComponent', () => {
     let component: SocialNavbarComponent;

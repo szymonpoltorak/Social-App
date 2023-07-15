@@ -10,6 +10,6 @@
         </div>
     </div>
 
-    <app-remove-friend-icon *ngIf="isUsersFriend" (click)="removeUserFromFriends()"></app-remove-friend-icon>
-    <app-add-friend-icon *ngIf="!isUsersFriend" (click)="addUserToFriends()"></app-add-friend-icon>
+    <app-remove-friend-icon (click)="removeUserFromFriends()" *ngIf="isUsersFriend"></app-remove-friend-icon>
+    <app-add-friend-icon (click)="addUserToFriends()" *ngIf="!isUsersFriend"></app-add-friend-icon>
 </div>

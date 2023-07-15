@@ -31,10 +31,6 @@ $main-background-color: #0a0b0a;
     overflow-y: scroll;
 }
 
-.logo-background {
-    @include navbar-background;
-}
-
 .grid-container {
     @include grid-three-columns;
     gap: 2em;
@@ -55,7 +51,7 @@ $main-background-color: #0a0b0a;
     top: 8em;
 }
 
-@media screen and (max-width: 1169px){
+@media screen and (max-width: 1169px) {
     .grid-container {
         grid-template-columns: repeat(2, 0.5fr);
         gap: 1em;

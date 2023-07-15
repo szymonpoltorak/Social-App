@@ -2,7 +2,8 @@
     <app-logo (click)="navigateToUrl()" class="logo-background"></app-logo>
 
     <div class="search-bar">
-        <input [(ngModel)]="searchValue" class="search-input" id="search-input" placeholder="Search Social365" type="search">
+        <input [(ngModel)]="searchValue" class="search-input" id="search-input" placeholder="Search Social365"
+               type="search">
 
         <app-search-icon (click)="searchForUser()"></app-search-icon>
     </div>
@@ -14,11 +15,11 @@
 
         <app-settings-icon class="icon"></app-settings-icon>
 
-        <app-logout-icon class="icon" (click)="logoutUserFromSite()"></app-logout-icon>
+        <app-logout-icon (click)="logoutUserFromSite()" class="icon"></app-logout-icon>
 
         <app-menu-icon (click)="toggleMenu()" class="menu"></app-menu-icon>
 
-        <div class="dropdown" *ngIf="!isMenuVisible">
+        <div *ngIf="!isMenuVisible" class="dropdown">
             <div class="option">Messages</div>
 
             <div class="option">Notifications</div>
@@ -27,11 +28,16 @@
 
             <div (click)="logoutUserFromSite()" class="option">Logout</div>
 
-            <div (click)="changeColumn(ColumnIndex.FRIENDS_COLUMN)" *ngIf="isOnHomeSite" class="option">Show friends</div>
+            <div (click)="changeColumn(ColumnIndex.FRIENDS_COLUMN)" *ngIf="isOnHomeSite" class="option">Show friends
+            </div>
 
-            <div (click)="changeColumn(ColumnIndex.USER_COLUMN)" *ngIf="isOnHomeSite" class="option">Show users details</div>
+            <div (click)="changeColumn(ColumnIndex.USER_COLUMN)" *ngIf="isOnHomeSite" class="option">Show users
+                details
+            </div>
 
-            <div (click)="changeColumn(ColumnIndex.POSTS_COLUMN)" *ngIf="isOnHomeSite && isOneColumnOnly" class="option">Show posts</div>
+            <div (click)="changeColumn(ColumnIndex.POSTS_COLUMN)" *ngIf="isOnHomeSite && isOneColumnOnly"
+                 class="option">Show posts
+            </div>
         </div>
     </div>
 </nav>

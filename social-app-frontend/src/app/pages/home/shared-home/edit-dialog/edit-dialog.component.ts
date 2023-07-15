@@ -12,11 +12,11 @@ import { EditDialogInterface } from "@core/interfaces/home/EditDialogInterface";
     styleUrls: ['./edit-dialog.component.scss']
 })
 export class EditDialogComponent implements OnInit, OnDestroy, EditDialogInterface {
-    private destroyData$: Subject<void> = new Subject<void>();
     @Output() closeEvent: EventEmitter<any> = new EventEmitter();
     title: string;
     url: string;
     editInputGroup !: FormGroup;
+    private destroyData$: Subject<void> = new Subject<void>();
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any,
                 private userDataService: UserHomeDataService,

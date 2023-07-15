@@ -15,7 +15,7 @@ export class CommentsService implements CommentsServiceInterface {
     }
 
     updateCommentNumOfLikes(commentId: number): Observable<LikeResponse> {
-        return this.http.patch<LikeResponse>(`${environment.httpBackend}${HomeApiCalls.LIKE_COMMENT}`, {}, {
+        return this.http.patch<LikeResponse>(`${ environment.httpBackend }${ HomeApiCalls.LIKE_COMMENT }`, {}, {
             params: {
                 "commentId": commentId
             }
@@ -23,7 +23,7 @@ export class CommentsService implements CommentsServiceInterface {
     }
 
     getListOfComments(postId: number, numOfSite: number): Observable<CommentData[]> {
-        return this.http.get<CommentData[]>(`${environment.httpBackend}${HomeApiCalls.COMMENT_LIST}`, {
+        return this.http.get<CommentData[]>(`${ environment.httpBackend }${ HomeApiCalls.COMMENT_LIST }`, {
             params: {
                 "postId": postId,
                 "numOfSite": numOfSite
@@ -32,7 +32,7 @@ export class CommentsService implements CommentsServiceInterface {
     }
 
     createComment(commentContent: string, postId: number): Observable<CommentData> {
-        return this.http.post<CommentData>(`${environment.httpBackend}${HomeApiCalls.CREATE_COMMENT}`, {
+        return this.http.post<CommentData>(`${ environment.httpBackend }${ HomeApiCalls.CREATE_COMMENT }`, {
             "commentContent": commentContent,
             "postId": postId
         });

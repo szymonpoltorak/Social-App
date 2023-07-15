@@ -48,23 +48,23 @@ export class RegisterComponent implements OnInit, RegisterInterface, OnDestroy {
         this.authService.registerUser(request)
             .pipe(takeUntil(this.destroyRegister$))
             .subscribe((data: AuthResponse): void => {
-            if (data.authToken === AuthConstants.NO_TOKEN) {
-                this.dialogService.openDialogWindow(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
-                    [DialogContents.REGISTER_ITEMS], DialogContents.FORM_HEADER);
+                if (data.authToken === AuthConstants.NO_TOKEN) {
+                    this.dialogService.openDialogWindow(DialogContents.REGISTER_USER_EXISTS_PARAGRAPH,
+                        [DialogContents.REGISTER_ITEMS], DialogContents.FORM_HEADER);
 
-                return;
-            }
-            this.userService.setUserAuthentication = true;
+                    return;
+                }
+                this.userService.setUserAuthentication = true;
 
-            const username: string = this.registerForm.get(FormFieldNames.EMAIL_DATE_GROUP)
-                ?.get(FormFieldNames.EMAIL_FIELD)?.value;
+                const username: string = this.registerForm.get(FormFieldNames.EMAIL_DATE_GROUP)
+                    ?.get(FormFieldNames.EMAIL_FIELD)?.value;
 
-            this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
+                this.utilService.addValueToStorage(StorageKeys.USERNAME, username);
 
-            this.authService.saveData(data);
+                this.authService.saveData(data);
 
-            this.utilService.navigate(RoutePaths.HOME_PATH);
-        });
+                this.utilService.navigate(RoutePaths.HOME_PATH);
+            });
     }
 
     ngOnInit(): void {
@@ -77,6 +77,11 @@ export class RegisterComponent implements OnInit, RegisterInterface, OnDestroy {
         this.dialogListItems = [DialogContents.REGISTER_REQUIRED, DialogContents.REGISTER_YEAR,
             DialogContents.REGISTER_PASSWORD, DialogContents.REGISTER_SAME_PASSWORDS];
         this.paragraphContent = DialogContents.REGISTER_PARAGRAPH;
+    }
+
+    ngOnDestroy(): void {
+        this.destroyRegister$.next();
+        this.destroyRegister$.complete();
     }
 
     private buildRegisterRequest(): RegisterRequest {
@@ -96,10 +101,5 @@ export class RegisterComponent implements OnInit, RegisterInterface, OnDestroy {
         registerRequest.password = passwordGroup.get(FormFieldNames.PASSWORD_FIELD)!.value;
 
         return registerRequest;
-    }
-
-    ngOnDestroy(): void {
-        this.destroyRegister$.next();
-        this.destroyRegister$.complete();
     }
 }

@@ -42,6 +42,6 @@ export class UtilService implements UtilServiceInterface {
     }
 
     buildTestData(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${environment.httpBackend}/api/test`, {});
+        return this.http.post<AuthResponse>(`${ environment.httpBackend }/api/test`, {});
     }
 }

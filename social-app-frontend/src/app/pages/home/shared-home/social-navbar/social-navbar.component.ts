@@ -14,15 +14,16 @@ import { ColumnIndex } from "@enums/ColumnIndex";
     styleUrls: ['./social-navbar.component.scss']
 })
 export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
-    private onDestroy$: Subject<void> = new Subject<void>();
     @Input() logoUrl: string = "";
     @Output() searchEvent: EventEmitter<void> = new EventEmitter<void>();
     @Output() columnEvent: EventEmitter<number> = new EventEmitter<number>();
     searchValue !: string;
-    isMenuVisible : boolean = true;
-    @Input() isOnHomeSite : boolean = false;
+    isMenuVisible: boolean = true;
+    @Input() isOnHomeSite: boolean = false;
     isOneColumnOnly: boolean = false;
     currentColumn: number = 0;
+    protected readonly ColumnIndex = ColumnIndex;
+    private onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private authService: AuthService,
                 private utilService: UtilService,
@@ -34,15 +35,14 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
         this.isMenuVisible = !this.isMenuVisible;
     }
 
-    @HostListener('window:resize', ['$event'])
-    onWindowResize(event: any): void {
+    @HostListener('window:resize')
+    onWindowResize(): void {
         this.isOneColumnOnly = window.innerWidth <= 800;
 
         if (!this.isOneColumnOnly && this.currentColumn === 1) {
             this.currentColumn = 0;
         }
     }
-
 
     changeColumn(column: number): void {
         this.currentColumn = column;
@@ -76,6 +76,4 @@ export class SocialNavbarComponent implements OnDestroy, SocialNavbarInterface {
         this.onDestroy$.next();
         this.onDestroy$.complete();
     }
-
-    protected readonly ColumnIndex = ColumnIndex;
 }

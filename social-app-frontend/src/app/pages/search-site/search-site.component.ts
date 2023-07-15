@@ -5,17 +5,17 @@ import { Subject, takeUntil } from "rxjs";
 import { SearchSiteInterface } from "@interfaces/search/SearchSiteInterface";
 
 @Component({
-  selector: 'app-search-site',
-  templateUrl: './search-site.component.html',
-  styleUrls: ['./search-site.component.scss']
+    selector: 'app-search-site',
+    templateUrl: './search-site.component.html',
+    styleUrls: ['./search-site.component.scss']
 })
 export class SearchSiteComponent implements OnInit, OnDestroy, SearchSiteInterface {
+    isItAll !: boolean;
+    userList: UserSearchData[] = [];
     private initUsersList$: Subject<void> = new Subject<void>();
     private loadingData$: Subject<void> = new Subject<void>();
     private loadMore$: Subject<void> = new Subject<void>();
     private numOfSite: number = 0;
-    isItAll !: boolean;
-    userList: UserSearchData[] = [];
 
     constructor(private searchService: SearchService) {
     }

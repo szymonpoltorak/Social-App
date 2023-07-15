@@ -91,15 +91,6 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
             });
     }
 
-    private buildLoginRequest(): LoginRequest {
-        const loginRequest: LoginRequest = new LoginRequest();
-
-        loginRequest.username = this.loginForm.get(FormFieldNames.EMAIL_FIELD)!.value;
-        loginRequest.password = this.loginForm.get(FormFieldNames.LOGIN_PASSWORD)!.value;
-
-        return loginRequest;
-    }
-
     ngOnDestroy(): void {
         this.testDestroy$.complete();
         this.loginDestroy$.complete();
@@ -111,5 +102,14 @@ export class LoginComponent implements OnInit, LoginInterface, OnDestroy {
 
     redirectToGithubOauth(): void {
         window.location.href = `${ environment.httpBackend }/oauth2/authorization/github`;
+    }
+
+    private buildLoginRequest(): LoginRequest {
+        const loginRequest: LoginRequest = new LoginRequest();
+
+        loginRequest.username = this.loginForm.get(FormFieldNames.EMAIL_FIELD)!.value;
+        loginRequest.password = this.loginForm.get(FormFieldNames.LOGIN_PASSWORD)!.value;
+
+        return loginRequest;
     }
 }

@@ -16,8 +16,8 @@
             <div class="icon-text-container">
                 <app-work-icon></app-work-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.JOB_PROFILE"
-                                 [socialLink]="job"></app-social-link>
+                <app-social-link [socialLink]="job"
+                                 [socialSiteName]="SocialNames.JOB_PROFILE"></app-social-link>
             </div>
 
             <app-edit-icon (click)="openDialog(SocialNames.JOB_DIALOG, HomeApiCalls.UPDATE_JOB)"></app-edit-icon>
@@ -27,7 +27,8 @@
             <div class="icon-text-container">
                 <app-location-icon></app-location-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.LOCATION_PROFILE" [socialLink]="userLocation"></app-social-link>
+                <app-social-link [socialLink]="userLocation"
+                                 [socialSiteName]="SocialNames.LOCATION_PROFILE"></app-social-link>
             </div>
 
             <app-edit-icon
@@ -46,8 +47,8 @@
 
                 <app-twitter-icon *ngIf="twitter === ''"></app-twitter-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.TWITTER_PROFILE"
-                                 [socialLink]="twitter"></app-social-link>
+                <app-social-link [socialLink]="twitter"
+                                 [socialSiteName]="SocialNames.TWITTER_PROFILE"></app-social-link>
             </div>
 
             <app-edit-icon (click)="openDialog(SocialNames.TWITTER_DIALOG, HomeApiCalls.UPDATE_TWITTER)">
@@ -62,8 +63,8 @@
 
                 <app-linked-in-icon *ngIf="linkedin === ''"></app-linked-in-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.LINKEDIN_PROFILE"
-                                 [socialLink]="linkedin"></app-social-link>
+                <app-social-link [socialLink]="linkedin"
+                                 [socialSiteName]="SocialNames.LINKEDIN_PROFILE"></app-social-link>
             </div>
 
             <app-edit-icon
@@ -78,7 +79,7 @@
 
                 <app-github-icon *ngIf="github === ''"></app-github-icon>
 
-                <app-social-link [socialSiteName]="SocialNames.GITHUB_PROFILE" [socialLink]="github"></app-social-link>
+                <app-social-link [socialLink]="github" [socialSiteName]="SocialNames.GITHUB_PROFILE"></app-social-link>
             </div>
 
             <app-edit-icon (click)="openDialog(SocialNames.GITHUB_DIALOG, HomeApiCalls.UPDATE_GITHUB)"></app-edit-icon>

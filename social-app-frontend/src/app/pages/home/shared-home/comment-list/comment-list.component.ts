@@ -6,17 +6,17 @@ import { TextInputComponent } from "@home/shared-home/text-input/text-input.comp
 import { CommentListInterface } from "@interfaces/home/CommentListInterface";
 
 @Component({
-  selector: 'app-comment-list',
-  templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.scss']
+    selector: 'app-comment-list',
+    templateUrl: './comment-list.component.html',
+    styleUrls: ['./comment-list.component.scss']
 })
 export class CommentListComponent implements OnInit, OnDestroy, CommentListInterface {
     commentList$: Subject<void> = new Subject<void>();
-    private createPost$: Subject<void> = new Subject<void>();
     @ViewChild(TextInputComponent) commentInput !: TextInputComponent;
-    @Input() postId : number = 0;
+    @Input() postId: number = 0;
     comments: CommentData[] = [];
     numOfSite: number = 0;
+    private createPost$: Subject<void> = new Subject<void>();
 
     constructor(private commentService: CommentsService) {
     }
@@ -33,10 +33,10 @@ export class CommentListComponent implements OnInit, OnDestroy, CommentListInter
         this.commentService.createComment(this.commentInput.inputText, this.postId)
             .pipe(takeUntil(this.createPost$))
             .subscribe((data: CommentData): void => {
-               this.comments.unshift(data);
+                this.comments.unshift(data);
 
-               this.commentInput.inputText = "";
-               this.commentInput.numOfCharacters = 0;
+                this.commentInput.inputText = "";
+                this.commentInput.numOfCharacters = 0;
             });
     }
 

@@ -2,7 +2,7 @@
     <div class="writing-container">
         <app-user-icon></app-user-icon>
 
-        <app-text-input [windowWidth]="'26em'" #postTextInput></app-text-input>
+        <app-text-input [windowWidth]="'26em'"></app-text-input>
     </div>
 
     <mat-divider></mat-divider>
@@ -10,14 +10,14 @@
     <app-post-button-bar (createEvent)="createNewPost()"></app-post-button-bar>
 </div>
 
-<app-post *ngFor="let post of posts"
-          [postData]="post"
-          [currentUser]="currentUser"
-          (deleteEvent)="deletePostFromList($event)"
+<app-post (deleteEvent)="deletePostFromList($event)"
           (updateFriendListEvent)="updateFriendList()"
+          *ngFor="let post of posts"
+          [currentUser]="currentUser"
+          [postData]="post"
 >
 </app-post>
 
 <div (click)="loadNewPosts()" *ngIf="posts.length !== 0 && !isAllLoaded" class="load-more">Load more posts</div>
 
-<div class="no-posts" *ngIf="posts.length === 0">No posts found yet</div>
+<div *ngIf="posts.length === 0" class="no-posts">No posts found yet</div>

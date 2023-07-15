@@ -4,9 +4,9 @@
     <div class="friends-container">
         <div *ngFor="let user of userList" class="search-container">
             <app-friend
-                [friendUsername]="user.username"
                 [friendJob]="user.job"
                 [friendName]="user.fullName"
+                [friendUsername]="user.username"
                 [isUsersFriend]="user.isUsersFriend"
             >
             </app-friend>
@@ -14,7 +14,7 @@
             <mat-divider></mat-divider>
         </div>
 
-        <div class="not-found" *ngIf="userList.length === 0">I did not find any account matching this pattern!</div>
+        <div *ngIf="userList.length === 0" class="not-found">I did not find any account matching this pattern!</div>
     </div>
 
     <div (click)="loadMoreData()" *ngIf="userList.length !== 0 && !isItAll" class="load-more">Load more</div>

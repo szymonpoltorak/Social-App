@@ -2,7 +2,8 @@ export const enum DialogContents {
     REGISTER_PARAGRAPH = "To make your form valid please ensure the following:",
     REGISTER_REQUIRED = "Every field is required,",
     REGISTER_YEAR = "You should be at least 13 years old,",
-    REGISTER_PASSWORD = "Password should contain at least 8 and max 20 characters, 1 upper and lower case and 1 special character,",
+    REGISTER_PASSWORD = "Password should contain at least 8 and max 20 characters, " +
+        "1 upper and lower case and 1 special character,",
     REGISTER_SAME_PASSWORDS = "Passwords must be the same,",
 
     FORM_HEADER = "Form is not valid!",

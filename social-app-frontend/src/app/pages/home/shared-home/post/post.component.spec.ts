@@ -19,7 +19,8 @@ import { MatListModule } from "@angular/material/list";
 import { SharedAuthModule } from "@auth/shared/shared-auth.module";
 
 @Component({ selector: 'app-test', template: '' })
-class TestComponent {}
+class TestComponent {
+}
 
 describe('PostComponent', () => {
     let component: PostComponent;

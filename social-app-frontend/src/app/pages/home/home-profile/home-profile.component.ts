@@ -15,15 +15,15 @@ import { HomeProfileInterface } from "@core/interfaces/home/HomeProfileInterface
 export class HomeProfileComponent implements OnInit, OnDestroy, HomeProfileInterface {
     userDataDestroy$: Subject<void> = new Subject<void>();
     destroyDialog$: Subject<void> = new Subject<void>();
-    protected readonly SocialNames = SocialNames;
-    protected readonly HomeApiCalls = HomeApiCalls;
     job: string = "";
     userLocation: string = "";
     numOfFriends: number = 0;
-    fullName : string = "";
+    fullName: string = "";
     twitter: string = "";
     github: string = "";
     linkedin: string = "";
+    protected readonly SocialNames = SocialNames;
+    protected readonly HomeApiCalls = HomeApiCalls;
 
     constructor(private homeService: HomeService,
                 private homeDialogService: HomeDialogService) {
@@ -49,28 +49,28 @@ export class HomeProfileComponent implements OnInit, OnDestroy, HomeProfileInter
         this.homeDialogService.openMatDialogWindow(title, url)
             .pipe(takeUntil(this.destroyDialog$))
             .subscribe((data: string): void => {
-            if (data === null) {
-                this.homeDialogService.closeDialog();
+                if (data === null) {
+                    this.homeDialogService.closeDialog();
 
-                return;
-            }
-            if (title === SocialNames.JOB_DIALOG) {
-                this.job = data;
-            }
-            if (title === SocialNames.LOCATION_DIALOG) {
-                this.userLocation = data;
-            }
-            if (title === SocialNames.TWITTER_DIALOG) {
-                this.twitter = data;
-            }
-            if (title === SocialNames.GITHUB_DIALOG) {
-                this.github = data;
-            }
-            if (title === SocialNames.LINKEDIN_DIALOG) {
-                this.linkedin = data;
-            }
-            this.homeDialogService.closeDialog();
-        });
+                    return;
+                }
+                if (title === SocialNames.JOB_DIALOG) {
+                    this.job = data;
+                }
+                if (title === SocialNames.LOCATION_DIALOG) {
+                    this.userLocation = data;
+                }
+                if (title === SocialNames.TWITTER_DIALOG) {
+                    this.twitter = data;
+                }
+                if (title === SocialNames.GITHUB_DIALOG) {
+                    this.github = data;
+                }
+                if (title === SocialNames.LINKEDIN_DIALOG) {
+                    this.linkedin = data;
+                }
+                this.homeDialogService.closeDialog();
+            });
     }
 
     ngOnDestroy(): void {

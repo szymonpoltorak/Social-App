@@ -12,8 +12,7 @@ import { OauthRoutingModule } from "@pages/oauth/oauth-routing.module";
         CommonModule,
         OauthRoutingModule
     ],
-    providers: [
-    ]
+    providers: []
 })
 export class OauthModule {
 }

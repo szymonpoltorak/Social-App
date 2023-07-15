@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+    HttpErrorResponse,
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+    HttpStatusCode
+} from '@angular/common/http';
 import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throwError } from 'rxjs';
 import { Router } from "@angular/router";
 import { UserService } from "@services/utils/user.service";
@@ -26,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         return next.handle(this.addTokenToRequest(token, request)).pipe(
             catchError((error: any) => {
-                if (error instanceof HttpErrorResponse && error.status === 403) {
+                if (error instanceof HttpErrorResponse && error.status === HttpStatusCode.Forbidden) {
                     this.utilService.removeValueFromStorage(StorageKeys.AUTH_TOKEN);
 
                     return this.refreshUsersTokenIfPossible(request, next);
@@ -36,7 +43,8 @@ export class AuthInterceptor implements HttpInterceptor {
         );
     }
 
-    private refreshUsersTokenIfPossible(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    private refreshUsersTokenIfPossible(request: HttpRequest<unknown>,
+                                        next: HttpHandler): Observable<HttpEvent<unknown>> {
         if (!this.isRefreshing) {
             this.isRefreshing = true;
             this.refreshTokenSubject.next(null);
