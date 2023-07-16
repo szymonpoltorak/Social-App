@@ -23,6 +23,8 @@ public class OAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
                                               AuthenticationException exception) throws IOException {
         String redirectUrl = frontendUrl + RedirectUrls.FAILURE_URL;
 
+        log.error("OAuth failure login. Redirecting to : {}", redirectUrl);
+
         getRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 }

@@ -4,14 +4,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.config.oauth.constants.RedirectUrls;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 
@@ -19,7 +16,6 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
  * Class to control auth endpoints.
  * It implements {@link AuthInterface}.
  */
-@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = AUTH_MAPPING)

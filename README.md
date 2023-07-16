@@ -43,6 +43,8 @@ I used various technologies which I will list below.
 
 * makefile,
 * docker,
+* kubernetes,
+* minikube,
 * postman.
 
 ## Installation of docker

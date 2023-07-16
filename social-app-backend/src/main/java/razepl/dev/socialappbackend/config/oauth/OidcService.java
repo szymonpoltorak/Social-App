@@ -19,6 +19,8 @@ public class OidcService extends OidcUserService {
     public final OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
         OidcUser oidcUser = super.loadUser(userRequest);
 
+        log.info("Loading OIDC user.");
+
         return oauthUserProcessor.processOAuthUserRegistration(userRequest, oidcUser);
     }
 }
