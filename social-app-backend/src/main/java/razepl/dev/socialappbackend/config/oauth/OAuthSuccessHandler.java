@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -19,6 +20,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements IOAuthSuccessHandler {
+    @Value(RedirectUrls.FRONTEND_URL_VALUE)
+    private String frontendUrl;
     private final JwtServiceInterface jwtService;
     private final TokenManager tokenManager;
 
@@ -44,9 +47,10 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
 
         String authToken = jwtService.generateToken(userDetails);
         String refreshToken = jwtService.generateRefreshToken(userDetails);
+        String redirectUrl = frontendUrl + RedirectUrls.SUCCESS_URL;
 
         redirectBuilder
-                .append(RedirectUrls.SUCCESS_URL)
+                .append(redirectUrl)
                 .append("?")
                 .append("authToken=").append(authToken).append("&")
                 .append("refreshToken=").append(refreshToken);

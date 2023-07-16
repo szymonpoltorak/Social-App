@@ -28,6 +28,26 @@ spring:
                 github:
                     client-id: ${GITHUB_CLIENT_ID}
                     client-secret: ${GITHUB_CLIENT_SECRET}
+    mail:
+        host: ${MAIL_HOST}
+        port: 1025
+        username: hello
+        password: hello
+
+        properties:
+            mail:
+                smtp:
+                    ssl:
+                        trust: "*"
+                    auth: true
+                    starttls:
+                        enable: true
+                    connectiontimeout: 5000
+                    timeout: 3000
+                    writetimeout: 5000
+
+frontend:
+    url: ${FRONTEND_URL}
 
 logging:
     level:

@@ -18,6 +18,7 @@ import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;
+import razepl.dev.socialappbackend.mail.IEmailSender;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class AuthService implements AuthServiceInterface {
     private final AuthenticationManager authenticationManager;
     private final TokenManager tokenManager;
     private final JwtServiceInterface jwtService;
+    private final IEmailSender emailSender;
 
     @Override
     public final AuthResponse register(RegisterRequest registerRequest) {
@@ -59,6 +61,8 @@ public class AuthService implements AuthServiceInterface {
         userRepository.save(user);
 
         log.info("Building token response for user : {}", user);
+
+        emailSender.sendEmail(user.getEmail(), "Welcome to SocialApp", "Welcome to SocialApp");
 
         return tokenManager.buildTokensIntoResponse(user, false);
     }

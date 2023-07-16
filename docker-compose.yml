@@ -1,34 +1,45 @@
 version: "3"
 
 services:
-  postgres:
-    container_name: postgres
-    build:
-      context: social-app-backend
-      dockerfile: Dockerfile.postgres
-    ports:
-      - "5432:5432"
-  backend:
-    container_name: backend
-    depends_on:
-      - postgres
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialapp
-      - GOOGLE_CLIENT_ID=YourId
-      - GOOGLE_CLIENT_SECRET=YourSecret
-      - GITHUB_CLIENT_ID=YourID
-      - GITHUB_CLIENT_SECRET=YourSecret
-    build:
-      context: social-app-backend
-      dockerfile: Dockerfile.backend
-    ports:
-      - "8080:8080"
-  frontend:
-    container_name: frontend
-    depends_on:
-      - backend
-    build:
-      context: social-app-frontend
-      dockerfile: Dockerfile.frontend
-    ports:
-      - "4200:80"
+    maildev:
+        container_name: maildev
+        build:
+            context: social-app-backend
+            dockerfile: Dockerfile.mail
+        ports:
+            - "1080:1080"
+            - "1025:1025"
+    postgres:
+        container_name: postgres
+        build:
+            context: social-app-backend
+            dockerfile: Dockerfile.postgres
+        ports:
+            - "5432:5432"
+    backend:
+        container_name: backend
+        depends_on:
+            - postgres
+            - maildev
+        environment:
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialapp
+            - GOOGLE_CLIENT_ID=YourId
+            - GOOGLE_CLIENT_SECRET=YourSecret
+            - GITHUB_CLIENT_ID=YourID
+            - GITHUB_CLIENT_SECRET=YourSecret
+            - FRONTEND_URL=http://frontend:4200
+            - MAIL_HOST=maildev
+        build:
+            context: social-app-backend
+            dockerfile: Dockerfile.backend
+        ports:
+            - "8080:8080"
+    frontend:
+        container_name: frontend
+        depends_on:
+            - backend
+        build:
+            context: social-app-frontend
+            dockerfile: Dockerfile.frontend
+        ports:
+            - "4200:80"

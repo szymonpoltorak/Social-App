@@ -4,12 +4,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.post.Post;
 
 /**
  * Repository interface for accessing and managing Comment entities.
  * Extends the JpaRepository interface to inherit common CRUD and pagination operations.
  */
+@Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     /**
      * Retrieves a page of comments for a specific post, sorted by comment date.

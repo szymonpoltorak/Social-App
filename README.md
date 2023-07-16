@@ -35,6 +35,8 @@ I used various technologies which I will list below.
 * oauth2,
 * jackson,
 * swagger,
+* maildev,
+* spring mail service,
 * logback.
 
 ### Others

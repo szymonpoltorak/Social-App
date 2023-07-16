@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.entities.token.interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.token.JwtToken;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
  * A repository for JwtTokens.
  * It extends {@link JpaRepository}.
  */
+@Repository
 public interface TokenRepository extends JpaRepository<JwtToken, Long> {
     /**
      * Method to find token object inside database by the given token string
