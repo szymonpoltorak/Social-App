@@ -2,7 +2,6 @@ package razepl.dev.socialappbackend.home;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.entities.user.User;
@@ -17,7 +16,6 @@ import static razepl.dev.socialappbackend.home.constants.HomeMappings.*;
 /**
  * Controller for /api/home endpoints.
  */
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = HOME_MAPPING)

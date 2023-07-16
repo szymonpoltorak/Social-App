@@ -39,7 +39,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler i
                              HttpServletResponse response,
                              Authentication authentication) throws IOException {
         log.error("Principal : {}", authentication.getPrincipal());
-        log.error("Credentials : {}", authentication.getCredentials());
 
         StringBuilder redirectBuilder = new StringBuilder(200);
 
