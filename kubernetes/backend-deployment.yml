@@ -19,6 +19,19 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/socialapp
+              value: jdbc:postgresql://postgres-service:5432/socialapp
+            - name: GOOGLE_CLIENT_ID
+              value: YourId
+            - name: GOOGLE_CLIENT_SECRET
+              value: YourSecret
+            - name: GITHUB_CLIENT_ID
+              value: YourID
+            - name: GITHUB_CLIENT_SECRET
+              value: YourSecret
+            - name: FRONTEND_URL
+              value: http://frontend-service:80
+            - name: MAIL_HOST
+              value: maildev-service
           dependsOn:
-            - name: postgres
+            - name: postgres-service
+            - name: maildev-service
