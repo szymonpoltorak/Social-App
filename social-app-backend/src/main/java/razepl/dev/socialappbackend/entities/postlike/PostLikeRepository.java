@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.entities.postlike;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.user.User;
 
@@ -10,6 +11,7 @@ import java.util.Optional;
 /**
  * This interface provides data access methods for managing likes in the repository.
  */
+@Repository
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     /**
      * Counts the number of likes for a specific post.

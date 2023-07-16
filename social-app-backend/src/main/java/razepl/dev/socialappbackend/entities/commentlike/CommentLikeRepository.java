@@ -2,6 +2,7 @@ package razepl.dev.socialappbackend.entities.commentlike;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.user.User;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
  * Repository interface for accessing and managing CommentLike entities.
  * Extends the JpaRepository interface to inherit common CRUD operations.
  */
+@Repository
 public interface CommentLikeRepository extends JpaRepository<CommentLike, Long> {
     /**
      * Counts the number of likes for a specific comment.

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.user.User;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
  * A repository interface for accessing and managing {@link User} entities.
  * It extends the {@link JpaRepository} interface to inherit common CRUD and pagination operations.
  */
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     /**
      * Finds a user by email address.

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import razepl.dev.socialappbackend.entities.user.User;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
  * A repository interface for accessing and managing Friend entities.
  * It extends the JpaRepository interface to inherit common CRUD operations.
  */
+@Repository
 public interface FriendsRepository extends JpaRepository<Friend, Long> {
     /**
      * Counts the number of friends for a specific user.
