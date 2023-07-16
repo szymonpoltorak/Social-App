@@ -5,11 +5,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import razepl.dev.socialappbackend.auth.apicalls.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.config.oauth.constants.RedirectUrls;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
 

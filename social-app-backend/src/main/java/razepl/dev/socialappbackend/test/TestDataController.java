@@ -38,7 +38,7 @@ public class TestDataController {
 
         AuthResponse response = registerUsers();
 
-        addFriendsFor("jacek0@gmail.com");
+        addFriendsFor("jacek0@mail.com");
 
         addPosts();
 
@@ -54,7 +54,7 @@ public class TestDataController {
         AuthResponse response = null;
 
         for (int i = 0; i < names.length; i++) {
-            String email = names[i].toLowerCase() + i + "@gmail.com";
+            String email = names[i].toLowerCase() + i + "@mail.com";
 
             RegisterRequest request = RegisterRequest
                     .builder()
@@ -97,9 +97,9 @@ public class TestDataController {
         String[] comments = {"That's the issue", "It works on my machine", "Well sus", "Go to work", "Go back to school",
                 "Where do you go?", "Lets go", "Hello you fellow kids", "Can you see the difference?"
         };
-        User jacek = userRepository.findByEmail("jacek0@gmail.com").orElseThrow();
-        User ania = userRepository.findByEmail("ania1@gmail.com").orElseThrow();
-        User andrzej = userRepository.findByEmail("andrzej2@gmail.com").orElseThrow();
+        User jacek = userRepository.findByEmail("jacek0@mail.com").orElseThrow();
+        User ania = userRepository.findByEmail("ania1@mail.com").orElseThrow();
+        User andrzej = userRepository.findByEmail("andrzej2@mail.com").orElseThrow();
 
         for (int i = 0; i < contents.length; i++) {
             if (i % 3 == 0) {

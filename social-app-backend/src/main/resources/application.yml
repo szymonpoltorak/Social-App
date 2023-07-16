@@ -29,7 +29,7 @@ spring:
                     client-id: ${GITHUB_CLIENT_ID}
                     client-secret: ${GITHUB_CLIENT_SECRET}
     mail:
-        host: localhost
+        host: ${MAIL_HOST}
         port: 1025
         username: hello
         password: hello
@@ -45,6 +45,9 @@ spring:
                     connectiontimeout: 5000
                     timeout: 3000
                     writetimeout: 5000
+
+frontend:
+    url: ${FRONTEND_URL}
 
 logging:
     level:
