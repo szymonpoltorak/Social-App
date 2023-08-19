@@ -18,13 +18,13 @@ import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
 import razepl.dev.socialappbackend.entities.postlike.PostLike;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.home.data.*;
-import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
+import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,7 +45,7 @@ class HomeServiceTest {
     private CommentLikeRepository commentLikeRepository;
 
     @Mock
-    private DataServiceInterface dataServiceInterface;
+    private HomeDataBuilderService dataServiceInterface;
 
     @Mock
     private UserRepository userRepository;
@@ -60,7 +60,7 @@ class HomeServiceTest {
     private FriendsRepository friendRepository;
 
     @InjectMocks
-    private HomeService homeService;
+    private HomeServiceImpl homeService;
 
     private User user;
 
@@ -92,10 +92,10 @@ class HomeServiceTest {
                 .thenReturn(Optional.empty());
 
         when(dataServiceInterface.buildLikeData(anyBoolean(), any()))
-                .thenReturn(new LikeData(1L, true));
+                .thenReturn(new LikeResponse(1L, true));
 
         // when
-        LikeData result = homeService.updateCommentLikeCounter(1L, user);
+        LikeResponse result = homeService.updateCommentLikeCounter(1L, user);
 
         // then
         assertTrue(result.isLiked());
@@ -117,10 +117,10 @@ class HomeServiceTest {
                 .thenReturn(Optional.of(like));
 
         when(dataServiceInterface.buildLikeData(anyBoolean(), any()))
-                .thenReturn(new LikeData(0L, false));
+                .thenReturn(new LikeResponse(0L, false));
 
         // when
-        LikeData result = homeService.updateCommentLikeCounter(1L, user);
+        LikeResponse result = homeService.updateCommentLikeCounter(1L, user);
 
         // then
         assertFalse(result.isLiked());
@@ -140,10 +140,10 @@ class HomeServiceTest {
                 .thenReturn(Optional.empty());
 
         when(dataServiceInterface.buidLikeData(anyBoolean(), any()))
-                .thenReturn(new LikeData(1L, true));
+                .thenReturn(new LikeResponse(1L, true));
 
         // when
-        LikeData result = homeService.updatePostLikeCounter(1L, user);
+        LikeResponse result = homeService.updatePostLikeCounter(1L, user);
 
         // then
         assertTrue(result.isLiked());
@@ -164,10 +164,10 @@ class HomeServiceTest {
                 .thenReturn(Optional.of(like));
 
         when(dataServiceInterface.buidLikeData(anyBoolean(), any()))
-                .thenReturn(new LikeData(0L, false));
+                .thenReturn(new LikeResponse(0L, false));
 
         // when
-        LikeData result = homeService.updatePostLikeCounter(1L, user);
+        LikeResponse result = homeService.updatePostLikeCounter(1L, user);
 
         // then
         assertFalse(result.isLiked());
@@ -188,7 +188,7 @@ class HomeServiceTest {
                 .thenReturn(new PageImpl<>(List.of(comment1, comment2)));
 
         when(dataServiceInterface.buildCommentData(any(), any()))
-                .thenReturn(CommentData
+                .thenReturn(CommentResponse
                         .builder()
                         .commentContent("Nice post")
                         .commentDate(LocalDate.now())
@@ -196,7 +196,7 @@ class HomeServiceTest {
                         .commentId(1L)
                         .build()
                 )
-                .thenReturn(CommentData
+                .thenReturn(CommentResponse
                         .builder()
                         .commentContent("I agree")
                         .commentDate(LocalDate.now())
@@ -206,7 +206,7 @@ class HomeServiceTest {
                 );
 
         // when
-        List<CommentData> result = homeService.getListOfComments(postId, numOfSite, user);
+        List<CommentResponse> result = homeService.getListOfComments(postId, numOfSite, user);
 
         // then
         assertEquals(2, result.size());
@@ -231,7 +231,7 @@ class HomeServiceTest {
                 .thenReturn(Optional.of(post));
 
         when(dataServiceInterface.buildCommentData(any(), any()))
-                .thenReturn(CommentData
+                .thenReturn(CommentResponse
                         .builder()
                         .commentContent("Nice post")
                         .commentDate(LocalDate.now())
@@ -240,7 +240,7 @@ class HomeServiceTest {
                 );
 
         // when
-        CommentData result = homeService.createComment(request, user);
+        CommentResponse result = homeService.createComment(request, user);
 
         // then
         assertEquals(request.commentContent(), result.commentContent());
@@ -252,7 +252,7 @@ class HomeServiceTest {
     final void test_buildUserDataFromDb_shouldReturnUserDataIfExists() {
         // given
         User user = new User();
-        UserData userData = UserData.builder().build();
+        UserResponse userData = UserResponse.builder().build();
 
         when(userRepository.findByEmail(any()))
                 .thenReturn(java.util.Optional.of(user));
@@ -261,7 +261,7 @@ class HomeServiceTest {
                 .thenReturn(userData);
 
         // when
-        UserData result = homeService.buildUserDataFromDb(user);
+        UserResponse result = homeService.buildUserDataFromDb(user);
 
         // then
         assertEquals(userData, result);
@@ -300,7 +300,7 @@ class HomeServiceTest {
                 .thenReturn(new PageImpl<>(List.of(friendData1, friendData2)));
 
         // when
-        List<FriendData> result = homeService.buildUsersFriendList(user);
+        List<FriendResponse> result = homeService.buildUsersFriendList(user);
 
         // then
         assertEquals(2, result.size());
@@ -315,14 +315,14 @@ class HomeServiceTest {
         User user = new User();
         Post post1 = new Post(1L, "Hello world", LocalDate.now(), user);
         Post post2 = new Post(2L, "Goodbye world", LocalDate.now(), user);
-        PostData postData1 = PostData
+        PostResponse postData1 = PostResponse
                 .builder()
                 .postDate(LocalDate.now())
                 .postContent("Hello world")
                 .postId(1L)
                 .username(user.getUsername())
                 .build();
-        PostData postData2 = PostData
+        PostResponse postData2 = PostResponse
                 .builder()
                 .postDate(LocalDate.now())
                 .postContent("Goodbye world")
@@ -338,7 +338,7 @@ class HomeServiceTest {
                 .thenReturn(postData2);
 
         // when
-        List<PostData> result = homeService.getTheListOfPostsByNumberOfSite(numOfSite, user);
+        List<PostResponse> result = homeService.getTheListOfPostsByNumberOfSite(numOfSite, user);
 
         // then
         assertEquals(2, result.size());
@@ -351,7 +351,7 @@ class HomeServiceTest {
         // given
         String postContent = "Hello world";
         User user = new User();
-        PostData postData = PostData
+        PostResponse postData = PostResponse
                 .builder()
                 .postDate(LocalDate.now())
                 .postContent("Hello world")
@@ -363,7 +363,7 @@ class HomeServiceTest {
                 .thenReturn(postData);
 
         // when
-        PostData result = homeService.createNewPost(postContent, user);
+        PostResponse result = homeService.createNewPost(postContent, user);
 
         // then
         assertEquals(postData, result);

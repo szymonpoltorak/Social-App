@@ -7,9 +7,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManagerService;
 import razepl.dev.socialappbackend.entities.token.JwtToken;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
@@ -25,24 +25,24 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class TokenManagerServiceTest {
     @Autowired
-    private TokenManager tokenManager;
+    private TokenManagerService tokenManager;
 
     @Mock
     private TokenRepository mockTokenRepository;
 
     @Mock
-    private JwtServiceInterface mockJwtService;
+    private JwtService mockJwtService;
 
     @Mock
     private UserRepository mockUserRepository;
 
     @Mock
-    private TokenManager tokenManagerService;
+    private TokenManagerService tokenManagerService;
 
     @BeforeEach
     final void setUp() {
         MockitoAnnotations.openMocks(this);
-        tokenManagerService = new TokenManagerService(mockTokenRepository, mockJwtService, mockUserRepository);
+        tokenManagerService = new TokenManagerServiceImpl(mockTokenRepository, mockJwtService, mockUserRepository);
     }
 
     @Test

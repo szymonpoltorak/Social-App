@@ -5,8 +5,8 @@ import jakarta.validation.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
-import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
+import razepl.dev.socialappbackend.auth.data.ExceptionResponse;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
 
 /**
  * The AuthExceptionInterface interface defines a methods for handling errors in Authentication.

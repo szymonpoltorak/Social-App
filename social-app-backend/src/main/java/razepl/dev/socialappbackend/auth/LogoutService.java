@@ -10,6 +10,9 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.token.JwtToken;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+
+import java.util.Optional;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.*;
 
@@ -32,13 +35,11 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         String jwt = authHeader.substring(TOKEN_START_INDEX);
-        JwtToken token = tokenRepository.findByToken(jwt).orElse(null);
+        
+        JwtToken token = tokenRepository.findByToken(jwt).orElseThrow(
+                () -> new TokenDoesNotExistException("Jwt in header: {}\nToken is null")
+        );
 
-        if (token == null) {
-            log.warn("Jwt in header: {}\nToken is null", jwt);
-
-            return;
-        }
         log.info("Jwt in header : {}\nToken is not null", jwt);
 
         token.setExpired(true);

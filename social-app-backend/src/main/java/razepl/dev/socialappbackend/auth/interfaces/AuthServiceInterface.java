@@ -2,7 +2,7 @@ package razepl.dev.socialappbackend.auth.interfaces;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import razepl.dev.socialappbackend.auth.apicalls.*;
+import razepl.dev.socialappbackend.auth.data.*;
 
 /**
  * This interface provides methods for user authentication and authorization.

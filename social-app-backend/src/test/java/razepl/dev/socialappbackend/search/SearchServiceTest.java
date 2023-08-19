@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
-import razepl.dev.socialappbackend.search.interfaces.SearchServiceInterface;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
+import razepl.dev.socialappbackend.search.interfaces.SearchService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class SearchServiceTest {
     @Autowired
-    private SearchServiceInterface searchService;
+    private SearchService searchService;
 
     @Autowired
     private UserRepository userRepository;
@@ -84,7 +84,7 @@ class SearchServiceTest {
         String pattern = "Jacek";
 
         // when
-        List<UserSearchData> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
+        List<UserSearchResponse> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
 
         // then
         assertTrue(result.isEmpty());
@@ -97,7 +97,7 @@ class SearchServiceTest {
         String pattern = "Ania";
 
         // when
-        List<UserSearchData> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
+        List<UserSearchResponse> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
 
         // then
         assertEquals(1, result.size());

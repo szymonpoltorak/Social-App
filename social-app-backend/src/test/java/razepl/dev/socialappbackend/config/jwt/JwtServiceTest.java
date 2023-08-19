@@ -9,7 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
-import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class JwtServiceTest {
     @Autowired
-    private JwtServiceInterface jwtService;
+    private JwtService jwtService;
 
     @Mock
     private HttpServletRequest mockRequest;
