@@ -20,10 +20,10 @@ public interface TokenManagerService {
      * Builds an {@link AuthResponse} object with authentication and refresh tokens generated from the given user.
      *
      * @param user          the user for which to generate tokens
-     * @param shouldIRevoke a flag indicating whether to revoke any existing tokens for the user
+     * @param shouldBeRevoked a flag indicating whether to revoke any existing tokens for the user
      * @return the constructed {@link AuthResponse} object
      */
-    AuthResponse buildTokensIntoResponse(User user, boolean shouldIRevoke);
+    AuthResponse buildTokensIntoResponse(User user, boolean shouldBeRevoked);
 
     /**
      * Revokes all tokens for the given user.

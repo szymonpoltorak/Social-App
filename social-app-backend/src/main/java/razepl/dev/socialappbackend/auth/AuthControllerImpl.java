@@ -10,7 +10,11 @@ import razepl.dev.socialappbackend.auth.data.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthController;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
 
-import static razepl.dev.socialappbackend.auth.constants.AuthMappings.*;
+import static razepl.dev.socialappbackend.auth.constants.AuthMappings.AUTHENTICATE_MAPPING;
+import static razepl.dev.socialappbackend.auth.constants.AuthMappings.AUTH_MAPPING;
+import static razepl.dev.socialappbackend.auth.constants.AuthMappings.LOGIN_MAPPING;
+import static razepl.dev.socialappbackend.auth.constants.AuthMappings.REFRESH_MAPPING;
+import static razepl.dev.socialappbackend.auth.constants.AuthMappings.REGISTER_MAPPING;
 
 /**
  * Class to control auth endpoints.

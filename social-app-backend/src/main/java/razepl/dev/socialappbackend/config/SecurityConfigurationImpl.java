@@ -25,6 +25,7 @@ import razepl.dev.socialappbackend.config.jwt.interfaces.JwtAuthenticationFilter
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
 import static razepl.dev.socialappbackend.config.constants.Headers.*;
+import static razepl.dev.socialappbackend.config.constants.Matchers.*;
 import static razepl.dev.socialappbackend.config.enums.Permissions.*;
 import static razepl.dev.socialappbackend.entities.user.Role.ADMIN;
 import static razepl.dev.socialappbackend.entities.user.Role.MODERATOR;

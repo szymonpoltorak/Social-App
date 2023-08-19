@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.config.constants.Headers;
+import razepl.dev.socialappbackend.config.constants.Matchers;
 import razepl.dev.socialappbackend.config.constants.Properties;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
@@ -88,7 +89,7 @@ public class JwtServiceImpl implements JwtService {
 
         String authHeader = request.getHeader(Headers.AUTH_HEADER);
 
-        if (request.getServletPath().contains(Headers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
+        if (request.getServletPath().contains(Matchers.AUTH_MAPPING) || authHeader == null || !authHeader.startsWith(Headers.TOKEN_HEADER)) {
             return null;
         }
         return authHeader.substring(Headers.TOKEN_START_INDEX);

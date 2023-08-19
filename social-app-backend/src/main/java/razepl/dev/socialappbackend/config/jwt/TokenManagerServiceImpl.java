@@ -44,13 +44,13 @@ public class TokenManagerServiceImpl implements TokenManagerService {
     }
 
     @Override
-    public final AuthResponse buildTokensIntoResponse(User user, boolean shouldIRevoke) {
+    public final AuthResponse buildTokensIntoResponse(User user, boolean shouldBeRevoked) {
         ArgumentValidator.throwIfNull(user);
 
         String authToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
 
-        if (shouldIRevoke) {
+        if (shouldBeRevoked) {
             revokeUserTokens(user);
         }
         saveUsersToken(authToken, user);
