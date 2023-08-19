@@ -1,7 +1,7 @@
 package razepl.dev.socialappbackend.search.interfaces;
 
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface SearchService {
      * @param user      The authenticated user making the request.
      * @return The list of user search data matching the search pattern.
      */
-    List<UserSearchData> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user);
+    List<UserSearchResponse> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user);
 }

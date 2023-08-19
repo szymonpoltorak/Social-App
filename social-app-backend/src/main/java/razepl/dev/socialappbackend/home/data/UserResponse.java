@@ -7,7 +7,7 @@ import lombok.Builder;
  * Twitter username, LinkedIn username, and GitHub username.
  */
 @Builder
-public record UserData(String fullName, long numOfFriends, String location, String job,
-                       String twitter, String linkedin, String github) {
+public record UserResponse(String fullName, long numOfFriends, String location, String job,
+                           String twitter, String linkedin, String github) {
 }
 

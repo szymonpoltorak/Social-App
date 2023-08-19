@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
 import razepl.dev.socialappbackend.search.interfaces.SearchController;
 import razepl.dev.socialappbackend.search.interfaces.SearchService;
 
@@ -29,8 +29,8 @@ public class SearchControllerImpl implements SearchController {
 
     @Override
     @GetMapping(value = USERS_LIST_MAPPING)
-    public final List<UserSearchData> getTheListOfUsers(@RequestParam String pattern, @RequestParam int numOfSite,
-                                                        @AuthenticationPrincipal User user) {
+    public final List<UserSearchResponse> getTheListOfUsers(@RequestParam String pattern, @RequestParam int numOfSite,
+                                                            @AuthenticationPrincipal User user) {
         return searchService.getListOfUserBasedOnPattern(pattern, numOfSite, user);
     }
 }

@@ -8,7 +8,7 @@ import razepl.dev.socialappbackend.admin.interfaces.AdminService;
 import razepl.dev.socialappbackend.auth.data.AuthResponse;
 import razepl.dev.socialappbackend.auth.data.RegisterRequest;
 import razepl.dev.socialappbackend.auth.interfaces.AuthController;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class AdminControllerImpl implements AdminController {
 
     @Override
     @GetMapping(value = ENDPOINT_MATCHER)
-    public final List<UserData> getUsersList() {
+    public final List<UserResponse> getUsersList() {
         return adminService.getUsersList();
     }
 

@@ -1,6 +1,6 @@
 package razepl.dev.socialappbackend.moderator.interfaces;
 
-import razepl.dev.socialappbackend.home.data.PostData;
+import razepl.dev.socialappbackend.home.data.PostResponse;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface ModeratorService {
      *
      * @return The list of post data.
      */
-    List<PostData> getPostsList();
+    List<PostResponse> getPostsList();
 
     /**
      * Deletes a post with the specified post ID.

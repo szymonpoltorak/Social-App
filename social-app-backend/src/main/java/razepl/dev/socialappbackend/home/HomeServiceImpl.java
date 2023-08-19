@@ -48,7 +48,7 @@ public class HomeServiceImpl implements HomeService {
     private final CommentLikeRepository commentLikeRepository;
 
     @Override
-    public final UserData buildUserDataFromDb(User authUser) {
+    public final UserResponse buildUserDataFromDb(User authUser) {
         ArgumentValidator.throwIfNull(authUser);
 
         log.info("Getting userdata for user : {}", authUser);
@@ -63,7 +63,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final List<FriendData> buildUsersFriendList(User authUser) {
+    public final List<FriendResponse> buildUsersFriendList(User authUser) {
         ArgumentValidator.throwIfNull(authUser);
 
         log.info("Finding list of users for : {}", authUser);
@@ -82,7 +82,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user) {
+    public final List<PostResponse> getTheListOfPostsByNumberOfSite(int numOfSite, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(numOfSite);
 
@@ -107,7 +107,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final PostData createNewPost(String postContent, User user) {
+    public final PostResponse createNewPost(String postContent, User user) {
         ArgumentValidator.throwIfNull(postContent, user);
 
         log.info("Creating post with data : {}", postContent);
@@ -127,7 +127,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final LikeData updatePostLikeCounter(long postId, User user) {
+    public final LikeResponse updatePostLikeCounter(long postId, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(postId);
 
@@ -170,7 +170,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final List<CommentData> getListOfComments(long postId, int numOfSite, User user) {
+    public final List<CommentResponse> getListOfComments(long postId, int numOfSite, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(postId);
         ArgumentValidator.throwIfNegativeId(numOfSite);
@@ -190,7 +190,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final CommentData createComment(CommentRequest request, User user) {
+    public final CommentResponse createComment(CommentRequest request, User user) {
         ArgumentValidator.throwIfNull(request, user);
 
         log.info("Creating comment with data: {}\nOf User: {}", request, user);
@@ -213,7 +213,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public final LikeData updateCommentLikeCounter(long commentId, User user) {
+    public final LikeResponse updateCommentLikeCounter(long commentId, User user) {
         ArgumentValidator.throwIfNull(user);
         ArgumentValidator.throwIfNegativeId(commentId);
 

@@ -11,7 +11,7 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
 import razepl.dev.socialappbackend.search.interfaces.SearchService;
 
 import java.time.LocalDate;
@@ -84,7 +84,7 @@ class SearchServiceTest {
         String pattern = "Jacek";
 
         // when
-        List<UserSearchData> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
+        List<UserSearchResponse> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
 
         // then
         assertTrue(result.isEmpty());
@@ -97,7 +97,7 @@ class SearchServiceTest {
         String pattern = "Ania";
 
         // when
-        List<UserSearchData> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
+        List<UserSearchResponse> result = searchService.getListOfUserBasedOnPattern(pattern, numOfSite, jacek);
 
         // then
         assertEquals(1, result.size());

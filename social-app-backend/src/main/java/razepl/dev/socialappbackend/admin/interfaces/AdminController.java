@@ -2,7 +2,7 @@ package razepl.dev.socialappbackend.admin.interfaces;
 
 import razepl.dev.socialappbackend.auth.data.AuthResponse;
 import razepl.dev.socialappbackend.auth.data.RegisterRequest;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface AdminController {
      *
      * @return The list of user data.
      */
-    List<UserData> getUsersList();
+    List<UserResponse> getUsersList();
 
     /**
      * Deletes a user with the specified email.

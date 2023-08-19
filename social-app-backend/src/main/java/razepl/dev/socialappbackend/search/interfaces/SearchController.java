@@ -3,7 +3,7 @@ package razepl.dev.socialappbackend.search.interfaces;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
 
 import java.util.List;
 
@@ -30,5 +30,5 @@ public interface SearchController {
             }
 
     )
-    List<UserSearchData> getTheListOfUsers(String pattern, int numOfSite, User user);
+    List<UserSearchResponse> getTheListOfUsers(String pattern, int numOfSite, User user);
 }

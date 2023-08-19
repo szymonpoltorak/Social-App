@@ -7,6 +7,6 @@ import lombok.Builder;
  * It implements the EntityData interface.
  */
 @Builder
-public record FriendData(String friendFullName, String friendJob, String friendUsername) {
+public record FriendResponse(String friendFullName, String friendJob, String friendUsername) {
 }
 

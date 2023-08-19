@@ -9,10 +9,10 @@ import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.CommentData;
-import razepl.dev.socialappbackend.home.data.LikeData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
@@ -25,10 +25,10 @@ public class HomeDataBuilderServiceImpl implements HomeDataBuilderService {
     private final CommentLikeRepository commentLikeRepository;
 
     @Override
-    public final UserData buildUserData(User user) {
+    public final UserResponse buildUserData(User user) {
         ArgumentValidator.throwIfNull(user);
 
-        return UserData
+        return UserResponse
                 .builder()
                 .fullName(user.getFullName())
                 .location(convertNullIntoEmptyString(user.getLocation()))
@@ -41,10 +41,10 @@ public class HomeDataBuilderServiceImpl implements HomeDataBuilderService {
     }
 
     @Override
-    public final PostData buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked) {
+    public final PostResponse buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked) {
         ArgumentValidator.throwIfNull(post);
 
-        return PostData
+        return PostResponse
                 .builder()
                 .postAuthor(post.getUser().getFullName())
                 .username(post.getUser().getUsername())
@@ -59,10 +59,10 @@ public class HomeDataBuilderServiceImpl implements HomeDataBuilderService {
     }
 
     @Override
-    public final LikeData buidLikeData(boolean isPostLiked, Post post) {
+    public final LikeResponse buidLikeData(boolean isPostLiked, Post post) {
         ArgumentValidator.throwIfNull(post);
 
-        return LikeData
+        return LikeResponse
                 .builder()
                 .numOfLikes(postLikeRepository.countByPost(post))
                 .isLiked(isPostLiked)
@@ -70,10 +70,10 @@ public class HomeDataBuilderServiceImpl implements HomeDataBuilderService {
     }
 
     @Override
-    public final LikeData buildLikeData(boolean isPostLiked, Comment comment) {
+    public final LikeResponse buildLikeData(boolean isPostLiked, Comment comment) {
         ArgumentValidator.throwIfNull(comment);
 
-        return LikeData
+        return LikeResponse
                 .builder()
                 .numOfLikes(commentLikeRepository.countByComment(comment))
                 .isLiked(isPostLiked)
@@ -81,10 +81,10 @@ public class HomeDataBuilderServiceImpl implements HomeDataBuilderService {
     }
 
     @Override
-    public final CommentData buildCommentData(Comment comment, User user) {
+    public final CommentResponse buildCommentData(Comment comment, User user) {
         ArgumentValidator.throwIfNull(comment, user);
 
-        return CommentData
+        return CommentResponse
                 .builder()
                 .commentAuthor(comment.getUser().getFullName())
                 .commentContent(comment.getCommentContent())

@@ -32,7 +32,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> addToUsersFriends(String friendsUsername, User user);
+    DataResponse addToUsersFriends(String friendsUsername, User user);
 
     /**
      * Removes a user from the friend list of the specified user.
@@ -55,7 +55,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> removeFromUsersFriends(String friendsUsername, User user);
+    DataResponse removeFromUsersFriends(String friendsUsername, User user);
 
     /**
      * Updates the Twitter data for the specified user.
@@ -78,7 +78,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> updateTwitterData(String updateData, User user);
+    DataResponse updateTwitterData(String updateData, User user);
 
     /**
      * Updates the LinkedIn data for the specified user.
@@ -101,7 +101,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> updateLinkedinData(String updateData, User user);
+    DataResponse updateLinkedinData(String updateData, User user);
 
     /**
      * Updates the GitHub data for the specified user.
@@ -124,7 +124,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> updateGithubData(String updateData, User user);
+    DataResponse updateGithubData(String updateData, User user);
 
     /**
      * Updates the location data for the specified user.
@@ -147,7 +147,7 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> updateUsersLocation(String updateData, User user);
+    DataResponse updateUsersLocation(String updateData, User user);
 
     /**
      * Updates the job data for the specified user.
@@ -170,5 +170,5 @@ public interface HomeUserController {
                     hidden = true
             )
     )
-    ResponseEntity<DataResponse> updateUsersJob(String updateData, User user);
+    DataResponse updateUsersJob(String updateData, User user);
 }

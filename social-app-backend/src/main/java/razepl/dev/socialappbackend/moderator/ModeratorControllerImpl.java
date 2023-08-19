@@ -2,7 +2,7 @@ package razepl.dev.socialappbackend.moderator;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import razepl.dev.socialappbackend.home.data.PostData;
+import razepl.dev.socialappbackend.home.data.PostResponse;
 import razepl.dev.socialappbackend.moderator.interfaces.ModeratorController;
 import razepl.dev.socialappbackend.moderator.interfaces.ModeratorService;
 
@@ -18,7 +18,7 @@ public class ModeratorControllerImpl implements ModeratorController {
 
     @Override
     @GetMapping(value = POSTS_MAPPING)
-    public final List<PostData> getPostsList() {
+    public final List<PostResponse> getPostsList() {
         return moderatorService.getPostsList();
     }
 

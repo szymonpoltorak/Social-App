@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.admin.interfaces.AdminService;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class AdminServiceImpl implements AdminService {
     private final HomeDataBuilderService dataService;
 
     @Override
-    public final List<UserData> getUsersList() {
+    public final List<UserResponse> getUsersList() {
         log.info("Getting users list");
 
         return userRepository

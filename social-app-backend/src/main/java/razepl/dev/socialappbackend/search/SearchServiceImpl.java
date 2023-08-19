@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
-import razepl.dev.socialappbackend.search.data.UserSearchData;
+import razepl.dev.socialappbackend.search.data.UserSearchResponse;
 import razepl.dev.socialappbackend.search.interfaces.SearchService;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
@@ -26,7 +26,7 @@ public class SearchServiceImpl implements SearchService {
     private final FriendsRepository friendsRepository;
 
     @Override
-    public final List<UserSearchData> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user) {
+    public final List<UserSearchResponse> getListOfUserBasedOnPattern(String pattern, int numOfSite, User user) {
         ArgumentValidator.throwIfNull(pattern, user);
         ArgumentValidator.throwIfNegativeId(numOfSite);
 
@@ -39,7 +39,7 @@ public class SearchServiceImpl implements SearchService {
 
         return users
                 .stream()
-                .map(usr -> UserSearchData
+                .map(usr -> UserSearchResponse
                         .builder()
                         .username(usr.getUsername())
                         .fullName(usr.getFullName())

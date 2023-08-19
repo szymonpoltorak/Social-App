@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.FriendData;
+import razepl.dev.socialappbackend.home.data.FriendResponse;
 
 /**
  * Class that represents Friend entity.
@@ -31,8 +31,8 @@ public class Friend {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public final FriendData buildData() {
-        return FriendData
+    public final FriendResponse buildData() {
+        return FriendResponse
                 .builder()
                 .friendFullName(friendName)
                 .friendUsername(friendUsername)

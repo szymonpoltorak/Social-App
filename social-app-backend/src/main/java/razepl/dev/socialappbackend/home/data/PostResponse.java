@@ -11,8 +11,8 @@ import java.time.LocalDate;
  * It implements the EntityData interface.
  */
 @Builder
-public record PostData(String postContent, String postAuthor, LocalDate postDate, String username,
-                       long numOfLikes, long numOfComments, long postId, boolean isPostLiked,
-                       boolean isUserInFriends) {
+public record PostResponse(String postContent, String postAuthor, LocalDate postDate, String username,
+                           long numOfLikes, long numOfComments, long postId, boolean isPostLiked,
+                           boolean isUserInFriends) {
 }
 

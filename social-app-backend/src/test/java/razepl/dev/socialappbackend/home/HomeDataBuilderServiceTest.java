@@ -14,10 +14,10 @@ import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
-import razepl.dev.socialappbackend.home.data.CommentData;
-import razepl.dev.socialappbackend.home.data.LikeData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 
 import java.time.LocalDate;
@@ -92,7 +92,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(10L);
 
         // when
-        UserData result = homeDataBuilderService.buildUserData(user);
+        UserResponse result = homeDataBuilderService.buildUserData(user);
 
         // then
         assertEquals(user.getFullName(), result.fullName());
@@ -113,7 +113,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(10L);
 
         // when
-        UserData result = homeDataBuilderService.buildUserData(user);
+        UserResponse result = homeDataBuilderService.buildUserData(user);
 
         // then
         assertEquals(user.getFullName(), result.fullName());
@@ -140,7 +140,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(3L);
 
         // when
-        PostData result = homeDataBuilderService.buildPostData(post, isUserInFriends, isPostLiked);
+        PostResponse result = homeDataBuilderService.buildPostData(post, isUserInFriends, isPostLiked);
 
         // then
         assertEquals(post.getUser().getFullName(), result.postAuthor());
@@ -164,7 +164,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(5L);
 
         // when
-        LikeData result = homeDataBuilderService.buidLikeData(isPostLiked, post);
+        LikeResponse result = homeDataBuilderService.buidLikeData(isPostLiked, post);
 
         // then
         assertEquals(isPostLiked, result.isLiked());
@@ -183,7 +183,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(3L);
 
         // when
-        LikeData result = homeDataBuilderService.buildLikeData(isCommentLiked, comment);
+        LikeResponse result = homeDataBuilderService.buildLikeData(isCommentLiked, comment);
 
         // then
         assertEquals(isCommentLiked, result.isLiked());
@@ -202,7 +202,7 @@ class HomeDataBuilderServiceTest {
                 .thenReturn(3L);
 
         // when
-        CommentData result = homeDataBuilderService.buildCommentData(comment, user);
+        CommentResponse result = homeDataBuilderService.buildCommentData(comment, user);
 
         // then
         assertEquals(comment.getUser().getFullName(), result.commentAuthor());
@@ -276,7 +276,7 @@ class HomeDataBuilderServiceTest {
     @Test
     final void test_buildUserData_correct_usage() {
         // given
-        UserData expected = UserData
+        UserResponse expected = UserResponse
                 .builder()
                 .fullName(user.getFullName())
                 .twitter("")
@@ -290,7 +290,7 @@ class HomeDataBuilderServiceTest {
         when(dataServiceInterface.buildUserData(user))
                 .thenReturn(expected);
 
-        UserData result = dataServiceInterface.buildUserData(user);
+        UserResponse result = dataServiceInterface.buildUserData(user);
 
         // then
         assertEquals(expected, result);
@@ -299,7 +299,7 @@ class HomeDataBuilderServiceTest {
     @Test
     final void test_buildCommentData_correct_usage() {
         // given
-        CommentData expected = CommentData
+        CommentResponse expected = CommentResponse
                 .builder()
                 .commentId(comment.getCommentId())
                 .commentAuthor("Jacek Wasilewski")
@@ -313,7 +313,7 @@ class HomeDataBuilderServiceTest {
         when(dataServiceInterface.buildCommentData(comment, user))
                 .thenReturn(expected);
 
-        CommentData result = dataServiceInterface.buildCommentData(comment, user);
+        CommentResponse result = dataServiceInterface.buildCommentData(comment, user);
 
         // then
         assertEquals(expected, result);
@@ -322,7 +322,7 @@ class HomeDataBuilderServiceTest {
     @Test
     final void test_buildPostData_correct_usage() {
         // given
-        PostData expected = PostData
+        PostResponse expected = PostResponse
                 .builder()
                 .postId(post.getPostId())
                 .postAuthor("Jacek Wasilewski")
@@ -336,7 +336,7 @@ class HomeDataBuilderServiceTest {
         when(dataServiceInterface.buildPostData(post, false, false))
                 .thenReturn(expected);
 
-        PostData result = dataServiceInterface.buildPostData(post, false, false);
+        PostResponse result = dataServiceInterface.buildPostData(post, false, false);
 
         // then
         assertEquals(expected, result);
@@ -345,7 +345,7 @@ class HomeDataBuilderServiceTest {
     @Test
     final void test_buildLikeData_post_correct_usage() {
         // given
-        LikeData expected = LikeData
+        LikeResponse expected = LikeResponse
                 .builder()
                 .isLiked(false)
                 .numOfLikes(0L)
@@ -354,7 +354,7 @@ class HomeDataBuilderServiceTest {
         // when
         when(dataServiceInterface.buidLikeData(false, post)).thenReturn(expected);
 
-        LikeData result = dataServiceInterface.buidLikeData(false, post);
+        LikeResponse result = dataServiceInterface.buidLikeData(false, post);
 
         // then
         assertEquals(expected, result);
@@ -363,7 +363,7 @@ class HomeDataBuilderServiceTest {
     @Test
     final void test_buildLikeData_comment_correct_usage() {
         // given
-        LikeData expected = LikeData
+        LikeResponse expected = LikeResponse
                 .builder()
                 .isLiked(false)
                 .numOfLikes(0L)
@@ -372,7 +372,7 @@ class HomeDataBuilderServiceTest {
         // when
         when(dataServiceInterface.buildLikeData(false, comment)).thenReturn(expected);
 
-        LikeData result = dataServiceInterface.buildLikeData(false, comment);
+        LikeResponse result = dataServiceInterface.buildLikeData(false, comment);
 
         // then
         assertEquals(expected, result);

@@ -15,7 +15,7 @@ public interface HomeService {
      * @param user The user for whom to build the user data.
      * @return The user data built from the database.
      */
-    UserData buildUserDataFromDb(User user);
+    UserResponse buildUserDataFromDb(User user);
 
     /**
      * Builds the list of friend data for a given user.
@@ -23,7 +23,7 @@ public interface HomeService {
      * @param user The user for whom to build the friend list.
      * @return The list of friend data.
      */
-    List<FriendData> buildUsersFriendList(User user);
+    List<FriendResponse> buildUsersFriendList(User user);
 
     /**
      * Retrieves a list of post data by the number of site for a given user.
@@ -32,7 +32,7 @@ public interface HomeService {
      * @param user      The user for whom to retrieve the post list.
      * @return The list of post data.
      */
-    List<PostData> getTheListOfPostsByNumberOfSite(int numOfSite, User user);
+    List<PostResponse> getTheListOfPostsByNumberOfSite(int numOfSite, User user);
 
     /**
      * Creates a new post with the specified content for a given user.
@@ -41,7 +41,7 @@ public interface HomeService {
      * @param user        The user who is creating the post.
      * @return The created post data.
      */
-    PostData createNewPost(String postContent, User user);
+    PostResponse createNewPost(String postContent, User user);
 
     /**
      * Updates the like counter for a specific post for a given user.
@@ -50,7 +50,7 @@ public interface HomeService {
      * @param user   The user who is updating the like counter.
      * @return The updated like data.
      */
-    LikeData updatePostLikeCounter(long postId, User user);
+    LikeResponse updatePostLikeCounter(long postId, User user);
 
     /**
      * Deletes a specific post by its ID.
@@ -67,7 +67,7 @@ public interface HomeService {
      * @param user      - The user making the request.
      * @return A list of CommentData objects representing the comments.
      */
-    List<CommentData> getListOfComments(long postId, int numOfSite, User user);
+    List<CommentResponse> getListOfComments(long postId, int numOfSite, User user);
 
     /**
      * Creates a new comment for a post.
@@ -76,7 +76,7 @@ public interface HomeService {
      * @param user    - The user creating the comment.
      * @return The created CommentData object.
      */
-    CommentData createComment(CommentRequest request, User user);
+    CommentResponse createComment(CommentRequest request, User user);
 
     /**
      * Updates the number of likes for a comment.
@@ -85,6 +85,6 @@ public interface HomeService {
      * @param user      - The user making the request.
      * @return The updated LikeData object.
      */
-    LikeData updateCommentLikeCounter(long commentId, User user);
+    LikeResponse updateCommentLikeCounter(long commentId, User user);
 }
 

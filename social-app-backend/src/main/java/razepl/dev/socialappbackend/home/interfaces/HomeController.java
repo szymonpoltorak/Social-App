@@ -32,7 +32,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    UserData getUserData(User user);
+    UserResponse getUserData(User user);
 
     /**
      * Retrieves a list of friend data for a given user.
@@ -54,7 +54,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    List<FriendData> getFriendsList(User user);
+    List<FriendResponse> getFriendsList(User user);
 
     /**
      * Retrieves a list of post data with an offset value for a given user.
@@ -77,7 +77,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    List<PostData> getPostsList(int numOfSite, User user);
+    List<PostResponse> getPostsList(int numOfSite, User user);
 
     /**
      * Creates a new post with the specified content for a given user.
@@ -100,7 +100,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    PostData createPost(String postContent, User user);
+    PostResponse createPost(String postContent, User user);
 
     /**
      * Changes the number of likes for a specific post for a given user.
@@ -123,7 +123,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    LikeData changePostNumberOfLikes(long postId, User user);
+    LikeResponse changePostNumberOfLikes(long postId, User user);
 
     /**
      * Deletes a specific post for a given user.
@@ -164,7 +164,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    List<CommentData> getListOfComments(long postId, int numOfSite, User user);
+    List<CommentResponse> getListOfComments(long postId, int numOfSite, User user);
 
     /**
      * Creates a new comment for a post.
@@ -187,7 +187,7 @@ public interface HomeController {
                     hidden = true
             )
     )
-    CommentData createComment(CommentRequest request, User user);
+    CommentResponse createComment(CommentRequest request, User user);
 
     /**
      * Changes the number of likes for a comment.
@@ -210,6 +210,6 @@ public interface HomeController {
                     hidden = true
             )
     )
-    LikeData changeCommentNumberOfLikes(long commentId, User user);
+    LikeResponse changeCommentNumberOfLikes(long commentId, User user);
 }
 

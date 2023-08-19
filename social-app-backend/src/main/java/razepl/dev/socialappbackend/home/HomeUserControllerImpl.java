@@ -30,78 +30,78 @@ public class HomeUserControllerImpl implements HomeUserController {
 
     @Override
     @PatchMapping(value = ADD_FRIEND_MAPPING)
-    public final ResponseEntity<DataResponse> addToUsersFriends(@RequestParam String friendsUsername,
+    public final DataResponse addToUsersFriends(@RequestParam String friendsUsername,
                                                                 @AuthenticationPrincipal User user) {
         log.info("Adding friend: {}, for user : {}", friendsUsername, user);
 
         userService.addFriendToUser(friendsUsername, user);
 
-        return ResponseEntity.ok(new DataResponse("Successfully add friend to user!"));
+        return new DataResponse("Successfully add friend to user!");
     }
 
     @Override
     @PatchMapping(value = REMOVE_FRIEND_MAPPING)
-    public final ResponseEntity<DataResponse> removeFromUsersFriends(@RequestParam String friendsUsername,
+    public final DataResponse removeFromUsersFriends(@RequestParam String friendsUsername,
                                                                      @AuthenticationPrincipal User user) {
         log.info("Removing friend: {}, from user : {}", friendsUsername, user);
 
         userService.removeFriendFromUser(friendsUsername, user);
 
-        return ResponseEntity.ok(new DataResponse("Successfully removed friend from user!"));
+        return new DataResponse("Successfully removed friend from user!");
     }
 
     @Override
     @PatchMapping(value = TWITTER_MAPPING)
-    public final ResponseEntity<DataResponse> updateTwitterData(@RequestParam String updateData,
+    public final DataResponse updateTwitterData(@RequestParam String updateData,
                                                                 @AuthenticationPrincipal User user) {
         log.info("Updating users twitter data with: \n{}", updateData);
 
         userService.updateTwitterData(updateData, user);
 
-        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
+        return new DataResponse(SUCCESSFUL_DATA_UPDATE);
     }
 
     @Override
     @PatchMapping(value = LINKEDIN_MAPPING)
-    public final ResponseEntity<DataResponse> updateLinkedinData(@RequestParam String updateData,
+    public final DataResponse updateLinkedinData(@RequestParam String updateData,
                                                                  @AuthenticationPrincipal User user) {
         log.info("Updating users linkedin data with: \n{}", updateData);
 
         userService.updateLinkedinData(updateData, user);
 
-        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
+        return new DataResponse(SUCCESSFUL_DATA_UPDATE);
     }
 
     @Override
     @PatchMapping(value = GITHUB_MAPPING)
-    public final ResponseEntity<DataResponse> updateGithubData(@RequestParam String updateData,
+    public final DataResponse updateGithubData(@RequestParam String updateData,
                                                                @AuthenticationPrincipal User user) {
         log.info("Updating users github data with: \n{}", updateData);
 
         userService.updateGithubData(updateData, user);
 
-        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
+        return new DataResponse(SUCCESSFUL_DATA_UPDATE);
     }
 
     @Override
     @PatchMapping(value = LOCATION_MAPPING)
-    public final ResponseEntity<DataResponse> updateUsersLocation(@RequestParam String updateData,
+    public final DataResponse updateUsersLocation(@RequestParam String updateData,
                                                                   @AuthenticationPrincipal User user) {
         log.info("Updating users location data with: \n{}", updateData);
 
         userService.updateUsersLocation(updateData, user);
 
-        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
+        return new DataResponse(SUCCESSFUL_DATA_UPDATE);
     }
 
     @Override
     @PatchMapping(value = JOB_MAPPING)
-    public final ResponseEntity<DataResponse> updateUsersJob(@RequestParam String updateData,
+    public final DataResponse updateUsersJob(@RequestParam String updateData,
                                                              @AuthenticationPrincipal User user) {
         log.info("Updating users friendJob data with: \n{}", updateData);
 
         userService.updateUsersJob(updateData, user);
 
-        return ResponseEntity.ok(new DataResponse(SUCCESSFUL_DATA_UPDATE));
+        return new DataResponse(SUCCESSFUL_DATA_UPDATE);
     }
 }

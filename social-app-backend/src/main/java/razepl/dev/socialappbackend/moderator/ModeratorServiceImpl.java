@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
-import razepl.dev.socialappbackend.home.data.PostData;
+import razepl.dev.socialappbackend.home.data.PostResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 import razepl.dev.socialappbackend.moderator.interfaces.ModeratorService;
 
@@ -20,7 +20,7 @@ public class ModeratorServiceImpl implements ModeratorService {
     private final CommentRepository commentRepository;
 
     @Override
-    public final List<PostData> getPostsList() {
+    public final List<PostResponse> getPostsList() {
         log.info("Getting posts list");
 
         return postRepository

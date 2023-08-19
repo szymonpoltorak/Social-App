@@ -3,10 +3,10 @@ package razepl.dev.socialappbackend.home.interfaces;
 import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.CommentData;
-import razepl.dev.socialappbackend.home.data.LikeData;
-import razepl.dev.socialappbackend.home.data.PostData;
-import razepl.dev.socialappbackend.home.data.UserData;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 
 /**
  * Represents the interface for building data objects.
@@ -18,7 +18,7 @@ public interface HomeDataBuilderService {
      * @param user - The User object to build from.
      * @return The built UserData object.
      */
-    UserData buildUserData(User user);
+    UserResponse buildUserData(User user);
 
     /**
      * Builds a PostData object from a Post, indicating whether the user is in friends and if the post is liked.
@@ -28,7 +28,7 @@ public interface HomeDataBuilderService {
      * @param isPostLiked     - Indicates whether the post is liked.
      * @return The built PostData object.
      */
-    PostData buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked);
+    PostResponse buildPostData(Post post, boolean isUserInFriends, boolean isPostLiked);
 
     /**
      * Builds a LikeData object from a boolean indicating if the post is liked and a Post object.
@@ -37,7 +37,7 @@ public interface HomeDataBuilderService {
      * @param post        - The Post object to build from.
      * @return The built LikeData object.
      */
-    LikeData buidLikeData(boolean isPostLiked, Post post);
+    LikeResponse buidLikeData(boolean isPostLiked, Post post);
 
     /**
      * Builds a LikeData object from a boolean indicating if the post is liked and a Comment object.
@@ -46,7 +46,7 @@ public interface HomeDataBuilderService {
      * @param comment     - The Comment object to build from.
      * @return The built LikeData object.
      */
-    LikeData buildLikeData(boolean isPostLiked, Comment comment);
+    LikeResponse buildLikeData(boolean isPostLiked, Comment comment);
 
     /**
      * Builds a CommentData object from a Comment and a User.
@@ -55,5 +55,5 @@ public interface HomeDataBuilderService {
      * @param user    - The User object to build from.
      * @return The built CommentData object.
      */
-    CommentData buildCommentData(Comment comment, User user);
+    CommentResponse buildCommentData(Comment comment, User user);
 }

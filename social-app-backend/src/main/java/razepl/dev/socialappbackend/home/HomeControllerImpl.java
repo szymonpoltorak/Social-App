@@ -25,31 +25,31 @@ public class HomeControllerImpl implements HomeController {
 
     @Override
     @GetMapping(value = USERDATA_MAPPING)
-    public final UserData getUserData(@AuthenticationPrincipal User user) {
+    public final UserResponse getUserData(@AuthenticationPrincipal User user) {
         return homeService.buildUserDataFromDb(user);
     }
 
     @Override
     @GetMapping(value = FRIENDS_LIST_MAPPING)
-    public final List<FriendData> getFriendsList(@AuthenticationPrincipal User user) {
+    public final List<FriendResponse> getFriendsList(@AuthenticationPrincipal User user) {
         return homeService.buildUsersFriendList(user);
     }
 
     @Override
     @GetMapping(value = POST_LIST_MAPPING)
-    public final List<PostData> getPostsList(@RequestParam int numOfSite, @AuthenticationPrincipal User user) {
+    public final List<PostResponse> getPostsList(@RequestParam int numOfSite, @AuthenticationPrincipal User user) {
         return homeService.getTheListOfPostsByNumberOfSite(numOfSite, user);
     }
 
     @Override
     @PostMapping(value = CREATE_POST_MAPPING)
-    public final PostData createPost(@RequestParam String postContent, @AuthenticationPrincipal User user) {
+    public final PostResponse createPost(@RequestParam String postContent, @AuthenticationPrincipal User user) {
         return homeService.createNewPost(postContent, user);
     }
 
     @Override
     @PatchMapping(value = LIKE_POST_MAPPING)
-    public final LikeData changePostNumberOfLikes(@RequestParam long postId, @AuthenticationPrincipal User user) {
+    public final LikeResponse changePostNumberOfLikes(@RequestParam long postId, @AuthenticationPrincipal User user) {
         return homeService.updatePostLikeCounter(postId, user);
     }
 
@@ -61,20 +61,20 @@ public class HomeControllerImpl implements HomeController {
 
     @Override
     @GetMapping(value = GET_COMMENTS_MAPPING)
-    public final List<CommentData> getListOfComments(@RequestParam long postId, @RequestParam int numOfSite,
-                                                     @AuthenticationPrincipal User user) {
+    public final List<CommentResponse> getListOfComments(@RequestParam long postId, @RequestParam int numOfSite,
+                                                         @AuthenticationPrincipal User user) {
         return homeService.getListOfComments(postId, numOfSite, user);
     }
 
     @Override
     @PostMapping(value = CREATE_COMMENT_MAPPING)
-    public final CommentData createComment(@RequestBody CommentRequest request, @AuthenticationPrincipal User user) {
+    public final CommentResponse createComment(@RequestBody CommentRequest request, @AuthenticationPrincipal User user) {
         return homeService.createComment(request, user);
     }
 
     @Override
     @PatchMapping(value = COMMENT_LIKE_MAPPING)
-    public final LikeData changeCommentNumberOfLikes(@RequestParam long commentId, @AuthenticationPrincipal User user) {
+    public final LikeResponse changeCommentNumberOfLikes(@RequestParam long commentId, @AuthenticationPrincipal User user) {
         return homeService.updateCommentLikeCounter(commentId, user);
     }
 }
