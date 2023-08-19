@@ -6,19 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.globals.DataBuilder;
 import razepl.dev.socialappbackend.home.data.FriendData;
 
 /**
  * Class that represents Friend entity.
- * Implements {@link DataBuilder}
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Entity(name = "Friends")
-public class Friend implements DataBuilder<FriendData> {
+public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long friendshipId;
@@ -33,7 +31,6 @@ public class Friend implements DataBuilder<FriendData> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Override
     public final FriendData buildData() {
         return FriendData
                 .builder()

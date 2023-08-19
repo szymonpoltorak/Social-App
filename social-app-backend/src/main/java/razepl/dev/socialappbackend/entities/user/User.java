@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
-import razepl.dev.socialappbackend.config.enums.Role;
 import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
 import java.io.*;
@@ -24,9 +23,10 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
 
+import static razepl.dev.socialappbackend.entities.user.constants.Constants.USERS_TABLE_NAME;
+import static razepl.dev.socialappbackend.entities.user.constants.Constants.USER_PACKAGE;
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.*;
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.*;
-import static razepl.dev.socialappbackend.globals.GlobalConstants.USERS_TABLE_NAME;
 
 /**
  * This class represents a user in the system.

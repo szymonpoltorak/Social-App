@@ -14,13 +14,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import razepl.dev.socialappbackend.auth.apicalls.AuthResponse;
-import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
-import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
-import razepl.dev.socialappbackend.auth.apicalls.TokenRequest;
-import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.data.TokenRequest;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManagerService;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;
@@ -46,10 +46,10 @@ class AuthServiceTest {
     private AuthenticationManager authenticationManager;
 
     @Mock
-    private TokenManager tokenManager;
+    private TokenManagerService tokenManager;
 
     @Mock
-    private JwtServiceInterface jwtService;
+    private JwtService jwtService;
 
     @InjectMocks
     private AuthService authService;

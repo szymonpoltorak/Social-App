@@ -39,11 +39,6 @@ public final class UserValidation {
             .compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[:\\?\\.@!#:\\-_=+ ])[a-zA-Z0-9:\\?\\.@!#:\\-_=+ ]{8,20}$");
 
     /**
-     * {@link User} package location.
-     */
-    public static final String USER_PACKAGE = "razepl.dev.socialappbackend.user.User";
-
-    /**
      * A private constructor to prevent instantiation of this class.
      */
     private UserValidation() {

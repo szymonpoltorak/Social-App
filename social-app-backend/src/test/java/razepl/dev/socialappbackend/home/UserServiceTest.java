@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import razepl.dev.socialappbackend.entities.friend.Friend;
 import razepl.dev.socialappbackend.entities.friend.FriendsRepository;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.FriendNotFoundException;
@@ -33,7 +33,7 @@ class UserServiceTest {
     private FriendsRepository friendsRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     private User user;
 

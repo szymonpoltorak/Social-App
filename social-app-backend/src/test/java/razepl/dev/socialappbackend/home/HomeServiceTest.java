@@ -18,13 +18,13 @@ import razepl.dev.socialappbackend.entities.post.Post;
 import razepl.dev.socialappbackend.entities.post.PostRepository;
 import razepl.dev.socialappbackend.entities.postlike.PostLike;
 import razepl.dev.socialappbackend.entities.postlike.PostLikeRepository;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.NegativeIdException;
 import razepl.dev.socialappbackend.exceptions.NullArgumentException;
 import razepl.dev.socialappbackend.home.data.*;
-import razepl.dev.socialappbackend.home.interfaces.DataServiceInterface;
+import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,7 +45,7 @@ class HomeServiceTest {
     private CommentLikeRepository commentLikeRepository;
 
     @Mock
-    private DataServiceInterface dataServiceInterface;
+    private HomeDataBuilderService dataServiceInterface;
 
     @Mock
     private UserRepository userRepository;
@@ -60,7 +60,7 @@ class HomeServiceTest {
     private FriendsRepository friendRepository;
 
     @InjectMocks
-    private HomeService homeService;
+    private HomeServiceImpl homeService;
 
     private User user;
 

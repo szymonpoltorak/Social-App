@@ -10,15 +10,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.auth.apicalls.*;
+import razepl.dev.socialappbackend.auth.data.*;
 import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
-import razepl.dev.socialappbackend.config.jwt.interfaces.JwtServiceInterface;
-import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManager;
-import razepl.dev.socialappbackend.config.enums.Role;
+import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
+import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManagerService;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.*;
-import razepl.dev.socialappbackend.mail.IEmailSender;
+import razepl.dev.socialappbackend.mail.EmailSender;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
 import java.util.Optional;
@@ -27,7 +27,7 @@ import static razepl.dev.socialappbackend.entities.user.constants.UserValidation
 import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.PASSWORD_PATTERN_MESSAGE;
 
 /**
- * Class to manage logic for {@link AuthController}.
+ * Class to manage logic for {@link AuthControllerImpl}.
  * It implements {@link AuthServiceInterface}.
  */
 @Slf4j
@@ -37,9 +37,9 @@ public class AuthService implements AuthServiceInterface {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final TokenManager tokenManager;
-    private final JwtServiceInterface jwtService;
-    private final IEmailSender emailSender;
+    private final TokenManagerService tokenManager;
+    private final JwtService jwtService;
+    private final EmailSender emailSender;
 
     @Override
     public final AuthResponse register(RegisterRequest registerRequest) {

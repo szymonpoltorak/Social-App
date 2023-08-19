@@ -19,9 +19,9 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import razepl.dev.socialappbackend.auth.apicalls.LoginRequest;
-import razepl.dev.socialappbackend.auth.apicalls.RegisterRequest;
-import razepl.dev.socialappbackend.auth.interfaces.AuthInterface;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.interfaces.AuthController;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
@@ -42,7 +42,7 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private AuthInterface authInterface;
+    private AuthController authInterface;
 
     @Autowired
     private UserRepository userRepository;

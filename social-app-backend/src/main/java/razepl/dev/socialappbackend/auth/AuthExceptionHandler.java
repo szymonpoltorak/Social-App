@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import razepl.dev.socialappbackend.auth.apicalls.ExceptionResponse;
-import razepl.dev.socialappbackend.auth.apicalls.TokenResponse;
+import razepl.dev.socialappbackend.auth.data.ExceptionResponse;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
 import razepl.dev.socialappbackend.exceptions.*;
 
