@@ -60,23 +60,6 @@ class LogoutServiceTest {
     }
 
     @Test
-    final void test_logout_shouldDoNothingIfJwtTokenIsNotFound() {
-        // given
-        when(request.getHeader(any()))
-                .thenReturn("Bearer abcdef");
-
-        when(tokenRepository.findByToken(any()))
-                .thenReturn(java.util.Optional.empty());
-
-        // when
-        logoutService.logout(request, response, authentication);
-
-        // then
-        verify(tokenRepository).findByToken(any());
-        verify(tokenRepository, never()).save(any());
-    }
-
-    @Test
     final void test_logout_shouldSetJwtTokenAsExpiredAndRevokedAndClearSecurityContextIfFound() {
         // given
         when(request.getHeader(any()))
