@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,9 +25,18 @@ import razepl.dev.socialappbackend.config.interfaces.SecurityConfiguration;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtAuthenticationFilter;
 import razepl.dev.socialappbackend.exceptions.SecurityChainException;
 
-import static razepl.dev.socialappbackend.config.constants.Headers.*;
-import static razepl.dev.socialappbackend.config.constants.Matchers.*;
-import static razepl.dev.socialappbackend.config.enums.Permissions.*;
+import static razepl.dev.socialappbackend.config.constants.Matchers.ADMIN_MATCHERS;
+import static razepl.dev.socialappbackend.config.constants.Matchers.LOGOUT_URL;
+import static razepl.dev.socialappbackend.config.constants.Matchers.MODERATOR_MATCHERS;
+import static razepl.dev.socialappbackend.config.constants.Matchers.WHITE_LIST;
+import static razepl.dev.socialappbackend.config.enums.Permissions.ADMIN_DELETE;
+import static razepl.dev.socialappbackend.config.enums.Permissions.ADMIN_READ;
+import static razepl.dev.socialappbackend.config.enums.Permissions.ADMIN_UPDATE;
+import static razepl.dev.socialappbackend.config.enums.Permissions.ADMIN_WRITE;
+import static razepl.dev.socialappbackend.config.enums.Permissions.MODERATOR_DELETE;
+import static razepl.dev.socialappbackend.config.enums.Permissions.MODERATOR_READ;
+import static razepl.dev.socialappbackend.config.enums.Permissions.MODERATOR_UPDATE;
+import static razepl.dev.socialappbackend.config.enums.Permissions.MODERATOR_WRITE;
 import static razepl.dev.socialappbackend.entities.user.Role.ADMIN;
 import static razepl.dev.socialappbackend.entities.user.Role.MODERATOR;
 
@@ -42,6 +52,7 @@ import static razepl.dev.socialappbackend.entities.user.Role.MODERATOR;
 )
 @RequiredArgsConstructor
 public class SecurityConfigurationImpl implements SecurityConfiguration {
+    private static final String OAUTH_FAIL_URL = "http://localhost:4200/auth/login";
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final LogoutHandler logoutHandler;
@@ -92,17 +103,20 @@ public class SecurityConfigurationImpl implements SecurityConfiguration {
                             .anyRequest()
                             .authenticated()
                     )
-                    .cors()
-                    .and()
+                    .cors(Customizer.withDefaults())
                     .sessionManagement(
                             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     )
+                    .formLogin().disable()
+                    .httpBasic().disable()
                     .oauth2Login(oauth -> oauth
-                            .userInfoEndpoint()
-                            .oidcUserService(oidcService)
-                            .userService(oauthService)
-                            .and()
+                            .userInfoEndpoint(
+                                    info -> info
+                                            .oidcUserService(oidcService)
+                                            .userService(oauthService)
+                            )
                             .failureHandler(authFailureHandler)
+                            .failureUrl(OAUTH_FAIL_URL)
                             .successHandler(authSuccessHandler)
                     )
                     .authenticationProvider(authenticationProvider)

@@ -20,8 +20,8 @@ public interface OAuthUserService {
     /**
      * Updates an existing user with the details from the OAuth user.
      *
-     * @param user       The existing user to update.
-     * @param oidcUser   The OAuth user containing the updated details.
+     * @param user     The existing user to update.
+     * @param oidcUser The OAuth user containing the updated details.
      */
     void updateExistingUser(User user, OAuthUser oidcUser);
 

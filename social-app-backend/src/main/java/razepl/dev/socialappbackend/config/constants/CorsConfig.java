@@ -16,7 +16,8 @@ public final class CorsConfig {
      * List of allowed frontend server addresses.
      */
     public static final List<String> CORS_ADDRESSES = List.of(
-            "http://localhost:4200", "http://frontend:4200", "http://localhost:8080", "http://backend:8080"
+            "http://localhost:4200", "http://frontend:4200", "http://localhost:8080", "http://backend:8080",
+            "http://frontend", "http://localhost"
     );
 
     /**

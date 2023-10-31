@@ -11,6 +11,6 @@ import java.io.IOException;
 
 public interface JwtAuthenticationFilter extends Filter {
     void doFilterInternal(@NonNull HttpServletRequest request,
-                         @NonNull HttpServletResponse response,
-                         @NonNull FilterChain filterChain) throws ServletException, IOException;
+                          @NonNull HttpServletResponse response,
+                          @NonNull FilterChain filterChain) throws ServletException, IOException;
 }

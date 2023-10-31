@@ -1,7 +1,5 @@
 package razepl.dev.socialappbackend.entities.user.constants;
 
-import razepl.dev.socialappbackend.entities.user.User;
-
 import java.util.regex.Pattern;
 
 /**

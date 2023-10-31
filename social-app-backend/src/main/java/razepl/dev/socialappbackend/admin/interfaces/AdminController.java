@@ -27,7 +27,7 @@ public interface AdminController {
     /**
      * Updates the name of a user with the specified email.
      *
-     * @param email - The email of the user to update.
+     * @param email   - The email of the user to update.
      * @param newName - The new name for the user.
      */
     void updateUsersName(String email, String newName);

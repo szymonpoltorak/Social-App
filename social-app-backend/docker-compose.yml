@@ -4,7 +4,7 @@ services:
     maildev:
         container_name: maildev
         build:
-            context: social-app-backend
+            context: .
             dockerfile: Dockerfile.mail
         ports:
             - "1080:1080"

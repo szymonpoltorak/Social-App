@@ -15,8 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.config.interfaces.AppConfiguration;
+import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
@@ -24,7 +24,10 @@ import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static razepl.dev.socialappbackend.config.constants.CorsConfig.*;
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.ALLOWED_REQUESTS;
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.API_PATTERN;
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.CONTENT_TYPE_HEADER;
+import static razepl.dev.socialappbackend.config.constants.CorsConfig.CORS_ADDRESSES;
 import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_HEADER;
 
 /**

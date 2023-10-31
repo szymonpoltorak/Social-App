@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.auth.data.AuthResponse;
 import razepl.dev.socialappbackend.auth.data.RegisterRequest;
-import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.auth.interfaces.AuthService;
 import razepl.dev.socialappbackend.entities.comment.Comment;
 import razepl.dev.socialappbackend.entities.comment.CommentRepository;
 import razepl.dev.socialappbackend.entities.friend.Friend;
@@ -26,7 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/test")
 public class TestDataController {
-    private final AuthServiceInterface authInterface;
+    private final AuthService authInterface;
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
     private final PostRepository postRepository;

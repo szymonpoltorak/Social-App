@@ -5,10 +5,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import razepl.dev.socialappbackend.auth.data.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.data.TokenRequest;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthController;
-import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.auth.interfaces.AuthService;
 
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.AUTHENTICATE_MAPPING;
 import static razepl.dev.socialappbackend.auth.constants.AuthMappings.AUTH_MAPPING;
@@ -25,7 +33,7 @@ import static razepl.dev.socialappbackend.auth.constants.AuthMappings.REGISTER_M
 @RequestMapping(value = AUTH_MAPPING)
 @Tag(name = "User authentication")
 public class AuthControllerImpl implements AuthController {
-    private final AuthServiceInterface authService;
+    private final AuthService authService;
 
     @Override
     @PostMapping(value = REGISTER_MAPPING)

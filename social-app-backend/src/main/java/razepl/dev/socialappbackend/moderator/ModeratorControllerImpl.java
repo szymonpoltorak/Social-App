@@ -1,14 +1,21 @@
 package razepl.dev.socialappbackend.moderator;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.home.data.PostResponse;
 import razepl.dev.socialappbackend.moderator.interfaces.ModeratorController;
 import razepl.dev.socialappbackend.moderator.interfaces.ModeratorService;
 
 import java.util.List;
 
-import static razepl.dev.socialappbackend.moderator.Mappings.*;
+import static razepl.dev.socialappbackend.moderator.Mappings.COMMENTS_MAPPING;
+import static razepl.dev.socialappbackend.moderator.Mappings.MODERATOR_MAPPING;
+import static razepl.dev.socialappbackend.moderator.Mappings.POSTS_MAPPING;
 
 @RestController
 @RequestMapping(value = MODERATOR_MAPPING)

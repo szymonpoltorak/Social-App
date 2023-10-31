@@ -21,7 +21,12 @@ import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
 import razepl.dev.socialappbackend.exceptions.CommentNotFoundException;
 import razepl.dev.socialappbackend.exceptions.PostNotFoundException;
-import razepl.dev.socialappbackend.home.data.*;
+import razepl.dev.socialappbackend.home.data.CommentRequest;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.FriendResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeDataBuilderService;
 import razepl.dev.socialappbackend.home.interfaces.HomeService;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
@@ -30,7 +35,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static razepl.dev.socialappbackend.home.constants.PageSizes.*;
+import static razepl.dev.socialappbackend.home.constants.PageSizes.COMMENT_LIST_SIZE;
+import static razepl.dev.socialappbackend.home.constants.PageSizes.FRIEND_LIST_PAGE;
+import static razepl.dev.socialappbackend.home.constants.PageSizes.POST_LIST_PAGE;
 
 /**
  * Service class for /api/home controller.

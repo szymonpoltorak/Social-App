@@ -7,7 +7,11 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import razepl.dev.socialappbackend.config.oauth.interfaces.OAuthUser;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;

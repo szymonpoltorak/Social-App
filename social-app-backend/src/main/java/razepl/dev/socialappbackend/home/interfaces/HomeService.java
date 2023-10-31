@@ -1,7 +1,12 @@
 package razepl.dev.socialappbackend.home.interfaces;
 
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.*;
+import razepl.dev.socialappbackend.home.data.CommentRequest;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.FriendResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 
 import java.util.List;
 

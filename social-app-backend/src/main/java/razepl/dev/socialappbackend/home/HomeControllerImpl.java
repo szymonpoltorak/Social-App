@@ -3,15 +3,36 @@ package razepl.dev.socialappbackend.home;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import razepl.dev.socialappbackend.entities.user.User;
-import razepl.dev.socialappbackend.home.data.*;
+import razepl.dev.socialappbackend.home.data.CommentRequest;
+import razepl.dev.socialappbackend.home.data.CommentResponse;
+import razepl.dev.socialappbackend.home.data.FriendResponse;
+import razepl.dev.socialappbackend.home.data.LikeResponse;
+import razepl.dev.socialappbackend.home.data.PostResponse;
+import razepl.dev.socialappbackend.home.data.UserResponse;
 import razepl.dev.socialappbackend.home.interfaces.HomeController;
 import razepl.dev.socialappbackend.home.interfaces.HomeService;
 
 import java.util.List;
 
-import static razepl.dev.socialappbackend.home.constants.HomeMappings.*;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.COMMENT_LIKE_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.CREATE_COMMENT_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.CREATE_POST_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.DELETE_POST_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.FRIENDS_LIST_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.GET_COMMENTS_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.HOME_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.LIKE_POST_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.POST_LIST_MAPPING;
+import static razepl.dev.socialappbackend.home.constants.HomeMappings.USERDATA_MAPPING;
 
 /**
  * Controller for /api/home endpoints.

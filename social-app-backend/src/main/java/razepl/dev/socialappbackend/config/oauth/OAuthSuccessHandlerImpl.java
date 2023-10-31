@@ -20,10 +20,10 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class OAuthSuccessHandlerImpl extends SimpleUrlAuthenticationSuccessHandler implements OAuthSuccessHandler {
-    @Value(RedirectUrls.FRONTEND_URL_VALUE)
-    private String frontendUrl;
     private final JwtService jwtService;
     private final TokenManagerService tokenManager;
+    @Value(RedirectUrls.FRONTEND_URL_VALUE)
+    private String frontendUrl;
 
     @Override
     public final void onAuthenticationSuccess(HttpServletRequest request,

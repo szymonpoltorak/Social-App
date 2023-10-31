@@ -4,7 +4,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -18,15 +25,31 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import razepl.dev.socialappbackend.entities.user.interfaces.ServiceUser;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.NotSerializableException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serial;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collection;
 
 import static razepl.dev.socialappbackend.entities.user.constants.Constants.USERS_TABLE_NAME;
 import static razepl.dev.socialappbackend.entities.user.constants.Constants.USER_PACKAGE;
-import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.*;
-import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.*;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.DATE_PATTERN;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.NAME_MAX_LENGTH;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.NAME_MIN_LENGTH;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidation.NAME_PATTERN;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.DATE_NULL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.EMAIL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.EMAIL_NULL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.NAME_NULL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.NAME_PATTERN_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.NAME_SIZE_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.PASSWORD_NULL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.SURNAME_NULL_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.SURNAME_PATTERN_MESSAGE;
+import static razepl.dev.socialappbackend.entities.user.constants.UserValidationMessages.SURNAME_SIZE_MESSAGE;
 
 /**
  * This class represents a user in the system.

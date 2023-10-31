@@ -7,17 +7,26 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import razepl.dev.socialappbackend.auth.data.*;
-import razepl.dev.socialappbackend.auth.interfaces.AuthServiceInterface;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.data.TokenRequest;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
+import razepl.dev.socialappbackend.auth.interfaces.AuthService;
 import razepl.dev.socialappbackend.config.jwt.interfaces.JwtService;
 import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManagerService;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
-import razepl.dev.socialappbackend.exceptions.*;
+import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
+import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
+import razepl.dev.socialappbackend.exceptions.UserAlreadyExistsException;
 import razepl.dev.socialappbackend.mail.EmailSender;
 import razepl.dev.socialappbackend.validators.ArgumentValidator;
 
@@ -28,12 +37,12 @@ import static razepl.dev.socialappbackend.entities.user.constants.UserValidation
 
 /**
  * Class to manage logic for {@link AuthControllerImpl}.
- * It implements {@link AuthServiceInterface}.
+ * It implements {@link AuthService}.
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthService implements AuthServiceInterface {
+public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -75,9 +84,7 @@ public class AuthService implements AuthServiceInterface {
 
         String username = loginRequest.username();
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                username, loginRequest.password())
-        );
+        authenticateUser(username, loginRequest.password());
 
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UsernameNotFoundException("Such user does not exist!")
@@ -123,6 +130,16 @@ public class AuthService implements AuthServiceInterface {
                 .builder()
                 .isAuthTokenValid(isAuthTokenValid)
                 .build();
+    }
+
+    private void authenticateUser(String username, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    username, password)
+            );
+        } catch (AuthenticationException exception) {
+            throw new UsernameNotFoundException("User has given bad credentials!", exception);
+        }
     }
 
     private String validateUserRegisterData(RegisterRequest registerRequest) {

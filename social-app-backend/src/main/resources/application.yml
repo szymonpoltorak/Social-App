@@ -15,19 +15,19 @@ spring:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
                 format_sql: true
     security:
-      oauth2:
-        client:
-            registration:
-                google:
-                    client-id: ${GOOGLE_CLIENT_ID}
-                    client-secret: ${GOOGLE_CLIENT_SECRET}
-                    scope:
-                        - email
-                        - profile
-                        - openid
-                github:
-                    client-id: ${GITHUB_CLIENT_ID}
-                    client-secret: ${GITHUB_CLIENT_SECRET}
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: ${GOOGLE_CLIENT_ID}
+                        client-secret: ${GOOGLE_CLIENT_SECRET}
+                        scope:
+                            - email
+                            - profile
+                            - openid
+                    github:
+                        client-id: ${GITHUB_CLIENT_ID}
+                        client-secret: ${GITHUB_CLIENT_SECRET}
     mail:
         host: ${MAIL_HOST}
         port: 1025

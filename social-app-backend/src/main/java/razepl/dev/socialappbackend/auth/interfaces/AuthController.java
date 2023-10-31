@@ -4,7 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import razepl.dev.socialappbackend.auth.data.*;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.data.TokenRequest;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
 
 /**
  * An interface that defines the methods for authentication services.

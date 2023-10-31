@@ -25,7 +25,7 @@ public interface ModeratorController {
     /**
      * Updates the content of a post with the specified post ID.
      *
-     * @param postId - The ID of the post to update.
+     * @param postId     - The ID of the post to update.
      * @param newContent - The new content for the post.
      */
     void updatePostContent(long postId, String newContent);

@@ -3,7 +3,6 @@ package razepl.dev.socialappbackend.home.interfaces;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.http.ResponseEntity;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.home.data.DataResponse;
 

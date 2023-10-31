@@ -2,12 +2,16 @@ package razepl.dev.socialappbackend.auth.interfaces;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import razepl.dev.socialappbackend.auth.data.*;
+import razepl.dev.socialappbackend.auth.data.AuthResponse;
+import razepl.dev.socialappbackend.auth.data.LoginRequest;
+import razepl.dev.socialappbackend.auth.data.RegisterRequest;
+import razepl.dev.socialappbackend.auth.data.TokenRequest;
+import razepl.dev.socialappbackend.auth.data.TokenResponse;
 
 /**
  * This interface provides methods for user authentication and authorization.
  */
-public interface AuthServiceInterface {
+public interface AuthService {
     /**
      * Registers a user with the provided registration request data.
      *

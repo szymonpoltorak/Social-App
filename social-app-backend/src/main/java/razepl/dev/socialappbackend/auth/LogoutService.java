@@ -12,9 +12,9 @@ import razepl.dev.socialappbackend.entities.token.JwtToken;
 import razepl.dev.socialappbackend.entities.token.interfaces.TokenRepository;
 import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
 
-import java.util.Optional;
-
-import static razepl.dev.socialappbackend.config.constants.Headers.*;
+import static razepl.dev.socialappbackend.config.constants.Headers.AUTH_HEADER;
+import static razepl.dev.socialappbackend.config.constants.Headers.TOKEN_HEADER;
+import static razepl.dev.socialappbackend.config.constants.Headers.TOKEN_START_INDEX;
 
 /**
  * Service class for logging user out.
@@ -35,7 +35,7 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         String jwt = authHeader.substring(TOKEN_START_INDEX);
-        
+
         JwtToken token = tokenRepository.findByToken(jwt).orElseThrow(
                 () -> new TokenDoesNotExistException("Jwt in header: {}\nToken is null")
         );

@@ -23,14 +23,26 @@ import razepl.dev.socialappbackend.config.jwt.interfaces.TokenManagerService;
 import razepl.dev.socialappbackend.entities.user.Role;
 import razepl.dev.socialappbackend.entities.user.User;
 import razepl.dev.socialappbackend.entities.user.interfaces.UserRepository;
-import razepl.dev.socialappbackend.exceptions.*;
+import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
+import razepl.dev.socialappbackend.exceptions.NullArgumentException;
+import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
+import razepl.dev.socialappbackend.exceptions.UserAlreadyExistsException;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,7 +64,7 @@ class AuthServiceTest {
     private JwtService jwtService;
 
     @InjectMocks
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     private User user;
 

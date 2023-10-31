@@ -12,7 +12,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import razepl.dev.socialappbackend.auth.data.ExceptionResponse;
 import razepl.dev.socialappbackend.auth.data.TokenResponse;
 import razepl.dev.socialappbackend.auth.interfaces.AuthExceptionInterface;
-import razepl.dev.socialappbackend.exceptions.*;
+import razepl.dev.socialappbackend.exceptions.AuthManagerInstanceException;
+import razepl.dev.socialappbackend.exceptions.InvalidTokenException;
+import razepl.dev.socialappbackend.exceptions.NullArgumentException;
+import razepl.dev.socialappbackend.exceptions.PasswordValidationException;
+import razepl.dev.socialappbackend.exceptions.TokenDoesNotExistException;
+import razepl.dev.socialappbackend.exceptions.TokensUserNotFoundException;
+import razepl.dev.socialappbackend.exceptions.UserAlreadyExistsException;
 
 import java.util.stream.Collectors;
 

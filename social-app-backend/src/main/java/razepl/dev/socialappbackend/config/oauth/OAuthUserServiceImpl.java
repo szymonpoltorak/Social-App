@@ -21,7 +21,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.*;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GITHUB_FULL_NAME;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GITHUB_LOCATION;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GITHUB_LOGIN;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GITHUB_TOKEN;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GOOGLE_FAMILY_NAME;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GOOGLE_LOGIN;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GOOGLE_NAME;
+import static razepl.dev.socialappbackend.config.oauth.constants.ProvidersAttributes.GOOGLE_TOKEN;
 
 @Slf4j
 @Service
